@@ -1,0 +1,12 @@
+# Archivos y carpetas a ignorar
+packages/
+node_modules/
+.config/
+.vs/
+obj/
+bin/
+*.suo
+*.cache
+*.targets
+*.force
+*.AssemblyAttributes.cs
