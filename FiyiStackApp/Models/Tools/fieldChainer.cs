@@ -121,6 +121,8 @@ namespace FiyiStackApp.Models.Tools
         public string Field_ForjQueryNonQuery_FormData { get; set; } = "";
         public string FieldTextEditor_ForjQueryNonQuery_LoadEvent { get; set; } = "";
         public string FieldTextEditor_ForjQueryNonQuery_Quill { get; set; } = "";
+
+        public string FieldForHTTPFile { get; set; } = "";
         public fieldChainer() 
         { 
         }
@@ -221,6 +223,8 @@ $@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", {(field.Nullab
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: number";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -306,6 +310,8 @@ $@"        public bool {field.Name} {{ get; set; }}
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : true,{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : true,{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: boolean";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -385,6 +391,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -462,6 +470,8 @@ $@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", {(field.Nu
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} NUMERIC(24,6),";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : 3.14,{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : 3.14,{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: number";
 
@@ -543,6 +553,8 @@ $@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: number";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left text-light"">
@@ -580,6 +592,8 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.N
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} DATETIME,";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""1753-01-01T00:00:00.001Z"",{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""1753-01-01T00:00:00.001Z"",{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
@@ -662,6 +676,8 @@ $@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", {(field.N
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""00:00:00.001"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""00:00:00.001"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -740,6 +756,8 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} INT,";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: number";
 
@@ -834,6 +852,8 @@ $@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", {(field.
                             SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} VARCHAR(6),";
 
                             Fields_ForJSONScript += $@"    ""{field.Name}"" : ""212529"",{Environment.NewLine}";
+
+                            FieldForHTTPFile += $@"    ""{field.Name}"" : ""212529"",{Environment.NewLine}";
                         }
                         else
                         { throw new Exception($"{field.Name} has not 'Colour' in the name"); }
@@ -914,6 +934,8 @@ $@"        public string {field.Name} {{ get; set; }}
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -987,6 +1009,8 @@ $@"        public string {field.Name} {{ get; set; }}
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} TEXT,";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
@@ -1082,6 +1106,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -1168,6 +1194,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -1251,6 +1279,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -1331,6 +1361,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} VARCHAR({field.MaxValue}),";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
@@ -1413,6 +1445,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} VARCHAR({field.MaxValue}),";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
@@ -1543,6 +1577,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
+
                         TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
@@ -1622,6 +1658,8 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
                         SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} INT,";
 
                         Fields_ForJSONScript += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
+
+                        FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
                         TsFields_ForTsModel += $@"{field.Name}?: number";
 

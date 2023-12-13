@@ -152,7 +152,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     else { LogText += $"Generation of C# service for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion
 
-                    #region C# .NET Core Web API + JSON Script
+                    #region C# .NET Core Web API + JSON Script + HTTP file
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpWebAPIs)
                     {
                         #region C# .NET Core Web API
@@ -191,6 +191,26 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
 
                         WinFormConfigurationComponent.CreateFile(
                         $"{JSONScriptPath}{Table.Name}_JSONScript.json",
+                        Content,
+                        GeneratorConfigurationComponent.Configuration.DeleteFiles);
+                        #endregion
+
+                        #region HTTP file
+                        string HTTPFilePath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\HTTPFile\\";
+                        if (Directory.Exists(HTTPFilePath))
+                        {
+                            LogText += $"Folder: {HTTPFilePath} exist {Environment.NewLine}";
+                        }
+                        else
+                        {
+                            LogText += $"Folder: {HTTPFilePath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(HTTPFilePath);
+                        }
+
+                        Content = Modules.CSharp.HTTPFile(GeneratorConfigurationComponent, Table);
+
+                        WinFormConfigurationComponent.CreateFile(
+                        $"{HTTPFilePath}{Table.Name}.http",
                         Content,
                         GeneratorConfigurationComponent.Configuration.DeleteFiles);
                         #endregion
