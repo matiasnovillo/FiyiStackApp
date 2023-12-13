@@ -60,15 +60,12 @@ namespace FiyiStackApp
             this.chbclonedConfigurationDeleteFiles = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnNewFolderAndFiles = new System.Windows.Forms.PictureBox();
             this.picStep2PathFiles = new System.Windows.Forms.PictureBox();
             this.picStep1Databases = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.PanelDatabaseConfiguration.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             this.PanelPathFilesConfiguration.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNewFolderAndFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep2PathFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep1Databases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
@@ -370,18 +367,6 @@ namespace FiyiStackApp
             this.label3.TabIndex = 188;
             this.label3.Text = "Front-end files";
             // 
-            // btnNewFolderAndFiles
-            // 
-            this.btnNewFolderAndFiles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNewFolderAndFiles.Image = global::FiyiStackApp.Properties.Resources.btnNew;
-            this.btnNewFolderAndFiles.Location = new System.Drawing.Point(29, 371);
-            this.btnNewFolderAndFiles.Name = "btnNewFolderAndFiles";
-            this.btnNewFolderAndFiles.Size = new System.Drawing.Size(120, 40);
-            this.btnNewFolderAndFiles.TabIndex = 164;
-            this.btnNewFolderAndFiles.TabStop = false;
-            this.btnNewFolderAndFiles.Click += new System.EventHandler(this.btnNewFiles_Click);
-            this.btnNewFolderAndFiles.Paint += new System.Windows.Forms.PaintEventHandler(this.btnNewFiles_Paint);
-            // 
             // picStep2PathFiles
             // 
             this.picStep2PathFiles.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -418,23 +403,11 @@ namespace FiyiStackApp
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             this.btnSave.Paint += new System.Windows.Forms.PaintEventHandler(this.btnSave_Paint);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 344);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(236, 23);
-            this.label2.TabIndex = 165;
-            this.label2.Text = "Create new folders and files";
-            // 
             // ConfigurationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1364, 1018);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnNewFolderAndFiles);
             this.Controls.Add(this.labelDataBase);
             this.Controls.Add(this.labelPathFiles);
             this.Controls.Add(this.PanelPathFilesConfiguration);
@@ -461,7 +434,6 @@ namespace FiyiStackApp
             this.StatusStrip.PerformLayout();
             this.PanelPathFilesConfiguration.ResumeLayout(false);
             this.PanelPathFilesConfiguration.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNewFolderAndFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep2PathFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep1Databases)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
@@ -493,8 +465,6 @@ namespace FiyiStackApp
         private System.Windows.Forms.Label label4;
         private ListView ListViewBackEndFilesGenerators;
         private ColumnHeader columnHeader2;
-        private PictureBox btnNewFolderAndFiles;
-        private Label label2;
         private ListView ListViewFrontEndFilesGenerators;
         private ColumnHeader columnHeader1;
     }

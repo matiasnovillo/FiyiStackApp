@@ -102,29 +102,6 @@ namespace FiyiStackApp
             catch (Exception ex) { ToolStatusLabel.Text = ex.Message; Cursor = Cursors.Default; }
         }
 
-        private void btnNewFiles_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //File generation
-                Generation.JsTsNETCoreSQLServer.Files.CSharp.NETCore.Startup.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-                Generation.JsTsNETCoreSQLServer.Files.CSharp.NETCore.tsconfigjson.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-                Generation.JsTsNETCoreSQLServer.Files.CSharp.NETCore.packagejson.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-                Generation.JsTsNETCoreSQLServer.Files.CSharp.NETCore.webpackconfigjs.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-                Generation.JsTsNETCoreSQLServer.Files.CSharp.NETCore.Webpackconfigvendorjs.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-                Generation.JsTsNETCoreSQLServer.Files.MSSQLServer.CommonFunctionsMSSQLServersql.Create(Program.WinFormConfigurationComponent.ProjectChosen);
-
-                //Folder generation
-                Directory.CreateDirectory($@"{Program.WinFormConfigurationComponent.ProjectChosen.Path}/wwwroot/PDFFiles");
-                Directory.CreateDirectory($@"{Program.WinFormConfigurationComponent.ProjectChosen.Path}/wwwroot/ExcelFiles");
-                Directory.CreateDirectory($@"{Program.WinFormConfigurationComponent.ProjectChosen.Path}/wwwroot/CSVFiles");
-                Directory.CreateDirectory($@"{Program.WinFormConfigurationComponent.ProjectChosen.Path}/wwwroot/Uploads");
-
-                ToolStatusLabel.Text = "Generation of files and folders ready.";
-            }
-            catch (Exception ex) { ToolStatusLabel.Text = ex.Message; Cursor = Cursors.Default; }
-        }
-
         #region Secondary configuration. Painting mostly
         private void labelDataBase_Click(object sender, EventArgs e)
         {
