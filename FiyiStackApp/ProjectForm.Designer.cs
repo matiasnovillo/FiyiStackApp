@@ -58,13 +58,7 @@ namespace FiyiStackApp
             this.panelRightSide = new System.Windows.Forms.Panel();
             this.btnNewOrEdit = new System.Windows.Forms.PictureBox();
             this.Panel0Basic = new System.Windows.Forms.Panel();
-            this.btnFolderBrowserDialog = new System.Windows.Forms.Button();
-            this.txtPath = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.labelProjectName = new System.Windows.Forms.Label();
-            this.txtProjectName = new System.Windows.Forms.TextBox();
-            this.txtGeneralHistoryUser = new System.Windows.Forms.TextBox();
-            this.labelGeneralHistoryUser = new System.Windows.Forms.Label();
+            this.PropertyGridProject = new System.Windows.Forms.PropertyGrid();
             this.picPanelSeparator = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.StatusStrip.SuspendLayout();
@@ -402,108 +396,19 @@ namespace FiyiStackApp
             // 
             // Panel0Basic
             // 
-            this.Panel0Basic.Controls.Add(this.btnFolderBrowserDialog);
-            this.Panel0Basic.Controls.Add(this.txtPath);
-            this.Panel0Basic.Controls.Add(this.label7);
-            this.Panel0Basic.Controls.Add(this.labelProjectName);
-            this.Panel0Basic.Controls.Add(this.txtProjectName);
-            this.Panel0Basic.Controls.Add(this.txtGeneralHistoryUser);
-            this.Panel0Basic.Controls.Add(this.labelGeneralHistoryUser);
+            this.Panel0Basic.Controls.Add(this.PropertyGridProject);
             this.Panel0Basic.Location = new System.Drawing.Point(17, 75);
             this.Panel0Basic.Margin = new System.Windows.Forms.Padding(4);
             this.Panel0Basic.Name = "Panel0Basic";
             this.Panel0Basic.Size = new System.Drawing.Size(464, 470);
             this.Panel0Basic.TabIndex = 31;
             // 
-            // btnFolderBrowserDialog
+            // PropertyGridProject
             // 
-            this.btnFolderBrowserDialog.Location = new System.Drawing.Point(385, 398);
-            this.btnFolderBrowserDialog.Name = "btnFolderBrowserDialog";
-            this.btnFolderBrowserDialog.Size = new System.Drawing.Size(47, 25);
-            this.btnFolderBrowserDialog.TabIndex = 19;
-            this.btnFolderBrowserDialog.Text = "...";
-            this.btnFolderBrowserDialog.UseVisualStyleBackColor = true;
-            this.btnFolderBrowserDialog.Click += new System.EventHandler(this.btnFolderBrowserDialog_Click);
-            // 
-            // txtPath
-            // 
-            this.txtPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(43)))));
-            this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPath.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.txtPath.Location = new System.Drawing.Point(37, 398);
-            this.txtPath.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPath.MaxLength = 100;
-            this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(341, 26);
-            this.txtPath.TabIndex = 18;
-            this.txtPath.BackColorChanged += new System.EventHandler(this.txtPath_BackColorChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.label7.Location = new System.Drawing.Point(32, 368);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 27);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Path";
-            // 
-            // labelProjectName
-            // 
-            this.labelProjectName.AutoSize = true;
-            this.labelProjectName.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.labelProjectName.Location = new System.Drawing.Point(32, 17);
-            this.labelProjectName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelProjectName.Name = "labelProjectName";
-            this.labelProjectName.Size = new System.Drawing.Size(137, 27);
-            this.labelProjectName.TabIndex = 6;
-            this.labelProjectName.Text = "Project name";
-            // 
-            // txtProjectName
-            // 
-            this.txtProjectName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(43)))));
-            this.txtProjectName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtProjectName.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.txtProjectName.Location = new System.Drawing.Point(37, 47);
-            this.txtProjectName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtProjectName.MaxLength = 100;
-            this.txtProjectName.Name = "txtProjectName";
-            this.txtProjectName.Size = new System.Drawing.Size(397, 26);
-            this.txtProjectName.TabIndex = 5;
-            this.txtProjectName.BackColorChanged += new System.EventHandler(this.txtProjectName_BackColorChanged);
-            // 
-            // txtGeneralHistoryUser
-            // 
-            this.txtGeneralHistoryUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(43)))));
-            this.txtGeneralHistoryUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtGeneralHistoryUser.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGeneralHistoryUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.txtGeneralHistoryUser.Location = new System.Drawing.Point(37, 119);
-            this.txtGeneralHistoryUser.Margin = new System.Windows.Forms.Padding(4);
-            this.txtGeneralHistoryUser.MaxLength = 2147483647;
-            this.txtGeneralHistoryUser.Multiline = true;
-            this.txtGeneralHistoryUser.Name = "txtGeneralHistoryUser";
-            this.txtGeneralHistoryUser.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtGeneralHistoryUser.Size = new System.Drawing.Size(395, 245);
-            this.txtGeneralHistoryUser.TabIndex = 7;
-            this.txtGeneralHistoryUser.BackColorChanged += new System.EventHandler(this.txtGeneralHistoryUser_BackColorChanged);
-            // 
-            // labelGeneralHistoryUser
-            // 
-            this.labelGeneralHistoryUser.AutoSize = true;
-            this.labelGeneralHistoryUser.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGeneralHistoryUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.labelGeneralHistoryUser.Location = new System.Drawing.Point(32, 88);
-            this.labelGeneralHistoryUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelGeneralHistoryUser.Name = "labelGeneralHistoryUser";
-            this.labelGeneralHistoryUser.Size = new System.Drawing.Size(202, 27);
-            this.labelGeneralHistoryUser.TabIndex = 8;
-            this.labelGeneralHistoryUser.Text = "General history user";
+            this.PropertyGridProject.Location = new System.Drawing.Point(37, 50);
+            this.PropertyGridProject.Name = "PropertyGridProject";
+            this.PropertyGridProject.Size = new System.Drawing.Size(396, 388);
+            this.PropertyGridProject.TabIndex = 0;
             // 
             // picPanelSeparator
             // 
@@ -556,7 +461,6 @@ namespace FiyiStackApp
             this.panelRightSide.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewOrEdit)).EndInit();
             this.Panel0Basic.ResumeLayout(false);
-            this.Panel0Basic.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPanelSeparator)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -593,12 +497,6 @@ namespace FiyiStackApp
         private ToolStripMenuItem optionsToolStripMenuItem;
         private ToolStripMenuItem changePasswordToolStripMenuItem;
         private Panel Panel0Basic;
-        private TextBox txtPath;
-        private Label label7;
-        private Label labelProjectName;
-        private TextBox txtProjectName;
-        private TextBox txtGeneralHistoryUser;
-        private Label labelGeneralHistoryUser;
-        private Button btnFolderBrowserDialog;
+        private PropertyGrid PropertyGridProject;
     }
 }

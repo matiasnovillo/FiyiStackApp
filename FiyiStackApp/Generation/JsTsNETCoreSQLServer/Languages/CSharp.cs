@@ -26,7 +26,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# Models with stored procedures
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpModelsWithSPs)
                     {
-                        string CSharpModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Models\\";
+                        string CSharpModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Models\\";
                         if (Directory.Exists(CSharpModelPath))
                         {
                             LogText += $"Folder: {CSharpModelPath} exist {Environment.NewLine}";
@@ -52,7 +52,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# DTOs
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpDTOs)
                     {
-                        string CSharpDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\DTOs\\";
+                        string CSharpDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\DTOs\\";
                         if (Directory.Exists(CSharpDTOPath))
                         {
                             LogText += $"Folder: {CSharpDTOPath} exist {Environment.NewLine}";
@@ -78,7 +78,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# Interfaces
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpInterfaces)
                     {
-                        string CSharpInterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Interfaces\\";
+                        string CSharpInterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Interfaces\\";
                         if (Directory.Exists(CSharpInterfacePath))
                         {
                             LogText += $"Folder: {CSharpInterfacePath} exist {Environment.NewLine}";
@@ -104,7 +104,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# Filters
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpFilters)
                     {
-                        string CSharpFilterPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Filters\\";
+                        string CSharpFilterPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Filters\\";
                         if (Directory.Exists(CSharpFilterPath))
                         {
                             LogText += $"Folder: {CSharpFilterPath} exist {Environment.NewLine}";
@@ -130,7 +130,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# Services
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpServices)
                     {
-                        string CSharpServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Services\\";
+                        string CSharpServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Services\\";
                         if (Directory.Exists(CSharpServicePath))
                         {
                             LogText += $"Folder: {CSharpServicePath} exist {Environment.NewLine}";
@@ -156,7 +156,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     if (GeneratorConfigurationComponent.Configuration.WantCSharpWebAPIs)
                     {
                         #region C# .NET Core Web API
-                        string WebAPIPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Controllers\\";
+                        string WebAPIPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Controllers\\";
                         if (Directory.Exists(WebAPIPath))
                         {
                             LogText += $"Folder: {WebAPIPath} exist {Environment.NewLine}";
@@ -176,7 +176,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         #endregion
 
                         #region JSON Script
-                        string JSONScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\JSONScripts\\";
+                        string JSONScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\JSONScripts\\";
                         if (Directory.Exists(JSONScriptPath))
                         {
                             LogText += $"Folder: {JSONScriptPath} exist {Environment.NewLine}";
@@ -196,7 +196,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         #endregion
 
                         #region HTTP file
-                        string HTTPFilePath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\HTTPFile\\";
+                        string HTTPFilePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\HTTPFile\\";
                         if (Directory.Exists(HTTPFilePath))
                         {
                             LogText += $"Folder: {HTTPFilePath} exist {Environment.NewLine}";
@@ -223,7 +223,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region C# .NET Core Razor Pages
                         if (GeneratorConfigurationComponent.Configuration.WantCSharpRazorPages)
                         {
-                        string RazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\Areas\\{Table.Area}\\Pages\\";
+                        string RazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\Areas\\{Table.Area}\\Pages\\";
                         if (Directory.Exists(RazorPagePath))
                         {
                             LogText += $"Folder: {RazorPagePath} exist {Environment.NewLine}";

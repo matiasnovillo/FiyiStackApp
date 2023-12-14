@@ -25,18 +25,44 @@ namespace FiyiStackApp
             chbclonedConfigurationDeleteStoredProcedure.Checked = Program.WinFormConfigurationComponent.Configuration.DeleteStoredProcedure;
             chbclonedConfigurationDeleteFiles.Checked = Program.WinFormConfigurationComponent.Configuration.DeleteFiles;
 
-            ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpModelsWithSPs;
-            ListViewBackEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpServices;
-            ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpInterfaces;
-            ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpWebAPIs;
-            ListViewBackEndFilesGenerators.Items[4].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpFilters;
-            ListViewBackEndFilesGenerators.Items[5].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages;
-            ListViewBackEndFilesGenerators.Items[6].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpDTOs;
+            //Back-end
+            if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
+            {
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# Models with SPs"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# Services"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# Interfaces"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# .NET Core Web APIs"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# Filters"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# .NET Core Razor Pages"));
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("C# DTOs"));
+                ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpModelsWithSPs;
+                ListViewBackEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpServices;
+                ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpInterfaces;
+                ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpWebAPIs;
+                ListViewBackEndFilesGenerators.Items[4].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpFilters;
+                ListViewBackEndFilesGenerators.Items[5].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages;
+                ListViewBackEndFilesGenerators.Items[6].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpDTOs;
+            }
+            else
+            {
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
+                ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPI;
+            }
 
             //Front-end
-            ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels;
-            ListViewFrontEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator;
-            ListViewFrontEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantTypeScriptDTOs;
+            if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
+            {
+                ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("TypeScript Models"));
+                ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("jQuery"));
+                ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("TypeScript DTOs"));
+                ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels;
+                ListViewFrontEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator;
+                ListViewFrontEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantTypeScriptDTOs;
+            }
+            else
+            {
+
+            }
 
             //Hide elements except
             HideAllPanelsExcept(new Panel[] { PanelDatabaseConfiguration });
@@ -67,18 +93,30 @@ namespace FiyiStackApp
                     Configuration.DeleteFiles = chbclonedConfigurationDeleteFiles.Checked;
 
                     //Back-end
-                    Configuration.WantCSharpModelsWithSPs = ListViewBackEndFilesGenerators.Items[0].Checked;
-                    Configuration.WantCSharpServices = ListViewBackEndFilesGenerators.Items[1].Checked;
-                    Configuration.WantCSharpInterfaces = ListViewBackEndFilesGenerators.Items[2].Checked;
-                    Configuration.WantCSharpWebAPIs = ListViewBackEndFilesGenerators.Items[3].Checked;
-                    Configuration.WantCSharpFilters = ListViewBackEndFilesGenerators.Items[4].Checked;
-                    Configuration.WantCSharpRazorPages = ListViewBackEndFilesGenerators.Items[5].Checked;
-                    Configuration.WantCSharpDTOs = ListViewBackEndFilesGenerators.Items[6].Checked;
+                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
+                    {
+                        Configuration.WantCSharpModelsWithSPs = ListViewBackEndFilesGenerators.Items[0].Checked;
+                        Configuration.WantCSharpServices = ListViewBackEndFilesGenerators.Items[1].Checked;
+                        Configuration.WantCSharpInterfaces = ListViewBackEndFilesGenerators.Items[2].Checked;
+                        Configuration.WantCSharpWebAPIs = ListViewBackEndFilesGenerators.Items[3].Checked;
+                        Configuration.WantCSharpFilters = ListViewBackEndFilesGenerators.Items[4].Checked;
+                        Configuration.WantCSharpRazorPages = ListViewBackEndFilesGenerators.Items[5].Checked;
+                        Configuration.WantCSharpDTOs = ListViewBackEndFilesGenerators.Items[6].Checked;
+                    }
+                    else
+                    {
+                        Configuration.WantBackendAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
+                    }
+
+
 
                     //Front-end
-                    Configuration.WantTypeScriptModels = ListViewFrontEndFilesGenerators.Items[0].Checked;
-                    Configuration.WantjQueryDOMManipulator = ListViewFrontEndFilesGenerators.Items[1].Checked;
-                    Configuration.WantTypeScriptDTOs = ListViewFrontEndFilesGenerators.Items[2].Checked;
+                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
+                    {
+                        Configuration.WantTypeScriptModels = ListViewFrontEndFilesGenerators.Items[0].Checked;
+                        Configuration.WantjQueryDOMManipulator = ListViewFrontEndFilesGenerators.Items[1].Checked;
+                        Configuration.WantTypeScriptDTOs = ListViewFrontEndFilesGenerators.Items[2].Checked;
+                    }
 
                     if (Configuration.ConfigurationId != 0) //Edit
                     {

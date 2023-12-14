@@ -128,6 +128,7 @@ namespace FiyiStackApp
                 WantTypeScriptModels = true,
                 WantjQueryDOMManipulator = true,
                 WantTypeScriptDTOs = true,
+                WantBackendAPI = true,
             };
             return Configuration;
         }
@@ -155,6 +156,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantCSharpServices = Configuration.WantCSharpServices;
                 Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages = Configuration.WantCSharpRazorPages;
                 Program.WinFormConfigurationComponent.Configuration.WantCSharpWebAPIs = Configuration.WantCSharpWebAPIs;
+                Program.WinFormConfigurationComponent.Configuration.WantBackendAPI = Configuration.WantBackendAPI;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
                 Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;

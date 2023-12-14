@@ -131,7 +131,6 @@ namespace FiyiStackApp
             this.btnGenerate = new System.Windows.Forms.PictureBox();
             this.picStep2Tables = new System.Windows.Forms.PictureBox();
             this.picStep1Databases = new System.Windows.Forms.PictureBox();
-            this.lblGenerationsLeft = new System.Windows.Forms.Label();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             this.PanelForeignKey.SuspendLayout();
@@ -1612,19 +1611,6 @@ namespace FiyiStackApp
             this.picStep1Databases.TabIndex = 97;
             this.picStep1Databases.TabStop = false;
             // 
-            // lblGenerationsLeft
-            // 
-            this.lblGenerationsLeft.AutoSize = true;
-            this.lblGenerationsLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblGenerationsLeft.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblGenerationsLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.lblGenerationsLeft.Location = new System.Drawing.Point(51, 56);
-            this.lblGenerationsLeft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblGenerationsLeft.Name = "lblGenerationsLeft";
-            this.lblGenerationsLeft.Size = new System.Drawing.Size(284, 36);
-            this.lblGenerationsLeft.TabIndex = 103;
-            this.lblGenerationsLeft.Text = "10/100 generations";
-            // 
             // GeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1638,7 +1624,6 @@ namespace FiyiStackApp
             this.Controls.Add(this.PanelMain);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
-            this.Controls.Add(this.lblGenerationsLeft);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -1813,6 +1798,5 @@ namespace FiyiStackApp
         private PictureBox btnCopyDBProduction;
         private PictureBox btnCopyDBLocalhost;
         private Label label14;
-        private Label lblGenerationsLeft;
     }
 }

@@ -53,6 +53,8 @@ namespace FiyiStackApp.Models.Core
         public bool WantTypeScriptDTOs { get; set; }
 
         public bool WantjQueryDOMManipulator { get; set; }
+
+        public bool WantBackendAPI { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -92,6 +94,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantTypeScriptModels", WantTypeScriptModels, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -137,6 +140,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantTypeScriptModels", WantTypeScriptModels, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -198,6 +202,7 @@ namespace FiyiStackApp.Models.Core
                     Configuration.WantTypeScriptModels = configuration.WantTypeScriptModels;
                     Configuration.WantTypeScriptDTOs = configuration.WantTypeScriptDTOs;
                     Configuration.WantjQueryDOMManipulator = configuration.WantjQueryDOMManipulator;
+                    Configuration.WantBackendAPI = configuration.WantBackendAPI;
                 }
 
                 return Configuration;
@@ -229,7 +234,8 @@ namespace FiyiStackApp.Models.Core
                 $"WantCSharpWebAPIs: {WantCSharpWebAPIs}, " +
                 $"WantTypeScriptModels: {WantTypeScriptModels}, " +
                 $"WantTypeScriptDTOs: {WantTypeScriptDTOs}, " +
-                $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}";
+                $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}, " +
+                $"WantBackendAPI:WantBackendAPI {WantBackendAPI}";
         }
     }
 }

@@ -21,7 +21,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region TypeScript model
                     if (GeneratorConfigurationComponent.Configuration.WantTypeScriptModels)
                     {
-                        string TypeScriptModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\TsModels\\";
+                        string TypeScriptModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\TsModels\\";
                         if (Directory.Exists(TypeScriptModelPath))
                         {
                             LogText += $"Folder: {TypeScriptModelPath} exist {Environment.NewLine}";
@@ -47,7 +47,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region jQuery in TypeScript
                     if (GeneratorConfigurationComponent.Configuration.WantjQueryDOMManipulator)
                     {
-                        string jQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\jQuery\\";
+                        string jQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\jQuery\\";
                         if (Directory.Exists(jQueryPath))
                         {
                             LogText += $"Folder: {jQueryPath} exist {Environment.NewLine}";
@@ -73,7 +73,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region TypeScript DTO
                     if (GeneratorConfigurationComponent.Configuration.WantTypeScriptDTOs)
                     {
-                        string TypeScriptDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\DTOs\\";
+                        string TypeScriptDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\DTOs\\";
                         if (Directory.Exists(TypeScriptDTOPath))
                         {
                             LogText += $"Folder: {TypeScriptDTOPath} exist {Environment.NewLine}";

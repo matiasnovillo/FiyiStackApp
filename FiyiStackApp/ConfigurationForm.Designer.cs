@@ -29,16 +29,6 @@ namespace FiyiStackApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("TypeScript Models");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("jQuery");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("TypeScript DTOs");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("C# Models with SPs");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("C# Services");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("C# Interfaces");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("C# .NET Core Web APIs");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("C# Filters");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("C# .NET Core Razor Pages");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("C# DTOs");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationForm));
             this.PanelDatabaseConfiguration = new System.Windows.Forms.Panel();
             this.chbclonedConfigurationDeleteTable = new System.Windows.Forms.CheckBox();
@@ -241,19 +231,6 @@ namespace FiyiStackApp
             this.ListViewFrontEndFilesGenerators.FullRowSelect = true;
             this.ListViewFrontEndFilesGenerators.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.ListViewFrontEndFilesGenerators.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem1.Tag = "0";
-            listViewItem1.ToolTipText = "TypeScript Models";
-            listViewItem2.StateImageIndex = 0;
-            listViewItem2.Tag = "1";
-            listViewItem2.ToolTipText = "jQuery";
-            listViewItem3.StateImageIndex = 0;
-            listViewItem3.Tag = "2";
-            listViewItem3.ToolTipText = "TypeScript DTOs";
-            this.ListViewFrontEndFilesGenerators.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
             this.ListViewFrontEndFilesGenerators.Location = new System.Drawing.Point(1, 226);
             this.ListViewFrontEndFilesGenerators.Margin = new System.Windows.Forms.Padding(4);
             this.ListViewFrontEndFilesGenerators.MultiSelect = false;
@@ -285,34 +262,6 @@ namespace FiyiStackApp
             this.ListViewBackEndFilesGenerators.FullRowSelect = true;
             this.ListViewBackEndFilesGenerators.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.ListViewBackEndFilesGenerators.HideSelection = false;
-            listViewItem4.StateImageIndex = 0;
-            listViewItem4.Tag = "0";
-            listViewItem4.ToolTipText = "C# Models with SPs";
-            listViewItem5.StateImageIndex = 0;
-            listViewItem5.Tag = "1";
-            listViewItem5.ToolTipText = "C# Services";
-            listViewItem6.StateImageIndex = 0;
-            listViewItem6.Tag = "2";
-            listViewItem6.ToolTipText = "C# Interfaces";
-            listViewItem7.StateImageIndex = 0;
-            listViewItem7.Tag = "3";
-            listViewItem7.ToolTipText = "C# .NET Core Web APIs";
-            listViewItem8.StateImageIndex = 0;
-            listViewItem8.Tag = "4";
-            listViewItem8.ToolTipText = "C# Filters";
-            listViewItem9.StateImageIndex = 0;
-            listViewItem9.Tag = "5";
-            listViewItem9.ToolTipText = "C# .NET Core Razor Pages";
-            listViewItem10.StateImageIndex = 0;
-            listViewItem10.Tag = "6";
-            this.ListViewBackEndFilesGenerators.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10});
             this.ListViewBackEndFilesGenerators.Location = new System.Drawing.Point(1, 30);
             this.ListViewBackEndFilesGenerators.Margin = new System.Windows.Forms.Padding(4);
             this.ListViewBackEndFilesGenerators.MultiSelect = false;

@@ -21,7 +21,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     #region jQuery in JavaScript
                     if (GeneratorConfigurationComponent.Configuration.WantjQueryDOMManipulator)
                     {
-                        string jQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\wwwroot\\js\\{Table.Area}\\{Table.Name}\\jQuery\\";
+                        string jQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\js\\{Table.Area}\\{Table.Name}\\jQuery\\";
                         if (Directory.Exists(jQueryPath))
                         {
                             LogText += $"Folder: {jQueryPath} exist {Environment.NewLine}";

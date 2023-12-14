@@ -81,7 +81,7 @@ SELECT @TotalRows = COUNT(*) FROM [{Table.Area}.{Table.Name}]";
                 }
 
                 #region Create script in project folder
-                string ScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.Path}\\SQLScripts\\";
+                string ScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\SQLScripts\\";
                 if (!Directory.Exists(ScriptPath))
                 { Directory.CreateDirectory(ScriptPath); }
 

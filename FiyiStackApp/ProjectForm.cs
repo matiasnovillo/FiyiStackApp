@@ -10,11 +10,8 @@ namespace FiyiStackApp
     public partial class ProjectForm : Form
     {
         bool Loading = false;
-        int iNavigatorForPanels;
         bool ToggleForFilterYourProjects = false;
-        bool ToggleJoinAndLoadPanels = false;
         
-
         public ProjectForm()
         {
             try
@@ -30,9 +27,7 @@ namespace FiyiStackApp
                 txtSearchYourProjectByName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
                 ListViewYourProjects.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
                 //RightSide Panel
-                txtProjectName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-                txtGeneralHistoryUser.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-                txtPath.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                PropertyGridProject.SelectedObject = new Project();
                
                 //Load your projects
                 LoadYourProjects();
@@ -170,10 +165,8 @@ namespace FiyiStackApp
                 }
 
                 //Load Basic panel of selected project
-                txtProjectName.Text = ProjectChosen.Name;
-                txtGeneralHistoryUser.Text = ProjectChosen.GeneralHistoryUser;
-                txtPath.Text = ProjectChosen.Path;
                 Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
+                PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
             }
         }
 
@@ -188,15 +181,12 @@ namespace FiyiStackApp
             Cursor = Cursors.WaitCursor;
 
             //Configure panel navigator
-            iNavigatorForPanels = 0;
             Panel0Basic.Visible = true;
 
             //Basic
             btnNewOrEdit.Image = Resources.btnNew;
             labelNewOrEditProject.Text = "NEW PROJECT";
-            txtProjectName.Text = "";
-            txtGeneralHistoryUser.Text = "";
-            txtPath.Text = "";
+            PropertyGridProject.SelectedObject = new Project();
 
             //Create a "zero" Project
             Program.WinFormConfigurationComponent.ProjectChosen = new Project();
@@ -280,9 +270,6 @@ namespace FiyiStackApp
                 ToolStatusLabel.Text = "Validating";
                 Cursor = Cursors.WaitCursor;
 
-                //Validations
-                if (txtProjectName.Text.Trim() == "") { throw new Exception("Please, enter a name to the project"); }
-
                 //Reset timer
                 Program.WinFormConfigurationComponent.timer.Stop();
                 Program.WinFormConfigurationComponent.timer.Start();
@@ -293,9 +280,7 @@ namespace FiyiStackApp
                     ToolStatusLabel.Text = "Creating new project";
 
                     #region Basic
-                    Program.WinFormConfigurationComponent.ProjectChosen.Name = txtProjectName.Text;
-                    Program.WinFormConfigurationComponent.ProjectChosen.GeneralHistoryUser = txtGeneralHistoryUser.Text;
-                    Program.WinFormConfigurationComponent.ProjectChosen.Path = txtPath.Text;
+                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
                     Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
                     Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now;
                     Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation;
@@ -326,9 +311,7 @@ namespace FiyiStackApp
                     _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.ProjectId;
 
                     #region Basic
-                    Program.WinFormConfigurationComponent.ProjectChosen.Name = txtProjectName.Text;
-                    Program.WinFormConfigurationComponent.ProjectChosen.GeneralHistoryUser = txtGeneralHistoryUser.Text;
-                    Program.WinFormConfigurationComponent.ProjectChosen.Path = txtPath.Text;
+                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
                     Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
                     //Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now; NO MODIFICATION
                     Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = DateTime.Now;
@@ -549,17 +532,6 @@ namespace FiyiStackApp
             LoginForm LoginForm = new LoginForm();
             LoginForm.ShowDialog();
         }
-        private void basicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Panel0Basic.Visible = true;
-            iNavigatorForPanels = 0;
-        }
-
-        private void accessToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Panel0Basic.Visible = false;
-            iNavigatorForPanels = 1;
-        }
 
         private void StatusStrip_Click(object sender, EventArgs e)
         {
@@ -577,7 +549,6 @@ namespace FiyiStackApp
         {
             FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
             DialogResult result = FolderBrowserDialog.ShowDialog();
-            txtPath.Text = FolderBrowserDialog.SelectedPath + "\\";
         }
     }
 }

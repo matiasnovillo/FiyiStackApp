@@ -20,10 +20,6 @@ namespace FiyiStackApp.Models.Core
 
         public int RoleId { get; set; }
 
-        public int UserAccountTypeId { get; set; }
-
-        public int GenerationsLeft { get; set; }
-
         public virtual Role Role { get; set; }
         #endregion
 
@@ -60,8 +56,6 @@ namespace FiyiStackApp.Models.Core
                     Email = field.Email;
                     Password = field.Password;
                     RoleId = field.RoleId;
-                    UserAccountTypeId = field.UserAccountTypeId;
-                    GenerationsLeft = field.GenerationsLeft;
                 }
 
             }
@@ -96,8 +90,6 @@ namespace FiyiStackApp.Models.Core
                     this.Email = field.Email;
                     this.Password = field.Password;
                     this.RoleId = field.RoleId;
-                    this.UserAccountTypeId = field.UserAccountTypeId;
-                    this.GenerationsLeft = field.GenerationsLeft;
                 }
             }
             catch (Exception ex) { throw ex; }

@@ -44,8 +44,11 @@ namespace UnitTestOverFiyiStackApp
                 WantCSharpRazorPages = true,
                 WantCSharpServices = true,
                 WantCSharpWebAPIs = true,
+                WantCSharpDTOs = true,
                 WantTypeScriptModels = true,
-                WantjQueryDOMManipulator = true
+                WantjQueryDOMManipulator = true,
+                WantTypeScriptDTOs = true,
+                WantBackendAPI = true,
             };
             Project ProjectChosen = new Project()
             {
@@ -55,7 +58,8 @@ namespace UnitTestOverFiyiStackApp
                 DateTimeLastModification = Now,
                 GeneralHistoryUser = "",
                 Name = "Mikromatica",
-                Path = "C:\\FiyiStack\\Test\\Mikromatica",
+                PathJsTsNETCoreSQLServer = "C:\\FiyiStack\\Test\\Mikromatica",
+                PathNET6CleanArchitecture = "C:\\FiyiStack\\Test\\Mikromatica",
                 UserIdCreation = 1,
                 UserIdLastModification = 1
             };
@@ -268,7 +272,7 @@ namespace UnitTestOverFiyiStackApp
             #endregion
 
             #region Result
-            string Result = Generator.Start(Configuration,
+            string Result = GeneratorJsTsNETCoreSQLServer.Start(Configuration,
                 fieldChainer,
                 modelChainer,
                 ProjectChosen,

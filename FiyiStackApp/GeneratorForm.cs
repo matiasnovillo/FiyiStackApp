@@ -193,24 +193,6 @@ namespace FiyiStackApp
                 cmbDataType.DisplayMember = "Text"; 
                 cmbDataType.DataSource = new DataType().GetList("");
 
-                //Fill lblGenerationsLeft
-                switch (Program.WinFormConfigurationComponent.UserLogged.UserAccountTypeId)
-                {
-                    case 1:
-                        lblGenerationsLeft.Text = $@"FREE TRIAL - {Program.WinFormConfigurationComponent.UserLogged.GenerationsLeft} / 20 generations left";
-                        break;
-                    case 2:
-                        lblGenerationsLeft.Text = $@"AMATEUR ACCOUNT - {Program.WinFormConfigurationComponent.UserLogged.GenerationsLeft} / 100 generations left";
-                        break;
-                    case 3:
-                        lblGenerationsLeft.Text = $@"PRO ACCOUNT - Unlimited generations";
-                        break;
-
-                    default:
-                        lblGenerationsLeft.Text = "PRO ACCOUNT - Unlimited generations";
-                        break;
-                }
-
                 //Basic
                 ToolStatusLabel.Text = "Ready. Select or create a database";
                 Cursor = Cursors.Default;
@@ -320,7 +302,6 @@ namespace FiyiStackApp
                 Cursor = Cursors.WaitCursor;
                 if (Program.WinFormConfigurationComponent.lstTableToGenerate.Count != 0)
                 {
-                    ToolStatusLabel.Text = "Checking number of generations allowed";
 
                     //Before generation done
                     TextBoxLogger.Clear();
@@ -328,41 +309,29 @@ namespace FiyiStackApp
                     PanelSummary.Visible = true;
 
                     //Start generation
-                    TextBoxLogger.Text += Generator.Start(Program.WinFormConfigurationComponent.Configuration,
-                        new fieldChainer(),
-                        new modelChainer(),
-                        Program.WinFormConfigurationComponent.ProjectChosen,
-                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-
-                    //Quit 1 generation for FREE TRIAL AND AMATEUR ONLY
-                    if (Program.WinFormConfigurationComponent.UserLogged.UserAccountTypeId != 3) // 3 -> PRO Account
+                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
                     {
-                        Program.WinFormConfigurationComponent.UserLogged.GenerationsLeft -= 1;
-                        User User = new User(Program.WinFormConfigurationComponent.UserLogged.UserId);
-                        User.GenerationsLeft -= 1;
-                        User.UpdateByUserId();
+                        TextBoxLogger.Text += GeneratorJsTsNETCoreSQLServer.Start(Program.WinFormConfigurationComponent.Configuration,
+                                        new fieldChainer(),
+                                        new modelChainer(),
+                                        Program.WinFormConfigurationComponent.ProjectChosen,
+                                        Program.WinFormConfigurationComponent.DataBaseChosen,
+                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate); 
                     }
-
-                    //Fill lblGenerationsLeft
-                    switch (Program.WinFormConfigurationComponent.UserLogged.UserAccountTypeId)
+                    else
                     {
-                        case 1:
-                            lblGenerationsLeft.Text = $@"FREE TRIAL - {Program.WinFormConfigurationComponent.UserLogged.GenerationsLeft} / 20 generations left";
-                            break;
-                        case 2:
-                            lblGenerationsLeft.Text = $@"AMATEUR ACCOUNT - {Program.WinFormConfigurationComponent.UserLogged.GenerationsLeft} / 100 generations left";
-                            break;
-                        case 3:
-                            lblGenerationsLeft.Text = $@"PRO ACCOUNT - Unlimited generations";
-                            break;
-
-                        default:
-                            lblGenerationsLeft.Text = "PRO ACCOUNT - Unlimited generations";
-                            break;
+                        TextBoxLogger.Text += GeneratorNET6CleanArchitecture.Start(Program.WinFormConfigurationComponent.Configuration,
+                                        new fieldChainer(),
+                                        new modelChainer(),
+                                        Program.WinFormConfigurationComponent.ProjectChosen,
+                                        Program.WinFormConfigurationComponent.DataBaseChosen,
+                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
                     }
 
                     //After generation done

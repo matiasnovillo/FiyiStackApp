@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FiyiStackApp.Models.Tools;
 using Microsoft.Data.SqlClient;
+using System.ComponentModel;
 using System.Data;
 
 namespace FiyiStackApp.Models.Core
@@ -9,12 +10,18 @@ namespace FiyiStackApp.Models.Core
     {
         #region Fields
         public int ProjectId { get; set; }
-
+        
+        [CategoryAttribute("Settings"), DescriptionAttribute("Project name")]
         public string Name { get; set; }
 
+        [CategoryAttribute("Settings"), DescriptionAttribute("History user")]
         public string GeneralHistoryUser { get; set; }
 
-        public string Path { get; set; }
+        [CategoryAttribute("Settings"), DescriptionAttribute("Path to JsTsNETCoreSQLServer")]
+        public string PathJsTsNETCoreSQLServer { get; set; }
+
+        [CategoryAttribute("Settings"), DescriptionAttribute("Path to NET6CleanArchitecture")]
+        public string PathNET6CleanArchitecture { get; set; }
 
         public bool Active { get; set; }
 
@@ -57,7 +64,8 @@ namespace FiyiStackApp.Models.Core
                     this.ProjectId = field.ProjectId;
                     Name = field.Name;
                     GeneralHistoryUser = field.GeneralHistoryUser;
-                    Path = field.Path;
+                    PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer;
+                    PathNET6CleanArchitecture = field.PathNET6CleanArchitecture;
                     Active = field.Active;
                     UserIdCreation = field.UserIdCreation;
                     UserIdLastModification = field.UserIdLastModification;
@@ -83,7 +91,8 @@ namespace FiyiStackApp.Models.Core
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
                 dp.Add("GeneralHistoryUser", GeneralHistoryUser, DbType.String, ParameterDirection.Input);
-                dp.Add("Path", Path, DbType.String, ParameterDirection.Input);
+                dp.Add("PathJsTsNETCoreSQLServer", PathJsTsNETCoreSQLServer, DbType.String, ParameterDirection.Input);
+                dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
@@ -127,7 +136,8 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("ProjectId", ProjectId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
                 dp.Add("GeneralHistoryUser", GeneralHistoryUser, DbType.String, ParameterDirection.Input);
-                dp.Add("Path", Path, DbType.String, ParameterDirection.Input);
+                dp.Add("PathJsTsNETCoreSQLServer", PathJsTsNETCoreSQLServer, DbType.String, ParameterDirection.Input);
+                dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
@@ -200,7 +210,8 @@ namespace FiyiStackApp.Models.Core
             return $"ProjectId: {ProjectId}, " +
                 $"Name: {Name}, " +
                 $"GeneralHistoryUser: {GeneralHistoryUser}, " +
-                $"Path: {Path}, " +
+                $"PathJsTsNETCoreSQLServer: {PathJsTsNETCoreSQLServer}, " +
+                $"PathNET6CleanArchitecture: {PathNET6CleanArchitecture}, " +
                 $"Active: {Active}, " +
                 $"UserIdCreation: {UserIdCreation}, " +
                 $"UserIdLastModification: {UserIdLastModification}, " +
