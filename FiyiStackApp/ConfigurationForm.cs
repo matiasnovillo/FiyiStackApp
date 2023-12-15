@@ -43,10 +43,15 @@ namespace FiyiStackApp
                 ListViewBackEndFilesGenerators.Items[5].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages;
                 ListViewBackEndFilesGenerators.Items[6].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpDTOs;
             }
-            else
+            if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
             {
                 ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                 ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPI;
+            }
+            else
+            {
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
+                ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB;
             }
 
             //Front-end
@@ -103,9 +108,13 @@ namespace FiyiStackApp
                         Configuration.WantCSharpRazorPages = ListViewBackEndFilesGenerators.Items[5].Checked;
                         Configuration.WantCSharpDTOs = ListViewBackEndFilesGenerators.Items[6].Checked;
                     }
-                    else
+                    else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
                     {
                         Configuration.WantBackendAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
+                    }
+                    else
+                    {
+                        Configuration.WantBackendAPINodeJsExpressMongoDB = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
 
 

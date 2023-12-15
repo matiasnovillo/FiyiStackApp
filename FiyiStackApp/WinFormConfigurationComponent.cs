@@ -129,6 +129,7 @@ namespace FiyiStackApp
                 WantjQueryDOMManipulator = true,
                 WantTypeScriptDTOs = true,
                 WantBackendAPI = true,
+                WantBackendAPINodeJsExpressMongoDB = true
             };
             return Configuration;
         }
@@ -157,6 +158,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages = Configuration.WantCSharpRazorPages;
                 Program.WinFormConfigurationComponent.Configuration.WantCSharpWebAPIs = Configuration.WantCSharpWebAPIs;
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPI = Configuration.WantBackendAPI;
+                Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB = Configuration.WantBackendAPINodeJsExpressMongoDB;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
                 Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;

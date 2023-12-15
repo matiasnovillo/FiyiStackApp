@@ -19,6 +19,7 @@ namespace UnitTestOverFiyiStackApp
         {
             DateTime Now = DateTime.Now;
             fieldChainer fieldChainer = new fieldChainer();
+            fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB = new fieldChainerNodeJsExpressMongoDB();
             modelChainer modelChainer = new modelChainer();
 
             //Tables inside FiyiStack database = 0
@@ -49,6 +50,7 @@ namespace UnitTestOverFiyiStackApp
                 WantjQueryDOMManipulator = true,
                 WantTypeScriptDTOs = true,
                 WantBackendAPI = true,
+                WantBackendAPINodeJsExpressMongoDB = true
             };
             Project ProjectChosen = new Project()
             {
@@ -57,9 +59,10 @@ namespace UnitTestOverFiyiStackApp
                 DateTimeCreation = Now,
                 DateTimeLastModification = Now,
                 GeneralHistoryUser = "",
-                Name = "Mikromatica",
-                PathJsTsNETCoreSQLServer = "C:\\FiyiStack\\Test\\Mikromatica",
-                PathNET6CleanArchitecture = "C:\\FiyiStack\\Test\\Mikromatica",
+                Name = "Test",
+                PathJsTsNETCoreSQLServer = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
+                PathNET6CleanArchitecture = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
+                PathNodeJsExpressMongoDB = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 UserIdCreation = 1,
                 UserIdLastModification = 1
             };
@@ -274,6 +277,7 @@ namespace UnitTestOverFiyiStackApp
             #region Result
             string Result = GeneratorJsTsNETCoreSQLServer.Start(Configuration,
                 fieldChainer,
+                fieldChainerNodeJsExpressMongoDB,
                 modelChainer,
                 ProjectChosen,
                 DataBaseChosen,

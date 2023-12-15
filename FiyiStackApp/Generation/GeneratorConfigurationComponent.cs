@@ -13,6 +13,7 @@ namespace FiyiStackApp.Generation
     {
         public Configuration Configuration { get; set; }
         public Models.Tools.fieldChainer fieldChainer { get; set; }
+        public Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB { get; set; }
         public Models.Tools.modelChainer modelChainer { get; set; }
         public Project ProjectChosen { get; set; }
         public DataBase DataBaseChosen { get; set; }
@@ -24,6 +25,7 @@ namespace FiyiStackApp.Generation
         #region Constructors
         public GeneratorConfigurationComponent(Configuration Configuration,
             Models.Tools.fieldChainer fieldChainer,
+            Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.modelChainer modelChainer,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
@@ -35,6 +37,7 @@ namespace FiyiStackApp.Generation
 
             //Initialization
             this.fieldChainer = new Models.Tools.fieldChainer();
+            this.fieldChainerNodeJsExpressMongoDB = new Models.Tools.fieldChainerNodeJsExpressMongoDB();
             this.modelChainer = new Models.Tools.modelChainer();
             this.ProjectChosen = new Models.Core.Project();
             this.DataBaseChosen = new Models.Core.DataBase();
@@ -46,6 +49,7 @@ namespace FiyiStackApp.Generation
             //Copy objects from parameters
             this.Configuration = Configuration;
             this.fieldChainer = fieldChainer;
+            this.fieldChainerNodeJsExpressMongoDB = fieldChainerNodeJsExpressMongoDB;
             this.modelChainer = modelChainer;
             this.ProjectChosen = ProjectChosen;
             this.DataBaseChosen = DataBaseChosen;

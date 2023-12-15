@@ -313,6 +313,7 @@ namespace FiyiStackApp
                     {
                         TextBoxLogger.Text += GeneratorJsTsNETCoreSQLServer.Start(Program.WinFormConfigurationComponent.Configuration,
                                         new fieldChainer(),
+                                        new fieldChainerNodeJsExpressMongoDB(),
                                         new modelChainer(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,
@@ -321,10 +322,24 @@ namespace FiyiStackApp
                                         Program.WinFormConfigurationComponent.lstFieldToGenerate,
                                         Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate); 
                     }
-                    else
+                    else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
                     {
                         TextBoxLogger.Text += GeneratorNET6CleanArchitecture.Start(Program.WinFormConfigurationComponent.Configuration,
                                         new fieldChainer(),
+                                        new fieldChainerNodeJsExpressMongoDB(),
+                                        new modelChainer(),
+                                        Program.WinFormConfigurationComponent.ProjectChosen,
+                                        Program.WinFormConfigurationComponent.DataBaseChosen,
+                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                    }
+                    else
+                    {
+                        TextBoxLogger.Text += GeneratorNodeJsExpressMongoDB.Start(Program.WinFormConfigurationComponent.Configuration,
+                                        new fieldChainer(),
+                                        new fieldChainerNodeJsExpressMongoDB(),
                                         new modelChainer(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,

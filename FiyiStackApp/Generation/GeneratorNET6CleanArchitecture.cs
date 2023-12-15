@@ -8,6 +8,7 @@ namespace FiyiStackApp.Generation
     {
         public static string Start(Configuration Configuration,
             Models.Tools.fieldChainer fieldChainer,
+            Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.modelChainer modelChainer,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
@@ -18,6 +19,7 @@ namespace FiyiStackApp.Generation
         {
             GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
             fieldChainer,
+            fieldChainerNodeJsExpressMongoDB,
             modelChainer,
             ProjectChosen,
             DataBaseChosen,

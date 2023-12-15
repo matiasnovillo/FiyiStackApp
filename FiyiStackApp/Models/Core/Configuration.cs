@@ -54,7 +54,10 @@ namespace FiyiStackApp.Models.Core
 
         public bool WantjQueryDOMManipulator { get; set; }
 
+        //For NET6CleanArchitecture
         public bool WantBackendAPI { get; set; }
+
+        public bool WantBackendAPINodeJsExpressMongoDB { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -95,6 +98,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -141,6 +145,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -203,6 +208,7 @@ namespace FiyiStackApp.Models.Core
                     Configuration.WantTypeScriptDTOs = configuration.WantTypeScriptDTOs;
                     Configuration.WantjQueryDOMManipulator = configuration.WantjQueryDOMManipulator;
                     Configuration.WantBackendAPI = configuration.WantBackendAPI;
+                    Configuration.WantBackendAPINodeJsExpressMongoDB = configuration.WantBackendAPINodeJsExpressMongoDB;
                 }
 
                 return Configuration;
@@ -235,6 +241,7 @@ namespace FiyiStackApp.Models.Core
                 $"WantTypeScriptModels: {WantTypeScriptModels}, " +
                 $"WantTypeScriptDTOs: {WantTypeScriptDTOs}, " +
                 $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}, " +
+                $"WantBackendAPINodeJsExpressMongoDB: {WantBackendAPINodeJsExpressMongoDB}, " +
                 $"WantBackendAPI:WantBackendAPI {WantBackendAPI}";
         }
     }
