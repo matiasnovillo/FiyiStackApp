@@ -1,5 +1,5 @@
 ﻿using FiyiStackApp.Models.Core;
-using FiyiStackApp.Generation.Modules;
+using FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules;
 using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Tools;
 
@@ -19,7 +19,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                 try
                 {
                     LogText += $"Searching [{TableToGenerate.Scheme}].[{TableToGenerate.Area}.{TableToGenerate.Name}] {Environment.NewLine}";
-                    GeneratorConfigurationComponent.fieldChainer = new fieldChainer(TableToGenerate);
+                    GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer(TableToGenerate);
                     FiyiStack.Library.MicrosoftSQLServer.Table MSSQLServerTable = new FiyiStack.Library.MicrosoftSQLServer.Table();
 
                     //Search the table, if it is not found, create it.

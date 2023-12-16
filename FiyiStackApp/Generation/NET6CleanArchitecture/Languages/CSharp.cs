@@ -15,9 +15,9 @@ namespace FiyiStackApp.Generation.NET6CleanArchitecture.Languages
                 {
                     if (Table.Area == "" || Table.Name == "") { throw new Exception("C# generation cancelled. A table does not have an area or name declared"); }
 
-                    //Here we prepare the fieldChainer object for every table to generate
-                    GeneratorConfigurationComponent.fieldChainer = new fieldChainer(Table);
-                    GeneratorConfigurationComponent.modelChainer = new modelChainer(Table, GeneratorConfigurationComponent.lstTableInFiyiStack);
+                    //Here we prepare the fieldChainerNET8MSSQLServerAPI object for every table to generate
+                    GeneratorConfigurationComponent.fieldChainerNET8MSSQLServerAPI = new fieldChainerNET8MSSQLServerAPI(Table);
+                    GeneratorConfigurationComponent.modelChainerNET8MSSQLServerAPI = new modelChainerNET8MSSQLServerAPI(Table, GeneratorConfigurationComponent.lstTableInFiyiStack);
 
                     LogText += $"Working with {Table.Name} {Environment.NewLine}";
                     string Content = "";

@@ -2,7 +2,7 @@
 
 namespace FiyiStackApp.Models.Tools
 {
-    public class fieldChainer
+    public class fieldChainerJsTsNETCoreSQLServer
     {
         public int NumberOfFields { get; set; } = 0; 
         /// <summary>
@@ -121,7 +121,7 @@ namespace FiyiStackApp.Models.Tools
         public string FieldTextEditor_ForjQueryNonQuery_Quill { get; set; } = "";
 
         public string FieldForHTTPFile { get; set; } = "";
-        public fieldChainer() 
+        public fieldChainerJsTsNETCoreSQLServer() 
         { 
         }
 
@@ -129,7 +129,7 @@ namespace FiyiStackApp.Models.Tools
         /// Object used to reduce duplicated code in /Generator/DataToGenerate folder <br/>
         /// This object contains all the fields chained to engage in every part of looped code
         ///</summary>
-        public fieldChainer(Table Table) 
+        public fieldChainerJsTsNETCoreSQLServer(Table Table) 
         {
             Field Field = new Field();
             List<Field> lstField = Field.GetAllByTableIdToModel(Table.TableId);

@@ -168,7 +168,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 //{Table.Name}Id
                 int {Table.Name}Id = Convert.ToInt32(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{Table.Name.ToLower()}id-input""]);
                 
-                {GeneratorConfigurationComponent.fieldChainer.Fields_ForController_InInsertAsync_Ajax}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForController_InInsertAsync_Ajax}
                 #endregion
 
                 int NewEnteredId = 0;
@@ -184,7 +184,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                         UserLastModificationId = UserId,
                         DateTimeCreation = DateTime.Now,
                         DateTimeLastModification = DateTime.Now,
-                        {GeneratorConfigurationComponent.fieldChainer.Fields_ForController_InInsertAsync.TrimEnd(',')}
+                        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForController_InInsertAsync.TrimEnd(',')}
                     }};
                     
                     NewEnteredId = _I{Table.Name}.Insert({Table.Name}Model);
@@ -196,7 +196,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                     
                     {Table.Name}Model.UserLastModificationId = UserId;
                     {Table.Name}Model.DateTimeLastModification = DateTime.Now;
-                    {GeneratorConfigurationComponent.fieldChainer.Fields_ForController_InUpdateAsync}                   
+                    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForController_InUpdateAsync}                   
 
                     RowsAffected = _I{Table.Name}.UpdateBy{Table.Name}Id({Table.Name}Model);
                 }}

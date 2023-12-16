@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FiyiStackApp.Models.Core;
 using FiyiStackApp.Models.Tools;
 
-namespace FiyiStackApp.Generation.Modules
+namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
 {
     public static partial class SQLScripts
     {
@@ -15,7 +15,7 @@ namespace FiyiStackApp.Generation.Modules
 
             try
             {
-                GeneratorConfigurationComponent.fieldChainer = new fieldChainer(Table);
+                GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer(Table);
 
                 string Script =
                     $@"USE [{GeneratorConfigurationComponent.DataBaseChosen.Name}]
@@ -24,7 +24,7 @@ SET QUOTED_IDENTIFIER ON
 
 --Last modification on: {DateTime.Now}
 
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForCreateFields_ForSQLServer}";
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForCreateFields_ForSQLServer}";
 
                 #region Create script in project folder
                 string ScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\SQLScripts\\";

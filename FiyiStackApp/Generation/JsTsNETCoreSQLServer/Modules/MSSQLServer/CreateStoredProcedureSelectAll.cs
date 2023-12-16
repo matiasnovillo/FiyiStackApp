@@ -31,7 +31,7 @@ EXEC [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
 SET DATEFORMAT DMY
 
 SELECT
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForSelect_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForSelect_ForSQLServer}
 ";
                 NonQuery = NonQuery.TrimEnd('\n', '\r', ',');
 

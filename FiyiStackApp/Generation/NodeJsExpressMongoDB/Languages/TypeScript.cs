@@ -15,7 +15,7 @@ namespace FiyiStackApp.Generation.NodeJsExpressMongoDB.Languages
                 {
                     if (Table.Area == "" || Table.Name == "") { throw new Exception("TypeScript generation cancelled. A table does not have an area or name declared"); }
 
-                    //Here we prepare the fieldChainer object for every table to generate
+                    //Here we prepare the fieldChainerNET8MSSQLServerAPI object for every table to generate
                     GeneratorConfigurationComponent.fieldChainerNodeJsExpressMongoDB = new fieldChainerNodeJsExpressMongoDB(Table);
 
                     LogText += $"Working with {Table.Name} {Environment.NewLine}";

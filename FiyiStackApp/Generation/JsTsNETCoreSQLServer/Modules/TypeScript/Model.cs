@@ -18,17 +18,17 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
 import {{ ajax }} from ""rxjs/ajax"";
 import {{ Ajax }} from ""../../../Library/Ajax"";
 import {{ {Table.Name.ToLower()}SelectAllPaged }} from ""../DTOs/{Table.Name.ToLower()}SelectAllPaged"";
-{GeneratorConfigurationComponent.modelChainer.Imports_ForTypeScriptModel}
+{GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.Imports_ForTypeScriptModel}
 
 {Security.WaterMark(Security.EWaterMarkFor.TypeScriptAndJavaScript, Constant.FiyiStackGUID.ToString())}
 
-//{lstField.Count} fields | Sub-models: {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models  | Last modification on: {DateTime.Now} | Stack: 9
+//{lstField.Count} fields | Sub-models: {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models  | Last modification on: {DateTime.Now} | Stack: 9
 
 export class {Table.Name}Model {{
 
     //Fields
-    {GeneratorConfigurationComponent.fieldChainer.TsFields_ForTsModel.TrimEnd('\t', '\n', '\r')}
-    {GeneratorConfigurationComponent.modelChainer.NewList_ForTypeScriptModel}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.TsFields_ForTsModel.TrimEnd('\t', '\n', '\r')}
+    {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.NewList_ForTypeScriptModel}
 
     //Queries
     static Select1By{Table.Name}Id({Table.Name}Id: number) {{

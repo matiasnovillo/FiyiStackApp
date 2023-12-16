@@ -18,9 +18,11 @@ namespace UnitTestOverFiyiStackApp
         public void TestGenerator()
         {
             DateTime Now = DateTime.Now;
-            fieldChainer fieldChainer = new fieldChainer();
+            fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI = new fieldChainerNET8MSSQLServerAPI();
+            modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI = new modelChainerNET8MSSQLServerAPI();
             fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB = new fieldChainerNodeJsExpressMongoDB();
-            modelChainer modelChainer = new modelChainer();
+            fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer();
+            modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer = new modelChainerJsTsNETCoreSQLServer();
 
             //Tables inside FiyiStack database = 0
             List<Table> lstTableInFiyiStack = new List<Table>();
@@ -50,7 +52,8 @@ namespace UnitTestOverFiyiStackApp
                 WantjQueryDOMManipulator = true,
                 WantTypeScriptDTOs = true,
                 WantBackendAPI = true,
-                WantBackendAPINodeJsExpressMongoDB = true
+                WantBackendAPINodeJsExpressMongoDB = true,
+                WantNET8MSSQLServerAPI = true
             };
             Project ProjectChosen = new Project()
             {
@@ -63,6 +66,7 @@ namespace UnitTestOverFiyiStackApp
                 PathJsTsNETCoreSQLServer = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 PathNET6CleanArchitecture = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 PathNodeJsExpressMongoDB = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
+                PathNET8MSSQLServerAPI = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 UserIdCreation = 1,
                 UserIdLastModification = 1
             };
@@ -276,9 +280,11 @@ namespace UnitTestOverFiyiStackApp
 
             #region Result
             string Result = GeneratorJsTsNETCoreSQLServer.Start(Configuration,
-                fieldChainer,
+                fieldChainerNET8MSSQLServerAPI,
+                modelChainerNET8MSSQLServerAPI,
                 fieldChainerNodeJsExpressMongoDB,
-                modelChainer,
+                fieldChainerJsTsNETCoreSQLServer,
+                modelChainerJsTsNETCoreSQLServer,
                 ProjectChosen,
                 DataBaseChosen,
                 lstTableInFiyiStack,

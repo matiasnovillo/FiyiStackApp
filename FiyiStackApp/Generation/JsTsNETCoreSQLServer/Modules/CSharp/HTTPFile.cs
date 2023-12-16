@@ -37,7 +37,7 @@ POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/InsertOrUpdate
 Content-Type: application/json
 
 {{
-    {GeneratorConfigurationComponent.fieldChainer.FieldForHTTPFile.TrimEnd('\t', '\n', '\r', ',')}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldForHTTPFile.TrimEnd('\t', '\n', '\r', ',')}
 }}
 
 ### DeleteBy{Table.Name}Id

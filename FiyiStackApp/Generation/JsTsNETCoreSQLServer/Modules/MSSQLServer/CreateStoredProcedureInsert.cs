@@ -13,7 +13,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
             try
             {
                 string NonQuery = $@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}] 
-({GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForParametersInInsert_ForSQLServer}
+({GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInInsert_ForSQLServer}
     @NewEnteredId INT OUTPUT
 )
 
@@ -26,7 +26,7 @@ AS
  *
 DECLARE	@NewEnteredId INT
 EXEC [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForParametersExample_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersExample_ForSQLServer}
 @NewEnteredId = @NewEnteredId OUTPUT
 
 SELECT @NewEnteredId AS N'@NewEnteredId'
@@ -37,14 +37,14 @@ SELECT @NewEnteredId AS N'@NewEnteredId'
 
 INSERT INTO [{Table.Area}.{Table.Name}]
 (
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForInsertInto_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForInsertInto_ForSQLServer}
 ";
                 NonQuery = NonQuery.TrimEnd('\n', '\r', ',');
                 NonQuery += $@"
 )
 VALUES
 (
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForValues_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForValues_ForSQLServer}
 ";
                 NonQuery = NonQuery.TrimEnd('\n','\r',',');
                 NonQuery += $@"

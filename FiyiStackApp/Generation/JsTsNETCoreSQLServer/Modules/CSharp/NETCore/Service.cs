@@ -183,7 +183,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 <br>
 <table cellpadding=""""0"""" cellspacing=""""0"""" border=""""0"""" width=""""100%"""" style=""""width: 100% !important; min-width: 100%; max-width: 100%;"""">
     <tr>
-        {GeneratorConfigurationComponent.fieldChainer.Fields_ForIronPDF_Converter}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForIronPDF_Converter}
     </tr>
     {{RowsAsHTML}}
 </table>
@@ -212,7 +212,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 dt{Table.Name}Copy.TableName = ""{Table.Name}"";
 
                 #region Define columns for dt{Table.Name}Copy
-                {GeneratorConfigurationComponent.fieldChainer.Fields_ForExcel_Converter_DefineDataColumns.TrimEnd('\t')}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForExcel_Converter_DefineDataColumns.TrimEnd('\t')}
                 #endregion
 
                 dt{Table.Name} = new {Table.Name}Model().SelectAllToDataTable();
@@ -241,7 +241,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                     dt{Table.Name}Copy.TableName = ""{Table.Name}"";
 
                     #region Define columns for dt{Table.Name}Copy
-                    {GeneratorConfigurationComponent.fieldChainer.Fields_ForExcel_Converter_DefineDataColumns}
+                    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForExcel_Converter_DefineDataColumns}
                     #endregion
 
                     ds{Table.Name}.Tables.Add(dt{Table.Name}Copy);

@@ -19,14 +19,14 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
 var formData = new FormData();
 
 //Used for Quill Editor
-{GeneratorConfigurationComponent.fieldChainer.FieldTextEditor_ForjQueryNonQuery_Quill}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextEditor_ForjQueryNonQuery_Quill}
 
 //Used for file input
-{GeneratorConfigurationComponent.fieldChainer.FieldTextFile_ForjQueryNonQuery}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextFile_ForjQueryNonQuery}
 
 //LOAD EVENT
 $(document).ready(function () {{
-    {GeneratorConfigurationComponent.fieldChainer.FieldTextEditor_ForjQueryNonQuery_LoadEvent}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextEditor_ForjQueryNonQuery_LoadEvent}
     
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName(""needs-validation"");
@@ -42,7 +42,7 @@ $(document).ready(function () {{
                 //{Table.Name}Id
                 formData.append(""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{Table.Name.ToLower()}id-input"", $(""#{Table.Area.ToLower()}-{Table.Name.ToLower()}-{Table.Name.ToLower()}id-input"").val());
 
-                {GeneratorConfigurationComponent.fieldChainer.Field_ForjQueryNonQuery_FormData}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Field_ForjQueryNonQuery_FormData}
 
                 //Setup request
                 var xmlHttpRequest = new XMLHttpRequest();

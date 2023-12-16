@@ -48,7 +48,7 @@ SET DATEFORMAT DMY
 SET NOCOUNT ON
 
 SELECT
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForSelect_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForSelect_ForSQLServer}
 ";
                 Query = Query.TrimEnd('\n', '\r', ',');
 
@@ -61,9 +61,9 @@ FROM
 WHERE
     1=1
     AND (@QueryString = '' 
-        {GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForWhereClauseSelectAllPaged_ForSQLServer.TrimEnd(' ')}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForWhereClauseSelectAllPaged_ForSQLServer.TrimEnd(' ')}
     )
-ORDER BY {GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForSelectAllPaged_ForSQLServer}
+ORDER BY {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForSelectAllPaged_ForSQLServer}
 ";
                 Query = Query.TrimEnd('\n', '\r', ',');
 

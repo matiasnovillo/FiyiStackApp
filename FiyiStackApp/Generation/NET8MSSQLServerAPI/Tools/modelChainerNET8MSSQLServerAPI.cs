@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FiyiStackApp.Models.Tools
 {
-    public class modelChainer
+    public class modelChainerNET8MSSQLServerAPI
     {
         public int CounterOfModelsThatDependOnThis { get; set; } = 0;
 
@@ -13,11 +13,7 @@ namespace FiyiStackApp.Models.Tools
         public string NewList_ForCSharpModel { get; set; } = "";
 
         public string LoopThroughListsAndSubLists_ForCSharpModel { get; set; } = "";
-
-        public string NewList_ForTypeScriptModel { get; set; } = "";
-
-        public string Imports_ForTypeScriptModel { get; set; } = "";
-        public modelChainer()
+        public modelChainerNET8MSSQLServerAPI()
         {
         }
         /// <summary>
@@ -27,7 +23,7 @@ namespace FiyiStackApp.Models.Tools
         /// <param name="Blog"></param>
         /// <param name="lstAllTables"></param>
 
-        public modelChainer(Table Blog, List<Table> lstAllTables)
+        public modelChainerNET8MSSQLServerAPI(Table Blog, List<Table> lstAllTables)
         {
             List<Field> lstTablesFiltered = new List<Field>();
 
@@ -68,11 +64,6 @@ namespace FiyiStackApp.Models.Tools
                 }}
                 
                 ";
-
-                NewList_ForTypeScriptModel += $@"lst{CommentForBlog.Name}Model?: {CommentForBlog.Name}Model[] | undefined;
-    ";
-
-                Imports_ForTypeScriptModel += $@"import {{ {CommentForBlog.Name}Model }} from ""../../{CommentForBlog.Name}/TsModels/{CommentForBlog.Name}_TsModel"";";
             }
 
             CSharpModelsThatDependOnThis_ForCSharpModel = CSharpModelsThatDependOnThis_ForCSharpModel.TrimEnd('\t', '\t', '\n', '\r');

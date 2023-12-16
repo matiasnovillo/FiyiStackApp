@@ -43,15 +43,20 @@ namespace FiyiStackApp
                 ListViewBackEndFilesGenerators.Items[5].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages;
                 ListViewBackEndFilesGenerators.Items[6].Checked = Program.WinFormConfigurationComponent.Configuration.WantCSharpDTOs;
             }
-            if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
+            else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
             {
                 ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                 ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPI;
             }
-            else
+            else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
             {
                 ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                 ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB;
+            }
+            else
+            {
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
+                ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI;
             }
 
             //Front-end
@@ -112,9 +117,13 @@ namespace FiyiStackApp
                     {
                         Configuration.WantBackendAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
-                    else
+                    else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
                     {
                         Configuration.WantBackendAPINodeJsExpressMongoDB = ListViewBackEndFilesGenerators.Items[0].Checked;
+                    }
+                    else
+                    {
+                        Configuration.WantNET8MSSQLServerAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
 
 

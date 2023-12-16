@@ -14,7 +14,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
             {
                 string NonQuery = $@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
 (
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForParametersInUpdateBy_ForSQLServer}
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInUpdateBy_ForSQLServer}
     @RowsAffected INT OUTPUT
 )
 
@@ -36,7 +36,7 @@ SELECT @RowsAffected AS N'@RowsAffected'
 --Last modification on: {DateTime.Now}
 
 UPDATE [{Table.Area}.{Table.Name}] SET
-{GeneratorConfigurationComponent.fieldChainer.SQLServerFieldsForUpdateInUpdateBy_ForSQLServer}";
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForUpdateInUpdateBy_ForSQLServer}";
 
                 NonQuery = NonQuery.TrimEnd('\n', '\r', ',');
                 NonQuery += $@"

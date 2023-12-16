@@ -19,7 +19,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
     string NonQueryIcon = """";
 
     int {Table.Name}Id;
-    {GeneratorConfigurationComponent.fieldChainer.Fields_ForRazorPageFrontNonQuery_Part1}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForRazorPageFrontNonQuery_Part1}
 
     if(HttpContext.Request.QueryString.Value.Contains(""?{Table.Name}Id=0""))
     {{
@@ -27,7 +27,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
         NonQueryIcon = ""fas fa-plus"";
 
         {Table.Name}Id = 0;
-        {GeneratorConfigurationComponent.fieldChainer.Fields_ForRazorPageFrontNonQuery_Part2}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForRazorPageFrontNonQuery_Part2}
     }}
     else
     {{
@@ -38,7 +38,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
         (Convert.ToInt32(HttpContext.Request.QueryString.Value.Replace(""?{Table.Name}Id="","""")));
 
         {Table.Name}Id = {Table.Name}Model.{Table.Name}Id;
-        {GeneratorConfigurationComponent.fieldChainer.Fields_ForRazorPageFrontNonQuery_Part3}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForRazorPageFrontNonQuery_Part3}
     }}
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
@@ -113,7 +113,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
                 <!-- Card body -->
                 <div class=""card-body"">
                     <form class=""needs-validation"" novalidate>
-                        { GeneratorConfigurationComponent.fieldChainer.Fields_ForRazorPageFrontNonQuery_InHTMLTag}
+                        { GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForRazorPageFrontNonQuery_InHTMLTag}
                         <!-- Buttons -->
                         <div class=""row justify-content-between"">
                             <button class=""btn btn-primary text-nowrap ml-3 mt-4"" 

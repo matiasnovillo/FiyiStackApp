@@ -47,7 +47,7 @@ class {Table.Name}Query {{
                 <input id=""{Table.Name.ToLower()}-table-check-all"" type=""checkbox"">
             </div>
         </th>
-        {GeneratorConfigurationComponent.fieldChainer.Fields_ForjQuery_TableFill_FirstPart}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForjQuery_TableFill_FirstPart}
         <th scope=""col""></th>
     </tr>
 </thead>
@@ -119,7 +119,7 @@ class {Table.Name}Query {{
         </div>
     </td>
     <!-- Data -->
-    {GeneratorConfigurationComponent.fieldChainer.Fields_ForjQuery_TableFill_SecondtPart}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForjQuery_TableFill_SecondtPart}
     <!-- Actions -->
     <td class=""text-right"">
         <a class=""btn btn-icon-only text-primary"" href=""/{Table.Area}/{Table.Name}NonQueryPage?{Table.Name}Id=${{row.{Table.Name}Id}}"" role=""button"" data-toggle=""tooltip"" data-original-title=""Edit"">
@@ -154,7 +154,7 @@ class {Table.Name}Query {{
             <div class=""card-body"">
                 <div class=""row"">
                     <div class=""col text-truncate"">
-                        {GeneratorConfigurationComponent.fieldChainer.Fields_ForjQuery_ListFill}
+                        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForjQuery_ListFill}
                     </div>
                     <div class=""col-auto"">
                     </div>

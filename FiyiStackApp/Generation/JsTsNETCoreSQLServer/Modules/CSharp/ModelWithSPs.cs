@@ -30,8 +30,8 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
     /// Function:          Allow you to manipulate information from database using stored procedures.
     ///                    Also, let you make other related actions with the model in question or
     ///                    make temporal copies with random data. <br/>
-    /// Fields:            {GeneratorConfigurationComponent.fieldChainer.NumberOfFields} <br/> 
-    /// Sub-models:      {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models <br/>
+    /// Fields:            {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.NumberOfFields} <br/> 
+    /// Sub-models:      {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models <br/>
     /// Last modification: {DateTime.Now}
     /// </summary>
     public partial class {Table.Name}Model
@@ -40,11 +40,11 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         private string _ConnectionString = ConnectionStrings.ConnectionStrings.Development();
 
         #region Fields
-        {GeneratorConfigurationComponent.fieldChainer.CSharpFields_ForCSharpModel}
+        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFields_ForCSharpModel}
         #endregion
 
         #region Sub-lists
-        {GeneratorConfigurationComponent.modelChainer.CSharpModelsThatDependOnThis_ForCSharpModel}
+        {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CSharpModelsThatDependOnThis_ForCSharpModel}
         #endregion
 
         #region Constructors
@@ -53,8 +53,8 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Function:     Create fastly this model with field {Table.Name}Id = 0 <br/>
         /// Note 1:       Generally used to have fast access to functions of object. <br/>
         /// Note 2:       Need construction with [new] reserved word, as all constructors. <br/>
-        /// Fields:       {GeneratorConfigurationComponent.fieldChainer.NumberOfFields} <br/> 
-        /// Dependencies: {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
+        /// Fields:       {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.NumberOfFields} <br/> 
+        /// Dependencies: {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
         /// </summary>
         public {Table.Name}Model()
         {{
@@ -63,7 +63,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 {Table.Name}Id = 0;
 
                 //Initialize sub-lists
-                {GeneratorConfigurationComponent.modelChainer.NewList_ForCSharpModel}
+                {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.NewList_ForCSharpModel}
             }}
             catch (Exception ex) {{ throw ex; }}
         }}
@@ -72,8 +72,8 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Stack:        3 <br/>
         /// Function:     Create this model with stored information in database using {Table.Name}Id <br/>
         /// Note:         Raise exception on duplicated IDs <br/>
-        /// Fields:       {GeneratorConfigurationComponent.fieldChainer.NumberOfFields} <br/> 
-        /// Dependencies: {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
+        /// Fields:       {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.NumberOfFields} <br/> 
+        /// Dependencies: {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
         /// </summary>
         public {Table.Name}Model(int {Table.Name}Id)
         {{
@@ -82,7 +82,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 List<{Table.Name}Model> lst{Table.Name}Model = new List<{Table.Name}Model>();
 
                 //Initialize sub-lists
-                {GeneratorConfigurationComponent.modelChainer.NewList_ForCSharpModel}
+                {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.NewList_ForCSharpModel}
                 
                 DynamicParameters dp = new DynamicParameters();
 
@@ -101,7 +101,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         
                 foreach ({Table.Name}Model {Table.Name.ToLower()} in lst{Table.Name}Model)
                 {{
-                    {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAndParameters1_ForCSharpModel.Replace("\t\t\t\t", "\t\t\t\t\t")}
+                    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAndParameters1_ForCSharpModel.Replace("\t\t\t\t", "\t\t\t\t\t")}
                 }}
             }}
             catch (Exception ex) {{ throw ex; }}
@@ -112,17 +112,17 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Stack:        3 <br/>
         /// Function:     Create this model with filled parameters <br/>
         /// Note:         Raise exception on duplicated IDs <br/>
-        /// Fields:       {GeneratorConfigurationComponent.fieldChainer.NumberOfFields} <br/> 
-        /// Dependencies: {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
+        /// Fields:       {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.NumberOfFields} <br/> 
+        /// Dependencies: {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
         /// </summary>
-        public {Table.Name}Model({GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAsParametersInOneLine_ForCSharpModel})
+        public {Table.Name}Model({GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAsParametersInOneLine_ForCSharpModel})
         {{
             try
             {{
                 //Initialize sub-lists
-                {GeneratorConfigurationComponent.modelChainer.NewList_ForCSharpModel}
+                {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.NewList_ForCSharpModel}
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAndParameters2_ForCSharpModel}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAndParameters2_ForCSharpModel}
             }}
             catch (Exception ex) {{ throw ex; }}
         }}
@@ -131,17 +131,17 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Stack:        3 <br/>
         /// Function:     Create this model (copy) using the given model (original), {Table.Name.ToLower()}, passed by parameter. <br/>
         /// Note:         This constructor is generally used to execute functions using the copied fields <br/>
-        /// Fields:       {GeneratorConfigurationComponent.fieldChainer.NumberOfFields} <br/> 
-        /// Dependencies: {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
+        /// Fields:       {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.NumberOfFields} <br/> 
+        /// Dependencies: {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.CounterOfModelsThatDependOnThis} models depend on this model <br/>
         /// </summary>
         public {Table.Name}Model({Table.Name}Model {Table.Name.ToLower()})
         {{
             try
             {{
                 //Initialize sub-lists
-                {GeneratorConfigurationComponent.modelChainer.NewList_ForCSharpModel}
+                {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.NewList_ForCSharpModel}
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAndParameters1_ForCSharpModel.Replace("this.", "")}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAndParameters1_ForCSharpModel.Replace("this.", "")}
             }}
             catch (Exception ex) {{ throw ex; }}
         }}
@@ -243,7 +243,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 foreach ({Table.Name}Model {Table.Name.ToLower()} in lst{Table.Name}Model)
                 {{
-                    {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAndParameters4_ForCSharpModel}
+                    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAndParameters4_ForCSharpModel}
                 }}
 
                 return {Table.Name}Model;
@@ -289,7 +289,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 {Table.Name.ToLower()}SelectAllPaged.TotalPages = Library.Math.Divide({Table.Name.ToLower()}SelectAllPaged.TotalRows, {Table.Name.ToLower()}SelectAllPaged.RowsPerPage, Library.Math.RoundType.RoundUp);
 
-                {GeneratorConfigurationComponent.modelChainer.LoopThroughListsAndSubLists_ForCSharpModel}
+                {GeneratorConfigurationComponent.modelChainerJsTsNETCoreSQLServer.LoopThroughListsAndSubLists_ForCSharpModel}
 
                 return {Table.Name.ToLower()}SelectAllPaged;
             }}
@@ -310,7 +310,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
                 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP1_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name}Id, DbType.Int32, ParameterDirection.Input);
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP1_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name}Id, DbType.Int32, ParameterDirection.Input);
 " + "\t\t\t\t", "")}
                 dp.Add(""NewEnteredId"", NewEnteredId, DbType.Int32, ParameterDirection.Output);
         
@@ -340,7 +340,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP2_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name.ToLower()}.{Table.Name}Id, DbType.Int32, ParameterDirection.Input);
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP2_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name.ToLower()}.{Table.Name}Id, DbType.Int32, ParameterDirection.Input);
 " + "\t\t\t\t", "")}
                 dp.Add(""NewEnteredId"", NewEnteredId, DbType.Int32, ParameterDirection.Output);
                 
@@ -362,7 +362,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Note: Raise exception when the function did not made a succesfull insertion in database
         /// </summary>
         /// <returns>The ID of the last registry inserted in {Table.Name} table</returns>
-        public int Insert({GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAsParametersInOneLine_ForCSharpModel.Replace($"int {Table.Name}Id, ", "")})
+        public int Insert({GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAsParametersInOneLine_ForCSharpModel.Replace($"int {Table.Name}Id, ", "")})
         {{
             try
             {{
@@ -370,7 +370,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP1_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name}Id, DbType.Int32, ParameterDirection.Input);
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP1_ForCSharpModel.Replace($@"dp.Add(""{Table.Name}Id"", {Table.Name}Id, DbType.Int32, ParameterDirection.Input);
 " + "\t\t\t\t", "")}
                 dp.Add(""NewEnteredId"", NewEnteredId, DbType.Int32, ParameterDirection.Output);
         
@@ -400,7 +400,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP1_ForCSharpModel}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP1_ForCSharpModel}
                 dp.Add(""RowsAffected"", RowsAffected, DbType.Int32, ParameterDirection.Output);
         
                 using (SqlConnection sqlConnection = new SqlConnection(_ConnectionString))
@@ -429,7 +429,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP2_ForCSharpModel}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP2_ForCSharpModel}
                 dp.Add(""RowsAffected"", RowsAffected, DbType.Int32, ParameterDirection.Output);
         
                 using (SqlConnection sqlConnection = new SqlConnection(_ConnectionString))
@@ -450,7 +450,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// Note: Raise exception when the function did not made a succesfull update in database
         /// </summary>
         /// <returns>The number of rows updated in {Table.Name} table</returns>
-        public int UpdateBy{Table.Name}Id({GeneratorConfigurationComponent.fieldChainer.CSharpFieldsAsParametersInOneLine_ForCSharpModel})
+        public int UpdateBy{Table.Name}Id({GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsAsParametersInOneLine_ForCSharpModel})
         {{
             try
             {{
@@ -458,7 +458,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DynamicParameters dp = new DynamicParameters();
                 DataTable DataTable = new DataTable();
 
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForNonQuerySP1_ForCSharpModel}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForNonQuerySP1_ForCSharpModel}
                 dp.Add(""RowsAffected"", RowsAffected, DbType.Int32, ParameterDirection.Output);
         
                 using (SqlConnection sqlConnection = new SqlConnection(_ConnectionString))
@@ -559,13 +559,13 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         /// </summary>
         public override string ToString()
         {{
-            return {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForToStringFunction_ForCSharpModel};
+            return {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForToStringFunction_ForCSharpModel};
         }}
 
         public string ToStringOnlyValuesForHTML()
         {{
             return $@""<tr>
-                {GeneratorConfigurationComponent.fieldChainer.CSharpFieldsForToStringOnlyValuesForHTMLFunction_ForCSharpModel}
+                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.CSharpFieldsForToStringOnlyValuesForHTMLFunction_ForCSharpModel}
                 </tr>"";
         }}
     }}

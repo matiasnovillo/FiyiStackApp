@@ -7,9 +7,11 @@ namespace FiyiStackApp.Generation
     public static class GeneratorJsTsNETCoreSQLServer
     {
         public static string Start(Configuration Configuration,
-            Models.Tools.fieldChainer fieldChainer,
+            Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
+            Models.Tools.modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI,
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
-            Models.Tools.modelChainer modelChainer,
+            Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
+            Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
             List<Models.Core.Table> lstTableInFiyiStack,
@@ -18,9 +20,11 @@ namespace FiyiStackApp.Generation
             List<StoredProcedure> lstStoredProcedureToGenerate)
         {
             GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
-            fieldChainer,
+            fieldChainerNET8MSSQLServerAPI,
+            modelChainerNET8MSSQLServerAPI,
             fieldChainerNodeJsExpressMongoDB,
-            modelChainer,
+            fieldChainerJsTsNETCoreSQLServer,
+            modelChainerJsTsNETCoreSQLServer,
             ProjectChosen,
             DataBaseChosen,
             lstTableInFiyiStack,
