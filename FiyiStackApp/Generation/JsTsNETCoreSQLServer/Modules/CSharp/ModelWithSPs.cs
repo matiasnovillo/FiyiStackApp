@@ -34,7 +34,6 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
     /// Sub-models:      {GeneratorConfigurationComponent.modelChainer.CounterOfModelsThatDependOnThis} models <br/>
     /// Last modification: {DateTime.Now}
     /// </summary>
-    [Serializable]
     public partial class {Table.Name}Model
     {{
         [NotMapped]
@@ -554,26 +553,6 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             catch (Exception ex) {{ throw ex; }}
         }}
         #endregion
-
-        /// <summary>
-        /// Function: Take the model stored in the given byte array to return the model. <br/>
-        /// Note 1:   Similar to a decryptor function. <br/>
-        /// Note 2:   The model need the [Serializable] decorator in model definition. <br/>
-        /// </summary>
-        public {Table.Name}Model ByteArrayTo{Table.Name}Model<T>(byte[] arr{Table.Name}Model)
-        {{
-            try
-            {{
-                if (arr{Table.Name}Model == null)
-                {{ return new {Table.Name}Model(); }}
-                BinaryFormatter BinaryFormatter = new BinaryFormatter();
-                using MemoryStream MemoryStream = new MemoryStream(arr{Table.Name}Model);
-                object Object = BinaryFormatter.Deserialize(MemoryStream);
-                return ({Table.Name}Model)Object;
-            }}
-            catch (Exception ex)
-            {{ throw ex; }}
-        }}
         
         /// <summary>
         /// Function: Show all information (fields) inside the model during depuration mode.
