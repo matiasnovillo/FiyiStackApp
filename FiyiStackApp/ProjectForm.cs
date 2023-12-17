@@ -540,7 +540,7 @@ namespace FiyiStackApp
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangePassword ChangePassword = new ChangePassword();
+            ChangeUserData ChangePassword = new ChangeUserData();
             ChangePassword.ShowDialog();
         }
         #endregion

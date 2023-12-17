@@ -97,7 +97,7 @@ namespace FiyiStackApp.Models.Core
         #endregion
 
         #region Non-Queries
-        public int ChangePasswordByUserId(int UserId, string NewPassword)
+        public int ChangeUserDataByUserId(int UserId, string NewPassword, string NewUserName, string NewEmail)
         {
             try
             {
@@ -106,6 +106,8 @@ namespace FiyiStackApp.Models.Core
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("UserId", UserId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("NewPassword", NewPassword, DbType.String, ParameterDirection.Input);
+                dp.Add("NewUserName", NewUserName, DbType.String, ParameterDirection.Input);
+                dp.Add("NewEmail", NewEmail, DbType.String, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
