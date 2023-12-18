@@ -16,7 +16,6 @@ namespace FiyiStackApp
         public List<Project> lstYourFiyiStackProjects = new List<Project>();
         public List<Project> lstNotYourFiyiStackProjects = new List<Project>();
         public Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
-        public System.Timers.Timer timer;
 
         //For LoginForm
         public string FantasyNameOrEmailFromLocalDB

@@ -10,13 +10,7 @@
     <Compile Update="Generation\GeneratorConfigurationComponent.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="GeneratorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="WinFormConfigurationComponent.cs">

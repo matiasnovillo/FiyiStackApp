@@ -85,10 +85,6 @@ namespace FiyiStackApp
         {
             try
             {
-                //Reset timer
-                Program.WinFormConfigurationComponent.timer.Stop();
-                Program.WinFormConfigurationComponent.timer.Start();
-
                 //TODO Send email about kind of information in UserConfiguration...PropertiesConfiguration
 
                 if (Program.WinFormConfigurationComponent.ProjectChosen.ProjectId == 0) { throw new Exception("Project not selected"); }
@@ -268,9 +264,6 @@ namespace FiyiStackApp
 
         private void ConfigurationForm_MouseMove(object sender, MouseEventArgs e)
         {
-            //Reset timer
-            Program.WinFormConfigurationComponent.timer.Stop();
-            Program.WinFormConfigurationComponent.timer.Start();
         }
 
         private void HideAllPanelsExcept(Panel[] PanelsToAvoid = null)
