@@ -87,6 +87,7 @@ namespace FiyiStackApp
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(1067, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -286,7 +287,7 @@ namespace FiyiStackApp
             this.panelLeftSide.Controls.Add(this.picLoadProject);
             this.panelLeftSide.Controls.Add(this.PanelLoadProject);
             this.panelLeftSide.Controls.Add(this.labelLoadProject);
-            this.panelLeftSide.Location = new System.Drawing.Point(0, 38);
+            this.panelLeftSide.Location = new System.Drawing.Point(21, 48);
             this.panelLeftSide.Margin = new System.Windows.Forms.Padding(4);
             this.panelLeftSide.Name = "panelLeftSide";
             this.panelLeftSide.Size = new System.Drawing.Size(519, 620);
@@ -406,6 +407,7 @@ namespace FiyiStackApp
             // PropertyGridProject
             // 
             this.PropertyGridProject.Location = new System.Drawing.Point(37, 50);
+            this.PropertyGridProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PropertyGridProject.Name = "PropertyGridProject";
             this.PropertyGridProject.Size = new System.Drawing.Size(396, 388);
             this.PropertyGridProject.TabIndex = 0;

@@ -1637,7 +1637,7 @@ namespace FiyiStackApp
             Program.WinFormConfigurationComponent.ProjectChosen = (Project)Converter.SetObjectPropertiesToNull(Program.WinFormConfigurationComponent.ProjectChosen);
             Program.WinFormConfigurationComponent = new WinFormConfigurationComponent();
             this.Dispose();
-            LoginForm LoginForm = new LoginForm();
+            MainForm LoginForm = new MainForm();
             LoginForm.ShowDialog();
         }
 

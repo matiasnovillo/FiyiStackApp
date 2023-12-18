@@ -520,18 +520,6 @@ namespace FiyiStackApp
         #endregion
 
         #region Configuration MenuStrip
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Program.WinFormConfigurationComponent.UserLogged =  (User)Converter.SetObjectPropertiesToNull(Program.WinFormConfigurationComponent.UserLogged);
-            Program.WinFormConfigurationComponent = new WinFormConfigurationComponent();
-            this.Dispose();
-            LoginForm LoginForm = new LoginForm();
-            LoginForm.ShowDialog();
-        }
 
         private void StatusStrip_Click(object sender, EventArgs e)
         {
@@ -544,11 +532,5 @@ namespace FiyiStackApp
             ChangePassword.ShowDialog();
         }
         #endregion
-
-        private void btnFolderBrowserDialog_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
-            DialogResult result = FolderBrowserDialog.ShowDialog();
-        }
     }
 }

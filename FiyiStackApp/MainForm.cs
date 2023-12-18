@@ -10,17 +10,17 @@ using System.Timers;
 
 namespace FiyiStackApp
 {
-    public partial class LoginForm : Form
+    public partial class MainForm : Form
     {
         User _User;
         bool Loading = false;
 
-        public LoginForm()
+        public MainForm()
         {
             InitializeComponent();
             //Basic
             Loading = true;
-            lblMessage.Text = "";
+            lblMessageDockedBottom.Text = "";
 
             //Set border radius to TextBoxes
             Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
@@ -33,7 +33,6 @@ namespace FiyiStackApp
                 chbRememberMe.Checked = true;
                 txtFantasyNameOrEmail.TabIndex = 1;
                 txtPassword.TabIndex = 0;
-                picProfilePicture.Image = Program.WinFormConfigurationComponent.ProfilePicture;
 
             }
             else//Not remembered user
@@ -44,6 +43,22 @@ namespace FiyiStackApp
                 txtPassword.TabIndex = 1;
             }
             Loading = false;
+
+            //Basico
+            PanelLogin.Location = new Point(6, 106);
+            PanelProject.Location = new Point(6, 106);
+            lblTitle.Text = "Bienvenido a FiyiStack. El generador de código";
+            lblSubtitle.Text = "Más de 5.000 lineas de código por tabla. Y sigue creciendo";
+
+            HideAllPanelsExcept(PanelLogin);
+        }
+
+        private void HideAllPanelsExcept(Panel Panel)
+        {
+            PanelLogin.Hide();
+            PanelProject.Hide();
+
+            Panel.Show();
         }
 
         private void Login()
@@ -59,7 +74,7 @@ namespace FiyiStackApp
                 {
                     //Initialization
                     Cursor = Cursors.WaitCursor;
-                    lblMessage.Text = "Trying login";
+                    lblMessageDockedBottom.Text = "Trying login";
                     picErrorForFantasyNameOrEmail.Visible = false;
 
                     _User = new User(txtFantasyNameOrEmail.Text, txtFantasyNameOrEmail.Text, Security.EncodeString(txtPassword.Text));
@@ -68,8 +83,7 @@ namespace FiyiStackApp
                     {
                         picErrorForFantasyNameOrEmail.Visible = true;
                         picErrorForPassword.Visible = true;
-                        picProfilePicture.Image = Resources.User;
-                        lblMessage.Text = "User not found";
+                        lblMessageDockedBottom.Text = "User not found";
                     }
                     else//User found
                     {
@@ -79,7 +93,7 @@ namespace FiyiStackApp
                         {
                             Program.WinFormConfigurationComponent.FantasyNameOrEmailFromLocalDB = _User.FantasyName;
                         }
-                        lblMessage.Text = "User found. Entering";
+                        lblMessageDockedBottom.Text = "User found. Entering";
                         
                         Program.WinFormConfigurationComponent.timer = new System.Timers.Timer(600000);
                         Program.WinFormConfigurationComponent.timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
@@ -97,7 +111,7 @@ namespace FiyiStackApp
             }
             catch (Exception ex) 
             {
-                lblMessage.Text = ex.Message;
+                lblMessageDockedBottom.Text = ex.Message;
                 Cursor = Cursors.Default; 
                 Console.WriteLine(ex.Message); 
             }
