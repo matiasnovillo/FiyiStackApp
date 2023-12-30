@@ -44,6 +44,9 @@ namespace FiyiStackApp
             this.PanelDockedLeft = new System.Windows.Forms.Panel();
             this.PanelDockedCenter = new System.Windows.Forms.Panel();
             this.PanelGenerator = new System.Windows.Forms.Panel();
+            this.PanelSummary = new System.Windows.Forms.Panel();
+            this.TextBoxLogger = new System.Windows.Forms.TextBox();
+            this.btnHidePanelSummary = new System.Windows.Forms.PictureBox();
             this.PanelField = new System.Windows.Forms.Panel();
             this.btnRefreshFields = new System.Windows.Forms.PictureBox();
             this.picAddFieldButton = new System.Windows.Forms.PictureBox();
@@ -134,9 +137,6 @@ namespace FiyiStackApp
             this.btnGenerate = new System.Windows.Forms.PictureBox();
             this.picStep2Tables = new System.Windows.Forms.PictureBox();
             this.picStep1Databases = new System.Windows.Forms.PictureBox();
-            this.PanelSummary = new System.Windows.Forms.Panel();
-            this.TextBoxLogger = new System.Windows.Forms.TextBox();
-            this.btnHidePanelSummary = new System.Windows.Forms.PictureBox();
             this.PanelProject = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchYourProjectByName = new System.Windows.Forms.TextBox();
@@ -158,6 +158,8 @@ namespace FiyiStackApp
             this.MenuStripDockedTop.SuspendLayout();
             this.PanelDockedCenter.SuspendLayout();
             this.PanelGenerator.SuspendLayout();
+            this.PanelSummary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).BeginInit();
             this.PanelField.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRefreshFields)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAddFieldButton)).BeginInit();
@@ -197,8 +199,6 @@ namespace FiyiStackApp
             ((System.ComponentModel.ISupportInitialize)(this.btnGenerate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep2Tables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep1Databases)).BeginInit();
-            this.PanelSummary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).BeginInit();
             this.PanelProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteYourProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewOrEdit)).BeginInit();
@@ -317,14 +317,14 @@ namespace FiyiStackApp
             // 
             this.cambiarDatosDeUsuarioToolStripMenuItem.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cambiarDatosDeUsuarioToolStripMenuItem.Name = "cambiarDatosDeUsuarioToolStripMenuItem";
-            this.cambiarDatosDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cambiarDatosDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.cambiarDatosDeUsuarioToolStripMenuItem.Text = "Change user data";
             this.cambiarDatosDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cambiarDatosDeUsuarioToolStripMenuItem_Click);
             // 
             // volverAProyectosToolStripMenuItem
             // 
             this.volverAProyectosToolStripMenuItem.Name = "volverAProyectosToolStripMenuItem";
-            this.volverAProyectosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.volverAProyectosToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.volverAProyectosToolStripMenuItem.Text = "Go back to projects";
             this.volverAProyectosToolStripMenuItem.Click += new System.EventHandler(this.volverAProyectosToolStripMenuItem_Click);
             // 
@@ -360,6 +360,44 @@ namespace FiyiStackApp
             this.PanelGenerator.Name = "PanelGenerator";
             this.PanelGenerator.Size = new System.Drawing.Size(1195, 624);
             this.PanelGenerator.TabIndex = 21;
+            // 
+            // PanelSummary
+            // 
+            this.PanelSummary.Controls.Add(this.TextBoxLogger);
+            this.PanelSummary.Controls.Add(this.btnHidePanelSummary);
+            this.PanelSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PanelSummary.Location = new System.Drawing.Point(1062, 332);
+            this.PanelSummary.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelSummary.Name = "PanelSummary";
+            this.PanelSummary.Size = new System.Drawing.Size(969, 589);
+            this.PanelSummary.TabIndex = 93;
+            // 
+            // TextBoxLogger
+            // 
+            this.TextBoxLogger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
+            this.TextBoxLogger.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
+            this.TextBoxLogger.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
+            this.TextBoxLogger.Location = new System.Drawing.Point(21, 4);
+            this.TextBoxLogger.Multiline = true;
+            this.TextBoxLogger.Name = "TextBoxLogger";
+            this.TextBoxLogger.ReadOnly = true;
+            this.TextBoxLogger.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TextBoxLogger.Size = new System.Drawing.Size(921, 525);
+            this.TextBoxLogger.TabIndex = 100;
+            // 
+            // btnHidePanelSummary
+            // 
+            this.btnHidePanelSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHidePanelSummary.Image = ((System.Drawing.Image)(resources.GetObject("btnHidePanelSummary.Image")));
+            this.btnHidePanelSummary.Location = new System.Drawing.Point(809, 536);
+            this.btnHidePanelSummary.Margin = new System.Windows.Forms.Padding(4);
+            this.btnHidePanelSummary.Name = "btnHidePanelSummary";
+            this.btnHidePanelSummary.Size = new System.Drawing.Size(133, 49);
+            this.btnHidePanelSummary.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnHidePanelSummary.TabIndex = 99;
+            this.btnHidePanelSummary.TabStop = false;
+            this.btnHidePanelSummary.Click += new System.EventHandler(this.btnHidePanelSummary_Click);
+            this.btnHidePanelSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.btnHidePanelSummary_Paint);
             // 
             // PanelField
             // 
@@ -1663,44 +1701,6 @@ namespace FiyiStackApp
             this.picStep1Databases.TabIndex = 97;
             this.picStep1Databases.TabStop = false;
             // 
-            // PanelSummary
-            // 
-            this.PanelSummary.Controls.Add(this.TextBoxLogger);
-            this.PanelSummary.Controls.Add(this.btnHidePanelSummary);
-            this.PanelSummary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PanelSummary.Location = new System.Drawing.Point(1062, 332);
-            this.PanelSummary.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelSummary.Name = "PanelSummary";
-            this.PanelSummary.Size = new System.Drawing.Size(969, 589);
-            this.PanelSummary.TabIndex = 93;
-            // 
-            // TextBoxLogger
-            // 
-            this.TextBoxLogger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.TextBoxLogger.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
-            this.TextBoxLogger.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.TextBoxLogger.Location = new System.Drawing.Point(21, 4);
-            this.TextBoxLogger.Multiline = true;
-            this.TextBoxLogger.Name = "TextBoxLogger";
-            this.TextBoxLogger.ReadOnly = true;
-            this.TextBoxLogger.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextBoxLogger.Size = new System.Drawing.Size(921, 525);
-            this.TextBoxLogger.TabIndex = 100;
-            // 
-            // btnHidePanelSummary
-            // 
-            this.btnHidePanelSummary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHidePanelSummary.Image = ((System.Drawing.Image)(resources.GetObject("btnHidePanelSummary.Image")));
-            this.btnHidePanelSummary.Location = new System.Drawing.Point(809, 536);
-            this.btnHidePanelSummary.Margin = new System.Windows.Forms.Padding(4);
-            this.btnHidePanelSummary.Name = "btnHidePanelSummary";
-            this.btnHidePanelSummary.Size = new System.Drawing.Size(133, 49);
-            this.btnHidePanelSummary.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnHidePanelSummary.TabIndex = 99;
-            this.btnHidePanelSummary.TabStop = false;
-            this.btnHidePanelSummary.Click += new System.EventHandler(this.btnHidePanelSummary_Click);
-            this.btnHidePanelSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.btnHidePanelSummary_Paint);
-            // 
             // PanelProject
             // 
             this.PanelProject.Controls.Add(this.label1);
@@ -1960,6 +1960,9 @@ namespace FiyiStackApp
             this.PanelDockedCenter.ResumeLayout(false);
             this.PanelDockedCenter.PerformLayout();
             this.PanelGenerator.ResumeLayout(false);
+            this.PanelSummary.ResumeLayout(false);
+            this.PanelSummary.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).EndInit();
             this.PanelField.ResumeLayout(false);
             this.PanelField.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRefreshFields)).EndInit();
@@ -2010,9 +2013,6 @@ namespace FiyiStackApp
             ((System.ComponentModel.ISupportInitialize)(this.btnGenerate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep2Tables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep1Databases)).EndInit();
-            this.PanelSummary.ResumeLayout(false);
-            this.PanelSummary.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).EndInit();
             this.PanelProject.ResumeLayout(false);
             this.PanelProject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteYourProjects)).EndInit();

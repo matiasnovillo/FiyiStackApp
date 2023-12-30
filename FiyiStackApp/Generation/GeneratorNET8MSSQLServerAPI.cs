@@ -12,6 +12,7 @@ namespace FiyiStackApp.Generation
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
             Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
+            Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
             List<Models.Core.Table> lstTableInFiyiStack,
@@ -19,12 +20,13 @@ namespace FiyiStackApp.Generation
             List<Models.Core.Field> lstFieldToGenerate,
             List<StoredProcedure> lstStoredProcedureToGenerate)
         {
-            GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
+            GeneratorConfigurationComponent GeneratorConfigurationComponent = new(Configuration,
             fieldChainerNET8MSSQLServerAPI,
             modelChainerNET8MSSQLServerAPI,
             fieldChainerNodeJsExpressMongoDB,
             fieldChainerJsTsNETCoreSQLServer,
             modelChainerJsTsNETCoreSQLServer,
+            fieldChainerNET8BlazorMSSQLServerCodeFirst,
             ProjectChosen,
             DataBaseChosen,
             lstTableInFiyiStack,

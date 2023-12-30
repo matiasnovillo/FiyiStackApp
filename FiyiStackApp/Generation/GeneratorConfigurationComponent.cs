@@ -1,11 +1,5 @@
 ﻿using FiyiStackApp.Models.Core;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FiyiStackApp.Generation
 {
@@ -17,6 +11,7 @@ namespace FiyiStackApp.Generation
         public Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB { get; set; }
         public Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer { get; set; }
         public Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer { get; set; }
+        public Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst { get; set; }
 
         public Project ProjectChosen { get; set; }
         public DataBase DataBaseChosen { get; set; }
@@ -32,11 +27,12 @@ namespace FiyiStackApp.Generation
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
             Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
-            Models.Core.Project ProjectChosen,
-            Models.Core.DataBase DataBaseChosen,
-            List<Models.Core.Table> lstTableInFiyiStack,
-            List<Models.Core.Table> lstTableToGenerate,
-            List<Models.Core.Field> lstFieldToGenerate,
+            Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
+            Project ProjectChosen,
+            DataBase DataBaseChosen,
+            List<Table> lstTableInFiyiStack,
+            List<Table> lstTableToGenerate,
+            List<Field> lstFieldToGenerate,
             List<FiyiStack.Library.MicrosoftSQLServer.StoredProcedure> lstStoredProcedureToGenerate)
         {
 
@@ -46,12 +42,12 @@ namespace FiyiStackApp.Generation
             this.fieldChainerNodeJsExpressMongoDB = new Models.Tools.fieldChainerNodeJsExpressMongoDB();
             this.fieldChainerJsTsNETCoreSQLServer = new Models.Tools.fieldChainerJsTsNETCoreSQLServer();
             this.modelChainerJsTsNETCoreSQLServer = new Models.Tools.modelChainerJsTsNETCoreSQLServer();
-            this.ProjectChosen = new Models.Core.Project();
-            this.DataBaseChosen = new Models.Core.DataBase();
-            this.lstTableInFiyiStack = new List<Models.Core.Table>();
-            this.lstTableToGenerate = new List<Models.Core.Table>();
-            this.lstFieldToGenerate = new List<Models.Core.Field>();
-            this.lstStoredProcedureToGenerate = new List<FiyiStack.Library.MicrosoftSQLServer.StoredProcedure>();
+            this.ProjectChosen = new Project();
+            this.DataBaseChosen = new DataBase();
+            this.lstTableInFiyiStack = [];
+            this.lstTableToGenerate = [];
+            this.lstFieldToGenerate = [];
+            this.lstStoredProcedureToGenerate = [];
 
             //Copy objects from parameters
             this.Configuration = Configuration;

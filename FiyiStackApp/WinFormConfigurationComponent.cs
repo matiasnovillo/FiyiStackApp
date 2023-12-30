@@ -11,10 +11,10 @@ namespace FiyiStackApp
     {
         #region Properties
         //For all forms
-        public User UserLogged = new User();
-        public Configuration Configuration = new Configuration();
-        public List<Project> lstYourFiyiStackProjects = new List<Project>();
-        public List<Project> lstNotYourFiyiStackProjects = new List<Project>();
+        public User UserLogged = new();
+        public Configuration Configuration = new();
+        public List<Project> lstYourFiyiStackProjects = [];
+        public List<Project> lstNotYourFiyiStackProjects = [];
         public Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
 
         //For LoginForm
@@ -58,28 +58,28 @@ namespace FiyiStackApp
         }
 
         //For GeneratorForm
-        public Project ProjectChosen = new Project();
-        public UserProject UserProjectChosen = new UserProject();
+        public Project ProjectChosen = new();
+        public UserProject UserProjectChosen = new();
 
-        public List<DataBase> lstDataBaseInFiyiStack = new List<DataBase>();
-        public DataBase DataBaseChosen = new DataBase();
+        public List<DataBase> lstDataBaseInFiyiStack = [];
+        public DataBase DataBaseChosen = new();
 
-        public List<Table> lstTableInFiyiStack = new List<Table>();
-        public Table TableChosen = new Table();
+        public List<Table> lstTableInFiyiStack = [];
+        public Table TableChosen = new();
 
-        public List<Field> lstFieldInFiyiStack = new List<Field>();
-        public Field FieldChosen = new Field();
+        public List<Field> lstFieldInFiyiStack = [];
+        public Field FieldChosen = new();
 
-        public DataType DataType = new DataType();
+        public DataType DataType = new();
 
         /// <summary>
         /// Auditing fields to add to a new Table, if auditory fields are requested
         /// </summary>
-        public List<Field> lstAuditingFields = new List<Field>();
+        public List<Field> lstAuditingFields = [];
 
-        public List<Table> lstTableToGenerate = new List<Table>();
-        public List<Field> lstFieldToGenerate = new List<Field>();
-        public List<FiyiStack.Library.MicrosoftSQLServer.StoredProcedure> lstStoredProcedureToGenerate = new List<FiyiStack.Library.MicrosoftSQLServer.StoredProcedure>();
+        public List<Table> lstTableToGenerate = [];
+        public List<Field> lstFieldToGenerate = [];
+        public List<FiyiStack.Library.MicrosoftSQLServer.StoredProcedure> lstStoredProcedureToGenerate = [];
         #endregion
 
         #region Constructors
@@ -99,7 +99,7 @@ namespace FiyiStackApp
         #region Functions
         public Configuration LoadDefaultConfiguration()
         {
-            Configuration Configuration = new Configuration()
+            Configuration Configuration = new()
             {
                 ConfigurationId = 0,
                 ProjectId = 0,
@@ -129,7 +129,8 @@ namespace FiyiStackApp
                 WantTypeScriptDTOs = true,
                 WantBackendAPI = true,
                 WantBackendAPINodeJsExpressMongoDB = true,
-                WantNET8MSSQLServerAPI = true
+                WantNET8MSSQLServerAPI = true,
+                WantNET8BlazorMSSQLServerCodeFirst = true
             };
             return Configuration;
         }
@@ -160,6 +161,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPI = Configuration.WantBackendAPI;
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB = Configuration.WantBackendAPINodeJsExpressMongoDB;
                 Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI = Configuration.WantNET8MSSQLServerAPI;
+                Program.WinFormConfigurationComponent.Configuration.WantNET8BlazorMSSQLServerCodeFirst = Configuration.WantNET8BlazorMSSQLServerCodeFirst;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
                 Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;
@@ -218,7 +220,7 @@ namespace FiyiStackApp
 
         public void SetClipBoard(string TextToClip)
         {
-            StringBuilder sbTextToClip = new StringBuilder(TextToClip);
+            StringBuilder sbTextToClip = new(TextToClip);
             Clipboard.SetText(sbTextToClip.ToString());
         }
         #endregion

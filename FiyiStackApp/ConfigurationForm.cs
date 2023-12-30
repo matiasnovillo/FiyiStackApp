@@ -53,10 +53,15 @@ namespace FiyiStackApp
                 ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                 ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB;
             }
-            else
+            else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
             {
                 ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                 ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI;
+            }
+            else
+            {
+                ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("FullStack backend y frontend"));
+                ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8BlazorMSSQLServerCodeFirst;
             }
 
             //Front-end
@@ -117,9 +122,13 @@ namespace FiyiStackApp
                     {
                         Configuration.WantBackendAPINodeJsExpressMongoDB = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
-                    else
+                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
                     {
                         Configuration.WantNET8MSSQLServerAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
+                    }
+                    else
+                    {
+                        Configuration.WantNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
 
 

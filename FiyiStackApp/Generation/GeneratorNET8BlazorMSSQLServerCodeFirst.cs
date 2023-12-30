@@ -1,10 +1,10 @@
 ﻿using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Core;
-using FiyiStackApp.Generation.NodeJsExpressMongoDB.Languages;
+using FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages;
 
 namespace FiyiStackApp.Generation
 {
-    public static class GeneratorNodeJsExpressMongoDB
+    public static class GeneratorNET8BlazorMSSQLServerCodeFirst
     {
         public static string Start(Configuration Configuration,
             Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
@@ -42,9 +42,8 @@ namespace FiyiStackApp.Generation
 {GeneratorConfigurationComponent.lstStoredProcedureToGenerate.Count} stored procedures to work with
 ";
 
-
                 LogText += $"Entering C# language{Environment.NewLine}";
-                LogText += TypeScript.Start(GeneratorConfigurationComponent);
+                LogText += CSharp.Start(GeneratorConfigurationComponent);
 
                 return LogText;
             }

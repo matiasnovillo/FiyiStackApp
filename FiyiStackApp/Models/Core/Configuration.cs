@@ -60,6 +60,8 @@ namespace FiyiStackApp.Models.Core
         public bool WantBackendAPINodeJsExpressMongoDB { get; set; }
 
         public bool WantNET8MSSQLServerAPI { get; set; }
+
+        public bool WantNET8BlazorMSSQLServerCodeFirst { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -102,6 +104,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantNET8BlazorMSSQLServerCodeFirst", WantNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -150,6 +153,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantNET8BlazorMSSQLServerCodeFirst", WantNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -214,6 +218,7 @@ namespace FiyiStackApp.Models.Core
                     Configuration.WantBackendAPI = configuration.WantBackendAPI;
                     Configuration.WantBackendAPINodeJsExpressMongoDB = configuration.WantBackendAPINodeJsExpressMongoDB;
                     Configuration.WantNET8MSSQLServerAPI = configuration.WantNET8MSSQLServerAPI;
+                    Configuration.WantNET8BlazorMSSQLServerCodeFirst = configuration.WantNET8BlazorMSSQLServerCodeFirst;
                 }
 
                 return Configuration;
@@ -248,6 +253,7 @@ namespace FiyiStackApp.Models.Core
                 $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}, " +
                 $"WantBackendAPINodeJsExpressMongoDB: {WantBackendAPINodeJsExpressMongoDB}, " +
                 $"WantNET8MSSQLServerAPI: {WantNET8MSSQLServerAPI}, " +
+                $"WantNET8BlazorMSSQLServerCodeFirst: {WantNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantBackendAPI:WantBackendAPI {WantBackendAPI}";
         }
     }

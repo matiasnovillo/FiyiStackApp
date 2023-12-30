@@ -29,6 +29,9 @@ namespace FiyiStackApp.Models.Core
         [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8MSSQLServerAPI")]
         public string PathNET8MSSQLServerAPI { get; set; }
 
+        [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8BlazorMSSQLServerCodeFirst")]
+        public string PathNET8BlazorMSSQLServerCodeFirst { get; set; }
+
         public bool Active { get; set; }
 
         public int UserIdCreation { get; set; }
@@ -74,6 +77,7 @@ namespace FiyiStackApp.Models.Core
                     PathNET6CleanArchitecture = field.PathNET6CleanArchitecture;
                     PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB;
                     PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI;
+                    PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst;
                     Active = field.Active;
                     UserIdCreation = field.UserIdCreation;
                     UserIdLastModification = field.UserIdLastModification;

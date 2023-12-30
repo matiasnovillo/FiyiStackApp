@@ -250,12 +250,12 @@ namespace FiyiStackApp
         #region Secondary Configuration
         private void txtUserName_BackColorChanged(object sender, EventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void txtUserPassword_BackColorChanged(object sender, EventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void btnSee_MouseDown(object sender, MouseEventArgs e)
@@ -272,22 +272,22 @@ namespace FiyiStackApp
 
         private void picProfilePicture_Paint(object sender, PaintEventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 50, 50);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 50, 50);
         }
 
         private void picRememberMe_Paint(object sender, PaintEventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
         }
 
         private void btnLogin_Paint(object sender, PaintEventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
         }
 
         private void picLogo_Paint(object sender, PaintEventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -433,12 +433,12 @@ namespace FiyiStackApp
 
         private void txtSearchYourProjectByName_BackColorChanged(object sender, EventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void ListViewYourProjects_BackColorChanged(object sender, EventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void cambiarDatosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -846,6 +846,7 @@ namespace FiyiStackApp
                                         new fieldChainerNodeJsExpressMongoDB(),
                                         new fieldChainerJsTsNETCoreSQLServer(),
                                         new modelChainerJsTsNETCoreSQLServer(),
+                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,
                                         Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -861,6 +862,7 @@ namespace FiyiStackApp
                                         new fieldChainerNodeJsExpressMongoDB(),
                                         new fieldChainerJsTsNETCoreSQLServer(),
                                         new modelChainerJsTsNETCoreSQLServer(),
+                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,
                                         Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -876,6 +878,23 @@ namespace FiyiStackApp
                                         new fieldChainerNodeJsExpressMongoDB(),
                                         new fieldChainerJsTsNETCoreSQLServer(),
                                         new modelChainerJsTsNETCoreSQLServer(),
+                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                        Program.WinFormConfigurationComponent.ProjectChosen,
+                                        Program.WinFormConfigurationComponent.DataBaseChosen,
+                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                    }
+                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
+                    {
+                        TextBoxLogger.Text += GeneratorNET8MSSQLServerAPI.Start(Program.WinFormConfigurationComponent.Configuration,
+                                        new fieldChainerNET8MSSQLServerAPI(),
+                                        new modelChainerNET8MSSQLServerAPI(),
+                                        new fieldChainerNodeJsExpressMongoDB(),
+                                        new fieldChainerJsTsNETCoreSQLServer(),
+                                        new modelChainerJsTsNETCoreSQLServer(),
+                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,
                                         Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -891,6 +910,7 @@ namespace FiyiStackApp
                                         new fieldChainerNodeJsExpressMongoDB(),
                                         new fieldChainerJsTsNETCoreSQLServer(),
                                         new modelChainerJsTsNETCoreSQLServer(),
+                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
                                         Program.WinFormConfigurationComponent.ProjectChosen,
                                         Program.WinFormConfigurationComponent.DataBaseChosen,
                                         Program.WinFormConfigurationComponent.lstTableInFiyiStack,

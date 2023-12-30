@@ -50,4 +50,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Generation\NET8BlazorMSSQLServerCodeFirst\Modules\" />
+  </ItemGroup>
+
 </Project>

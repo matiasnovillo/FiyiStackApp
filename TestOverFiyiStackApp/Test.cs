@@ -23,6 +23,7 @@ namespace UnitTestOverFiyiStackApp
             fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB = new fieldChainerNodeJsExpressMongoDB();
             fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer();
             modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer = new modelChainerJsTsNETCoreSQLServer();
+            fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst = new fieldChainerNET8BlazorMSSQLServerCodeFirst();
 
             //Tables inside FiyiStack database = 0
             List<Table> lstTableInFiyiStack = new List<Table>();
@@ -67,10 +68,11 @@ namespace UnitTestOverFiyiStackApp
                 PathNET6CleanArchitecture = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 PathNodeJsExpressMongoDB = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 PathNET8MSSQLServerAPI = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
+                PathNET8BlazorMSSQLServerCodeFirst = "C:\\FiyiStack\\Test\\TestDeFiyiStackApp",
                 UserIdCreation = 1,
                 UserIdLastModification = 1
             };
-            DataBase DataBaseChosen = new DataBase()
+            DataBase DataBaseChosen = new()
             {
                 ProjectId = 1,
                 DataBaseId = 1,
@@ -285,6 +287,7 @@ namespace UnitTestOverFiyiStackApp
                 fieldChainerNodeJsExpressMongoDB,
                 fieldChainerJsTsNETCoreSQLServer,
                 modelChainerJsTsNETCoreSQLServer,
+                fieldChainerNET8BlazorMSSQLServerCodeFirst,
                 ProjectChosen,
                 DataBaseChosen,
                 lstTableInFiyiStack,
