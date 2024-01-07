@@ -130,7 +130,12 @@ namespace FiyiStackApp
                 WantBackendAPI = true,
                 WantBackendAPINodeJsExpressMongoDB = true,
                 WantNET8MSSQLServerAPI = true,
-                WantNET8BlazorMSSQLServerCodeFirst = true
+                WantDTONET8BlazorMSSQLServerCodeFirst = true,
+                WantEntityNET8BlazorMSSQLServerCodeFirst = true,
+                WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = true,
+                WantInterfaceNET8BlazorMSSQLServerCodeFirst = true,
+                WantRepositoryNET8BlazorMSSQLServerCodeFirst = true,
+                WantBlazorPageNET8BlazorMSSQLServerCodeFirst = true
             };
             return Configuration;
         }
@@ -161,11 +166,16 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPI = Configuration.WantBackendAPI;
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB = Configuration.WantBackendAPINodeJsExpressMongoDB;
                 Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI = Configuration.WantNET8MSSQLServerAPI;
-                Program.WinFormConfigurationComponent.Configuration.WantNET8BlazorMSSQLServerCodeFirst = Configuration.WantNET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
                 Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptDTOs = Configuration.WantTypeScriptDTOs;
+                Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
             }
             catch (Exception ex) { throw ex; }
         }

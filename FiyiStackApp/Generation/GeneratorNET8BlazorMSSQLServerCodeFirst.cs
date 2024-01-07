@@ -39,7 +39,6 @@ namespace FiyiStackApp.Generation
                 string LogText = $@"Starting...
 {GeneratorConfigurationComponent.lstTableToGenerate.Count} tables to work with
 {GeneratorConfigurationComponent.lstFieldToGenerate.Count} fields to work with
-{GeneratorConfigurationComponent.lstStoredProcedureToGenerate.Count} stored procedures to work with
 ";
 
                 LogText += $"Entering C# language{Environment.NewLine}";

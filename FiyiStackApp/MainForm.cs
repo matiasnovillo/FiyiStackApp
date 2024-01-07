@@ -247,95 +247,6 @@ namespace FiyiStackApp
             Cursor = Cursors.Default;
         }
 
-        #region Secondary Configuration
-        private void txtUserName_BackColorChanged(object sender, EventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
-        }
-
-        private void txtUserPassword_BackColorChanged(object sender, EventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
-        }
-
-        private void btnSee_MouseDown(object sender, MouseEventArgs e)
-        {
-            txtPassword.PasswordChar = '\0';
-            btnSeePassword.Visible = false;
-        }
-
-        private void btnSee_MouseUp(object sender, MouseEventArgs e)
-        {
-            txtPassword.PasswordChar = '*';
-            btnSeePassword.Visible = true;
-        }
-
-        private void picProfilePicture_Paint(object sender, PaintEventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 50, 50);
-        }
-
-        private void picRememberMe_Paint(object sender, PaintEventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
-        }
-
-        private void btnLogin_Paint(object sender, PaintEventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
-        }
-
-        private void picLogo_Paint(object sender, PaintEventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            Login();
-        }
-
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == 13) //Code for Enter button
-            {
-                Login();
-            }
-        }
-
-        private void txtFantasyNameOrEmail_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == 13) //Code for Enter button
-            {
-                Login();
-            }
-        }
-
-        private void chbRememberMe_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Loading == false)
-            {
-                if (Program.WinFormConfigurationComponent.RememberMe)//Not remember user
-                {
-                    Program.WinFormConfigurationComponent.RememberMe = false;
-                    Program.WinFormConfigurationComponent.FantasyNameOrEmailFromLocalDB = "";
-                    if (File.Exists("ProfilePicture.png"))
-                    {
-                        try
-                        {
-                            File.Delete("ProfilePicture.png");
-                        }
-                        catch (Exception) { }
-                    }
-                }
-                else//Remember user
-                {
-                    Program.WinFormConfigurationComponent.RememberMe = true;
-                } 
-            }
-        }
-        #endregion
-
         private void txtSearchYourProjectByName_KeyDown(object sender, KeyEventArgs e)
         {
             LoadYourProjects();
@@ -344,11 +255,6 @@ namespace FiyiStackApp
         private void btnNewProject_Click(object sender, EventArgs e)
         {
             NewProject();
-        }
-
-        private void btnNewOrEdit_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
         }
 
         private void btnDeleteYourProjects_Click(object sender, EventArgs e)
@@ -429,16 +335,6 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
                 PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
             }
-        }
-
-        private void txtSearchYourProjectByName_BackColorChanged(object sender, EventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
-        }
-
-        private void ListViewYourProjects_BackColorChanged(object sender, EventArgs e)
-        {
-            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void cambiarDatosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -563,13 +459,14 @@ namespace FiyiStackApp
             Program.WinFormConfigurationComponent.LoadConfiguration();
 
             //Load
-            Models.Core.DataBase Database = new Models.Core.DataBase();
+            DataBase Database = new();
             Program.WinFormConfigurationComponent.DataBaseChosen = Database;
 
             //Load empty PropertyGridDatabase
-            Models.Core.DataBase DataBase = new Models.Core.DataBase();
-
-            DataBase.ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True";
+            DataBase DataBase = new()
+            {
+                ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
+            };
 
             Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
             PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
@@ -607,7 +504,7 @@ namespace FiyiStackApp
                     _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.Add();
 
                     #region Access
-                    UserProject UserProject = new UserProject();
+                    UserProject UserProject = new();
                     UserProject.UserId = Program.WinFormConfigurationComponent.UserLogged.UserId;
                     UserProject.AccessTypeId = 1;
                     UserProject.ProjectId = _ProjectId;
@@ -638,7 +535,7 @@ namespace FiyiStackApp
                     #endregion
 
                     #region Access
-                    UserProject UserProject = new UserProject(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
+                    UserProject UserProject = new(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
                     #endregion
 
                     #region Delete a UserId that is present in the table but is not present in the listview
@@ -728,10 +625,7 @@ namespace FiyiStackApp
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
         }
 
-        private void btnShowConfigurationForm_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
-        }
+        
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
@@ -740,14 +634,23 @@ namespace FiyiStackApp
                 //Validation and preparing
                 lblMessageDockedBottom.Text = "Validating and preparing";
                 HideAllGeneratorPanelsExcept(PanelSummary);
-                Program.WinFormConfigurationComponent.lstTableToGenerate = new List<Models.Core.Table>();
-                Program.WinFormConfigurationComponent.lstFieldToGenerate = new List<Models.Core.Field>();
-                Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate = new List<StoredProcedure>();
+
+                Program.WinFormConfigurationComponent.lstTableToGenerate = [];
+                Program.WinFormConfigurationComponent.lstFieldToGenerate = [];
+
+                //Before generation done
+                TextBoxLogger.Clear();
+                lblMessageDockedBottom.Text = "Starting...";
+                PanelSummary.Visible = true;
+
+                //Start generation
+                Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate = [];
                 //List of actions for stored procedures
-                List<string> lstStoredProcedureAction = new List<string>()
-                {
+                List<string> lstStoredProcedureAction =
+                [
                 "Insert", "UpdateBy", "DeleteBy", "Select1By", "SelectAll", "SelectAllPaged", "Count", "DeleteAll"
-                };
+                ];
+
                 for (int i = 0; i < ListViewTable.Items.Count; i++)
                 {
                     if (ListViewTable.Items[i].Checked)
@@ -758,7 +661,7 @@ namespace FiyiStackApp
                             ListViewTable.Items[i].ImageIndex == 1 ||
                             ListViewTable.Items[i].ImageIndex == 13) //OK or Need to upload or Virtual model
                         {
-                            Models.Core.Table TableChecked = new Models.Core.Table(Convert.ToInt32(ListViewTable.Items[i].Tag));
+                            Table TableChecked = new(Convert.ToInt32(ListViewTable.Items[i].Tag));
                             if (TableChecked.TableId == 0 ||
                                 TableChecked.Name.Trim() == "" ||
                                 TableChecked.Name == null ||
@@ -771,7 +674,7 @@ namespace FiyiStackApp
                             {
                                 //Fill a list of tables, fields and stored procedures to generate
                                 Program.WinFormConfigurationComponent.lstTableToGenerate.Add(TableChecked);
-                                foreach (Models.Core.Field field in new Models.Core.Field().GetAllByTableIdToModel(TableChecked.TableId))
+                                foreach (Field field in new Field().GetAllByTableIdToModel(TableChecked.TableId))
                                 {
                                     Program.WinFormConfigurationComponent.lstFieldToGenerate.Add(field);
                                 }
@@ -779,10 +682,12 @@ namespace FiyiStackApp
                                 int actionId = 0;
                                 foreach (string action in lstStoredProcedureAction)
                                 {
-                                    StoredProcedure storedprocedure = new StoredProcedure();
-                                    storedprocedure.TableArea = TableChecked.Area;
-                                    storedprocedure.TableName = TableChecked.Name;
-                                    storedprocedure.SchemeName = TableChecked.Scheme;
+                                    StoredProcedure storedprocedure = new()
+                                    {
+                                        TableArea = TableChecked.Area,
+                                        TableName = TableChecked.Name,
+                                        SchemeName = TableChecked.Scheme
+                                    };
                                     switch (actionId)
                                     {
                                         case 0: //Insert
@@ -828,105 +733,103 @@ namespace FiyiStackApp
                     }
                 }
 
-                Cursor = Cursors.WaitCursor;
-                if (Program.WinFormConfigurationComponent.lstTableToGenerate.Count != 0)
+                if (Program.WinFormConfigurationComponent.lstTableToGenerate.Count == 0)
                 {
+                    lblMessageDockedBottom.Text = "Nothing to generate";
+                    TextBoxLogger.Text += "Nothing to generate";
 
-                    //Before generation done
-                    TextBoxLogger.Clear();
-                    lblMessageDockedBottom.Text = "Starting...";
-                    PanelSummary.Visible = true;
-
-                    //Start generation
-                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
-                    {
-                        TextBoxLogger.Text += GeneratorJsTsNETCoreSQLServer.Start(Program.WinFormConfigurationComponent.Configuration,
-                                        new fieldChainerNET8MSSQLServerAPI(),
-                                        new modelChainerNET8MSSQLServerAPI(),
-                                        new fieldChainerNodeJsExpressMongoDB(),
-                                        new fieldChainerJsTsNETCoreSQLServer(),
-                                        new modelChainerJsTsNETCoreSQLServer(),
-                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                        Program.WinFormConfigurationComponent.ProjectChosen,
-                                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-                    }
-                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
-                    {
-                        TextBoxLogger.Text += GeneratorNET6CleanArchitecture.Start(Program.WinFormConfigurationComponent.Configuration,
-                                        new fieldChainerNET8MSSQLServerAPI(),
-                                        new modelChainerNET8MSSQLServerAPI(),
-                                        new fieldChainerNodeJsExpressMongoDB(),
-                                        new fieldChainerJsTsNETCoreSQLServer(),
-                                        new modelChainerJsTsNETCoreSQLServer(),
-                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                        Program.WinFormConfigurationComponent.ProjectChosen,
-                                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-                    }
-                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
-                    {
-                        TextBoxLogger.Text += GeneratorNodeJsExpressMongoDB.Start(Program.WinFormConfigurationComponent.Configuration,
-                                        new fieldChainerNET8MSSQLServerAPI(),
-                                        new modelChainerNET8MSSQLServerAPI(),
-                                        new fieldChainerNodeJsExpressMongoDB(),
-                                        new fieldChainerJsTsNETCoreSQLServer(),
-                                        new modelChainerJsTsNETCoreSQLServer(),
-                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                        Program.WinFormConfigurationComponent.ProjectChosen,
-                                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-                    }
-                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
-                    {
-                        TextBoxLogger.Text += GeneratorNET8MSSQLServerAPI.Start(Program.WinFormConfigurationComponent.Configuration,
-                                        new fieldChainerNET8MSSQLServerAPI(),
-                                        new modelChainerNET8MSSQLServerAPI(),
-                                        new fieldChainerNodeJsExpressMongoDB(),
-                                        new fieldChainerJsTsNETCoreSQLServer(),
-                                        new modelChainerJsTsNETCoreSQLServer(),
-                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                        Program.WinFormConfigurationComponent.ProjectChosen,
-                                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-                    }
-                    else
-                    {
-                        TextBoxLogger.Text += GeneratorNET8MSSQLServerAPI.Start(Program.WinFormConfigurationComponent.Configuration,
-                                        new fieldChainerNET8MSSQLServerAPI(),
-                                        new modelChainerNET8MSSQLServerAPI(),
-                                        new fieldChainerNodeJsExpressMongoDB(),
-                                        new fieldChainerJsTsNETCoreSQLServer(),
-                                        new modelChainerJsTsNETCoreSQLServer(),
-                                        new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                        Program.WinFormConfigurationComponent.ProjectChosen,
-                                        Program.WinFormConfigurationComponent.DataBaseChosen,
-                                        Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                        Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                        Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
-                    }
-
-                    //After generation done
-                    LoadTables();
-                    ListViewField.Clear();
-                    lblMessageDockedBottom.Text = "Ready. Generation done";
-                    TextBoxLogger.Text += "Ready. Generation done";
-                    Cursor = Cursors.Default;
+                    return;
                 }
-                else { lblMessageDockedBottom.Text = "Nothing to generate"; }
+
+                Cursor = Cursors.WaitCursor;
+
+                if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
+                {
+                    TextBoxLogger.Text += GeneratorJsTsNETCoreSQLServer.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture.Trim() != "")
+                {
+                    TextBoxLogger.Text += GeneratorNET6CleanArchitecture.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
+                {
+                    TextBoxLogger.Text += GeneratorNodeJsExpressMongoDB.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
+                {
+                    TextBoxLogger.Text += GeneratorNET8MSSQLServerAPI.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+                else
+                {
+                    TextBoxLogger.Text += GeneratorNET8BlazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+
+                //After generation done
+                LoadTables();
+                ListViewField.Clear();
+                lblMessageDockedBottom.Text = "Ready. Generation done";
+                TextBoxLogger.Text += "Ready. Generation done";
+                Cursor = Cursors.Default;
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
         }
@@ -988,11 +891,6 @@ namespace FiyiStackApp
             { lblMessageDockedBottom.Text = ex.Message; ListViewTable.Items.Clear(); ListViewField.Items.Clear(); Cursor = Cursors.Default; }
         }
 
-        private void btnGenerate_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
-        }
-
         private void btnShowConfigurationForm_Click(object sender, EventArgs e)
         {
             ConfigurationForm ConfigurationForm = new ConfigurationForm();
@@ -1025,10 +923,12 @@ namespace FiyiStackApp
 
         private void btnCopyDBLocalhost_Click(object sender, EventArgs e)
         {
-            Models.Core.DataBase DataBase = new Models.Core.DataBase();
-            DataBase.ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework";
-            DataBase.DateTimeLastModification = DateTime.Now;
-            DataBase.DateTimeCreation = DateTime.Now;
+            Models.Core.DataBase DataBase = new Models.Core.DataBase
+            {
+                ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework",
+                DateTimeLastModification = DateTime.Now,
+                DateTimeCreation = DateTime.Now
+            };
 
             Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
 
@@ -1084,11 +984,6 @@ namespace FiyiStackApp
             HideAllPanelsExcept(PanelProject);
             lblTitle.Text = "Load or edit a project";
             lblSubtitle.Text = $@"";
-        }
-
-        private void btnAddDatabase_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
         }
 
         private void btnDeleteDataBases_Click(object sender, EventArgs e)
@@ -1168,11 +1063,6 @@ namespace FiyiStackApp
         private void btnRefreshDataBases_Click(object sender, EventArgs e)
         {
             LoadDataBases();
-        }
-
-        private void ListViewDatabase_BackColorChanged(object sender, EventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void ListViewDatabase_ItemActivate(object sender, EventArgs e)
@@ -1257,11 +1147,6 @@ namespace FiyiStackApp
         private void btnRefreshTables_Click(object sender, EventArgs e)
         {
             LoadTables();
-        }
-
-        private void ListViewTable_BackColorChanged(object sender, EventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void ListViewTable_ItemActivate(object sender, EventArgs e)
@@ -1565,11 +1450,6 @@ namespace FiyiStackApp
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
         }
 
-        private void btnAddTable_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
-        }
-
         private void btnDeleteField_Click(object sender, EventArgs e)
         {
             try
@@ -1646,10 +1526,7 @@ namespace FiyiStackApp
             LoadFields();
         }
 
-        private void cmbDataType_BackColorChanged(object sender, EventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 1, 10);
-        }
+        
 
         private void cmbDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1754,11 +1631,6 @@ namespace FiyiStackApp
                 }
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
-        }
-
-        private void ListViewField_BackColorChanged(object sender, EventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
         }
 
         private void ListViewField_ItemActivate(object sender, EventArgs e)
@@ -1878,11 +1750,6 @@ namespace FiyiStackApp
                 lblMessageDockedBottom.Text = Program.WinFormConfigurationComponent.FieldChosen.Name + " loaded";
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
-        }
-
-        private void btnAddField_Paint(object sender, PaintEventArgs e)
-        {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
         }
 
         private void btnAddField_Click(object sender, EventArgs e)
@@ -2100,9 +1967,158 @@ namespace FiyiStackApp
             HideAllGeneratorPanelsExcept(PanelDatabase);
         }
 
+        #region Secondary Configuration
+        private void btnAddDatabase_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void btnGenerate_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void btnAddField_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void btnShowConfigurationForm_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void btnNewOrEdit_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void ListViewDatabase_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void txtSearchYourProjectByName_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void ListViewYourProjects_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void ListViewField_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void txtUserName_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void txtUserPassword_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void btnSee_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtPassword.PasswordChar = '\0';
+            btnSeePassword.Visible = false;
+        }
+
+        private void btnSee_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtPassword.PasswordChar = '*';
+            btnSeePassword.Visible = true;
+        }
+
         private void btnHidePanelSummary_Paint(object sender, PaintEventArgs e)
         {
-            FiyiStackApp.Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
         }
+
+        private void picProfilePicture_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 50, 50);
+        }
+
+        private void btnAddTable_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void ListViewTable_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 10);
+        }
+
+        private void cmbDataType_BackColorChanged(object sender, EventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 1, 10);
+        }
+
+        private void picRememberMe_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
+        }
+
+        private void btnLogin_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 10, 50);
+        }
+
+        private void picLogo_Paint(object sender, PaintEventArgs e)
+        {
+            Library.UI.UI.SetBorderRadiusToControl(ref sender, 20, 20);
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13) //Code for Enter button
+            {
+                Login();
+            }
+        }
+
+        private void txtFantasyNameOrEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13) //Code for Enter button
+            {
+                Login();
+            }
+        }
+
+        private void chbRememberMe_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Loading == false)
+            {
+                if (Program.WinFormConfigurationComponent.RememberMe)//Not remember user
+                {
+                    Program.WinFormConfigurationComponent.RememberMe = false;
+                    Program.WinFormConfigurationComponent.FantasyNameOrEmailFromLocalDB = "";
+                    if (File.Exists("ProfilePicture.png"))
+                    {
+                        try
+                        {
+                            File.Delete("ProfilePicture.png");
+                        }
+                        catch (Exception) { }
+                    }
+                }
+                else//Remember user
+                {
+                    Program.WinFormConfigurationComponent.RememberMe = true;
+                }
+            }
+        }
+        #endregion
     }
 }

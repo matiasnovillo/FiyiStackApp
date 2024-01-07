@@ -61,7 +61,17 @@ namespace FiyiStackApp.Models.Core
 
         public bool WantNET8MSSQLServerAPI { get; set; }
 
-        public bool WantNET8BlazorMSSQLServerCodeFirst { get; set; }
+        public bool WantDTONET8BlazorMSSQLServerCodeFirst { get; set; }
+
+        public bool WantEntityNET8BlazorMSSQLServerCodeFirst { get; set; }
+
+        public bool WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst { get; set; }
+        
+        public bool WantInterfaceNET8BlazorMSSQLServerCodeFirst { get; set; }
+
+        public bool WantRepositoryNET8BlazorMSSQLServerCodeFirst { get; set; }
+
+        public  bool WantBlazorPageNET8BlazorMSSQLServerCodeFirst { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -104,7 +114,12 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNET8BlazorMSSQLServerCodeFirst", WantNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantInterfaceNET8BlazorMSSQLServerCodeFirst", WantInterfaceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -153,7 +168,12 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNET8BlazorMSSQLServerCodeFirst", WantNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantInterfaceNET8BlazorMSSQLServerCodeFirst", WantInterfaceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -218,7 +238,12 @@ namespace FiyiStackApp.Models.Core
                     Configuration.WantBackendAPI = configuration.WantBackendAPI;
                     Configuration.WantBackendAPINodeJsExpressMongoDB = configuration.WantBackendAPINodeJsExpressMongoDB;
                     Configuration.WantNET8MSSQLServerAPI = configuration.WantNET8MSSQLServerAPI;
-                    Configuration.WantNET8BlazorMSSQLServerCodeFirst = configuration.WantNET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
+                    Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
                 }
 
                 return Configuration;
@@ -253,7 +278,12 @@ namespace FiyiStackApp.Models.Core
                 $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}, " +
                 $"WantBackendAPINodeJsExpressMongoDB: {WantBackendAPINodeJsExpressMongoDB}, " +
                 $"WantNET8MSSQLServerAPI: {WantNET8MSSQLServerAPI}, " +
-                $"WantNET8BlazorMSSQLServerCodeFirst: {WantNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantDTONET8BlazorMSSQLServerCodeFirst: {WantDTONET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantEntityNET8BlazorMSSQLServerCodeFirst: {WantEntityNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst: {WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantInterfaceNET8BlazorMSSQLServerCodeFirst: {WantInterfaceNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantRepositoryNET8BlazorMSSQLServerCodeFirst: {WantRepositoryNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantBlazorPageNET8BlazorMSSQLServerCodeFirst: {WantBlazorPageNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantBackendAPI:WantBackendAPI {WantBackendAPI}";
         }
     }

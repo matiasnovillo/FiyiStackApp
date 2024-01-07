@@ -54,7 +54,13 @@ namespace UnitTestOverFiyiStackApp
                 WantTypeScriptDTOs = true,
                 WantBackendAPI = true,
                 WantBackendAPINodeJsExpressMongoDB = true,
-                WantNET8MSSQLServerAPI = true
+                WantNET8MSSQLServerAPI = true,
+                WantEntityNET8BlazorMSSQLServerCodeFirst = true,
+                WantDTONET8BlazorMSSQLServerCodeFirst = true,
+                WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = true,
+                WantInterfaceNET8BlazorMSSQLServerCodeFirst = true,
+                WantRepositoryNET8BlazorMSSQLServerCodeFirst = true,
+                WantBlazorPageNET8BlazorMSSQLServerCodeFirst = true
             };
             Project ProjectChosen = new Project()
             {

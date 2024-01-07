@@ -107,6 +107,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8MSSQLServerAPI", PathNET8MSSQLServerAPI, DbType.String, ParameterDirection.Input);
+                dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
@@ -154,6 +155,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8MSSQLServerAPI", PathNET8MSSQLServerAPI, DbType.String, ParameterDirection.Input);
+                dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
