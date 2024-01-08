@@ -11,6 +11,198 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             {
                 string Content =
                 $@"
+@page ""/{Table.Area}/{Table.Name}Page/{{{Table.Name}Id:int}}""
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Repositories;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Shared
+@inject UserRepository userRepository;
+@inject MenuRepository menuRepository;
+@inject RoleRepository roleRepository;
+@inject RoleMenuRepository rolemenuRepository;
+@inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
+@inject StateContainer StateContainer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Editar usuario - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+
+<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
+
+<div class=""main-content position-relative max-height-vh-100 h-100"">
+    <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard>
+    <div class=""container-fluid px-2 px-md-4"">
+        <div class=""page-header min-height-300 border-radius-xl mt-4""
+             style=""background-image: url('assets/img/illustrations/Landscape2.jpg');"">
+            <span class=""mask bg-gradient-primary opacity-6""></span>
+        </div>
+        <div class=""card card-body mx-3 mx-md-4 mt-n6"">
+            <div class=""card-header mb-0 pb-0 bg-white"">
+                <h1 class=""mb-3"">
+                    @if({Table.Name}Id == 0)
+                    {{
+                        <span>Add {Table.Name.ToLower()}</span>
+                    }}
+                    else
+                    {{
+                        <span>Edit {Table.Name.ToLower()}</span>
+                    }}
+                </h1>
+                <NavLink class=""btn btn-outline-info"" href=""{Table.Area}/{Table.Name}Page"">
+                    <span class=""fas fa-chevron-left""></span>
+                    &nbsp;Go back
+                </NavLink>
+            </div>
+            <div class=""card-body px-0"">
+                <form method=""post"" @onsubmit=""Submit""
+                      @formname=""{Table.Name.ToLower()}-form"" class=""mb-4"">
+                    <AntiforgeryToken />
+                    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_BlazorNonQueryPage}
+                    <hr />
+                    <button id=""btn-submit"" type=""submit""
+                            class=""btn bg-gradient-primary"">
+                        <i class=""fas fa-pen""></i>
+                        @if ({Table.Name}Id == 0)
+                        {{
+                            <span>Add</span>
+                        }}
+                        else
+                        {{
+                            <span>Edit</span>
+                        }}
+                    </button>
+                    <NavLink class=""btn btn-outline-info"" href=""{Table.Area}/{Table.Name}Page"">
+                        <span class=""fas fa-chevron-left""></span>
+                        &nbsp;Go back
+                    </NavLink>
+                </form>
+                @if (MessageForForm != """")
+                {{
+                    <span class=""text-danger"">
+                        @((MarkupString)MessageForForm)
+                    </span>
+                }}
+            </div>
+        </div>
+    </div>
+
+    <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FooterDashboard></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FooterDashboard>
+</div>
+
+@code {{
+    #region Properties
+    public List<Menu?> lstMenuResult {{ get; set; }}
+
+    public List<Role?> lstRole {{ get; set; }}
+
+    [Parameter]
+    public int {Table.Name}Id {{ get; set; }}
+
+    public string MessageForForm {{ get; set; }} = """";
+
+    [SupplyParameterFromForm]
+    public {Table.Name}? {Table.Name} {{ get; set; }}
+
+    public User? User {{ get; set; }}
+
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ProgressBarForFile_BlazorNonQueryPage}
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {{
+        try
+        {{
+            //Look for saved user in shared component, simulates a session
+            User = StateContainer.User == null ? new() : StateContainer.User;
+
+            lstMenuResult = [];
+            {Table.Name} = new();
+
+            if (User != null)
+            {{
+                if (User.UserId != 0)
+                {{
+                    //Logged user
+
+                    List<Menu?> lstMenu = await menuRepository
+                                        .GetAll(CancellationToken.None);
+
+                    lstMenuResult = await rolemenuRepository
+                                        .GetAllByRoleId(User.RoleId, lstMenu);
+
+                    lstRole = await roleRepository.GetAll(CancellationToken.None);
+
+                    if ({Table.Name}Id == 0)
+                    {{
+                        //Create new {Table.Name}
+                        {Table.Name} = new();
+                    }}
+                    else
+                    {{
+                        //Edit user
+                        //Populate user data
+                        {Table.Name} = await {Table.Name.ToLower()}Repository
+                                    .GetBy{Table.Name}Id({Table.Name}Id, CancellationToken.None);
+                    }}
+                }}
+                else
+                {{
+                    //Not logged user
+
+                    //Redirect to...
+                    NavigationManager.NavigateTo(""Login"");
+                }}
+            }}
+            else
+            {{
+                //Impossible
+            }}
+
+            base.OnInitialized();
+        }}
+        catch (Exception ex)
+        {{
+            MessageForForm = $@""There was a mistake. Try again.
+                             Error message: {{ex.Message}}"";
+        }}
+    }}
+
+    private async void Submit()
+    {{
+        try
+        {{
+            if ({Table.Name}Id == 0)
+            {{
+                //Create new {Table.Name}
+                {Table.Name}.{Table.Name}Id = 0;
+
+                await {Table.Name.ToLower()}Repository
+                        .Add({Table.Name}, CancellationToken.None);
+            }}
+            else
+            {{
+                //Update data
+                await {Table.Name.ToLower()}Repository
+                            .Update({Table.Name}, CancellationToken.None);
+            }}
+
+            //Redirect to users page
+            NavigationManager.NavigateTo(""{Table.Area}/{Table.Name}Page"");
+        }}
+        catch (Exception ex)
+        {{
+            MessageForForm = $@""There was a mistake. Try again.
+                             Error message: {{ex.Message}}"";
+        }}
+        finally
+        {{
+            //Re-render the page to show ScannedText
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }}
+    }}
+
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.UploadFileMethod_BlazorNonQueryPage}
+}}
 
 ";
 

@@ -27,6 +27,12 @@ namespace FiyiStackApp.Models.Tools
 
         public string Properties_ForIronPDF_Converter { get; set; } = "";
 
+        public string PropertiesInHTML_BlazorNonQueryPage { get; set; } = "";
+
+        public string ProgressBarForFile_BlazorNonQueryPage { get; set; } = "";
+
+        public string UploadFileMethod_BlazorNonQueryPage { get; set; } = "";
+
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
         }
@@ -109,7 +115,22 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
-                           
+                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""number""
+                               step=""1""
+                               min=""{field.MinValue}"" 
+                               max=""{field.MaxValue}"" 
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
                         }
 
                         break;
@@ -162,6 +183,20 @@ else
     </p>
 }}
                                         ";
+
+                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""form-check form-switch"">
+                        <input class=""form-check-input""
+                               type=""checkbox""
+                               name=""strict-search""
+                               @bind=""{Table.Name}!.{field.Name}""
+                               id=""{field.Name.ToLower()}"" />
+                        <label class=""form-check-label""
+                               for=""{field.Name.ToLower()}"">
+                            {field.Name}
+                        </label>
+                    </div>
+                    ";
                         }
                         break;
                     case 5: //Text: Basic
@@ -185,6 +220,20 @@ $@"//{field.Name}
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
 
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""text""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
+
                         break;
                     case 6: //Decimal
 
@@ -206,6 +255,23 @@ $@"//{field.Name}
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""number""
+                               step=""0.1""
+                               id=""{field.Name.ToLower()}""
+                               min=""{field.MinValue}"" 
+                               max=""{field.MaxValue}"" 
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
 
                         break;
                     case 8: //Primary Key (Id)
@@ -238,7 +304,19 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.N
 
                         if (field.Name != "DateTimeCreation" && field.Name != "DateTimeLastModification")
                         {
-                           
+                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                                class=""input-group input-group-static"">
+                                {field.Name}
+                        </label>
+                        <input type=""datetime-local""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}""/>
+                    </div>
+                    ";
                         }
                         break;
                     case 11: //Time
@@ -261,6 +339,20 @@ $@"//{field.Name}
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""time""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
 
                         break;
                     case 13: //Foreign Key (Id): Options
@@ -302,6 +394,20 @@ $@"//{field.Name}
 </p>
                                         ";
 
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""color""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
+
                         break;
                     case 15: //Text: TextArea
 
@@ -322,6 +428,21 @@ $@"//{field.Name}
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</div>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <textarea rows=""10""
+                            class=""form-control""
+                            @bind=""{Table.Name}!.{field.Name}""
+                            {(field.Nullable == true ? "" : "required")}
+                            id=""{field.Name.ToLower()}"">
+                        </textarea>
+                    </div>
+                    ";
 
                         break;
                     case 16: //Text: TextEditor 
@@ -349,6 +470,20 @@ $@"//{field.Name}
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""password""
+                               id=""{field.Name.ToLower()}""
+                               {(field.Nullable == true ? "" : "required")}
+                               class=""form-control""
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
 
                         break;
                     case 18: //Text: PhoneNumber
@@ -382,6 +517,20 @@ $@"//{field.Name}
     @{Table.Name.ToLower()}?.{field.Name}
 </a>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""tel""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
 
                         break;
                     case 19: //Text: URL
@@ -418,6 +567,20 @@ $@"//{field.Name}
 </a>
                                         ";
 
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""url""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
+
                         break;
                     case 20: //Text: Email
 
@@ -450,6 +613,20 @@ $@"//{field.Name}
     @{Table.Name.ToLower()}?.{field.Name}
 </a>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""email""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    ";
 
                         break;
                     case 21: //Text: File
@@ -486,6 +663,88 @@ $@"//{field.Name}
 </a>
                                         ";
 
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <Input{field.Name} type=""file""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               OnChange=""@Upload{field.Name}"" />
+                        @{{
+                            var ProgressCssFor{field.Name} = ""progress"" + (DisplayProgressFor{field.Name} ? """" : ""d-none"");
+                            var ProgressWidthStyleFor{field.Name} = ProgressPercentFor{field.Name} + ""%"";
+                        }}
+                        <!--Progress bar-->
+                        <div class=""@ProgressCssFor{field.Name}"">
+                            <div class=""progress-bar progress-bar-striped progress-bar-animated @ProgressBarColourFor{field.Name}""
+                                 role=""progressbar"" style=""width:@ProgressWidthStyleFor{field.Name}""
+                                 area-valuenow=""@ProgressPercentFor{field.Name}"" 
+                                 aria-valuemin=""0""
+                                 aria-valuemax=""100"">
+                            </div>
+                        </div>
+                    </div>
+                    ";
+
+                        ProgressBarForFile_BlazorNonQueryPage += $@"//Progress bar for {field.Name}
+    public bool DisplayProgressFor{field.Name} {{ get; set; }} = false;
+    public int ProgressPercentFor{field.Name} {{ get; set; }} = 0;
+    public string ProgressTextFor{field.Name} {{ get; set; }} = """";
+    public string ProgressBarColourFor{field.Name} {{ get; set; }} = ""bg-info"";
+    
+    ";
+
+                        UploadFileMethod_BlazorNonQueryPage += $@"private async void UploadFile(InputFileChangeEventArgs e)
+    {{
+
+        try
+        {{
+            DisplayProgressFor{field.Name} = true;
+            ProgressPercentFor{field.Name} = 80;
+            ProgressBarColourFor{field.Name} = ""bg-info"";
+
+            string path = Path.Combine(
+                Environment.CurrentDirectory,
+                ""wwwroot"",
+                ""Uploads"",
+                ""{Table.Area}"",
+                ""{Table.Name}"",
+                e.File.Name);
+
+            long MaxFileSize = 1024L * 1024L; //3MB max.
+
+            await using FileStream FileStream = new(path, FileMode.Create);
+            await e.File.OpenReadStream(MaxFileSize).CopyToAsync(FileStream);
+
+            FileStream.Close();
+
+            {Table.Name}!.{field.Name} = path;
+
+            ProgressPercentFor{field.Name} = 100;
+            ProgressBarColourFor{field.Name} = ""bg-success"";
+            DisplayProgressFor{field.Name} = false;
+        }}
+        catch (Exception ex)
+        {{
+            MessageForForm = $@""There was a mistake. Try again.
+                             Error message: {{ex.Message}}"";
+
+            ProgressPercentFor{field.Name} = 100;
+            ProgressBarColourFor{field.Name} = ""bg-danger"";
+        }}
+        finally
+        {{
+            //Re-render the page to show ScannedText
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }}
+    }}
+
+    ";
+
                         break;
                     case 22: //Text: Tag
 
@@ -507,6 +766,21 @@ $@"//{field.Name}
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
+
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <input type=""text""
+                               id=""{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}""
+                               data-toggle=""tags"" />
+                    </div>
+                    ";
 
                         break;
                     case 23: //Foreign Key (Id): DropDown
@@ -532,7 +806,18 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
-                            
+                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <select id=""{field.Name.ToLower()}""
+                            class=""form-control""
+                            @bind={Table.Name}.{field.Name}>
+                        </select>
+                    </div>
+                    ";
                         }
                         break;
                     default:
