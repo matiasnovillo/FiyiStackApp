@@ -418,7 +418,7 @@ $@"        public string? {field.Name} {{ get; set; }}
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
-                    .HasColumnType(""varchar({field.MaxValue})"")
+                    .HasColumnType(""text"")
                     .IsRequired({(field.Nullable == true ? "false" : "true")});
 
                 ";

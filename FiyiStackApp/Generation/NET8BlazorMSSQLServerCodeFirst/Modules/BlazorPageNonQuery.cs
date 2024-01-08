@@ -12,20 +12,17 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"
 @page ""/{Table.Area}/{Table.Name}Page/{{{Table.Name}Id:int}}""
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 @using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Shared
-@inject UserRepository userRepository;
-@inject MenuRepository menuRepository;
-@inject RoleRepository roleRepository;
-@inject RoleMenuRepository rolemenuRepository;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
-@inject StateContainer StateContainer
-@inject NavigationManager NavigationManager
 
-<PageTitle>Editar usuario - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+@if ({Table.Name}Id == 0)
+{{
+    <PageTitle>Add {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+}}
+else
+{{
+    <PageTitle>Edit {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+}}
 
 <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
 
@@ -162,6 +159,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+                {{
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    EmergencyLevel = 1,
+                    Comment = """",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
             MessageForForm = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
@@ -191,6 +204,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+                {{
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    EmergencyLevel = 1,
+                    Comment = """",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
             MessageForForm = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}

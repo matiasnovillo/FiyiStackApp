@@ -12,20 +12,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"
 @page ""/{Table.Area}/{Table.Name}Page""
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.DTOs;
 @using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Shared;
-@inject UserRepository userRepository;
-@inject MenuRepository menuRepository;
-@inject RoleRepository roleRepository;
-@inject RoleMenuRepository rolemenuRepository;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
 
-<PageTitle>{Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+<PageTitle>Query {Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
 
 <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
 
@@ -288,57 +278,80 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     paginated{Table.Name}DTO? paginated{Table.Name}DTO;
     #endregion
 
-    protected override async Task<bool> OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {{
-        //Look for saved user in shared component, simulates a session
-        User = StateContainer.User == null ? new() : StateContainer.User;
-
-        lstMenuResult = [];
-
-        paginated{Table.Name}DTO = new();
-        paginated{Table.Name}DTO.lst{Table.Name} = [];
-
-        if (User != null)
+        try
         {{
-            if (User.UserId != 0)
+            //Look for saved user in shared component, simulates a session
+            User = StateContainer.User == null ? new() : StateContainer.User;
+
+            lstMenuResult = [];
+
+            paginated{Table.Name}DTO = new();
+            paginated{Table.Name}DTO.lst{Table.Name} = [];
+
+            if (User != null)
             {{
-                //Logged user
+                if (User.UserId != 0)
+                {{
+                    //Logged user
 
-                List<Menu?> lstMenu = await menuRepository
-                                                .GetAll(CancellationToken.None);
+                    List<Menu?> lstMenu = await menuRepository
+                                                    .GetAll(CancellationToken.None);
 
-                lstMenuResult = await rolemenuRepository
-                                        .GetAllByRoleId(User.RoleId, lstMenu);
+                    lstMenuResult = await rolemenuRepository
+                                            .GetAllByRoleId(User.RoleId, lstMenu);
 
-                paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
-                                            .GetAllBy{Table.Name}IdPaginated(
-                                                """",
-                                                checkStrict,
-                                                1,
-                                                15,
-                                                CancellationToken.None);
+                    paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+                                                .GetAllBy{Table.Name}IdPaginated(
+                                                    """",
+                                                    checkStrict,
+                                                    1,
+                                                    15,
+                                                    CancellationToken.None);
 
-                TotalRows = await {Table.Name.ToLower()}Repository
-                                    .Count(CancellationToken.None);
+                    TotalRows = await {Table.Name.ToLower()}Repository
+                                        .Count(CancellationToken.None);
 
-                ChosenView = ""list"";
+                    ChosenView = ""list"";
+                }}
+                else
+                {{
+                    //Not logged user
+
+                    //Redirect to...
+                    NavigationManager.NavigateTo(""Login"");
+                }}
             }}
             else
             {{
-                //Not logged user
-
-                //Redirect to...
-                NavigationManager.NavigateTo(""Login"");
+                //Impossible
             }}
+
+            base.OnInitialized();
         }}
-        else
+        catch (Exception ex)
         {{
-            //Impossible
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
+            ErrorMessage = $@""There was a mistake. Try again.
+                             Error message: {{ex.Message}}"";
         }}
 
-        base.OnInitialized();
-
-        return true;
     }}
 
     #region Events
@@ -367,6 +380,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
@@ -464,6 +493,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
@@ -516,6 +561,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+                        
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
@@ -550,6 +611,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+            
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
@@ -614,6 +691,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
         catch (Exception ex)
         {{
+            Failure failure = new()
+            {{
+                Active = true,
+                DateTimeCreation = DateTime.Now,
+                DateTimeLastModification = DateTime.Now,
+                UserCreationId = 1,
+                UserLastModificationId = 1,
+                EmergencyLevel = 1,
+                Comment = """",
+                Message = ex.Message,
+                Source = ex.Source,
+                StackTrace = ex.StackTrace
+            }};
+
+            await failureRepository.Add(failure, CancellationToken.None);
+
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
