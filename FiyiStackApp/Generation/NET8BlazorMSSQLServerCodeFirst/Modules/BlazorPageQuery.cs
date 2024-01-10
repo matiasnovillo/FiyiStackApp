@@ -12,7 +12,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"
 @page ""/{Table.Area}/{Table.Name}Page""
+
 @using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
 
 <PageTitle>Query {Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
