@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiyiStackApp", "FiyiStackAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestOverFiyiStackApp", "TestOverFiyiStackApp\TestOverFiyiStackApp.csproj", "{1107E920-89D3-4B12-BA5A-C136376F5435}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiyiStack.Library", "..\Library\FiyiStack.Library\FiyiStack.Library\FiyiStack.Library.csproj", "{6F43A4EF-B3CE-4403-AA03-8115BA108562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiyiStack.Library", "FiyiStack.Library\FiyiStack.Library\FiyiStack.Library.csproj", "{F627835A-C7B6-46C3-BF82-4DBD3860BAEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{1107E920-89D3-4B12-BA5A-C136376F5435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1107E920-89D3-4B12-BA5A-C136376F5435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1107E920-89D3-4B12-BA5A-C136376F5435}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F43A4EF-B3CE-4403-AA03-8115BA108562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F43A4EF-B3CE-4403-AA03-8115BA108562}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F43A4EF-B3CE-4403-AA03-8115BA108562}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F43A4EF-B3CE-4403-AA03-8115BA108562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F627835A-C7B6-46C3-BF82-4DBD3860BAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F627835A-C7B6-46C3-BF82-4DBD3860BAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F627835A-C7B6-46C3-BF82-4DBD3860BAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F627835A-C7B6-46C3-BF82-4DBD3860BAEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

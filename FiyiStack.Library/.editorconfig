@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA2211: Los campos no constantes no deben ser visibles
+dotnet_diagnostic.CA2211.severity = suggestion

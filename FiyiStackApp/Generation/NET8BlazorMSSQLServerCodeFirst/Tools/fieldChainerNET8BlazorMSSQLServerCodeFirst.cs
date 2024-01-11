@@ -302,6 +302,14 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.N
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
                                         ";
 
+                        PropertiesForEntityConfiguration +=
+$@"//{field.Name}
+                entity.Property(e => e.{field.Name})
+                    .HasColumnType(""datetime"")
+                    .IsRequired(true);
+
+                ";
+
                         if (field.Name != "DateTimeCreation" && field.Name != "DateTimeLastModification")
                         {
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
