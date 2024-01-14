@@ -139,7 +139,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Blazor Pages (Query)
                     if (GeneratorConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}\\";
+                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}\\";
                         if (Directory.Exists(BlazorPagePath))
                         {
                             LogText += $"Folder: {BlazorPagePath} exist {Environment.NewLine}";
@@ -162,7 +162,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Blazor Pages (Non-Query)
                     if (GeneratorConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}\\";
+                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}\\";
                         if (Directory.Exists(BlazorPagePath))
                         {
                             LogText += $"Folder: {BlazorPagePath} exist {Environment.NewLine}";

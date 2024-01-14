@@ -192,12 +192,17 @@ else
                 //Create new {Table.Name}
                 {Table.Name}.{Table.Name}Id = 0;
 
+                {Table.Name}.DateTimeCreation = DateTime.Now;
+                {Table.Name}.DateTimeLastModification = DateTime.Now;
+
                 await {Table.Name.ToLower()}Repository
                         .Add({Table.Name}, CancellationToken.None);
             }}
             else
             {{
                 //Update data
+                {Table.Name}.DateTimeLastModification = DateTime.Now;
+
                 await {Table.Name.ToLower()}Repository
                             .Update({Table.Name}, CancellationToken.None);
             }}

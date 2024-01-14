@@ -706,7 +706,7 @@ $@"//{field.Name}
     
     ";
 
-                        UploadFileMethod_BlazorNonQueryPage += $@"private async void UploadFile(InputFileChangeEventArgs e)
+                        UploadFileMethod_BlazorNonQueryPage += $@"private async void Upload{field.Name}(InputFileChangeEventArgs e)
     {{
 
         try
