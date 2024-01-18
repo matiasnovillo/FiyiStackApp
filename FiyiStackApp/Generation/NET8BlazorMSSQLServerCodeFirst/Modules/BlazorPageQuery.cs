@@ -298,6 +298,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 if (User.UserId != 0)
                 {{
                     //Logged user
+                    if (User.RoleId != 1) //Only Root can access
+                    {{
+                        NavigationManager.NavigateTo(""403"");
+                    }}
 
                     List<Menu> lstMenu = menuRepository
                                             .GetAll();
