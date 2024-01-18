@@ -23,13 +23,13 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         IQueryable<{Table.Name}> AsQueryable();
 
         #region Queries
-        Task<int> Count(CancellationToken cancellationToken);
+        int Count(CancellationToken cancellationToken);
 
-        Task<{Table.Name}?> GetBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
+        {Table.Name}? GetBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
 
-        Task<List<{Table.Name}?>> GetAll(CancellationToken cancellationToken);
+        List<{Table.Name}?> GetAll(CancellationToken cancellationToken);
 
-        Task<paginated{Table.Name}DTO> GetAllBy{Table.Name}IdPaginated(string textToSearch,
+        paginated{Table.Name}DTO GetAllBy{Table.Name}IdPaginated(string textToSearch,
             bool strictSearch,
             int pageIndex,
             int pageSize,
@@ -37,15 +37,15 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         #endregion
 
         #region Non-Queries
-        Task<bool> Add({Table.Name} test, CancellationToken cancellationToken);
+        bool Add({Table.Name} test, CancellationToken cancellationToken);
 
-        Task<bool> Update({Table.Name} test, CancellationToken cancellationToken);
+        bool Update({Table.Name} test, CancellationToken cancellationToken);
 
-        Task<bool> DeleteBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
+        bool DeleteBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
         #endregion
 
         #region Other methods
-        Task<DataTable> GetAllInDataTable(CancellationToken cancellationToken);
+        DataTable GetAllInDataTable(CancellationToken cancellationToken);
         #endregion
     }}
 }}

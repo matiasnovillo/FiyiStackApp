@@ -252,7 +252,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 @code {{
     #region Properties
-    public List<Menu?> lstMenuResult {{ get; set; }}
+    public List<Menu> lstMenuResult {{ get; set; }} = [];
 
     public int TotalRows {{ get; set; }} = 0;
 
@@ -274,14 +274,14 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     public string? DownloadPathForPDF {{ get; set; }}
     public string? DownloadPathForCSV {{ get; set; }}
 
-    public User? User;
+    public User User = new();
 
-    public {Table.Name}? {Table.Name};
+    public {Table.Name} {Table.Name} = new();
 
-    paginated{Table.Name}DTO? paginated{Table.Name}DTO;
+    paginated{Table.Name}DTO paginated{Table.Name}DTO = new();
     #endregion
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {{
         try
         {{
@@ -299,22 +299,21 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 {{
                     //Logged user
 
-                    List<Menu?> lstMenu = await menuRepository
-                                                    .GetAll(CancellationToken.None);
+                    List<Menu> lstMenu = menuRepository
+                                            .GetAll();
 
-                    lstMenuResult = await rolemenuRepository
-                                            .GetAllByRoleId(User.RoleId, lstMenu);
+                    lstMenuResult = rolemenuRepository
+                                        .GetAllByRoleId(User.RoleId, lstMenu);
 
-                    paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+                    paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                                 .GetAllBy{Table.Name}IdPaginated(
                                                     """",
                                                     checkStrict,
                                                     1,
-                                                    15,
-                                                    CancellationToken.None);
+                                                    15);
 
-                    TotalRows = await {Table.Name.ToLower()}Repository
-                                        .Count(CancellationToken.None);
+                    TotalRows = {Table.Name.ToLower()}Repository
+                                    .Count();
 
                     ChosenView = ""list"";
                 }}
@@ -349,7 +348,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
@@ -358,7 +357,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     }}
 
     #region Events
-    private async void SearchText(ChangeEventArgs args)
+    private async Task SearchText(ChangeEventArgs args)
     {{
         try
         {{
@@ -367,16 +366,15 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             TextToSearch = args.Value.ToString();
 
-            paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+            paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                         .GetAllBy{Table.Name}IdPaginated(
                                             TextToSearch,
                                             checkStrict,
                                             1,
-                                            15,
-                                            CancellationToken.None);
+                                            15);
 
-            TotalRows = await {Table.Name.ToLower()}Repository
-                    .Count(CancellationToken.None);
+            TotalRows = {Table.Name.ToLower()}Repository
+                            .Count();
 
             //Re-render the page
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -397,7 +395,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
@@ -405,64 +403,61 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
     }}
 
-    async Task OnPreviousPage()
+    private async Task OnPreviousPage()
     {{
         if (paginated{Table.Name}DTO.HasPreviousPage)
         {{
-            paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+            paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                         .GetAllBy{Table.Name}IdPaginated(
                                             TextToSearch,
                                             checkStrict,
                                             (paginated{Table.Name}DTO.PageIndex - 1),
-                                            paginated{Table.Name}DTO.PageSize,
-                                            CancellationToken.None);
+                                            paginated{Table.Name}DTO.PageSize);
         }}
 
-        TotalRows = await {Table.Name.ToLower()}Repository
-                            .Count(CancellationToken.None);
+        TotalRows = {Table.Name.ToLower()}Repository
+                            .Count();
 
         //Re-render the page
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
     }}
 
-    async Task OnPageSelected(int pageIndex)
+    private async Task OnPageSelected(int pageIndex)
     {{
-        paginated{Table.Name}DTO = paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
-                                                        .GetAllBy{Table.Name}IdPaginated(
-                                                            TextToSearch,
-                                                            checkStrict,
-                                                            pageIndex,
-                                                            paginated{Table.Name}DTO.PageSize,
-                                                            CancellationToken.None);
+        paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
+                                            .GetAllBy{Table.Name}IdPaginated(
+                                                TextToSearch,
+                                                checkStrict,
+                                                pageIndex,
+                                                paginated{Table.Name}DTO.PageSize);
 
-        TotalRows = await {Table.Name.ToLower()}Repository
-                            .Count(CancellationToken.None);
+        TotalRows = {Table.Name.ToLower()}Repository
+                        .Count();
 
         //Re-render the page
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
     }}
 
-    async Task OnNextPage()
+    private async Task OnNextPage()
     {{
         if (paginated{Table.Name}DTO.HasNextPage)
         {{
-            paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+            paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                         .GetAllBy{Table.Name}IdPaginated(
                                             TextToSearch,
                                             checkStrict,
                                             (paginated{Table.Name}DTO.PageIndex + 1),
-                                            paginated{Table.Name}DTO.PageSize,
-                                            CancellationToken.None);
+                                            paginated{Table.Name}DTO.PageSize);
         }}
 
-        TotalRows = await {Table.Name.ToLower()}Repository
-                            .Count(CancellationToken.None);
+        TotalRows = {Table.Name.ToLower()}Repository
+                            .Count();
 
         //Re-render the page
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
     }}
 
-    private async void ChangeView(string chosenView)
+    private async Task ChangeView(string chosenView)
     {{
         ChosenView = chosenView;
 
@@ -470,22 +465,21 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
     }}
 
-    private async void Delete(int {Table.Name.ToLower()}Id)
+    private async Task Delete(int {Table.Name.ToLower()}Id)
     {{
         try
         {{
-            await {Table.Name.ToLower()}Repository.DeleteBy{Table.Name}Id({Table.Name.ToLower()}Id, CancellationToken.None);
+            {Table.Name.ToLower()}Repository.DeleteBy{Table.Name}Id({Table.Name.ToLower()}Id);
 
-            paginated{Table.Name}DTO = await {Table.Name.ToLower()}Repository
+            paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                         .GetAllBy{Table.Name}IdPaginated(
                                             TextToSearch,
                                             checkStrict,
                                             1,
-                                            15, 
-                                            CancellationToken.None);
+                                            15);
 
-            TotalRows = await {Table.Name.ToLower()}Repository
-                                .Count(CancellationToken.None);
+            TotalRows = {Table.Name.ToLower()}Repository
+                                .Count();
 
             TextToSearch = """";
 
@@ -510,7 +504,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
@@ -519,7 +513,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     #endregion
 
     #region Conversions
-    private async void ConvertToExcel()
+    private async Task ConvertToExcel()
     {{
         try
         {{
@@ -539,7 +533,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Properties_ForExcel_Converter_DefineDataColumns}
             #endregion
 
-            dt{Table.Name} = await {Table.Name.ToLower()}Repository.GetAllInDataTable(CancellationToken.None);
+            dt{Table.Name} = {Table.Name.ToLower()}Repository.GetAllInDataTable();
 
             foreach (DataRow DataRow in dt{Table.Name}.Rows)
             {{
@@ -578,22 +572,22 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
                         
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
     }}
 
-    private async void ConvertToCSV()
+    private async Task ConvertToCSV()
     {{
         try
         {{
             //Set initial state
             ErrorMessage = """";
 
-            List<{Table.Name}?> lst{Table.Name} = await {Table.Name.ToLower()}Repository
-                                    .GetAll(CancellationToken.None);
+            List<{Table.Name}?> lst{Table.Name} = {Table.Name.ToLower()}Repository
+                                    .GetAll();
 
             DownloadPathForCSV = $@""wwwroot/Downloads/CSVFiles/{{DateTime.Now.ToString(""yyyy_MM_dd_HH_mm_ss_fff"")}}.csv"";
 
@@ -628,14 +622,14 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
             
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
     }}
 
-    private async void ConvertToPDF()
+    private async Task ConvertToPDF()
     {{
         try
         {{
@@ -646,8 +640,8 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             var Renderer = new HtmlToPdf();
             string RowsAsHTML = """";
 
-            List<{Table.Name}?> lst{Table.Name} = await {Table.Name.ToLower()}Repository
-                                    .GetAll(CancellationToken.None);
+            List<{Table.Name}> lst{Table.Name} = {Table.Name.ToLower()}Repository
+                                    .GetAll();
 
             DownloadPathForPDF = $@""wwwroot/Downloads/PDFFiles/{{DateTime.Now.ToString(""yyyy_MM_dd_HH_mm_ss_fff"")}}.pdf"";
 
@@ -660,11 +654,11 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     <tr>
     <td align=""""left"""" valign=""""top"""">
         <font face=""""'Source Sans Pro', sans-serif"""" color=""""#1a1a1a"""" style=""""font-size: 52px; line-height: 55px; font-weight: 300; letter-spacing: -1.5px;"""">
-            <span style=""""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #1a1a1a; font-size: 52px; line-height: 55px; font-weight: 300; letter-spacing: -1.5px;"""">Mikromatica</span>
+            <span style=""""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #1a1a1a; font-size: 52px; line-height: 55px; font-weight: 300; letter-spacing: -1.5px;"""">{{ProjectName}}</span>
         </font>
         <div style=""""height: 25px; line-height: 25px; font-size: 23px;"""">&nbsp;</div>
         <font face=""""'Source Sans Pro', sans-serif"""" color=""""#4c4c4c"""" style=""""font-size: 36px; line-height: 45px; font-weight: 300; letter-spacing: -1px;"""">
-            <span style=""""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #4c4c4c; font-size: 36px; line-height: 45px; font-weight: 300; letter-spacing: -1px;"""">Registers of {Table.Name}</span>
+            <span style=""""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #4c4c4c; font-size: 36px; line-height: 45px; font-weight: 300; letter-spacing: -1px;"""">Registers of {{Table}}</span>
         </font>
         <div style=""""height: 35px; line-height: 35px; font-size: 33px;"""">&nbsp;</div>
     </td>
@@ -708,7 +702,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 StackTrace = ex.StackTrace
             }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             ErrorMessage = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";

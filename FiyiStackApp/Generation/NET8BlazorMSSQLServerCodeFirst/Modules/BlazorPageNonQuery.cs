@@ -91,9 +91,9 @@ else
 
 @code {{
     #region Properties
-    public List<Menu?> lstMenuResult {{ get; set; }}
+    public List<Menu> lstMenuResult {{ get; set; }} = [];
 
-    public List<Role?> lstRole {{ get; set; }}
+    public List<Role> lstRole {{ get; set; }} = [];
 
     [Parameter]
     public int {Table.Name}Id {{ get; set; }}
@@ -101,14 +101,14 @@ else
     public string MessageForForm {{ get; set; }} = """";
 
     [SupplyParameterFromForm]
-    public {Table.Name}? {Table.Name} {{ get; set; }}
+    public {Table.Name} {Table.Name} {{ get; set; }} = new();
 
-    public User? User {{ get; set; }}
+    public User User {{ get; set; }} = new();
 
     {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ProgressBarForFile_BlazorNonQueryPage}
     #endregion
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {{
         try
         {{
@@ -124,13 +124,13 @@ else
                 {{
                     //Logged user
 
-                    List<Menu?> lstMenu = await menuRepository
-                                        .GetAll(CancellationToken.None);
+                    List<Menu> lstMenu = menuRepository
+                                        .GetAll();
 
-                    lstMenuResult = await rolemenuRepository
+                    lstMenuResult = rolemenuRepository
                                         .GetAllByRoleId(User.RoleId, lstMenu);
 
-                    lstRole = await roleRepository.GetAll(CancellationToken.None);
+                    lstRole = roleRepository.GetAll();
 
                     if ({Table.Name}Id == 0)
                     {{
@@ -139,10 +139,10 @@ else
                     }}
                     else
                     {{
-                        //Edit user
-                        //Populate user data
+                        //Edit {Table.Name}
+                        
                         {Table.Name} = await {Table.Name.ToLower()}Repository
-                                    .GetBy{Table.Name}Id({Table.Name}Id, CancellationToken.None);
+                                    .GetBy{Table.Name}Id({Table.Name}Id);
                     }}
                 }}
                 else
@@ -176,14 +176,14 @@ else
                     StackTrace = ex.StackTrace
                 }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             MessageForForm = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";
         }}
     }}
 
-    private async void Submit()
+    private async Task Submit()
     {{
         try
         {{
@@ -195,16 +195,16 @@ else
                 {Table.Name}.DateTimeCreation = DateTime.Now;
                 {Table.Name}.DateTimeLastModification = DateTime.Now;
 
-                await {Table.Name.ToLower()}Repository
-                        .Add({Table.Name}, CancellationToken.None);
+                {Table.Name.ToLower()}Repository
+                        .Add({Table.Name});
             }}
             else
             {{
                 //Update data
                 {Table.Name}.DateTimeLastModification = DateTime.Now;
 
-                await {Table.Name.ToLower()}Repository
-                            .Update({Table.Name}, CancellationToken.None);
+                {Table.Name.ToLower()}Repository
+                            .Update({Table.Name});
             }}
 
             //Redirect to users page
@@ -226,7 +226,7 @@ else
                     StackTrace = ex.StackTrace
                 }};
 
-            await failureRepository.Add(failure, CancellationToken.None);
+            failureRepository.Add(failure);
 
             MessageForForm = $@""There was a mistake. Try again.
                              Error message: {{ex.Message}}"";

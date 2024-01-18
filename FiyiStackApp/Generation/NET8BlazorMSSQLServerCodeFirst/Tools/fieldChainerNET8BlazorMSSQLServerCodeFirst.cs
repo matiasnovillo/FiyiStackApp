@@ -291,9 +291,8 @@ $@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
                     case 10: //DateTime
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
-        public DateTime 
-                        {field.Name} {{ get; set; }}
+$@"[Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+        public DateTime {field.Name} {{ get; set; }}
 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
@@ -677,7 +676,7 @@ $@"//{field.Name}
                                class=""input-group input-group-static"">
                             {field.Name}
                         </label>
-                        <Input{field.Name} type=""file""
+                        <InputFile type=""file""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
                                {(field.Nullable == true ? "" : "required")}
