@@ -729,7 +729,16 @@ $@"//{field.Name}
 
             FileStream.Close();
 
-            {Table.Name}!.{field.Name} = path;
+            string Limitator = ""\\wwwroot"";
+            int StartIndex = path.IndexOf(Limitator);
+            string Result = """";
+
+            if (StartIndex != -1)
+            {{
+                Result = path.Substring(StartIndex + Limitator.Length);
+            }}
+
+            {Table.Name}!.{field.Name} = Result;
 
             ProgressPercentFor{field.Name} = 100;
             ProgressBarColourFor{field.Name} = ""bg-success"";
