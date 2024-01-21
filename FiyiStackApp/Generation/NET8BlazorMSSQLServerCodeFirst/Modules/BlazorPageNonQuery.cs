@@ -145,7 +145,7 @@ else
                     {{
                         //Edit {Table.Name}
                         
-                        {Table.Name} = await {Table.Name.ToLower()}Repository
+                        {Table.Name} = {Table.Name.ToLower()}Repository
                                     .GetBy{Table.Name}Id({Table.Name}Id);
                     }}
                 }}

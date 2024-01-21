@@ -60,7 +60,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             catch (Exception) {{ throw; }}
         }}
 
-        public List<{Table.Name}?> GetAll(CancellationToken cancellationToken)
+        public List<{Table.Name}?> GetAll()
         {{
             try
             {{

@@ -23,29 +23,28 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         IQueryable<{Table.Name}> AsQueryable();
 
         #region Queries
-        int Count(CancellationToken cancellationToken);
+        int Count();
 
-        {Table.Name}? GetBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
+        {Table.Name}? GetBy{Table.Name}Id(int {Table.Name.ToLower()}Id);
 
-        List<{Table.Name}?> GetAll(CancellationToken cancellationToken);
+        List<{Table.Name}?> GetAll();
 
         paginated{Table.Name}DTO GetAllBy{Table.Name}IdPaginated(string textToSearch,
             bool strictSearch,
             int pageIndex,
-            int pageSize,
-            CancellationToken cancellationToken);
+            int pageSize);
         #endregion
 
         #region Non-Queries
-        bool Add({Table.Name} test, CancellationToken cancellationToken);
+        bool Add({Table.Name} {Table.Name.ToLower()});
 
-        bool Update({Table.Name} test, CancellationToken cancellationToken);
+        bool Update({Table.Name} {Table.Name.ToLower()});
 
-        bool DeleteBy{Table.Name}Id(int testId, CancellationToken cancellationToken);
+        bool DeleteBy{Table.Name}Id(int {Table.Name.ToLower()});
         #endregion
 
         #region Other methods
-        DataTable GetAllInDataTable(CancellationToken cancellationToken);
+        DataTable GetAllInDataTable();
         #endregion
     }}
 }}
