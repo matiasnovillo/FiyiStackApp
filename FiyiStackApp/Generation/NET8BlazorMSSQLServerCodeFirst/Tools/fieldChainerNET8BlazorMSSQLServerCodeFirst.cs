@@ -454,7 +454,39 @@ $@"//{field.Name}
                         break;
                     case 16: //Text: TextEditor 
 
-                        throw new Exception("The TextEditor property is not allowed in this generator");
+                        PropertiesInHTML_BlazorNonQueryPage += $@"
+                    <!--{field.Name}-->
+                    <div class=""mb-3"">
+                        <label for=""quill-editor-{field.Name.ToLower()}""
+                               class=""input-group input-group-static"">
+                            {field.Name}
+                        </label>
+                        <div id=""quill-editor-{field.Name.ToLower()}"">
+                        </div>
+                        <button id=""button-quill-conversion-{field.Name.ToLower()}""
+                        type=""button""
+                        class=""btn btn-outline-primary my-2"">
+                            Convert to HTML
+                        </button>
+                        <input type=""text""
+                               id=""quill-result-{field.Name.ToLower()}""
+                               class=""form-control""
+                               {(field.Nullable == true ? "" : "required")}
+                               @bind=""{Table.Name}!.{field.Name}"" />
+                    </div>
+                    <link rel=""stylesheet"" href=""assets/vendor/quill/dist/quill.snow.css"">
+                    <script type=""text/javascript"">
+                        var quilleditor{field.Name.ToLower()} = new Quill(""#quill-editor-{field.Name.ToLower()}"", {{
+                            theme: ""snow""
+                        }});
+
+                        $(""#button-quill-conversion-{field.Name.ToLower()}"").on(""click"", function () {{
+                            var html{field.Name.ToLower()} = quilleditor{field.Name.ToLower()}.root.innerHTML;
+                            $(""#quill-result-{field.Name.ToLower()}"").val(html{field.Name.ToLower()})
+                        }});
+                    </script>
+                    <script src=""assets/vendor/quill/dist/quill.min.js""></script>
+                    ";
 
                         break;
                     case 17: //Text: Password
