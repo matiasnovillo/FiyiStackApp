@@ -477,8 +477,39 @@ $@"//{field.Name}
                     <link rel=""stylesheet"" href=""assets/vendor/quill/dist/quill.snow.css"">
                     <script type=""text/javascript"">
                         var quilleditor{field.Name.ToLower()} = new Quill(""#quill-editor-{field.Name.ToLower()}"", {{
-                            theme: ""snow""
+                            theme: 'snow',
+                            modules: {{
+                                toolbar: {{
+                                    container: [
+                                        [{{ header: [1, 2, 3, 4, 5, 6, false] }}],
+                                        [""bold"", ""italic"", ""underline"", ""strike""],
+                                        [{{ list: ""ordered"" }}, {{ list: ""bullet"" }}],
+                                        [""link"", ""image"", ""video""],
+                                        [""clean""]
+                                    ],
+                                    handlers: {{
+                                        image: imageHandler{field.Name},
+                                        video: videoHandler{field.Name}
+                                    }}
+                                }}
+                            }}
                         }});
+
+                        function imageHandler{field.Name}() {{
+                            var range = this.quill.getSelection();
+                            var value = prompt('Por favor, ingrese la URL de la imagen');
+                            if (value) {{
+                                this.quill.insertEmbed(range.index, 'image', value, Quill.sources.USER);
+                            }}
+                        }}
+
+                        function videoHandler{field.Name}() {{
+                            var range = this.quill.getSelection();
+                            var value = prompt('Por favor, ingrese la URL del video');
+                            if (value) {{
+                                this.quill.insertEmbed(range.index, 'video', value, Quill.sources.USER);
+                            }}
+                        }}
 
                         $(""#button-quill-conversion-{field.Name.ToLower()}"").on(""click"", function () {{
                             var html{field.Name.ToLower()} = quilleditor{field.Name.ToLower()}.root.innerHTML;
