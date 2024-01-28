@@ -515,6 +515,10 @@ $@"//{field.Name}
                             var html{field.Name.ToLower()} = quilleditor{field.Name.ToLower()}.root.innerHTML;
                             $(""#quill-result-{field.Name.ToLower()}"").val(html{field.Name.ToLower()})
                         }});
+
+                        $(document).ready(function () {{
+                            quilleditor{field.Name.ToLower()}.container.childNodes[0].innerHTML = quilleditor{field.Name.ToLower()}.getText();
+                        }});
                     </script>
                     <script src=""assets/vendor/quill/dist/quill.min.js""></script>
                     ";
