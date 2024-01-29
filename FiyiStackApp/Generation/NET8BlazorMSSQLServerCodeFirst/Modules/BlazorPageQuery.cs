@@ -44,8 +44,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 </NavLink>
             </div>
             <div class=""card-body px-0"">
-                <p class=""mb-3 text-danger"">@ErrorMessage</p>
-                <p class=""mb-3 text-success"">@SuccessMessage</p>
+                @((MarkupString)Message)
                 <div class=""row"">
                     <div class=""col-12 col-md-4"">
                         <!--Searchbox-->
@@ -262,9 +261,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
     public string TextToSearch {{ get; set; }} = """";
 
-    public string ErrorMessage {{ get; set; }} = """";
-
-    public string SuccessMessage {{ get; set; }} = """";
+    public string Message {{ get; set; }} = """";
 
     public bool ShowDownloadButtonForExcel {{ get; set; }}
     public bool ShowDownloadButtonForPDF {{ get; set; }}
@@ -354,8 +351,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
 
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
 
     }}
@@ -366,7 +364,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         try
         {{
             //Basic configuration
-            SuccessMessage = """";
+            Message = """";
 
             TextToSearch = args.Value.ToString();
 
@@ -401,8 +399,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
 
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
 
     }}
@@ -487,7 +486,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             TextToSearch = """";
 
-            SuccessMessage = ""Register deleted correctly"";
+            Message = $@""<div class=""""alert alert-success text-white font-weight-bold"""" role=""""alert"""">
+                                Register deleted correctly
+                            </div>"";
 
             //Re-render the page
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -510,8 +511,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
 
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
     }}
     #endregion
@@ -522,7 +524,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         try
         {{
             //Set initial state
-            ErrorMessage = """";
+            Message = """";
 
             using var Book = new XLWorkbook();
 
@@ -578,8 +580,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
                         
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
     }}
 
@@ -588,7 +591,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         try
         {{
             //Set initial state
-            ErrorMessage = """";
+            Message = """";
 
             List<{Table.Name}?> lst{Table.Name} = {Table.Name.ToLower()}Repository
                                     .GetAll();
@@ -628,8 +631,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
             
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
     }}
 
@@ -638,7 +642,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         try
         {{
             //Set initial state
-            ErrorMessage = """";
+            Message = """";
             string ProjectName = ""{GeneratorConfigurationComponent.ProjectChosen.Name}"";
             string Table = ""{Table.Name}"";
             var Renderer = new HtmlToPdf();
@@ -708,8 +712,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
             failureRepository.Add(failure);
 
-            ErrorMessage = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
 
     }}

@@ -30,10 +30,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesForEntityConfiguration}
             }}
-            catch (Exception)
-            {{
-                throw;
-            }}
+            catch (Exception) {{ throw; }}
         }}
     }}
 }}

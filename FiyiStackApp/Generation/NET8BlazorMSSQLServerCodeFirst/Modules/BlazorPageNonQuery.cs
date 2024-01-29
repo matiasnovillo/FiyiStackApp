@@ -76,12 +76,7 @@ else
                         &nbsp;Go back
                     </NavLink>
                 </form>
-                @if (MessageForForm != """")
-                {{
-                    <span class=""text-danger"">
-                        @((MarkupString)MessageForForm)
-                    </span>
-                }}
+                @((MarkupString)MessageForForm)
             </div>
         </div>
     </div>
@@ -182,8 +177,9 @@ else
 
             failureRepository.Add(failure);
 
-            MessageForForm = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            MessageForForm = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
     }}
 
@@ -232,8 +228,9 @@ else
 
             failureRepository.Add(failure);
 
-            MessageForForm = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            MessageForForm = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
         }}
         finally
         {{
