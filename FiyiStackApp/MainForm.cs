@@ -1085,7 +1085,7 @@ namespace FiyiStackApp
                     }
                 }
 
-                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} | Table: | Field: ";
+                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} ({Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId}) | Table: | Field: ";
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
         }
@@ -1100,12 +1100,12 @@ namespace FiyiStackApp
                     {
                         if (ListViewTable.Items[i].ImageIndex != 3) //It is not allowed to delete external tables. First, import them.
                         {
-                            Models.Core.Table Table = new Models.Core.Table(Convert.ToInt32(ListViewTable.Items[i].Tag));
+                            Table Table = new Table(Convert.ToInt32(ListViewTable.Items[i].Tag));
                             //First, delete the Table inside FiyiStack
                             Table.DeleteByTableId(Convert.ToInt32(ListViewTable.Items[i].Tag));
 
                             //Second, delete all the Fields inside FiyiStack associated to that table
-                            Models.Core.Field Field = new Models.Core.Field();
+                            Field Field = new Field();
                             Field.DeleteByTableId(Convert.ToInt32(ListViewTable.Items[i].Tag));
 
                             LoadTables();
@@ -1128,7 +1128,7 @@ namespace FiyiStackApp
 
         private void AddTableButton_Click(object sender, EventArgs e)
         {
-            Models.Core.Table Table = new Models.Core.Table();
+            Table Table = new();
             Program.WinFormConfigurationComponent.TableChosen = Table;
             PropertyGridTable.SelectedObject = Program.WinFormConfigurationComponent.TableChosen;
 
@@ -1171,7 +1171,7 @@ namespace FiyiStackApp
                     }
                 }
 
-                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} | Table: {Program.WinFormConfigurationComponent.TableChosen.Name} | Field: ";
+                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} ({Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId}) | Table: {Program.WinFormConfigurationComponent.TableChosen.Name} ({Program.WinFormConfigurationComponent.TableChosen.TableId}) | Field: ";
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
         }
@@ -1745,7 +1745,7 @@ namespace FiyiStackApp
                         throw new Exception($"The field have a Data Type not recognized");
                 }
 
-                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} | Table: {Program.WinFormConfigurationComponent.TableChosen.Name} | Field: {Program.WinFormConfigurationComponent.FieldChosen.Name}";
+                lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} ({Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId}) | Table: {Program.WinFormConfigurationComponent.TableChosen.Name} ({Program.WinFormConfigurationComponent.TableChosen.TableId}) | Field: {Program.WinFormConfigurationComponent.FieldChosen.Name} ({Program.WinFormConfigurationComponent.FieldChosen.FieldId})";
 
                 lblMessageDockedBottom.Text = Program.WinFormConfigurationComponent.FieldChosen.Name + " loaded";
             }

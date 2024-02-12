@@ -148,9 +148,7 @@ $@"//{field.Name}
 
                 ";
 
-                        if (field.Name != "Active")
-                        {
-                            PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
 {{
     <td>
         <span class=""badge rounded-pill bg-success"">ON</span>
@@ -164,7 +162,7 @@ else
 }}
                                         ";
 
-                            PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
 {{
     <p>
         <b>{field.Name}: </b>
@@ -184,7 +182,7 @@ else
 }}
                                         ";
 
-                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
                     <div class=""form-check form-switch"">
                         <input class=""form-check-input""
                                type=""checkbox""
@@ -197,6 +195,10 @@ else
                         </label>
                     </div>
                     ";
+
+                        if (field.Name != "Active")
+                        {
+                            
                         }
                         break;
                     case 5: //Text: Basic
@@ -453,6 +455,25 @@ $@"//{field.Name}
 
                         break;
                     case 16: //Text: TextEditor 
+
+                        PropertiesForEntity +=
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+        public string? {field.Name} {{ get; set; }}
+";
+
+                        PropertiesForEntityConfiguration +=
+$@"//{field.Name}
+                entity.Property(e => e.{field.Name})
+                    .HasColumnType(""text"")
+                    .IsRequired({(field.Nullable == true ? "false" : "true")});
+
+                ";
+
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                                        ";
+
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</div>
+                                        ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"
                     <!--{field.Name}-->

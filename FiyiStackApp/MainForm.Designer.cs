@@ -1275,7 +1275,7 @@ namespace FiyiStackApp
             this.PanelTable.Controls.Add(this.ListViewTable);
             this.PanelTable.Controls.Add(this.btnAddTable);
             this.PanelTable.Controls.Add(this.btnDeleteTables);
-            this.PanelTable.Location = new System.Drawing.Point(815, 535);
+            this.PanelTable.Location = new System.Drawing.Point(818, 511);
             this.PanelTable.Margin = new System.Windows.Forms.Padding(4);
             this.PanelTable.Name = "PanelTable";
             this.PanelTable.Size = new System.Drawing.Size(969, 589);
