@@ -140,7 +140,7 @@ namespace FiyiStackApp
             this.PanelProject = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchYourProjectByName = new System.Windows.Forms.TextBox();
-            this.ListViewYourProjects = new System.Windows.Forms.ListView();
+            this.ListViewProjects = new System.Windows.Forms.ListView();
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDeleteYourProjects = new System.Windows.Forms.PictureBox();
             this.PropertyGridProject = new System.Windows.Forms.PropertyGrid();
@@ -299,7 +299,7 @@ namespace FiyiStackApp
             this.opcionesToolStripMenuItem});
             this.MenuStripDockedTop.Location = new System.Drawing.Point(0, 0);
             this.MenuStripDockedTop.Name = "MenuStripDockedTop";
-            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 28);
+            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 30);
             this.MenuStripDockedTop.TabIndex = 16;
             this.MenuStripDockedTop.Text = "menuStrip1";
             // 
@@ -310,7 +310,7 @@ namespace FiyiStackApp
             this.volverAProyectosToolStripMenuItem});
             this.opcionesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Window;
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
             this.opcionesToolStripMenuItem.Text = "Options";
             // 
             // cambiarDatosDeUsuarioToolStripMenuItem
@@ -331,22 +331,21 @@ namespace FiyiStackApp
             // PanelDockedLeft
             // 
             this.PanelDockedLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 28);
+            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 30);
             this.PanelDockedLeft.Name = "PanelDockedLeft";
-            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 781);
+            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 779);
             this.PanelDockedLeft.TabIndex = 17;
             // 
             // PanelDockedCenter
             // 
             this.PanelDockedCenter.Controls.Add(this.PanelGenerator);
-            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.lblSubtitle);
             this.PanelDockedCenter.Controls.Add(this.lblTitle);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
+            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 30);
             this.PanelDockedCenter.Name = "PanelDockedCenter";
-            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 781);
+            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 779);
             this.PanelDockedCenter.TabIndex = 19;
             // 
             // PanelGenerator
@@ -366,7 +365,7 @@ namespace FiyiStackApp
             this.PanelSummary.Controls.Add(this.TextBoxLogger);
             this.PanelSummary.Controls.Add(this.btnHidePanelSummary);
             this.PanelSummary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PanelSummary.Location = new System.Drawing.Point(1062, 332);
+            this.PanelSummary.Location = new System.Drawing.Point(1046, 336);
             this.PanelSummary.Margin = new System.Windows.Forms.Padding(4);
             this.PanelSummary.Name = "PanelSummary";
             this.PanelSummary.Size = new System.Drawing.Size(969, 589);
@@ -1705,12 +1704,12 @@ namespace FiyiStackApp
             // 
             this.PanelProject.Controls.Add(this.label1);
             this.PanelProject.Controls.Add(this.txtSearchYourProjectByName);
-            this.PanelProject.Controls.Add(this.ListViewYourProjects);
+            this.PanelProject.Controls.Add(this.ListViewProjects);
             this.PanelProject.Controls.Add(this.btnDeleteYourProjects);
             this.PanelProject.Controls.Add(this.PropertyGridProject);
             this.PanelProject.Controls.Add(this.btnNewOrEdit);
             this.PanelProject.Controls.Add(this.btnNewProject);
-            this.PanelProject.Location = new System.Drawing.Point(1023, 762);
+            this.PanelProject.Location = new System.Drawing.Point(120, 88);
             this.PanelProject.Name = "PanelProject";
             this.PanelProject.Size = new System.Drawing.Size(1195, 624);
             this.PanelProject.TabIndex = 20;
@@ -1741,34 +1740,34 @@ namespace FiyiStackApp
             this.txtSearchYourProjectByName.BackColorChanged += new System.EventHandler(this.txtSearchYourProjectByName_BackColorChanged);
             this.txtSearchYourProjectByName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchYourProjectByName_KeyDown);
             // 
-            // ListViewYourProjects
+            // ListViewProjects
             // 
-            this.ListViewYourProjects.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.ListViewYourProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(42)))));
-            this.ListViewYourProjects.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListViewYourProjects.CheckBoxes = true;
-            this.ListViewYourProjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewProjects.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.ListViewProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(42)))));
+            this.ListViewProjects.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewProjects.CheckBoxes = true;
+            this.ListViewProjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName});
-            this.ListViewYourProjects.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ListViewYourProjects.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ListViewYourProjects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.ListViewYourProjects.FullRowSelect = true;
-            this.ListViewYourProjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.ListViewYourProjects.HideSelection = false;
-            this.ListViewYourProjects.Location = new System.Drawing.Point(112, 95);
-            this.ListViewYourProjects.Margin = new System.Windows.Forms.Padding(4);
-            this.ListViewYourProjects.MultiSelect = false;
-            this.ListViewYourProjects.Name = "ListViewYourProjects";
-            this.ListViewYourProjects.ShowGroups = false;
-            this.ListViewYourProjects.ShowItemToolTips = true;
-            this.ListViewYourProjects.Size = new System.Drawing.Size(473, 471);
-            this.ListViewYourProjects.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.ListViewYourProjects.TabIndex = 24;
-            this.ListViewYourProjects.TileSize = new System.Drawing.Size(50, 50);
-            this.ListViewYourProjects.UseCompatibleStateImageBehavior = false;
-            this.ListViewYourProjects.View = System.Windows.Forms.View.SmallIcon;
-            this.ListViewYourProjects.ItemActivate += new System.EventHandler(this.ListViewYourProjects_ItemActivate);
-            this.ListViewYourProjects.BackColorChanged += new System.EventHandler(this.ListViewYourProjects_BackColorChanged);
+            this.ListViewProjects.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ListViewProjects.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListViewProjects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
+            this.ListViewProjects.FullRowSelect = true;
+            this.ListViewProjects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.ListViewProjects.HideSelection = false;
+            this.ListViewProjects.Location = new System.Drawing.Point(112, 95);
+            this.ListViewProjects.Margin = new System.Windows.Forms.Padding(4);
+            this.ListViewProjects.MultiSelect = false;
+            this.ListViewProjects.Name = "ListViewProjects";
+            this.ListViewProjects.ShowGroups = false;
+            this.ListViewProjects.ShowItemToolTips = true;
+            this.ListViewProjects.Size = new System.Drawing.Size(473, 471);
+            this.ListViewProjects.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.ListViewProjects.TabIndex = 24;
+            this.ListViewProjects.TileSize = new System.Drawing.Size(50, 50);
+            this.ListViewProjects.UseCompatibleStateImageBehavior = false;
+            this.ListViewProjects.View = System.Windows.Forms.View.SmallIcon;
+            this.ListViewProjects.ItemActivate += new System.EventHandler(this.ListViewYourProjects_ItemActivate);
+            this.ListViewProjects.BackColorChanged += new System.EventHandler(this.ListViewYourProjects_BackColorChanged);
             // 
             // colName
             // 
@@ -1859,7 +1858,7 @@ namespace FiyiStackApp
             this.PanelLogin.Controls.Add(this.btnSeePassword);
             this.PanelLogin.Controls.Add(this.picErrorForFantasyNameOrEmail);
             this.PanelLogin.Controls.Add(this.btnLogin);
-            this.PanelLogin.Location = new System.Drawing.Point(1064, 744);
+            this.PanelLogin.Location = new System.Drawing.Point(1051, 745);
             this.PanelLogin.Name = "PanelLogin";
             this.PanelLogin.Size = new System.Drawing.Size(1195, 624);
             this.PanelLogin.TabIndex = 17;
@@ -1941,6 +1940,7 @@ namespace FiyiStackApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1367, 832);
+            this.Controls.Add(this.PanelProject);
             this.Controls.Add(this.PanelDockedCenter);
             this.Controls.Add(this.PanelDockedLeft);
             this.Controls.Add(this.lblMessageDockedBottom);
@@ -2055,7 +2055,7 @@ namespace FiyiStackApp
         private PictureBox btnNewProject;
         private PropertyGrid PropertyGridProject;
         private PictureBox btnDeleteYourProjects;
-        private ListView ListViewYourProjects;
+        private ListView ListViewProjects;
         private ColumnHeader colName;
         private TextBox txtSearchYourProjectByName;
         private Label label1;

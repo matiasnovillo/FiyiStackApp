@@ -89,6 +89,27 @@ namespace FiyiStackApp.Models.Core
         }
         #endregion
 
+        #region Queries
+        public List<Project> GetAllByUserId(int UserId)
+        {
+            try
+            {
+                Project Project = new();
+                List<Project> lstProject = [];
+                DynamicParameters dp = new();
+                dp.Add("UserId", UserId, DbType.Int32, ParameterDirection.Input);
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionStrings.fiyistac_FiyiStackAppProduction))
+                {
+                    lstProject = (List<Project>)sqlConnection.Query<Project>("[dbo].[Project.GetAllByUserId]", dp, commandType: CommandType.StoredProcedure);
+                }
+
+                return lstProject;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        #endregion
+
         #region Non-Queries
         /// <summary>
         /// 

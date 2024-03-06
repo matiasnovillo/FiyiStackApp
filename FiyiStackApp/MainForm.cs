@@ -32,7 +32,7 @@ namespace FiyiStackApp
             txtFantasyNameOrEmail.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
             txtPassword.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
             txtSearchYourProjectByName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            ListViewYourProjects.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+            ListViewProjects.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
             ListViewDatabase.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
             ListViewTable.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
             ListViewField.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
@@ -166,7 +166,7 @@ namespace FiyiStackApp
 
                         HideAllPanelsExcept(PanelProject);
                         ShowingPanelProject();
-                        LoadYourProjects();
+                        LoadProjects();
                         NewProject();
                     }
 
@@ -195,40 +195,18 @@ namespace FiyiStackApp
             cambiarDatosDeUsuarioToolStripMenuItem.Visible = true;
         }
 
-        private void LoadYourProjects()
+        private void LoadProjects()
         {
-            UserProject UserProject = new UserProject();
-            List<UserProject> _lstUserProject = new List<UserProject>();
-            _lstUserProject = UserProject.GetAllByUserIdByProjectNameByAccessTypeIdToModel(Program.WinFormConfigurationComponent.UserLogged.UserId, txtSearchYourProjectByName.Text, 0);
-            ListViewYourProjects.Items.Clear();
-            Program.WinFormConfigurationComponent.lstYourFiyiStackProjects.Clear();
-            int i = 0;
-            foreach (var userproject in _lstUserProject)
+            ListViewProjects.Items.Clear();
+
+            List<Project> lstProject = new Project()
+                .GetAllByUserId(Program.WinFormConfigurationComponent.UserLogged.UserId);
+
+            foreach (Project project in lstProject)
             {
-                Project Project = new Project(userproject.ProjectId);
-                ListViewItem lvi = new ListViewItem(Project.Name);
-                lvi.Tag = Project.ProjectId;
-
-                if (userproject.AccessTypeId == 1)  //Private
-                {
-                    lvi.ImageIndex = 0;
-                    ListViewYourProjects.Items.Add(lvi);
-                }
-                if (userproject.AccessTypeId == 2)  //With link invitation
-                {
-                    lvi.ImageIndex = 1;
-                    ListViewYourProjects.Items.Add(lvi);
-                }
-                if (userproject.AccessTypeId == 3)  //Public
-                {
-                    lvi.ImageIndex = 2;
-                    ListViewYourProjects.Items.Add(lvi);
-                }
-                i += 1;
-
-                Program.WinFormConfigurationComponent.lstYourFiyiStackProjects.Add(Project);
+                Program.WinFormConfigurationComponent.lstProject.Add(project);
+                ListViewProjects.Items.Add(project.Name);
             }
-            
         }
 
         private void NewProject()
@@ -249,7 +227,7 @@ namespace FiyiStackApp
 
         private void txtSearchYourProjectByName_KeyDown(object sender, KeyEventArgs e)
         {
-            LoadYourProjects();
+            LoadProjects();
         }
 
         private void btnNewProject_Click(object sender, EventArgs e)
@@ -261,14 +239,11 @@ namespace FiyiStackApp
         {
             try
             {
-                for (int i = 0; i < ListViewYourProjects.Items.Count; i++)
+                for (int i = 0; i < ListViewProjects.Items.Count; i++)
                 {
-                    if (ListViewYourProjects.Items[i].Checked)
+                    if (ListViewProjects.Items[i].Checked)
                     {
-                        UserProject UserProject = new UserProject(Convert.ToInt32(ListViewYourProjects.Items[i].Tag));
-                        UserProject.DeleteByProjectId();
-
-                        Project Project = new Project(Convert.ToInt32(ListViewYourProjects.Items[i].Tag));
+                        Project Project = new Project(Convert.ToInt32(ListViewProjects.Items[i].Tag));
                         Project.DeleteByProjectId();
 
                         List<DataBase> lstDataBase = new DataBase().GetAllByProjectIdToModel(Project.ProjectId);
@@ -292,7 +267,7 @@ namespace FiyiStackApp
                         }
                     }
                 }
-                LoadYourProjects();
+                LoadProjects();
             }
             catch (Exception ex)
             {
@@ -306,35 +281,22 @@ namespace FiyiStackApp
             Cursor = Cursors.WaitCursor;
             btnNewOrEdit.Image = Resources.btnEdit;
 
-            foreach (ListViewItem item in ListViewYourProjects.Items)
+            Project ProjectChosen = new Project();
+            foreach (ListViewItem project in ListViewProjects.Items)
             {
-                LoadOneProjectToEdit(item, "myprojects");
+                if (project.Selected)
+                {
+                    ProjectChosen = Program.WinFormConfigurationComponent.lstProject.Find(projectSaved =>
+                            projectSaved.ProjectId == Convert.ToInt32(project.Tag));
+
+                    //Load Basic panel of selected project
+                    Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
+                    PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
+                }
             }
 
             lblMessageDockedBottom.Text = "Ready";
             Cursor = Cursors.Default;
-        }
-
-        private void LoadOneProjectToEdit(ListViewItem lviWithProjectInformation, string ProjectType)
-        {
-            if (lviWithProjectInformation.Selected)
-            {
-                Project ProjectChosen = new Project();
-                if (ProjectType == "myprojects")
-                {
-                    ProjectChosen = Program.WinFormConfigurationComponent.lstYourFiyiStackProjects.Find(project =>
-                            project.ProjectId == Convert.ToInt32(lviWithProjectInformation.Tag));
-                }
-                else // externalprojects
-                {
-                    ProjectChosen = Program.WinFormConfigurationComponent.lstNotYourFiyiStackProjects.Find(project =>
-                            project.ProjectId == Convert.ToInt32(lviWithProjectInformation.Tag));
-                }
-
-                //Load Basic panel of selected project
-                Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
-                PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
-            }
         }
 
         private void cambiarDatosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -345,140 +307,164 @@ namespace FiyiStackApp
 
         private void btnNewOrEdit_Click(object sender, EventArgs e)
         {
-            LoadPanelGenerator();
-            HideAllPanelsExcept(PanelGenerator);
-            LoadDataBases();
+            try
+            {
+                //Validations
+                Project Project = (Project)PropertyGridProject.SelectedObject;
 
-            #region Load auditing fields in a list 
-            Models.Core.Field ActiveField = new Models.Core.Field()
-            {
-                FieldId = 0,
-                TableId = 0,
-                DataTypeId = 4, //Boolean
-                Name = "Active",
-                Nullable = true,
-                HistoryUser = "For auditing purposes",
-                Regex = "",
-                MinValue = "",
-                MaxValue = "",
-                Active = true,
-                DateTimeCreation = DateTime.Now,
-                DateTimeLastModification = DateTime.Now,
-                UserIdCreation = 1,
-                UserIdLastModification = 1
-            };
-            Models.Core.Field DateTimeCreationField = new Models.Core.Field()
-            {
-                FieldId = 0,
-                TableId = 0,
-                DataTypeId = 10, //DateTime
-                Name = "DateTimeCreation",
-                Nullable = true,
-                HistoryUser = "For auditing purposes",
-                Regex = "",
-                MinValue = new DateTime(1753, 1, 1, 0, 0, 0, 0).ToString("yyyy-MM-ddTHH:mm"),
-                MaxValue = new DateTime(9998, 12, 30, 23, 59, 59, 999).ToString("yyyy-MM-ddTHH:mm"),
-                Active = true,
-                DateTimeCreation = DateTime.Now,
-                DateTimeLastModification = DateTime.Now,
-                UserIdCreation = 1,
-                UserIdLastModification = 1
-            };
-            Models.Core.Field DateTimeLastModificationField = new Models.Core.Field()
-            {
-                FieldId = 0,
-                TableId = 0,
-                DataTypeId = 10, //DateTime
-                Name = "DateTimeLastModification",
-                Nullable = true,
-                HistoryUser = "For auditing purposes",
-                Regex = "",
-                MinValue = new DateTime(1753, 1, 1, 0, 0, 0, 0).ToString("yyyy-MM-ddTHH:mm"),
-                MaxValue = new DateTime(9998, 12, 30, 23, 59, 59, 999).ToString("yyyy-MM-ddTHH:mm"),
-                Active = true,
-                DateTimeCreation = DateTime.Now,
-                DateTimeLastModification = DateTime.Now,
-                UserIdCreation = 1,
-                UserIdLastModification = 1
-            };
-            Models.Core.Field UserCreationIdField = new Models.Core.Field()
-            {
-                FieldId = 0,
-                TableId = 0,
-                DataTypeId = 13, //Foreign Key (Id)
-                Name = "UserCreationId",
-                Nullable = true,
-                HistoryUser = "For auditing purposes",
-                Regex = "",
-                MinValue = "",
-                MaxValue = "",
-                Active = true,
-                DateTimeCreation = DateTime.Now,
-                DateTimeLastModification = DateTime.Now,
-                UserIdCreation = 1,
-                UserIdLastModification = 1
-            };
-            Models.Core.Field UserLastModificationIdField = new Models.Core.Field()
-            {
-                FieldId = 0,
-                TableId = 0,
-                DataTypeId = 13, //Foreign Key (Id)
-                Name = "UserLastModificationId",
-                Nullable = true,
-                HistoryUser = "For auditing purposes",
-                Regex = "",
-                MinValue = "",
-                MaxValue = "",
-                Active = true,
-                DateTimeCreation = DateTime.Now,
-                DateTimeLastModification = DateTime.Now,
-                UserIdCreation = 1,
-                UserIdLastModification = 1
-            };
-            Program.WinFormConfigurationComponent.lstAuditingFields.Add(ActiveField);
-            Program.WinFormConfigurationComponent.lstAuditingFields.Add(DateTimeCreationField);
-            Program.WinFormConfigurationComponent.lstAuditingFields.Add(DateTimeLastModificationField);
-            Program.WinFormConfigurationComponent.lstAuditingFields.Add(UserCreationIdField);
-            Program.WinFormConfigurationComponent.lstAuditingFields.Add(UserLastModificationIdField);
-            #endregion
+                bool flagDuplicated = false;
+                foreach (ListViewItem project in ListViewProjects.Items)
+                {
+                    if (project.Text == Project.Name)
+                    {
+                        flagDuplicated = true;
+                    }
+                }
 
-            #region Default Configuration
-            //Search the Configuration for the selected project
-            Configuration Configuration = new Configuration().GetOneByProjectIdToModel(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
-            if (Configuration.ConfigurationId == 0)
-            {
-                //If Configuration not found create one
-                Configuration = Program.WinFormConfigurationComponent.LoadDefaultConfiguration();
-                Configuration.ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.ProjectId;
-                Configuration.UserCreationId = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                Configuration.UserLastModificationId = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                Configuration.Add();
+                if (flagDuplicated)
+                {
+                    throw new Exception("Ya existe un proyecto guardado con ese nombre");
+                }
+
+                LoadPanelGenerator();
+                HideAllPanelsExcept(PanelGenerator);
+                LoadDataBases();
+
+                #region Load auditing fields in a list 
+                Models.Core.Field ActiveField = new Models.Core.Field()
+                {
+                    FieldId = 0,
+                    TableId = 0,
+                    DataTypeId = 4, //Boolean
+                    Name = "Active",
+                    Nullable = true,
+                    HistoryUser = "For auditing purposes",
+                    Regex = "",
+                    MinValue = "",
+                    MaxValue = "",
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserIdCreation = 1,
+                    UserIdLastModification = 1
+                };
+                Models.Core.Field DateTimeCreationField = new Models.Core.Field()
+                {
+                    FieldId = 0,
+                    TableId = 0,
+                    DataTypeId = 10, //DateTime
+                    Name = "DateTimeCreation",
+                    Nullable = true,
+                    HistoryUser = "For auditing purposes",
+                    Regex = "",
+                    MinValue = new DateTime(1753, 1, 1, 0, 0, 0, 0).ToString("yyyy-MM-ddTHH:mm"),
+                    MaxValue = new DateTime(9998, 12, 30, 23, 59, 59, 999).ToString("yyyy-MM-ddTHH:mm"),
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserIdCreation = 1,
+                    UserIdLastModification = 1
+                };
+                Models.Core.Field DateTimeLastModificationField = new Models.Core.Field()
+                {
+                    FieldId = 0,
+                    TableId = 0,
+                    DataTypeId = 10, //DateTime
+                    Name = "DateTimeLastModification",
+                    Nullable = true,
+                    HistoryUser = "For auditing purposes",
+                    Regex = "",
+                    MinValue = new DateTime(1753, 1, 1, 0, 0, 0, 0).ToString("yyyy-MM-ddTHH:mm"),
+                    MaxValue = new DateTime(9998, 12, 30, 23, 59, 59, 999).ToString("yyyy-MM-ddTHH:mm"),
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserIdCreation = 1,
+                    UserIdLastModification = 1
+                };
+                Models.Core.Field UserCreationIdField = new Models.Core.Field()
+                {
+                    FieldId = 0,
+                    TableId = 0,
+                    DataTypeId = 13, //Foreign Key (Id)
+                    Name = "UserCreationId",
+                    Nullable = true,
+                    HistoryUser = "For auditing purposes",
+                    Regex = "",
+                    MinValue = "",
+                    MaxValue = "",
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserIdCreation = 1,
+                    UserIdLastModification = 1
+                };
+                Models.Core.Field UserLastModificationIdField = new Models.Core.Field()
+                {
+                    FieldId = 0,
+                    TableId = 0,
+                    DataTypeId = 13, //Foreign Key (Id)
+                    Name = "UserLastModificationId",
+                    Nullable = true,
+                    HistoryUser = "For auditing purposes",
+                    Regex = "",
+                    MinValue = "",
+                    MaxValue = "",
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserIdCreation = 1,
+                    UserIdLastModification = 1
+                };
+                Program.WinFormConfigurationComponent.lstAuditingFields.Add(ActiveField);
+                Program.WinFormConfigurationComponent.lstAuditingFields.Add(DateTimeCreationField);
+                Program.WinFormConfigurationComponent.lstAuditingFields.Add(DateTimeLastModificationField);
+                Program.WinFormConfigurationComponent.lstAuditingFields.Add(UserCreationIdField);
+                Program.WinFormConfigurationComponent.lstAuditingFields.Add(UserLastModificationIdField);
+                #endregion
+
+                #region Default Configuration
+                //Search the Configuration for the selected project
+                Configuration Configuration = new Configuration().GetOneByProjectIdToModel(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
+                if (Configuration.ConfigurationId == 0)
+                {
+                    //If Configuration not found create one
+                    Configuration = Program.WinFormConfigurationComponent.LoadDefaultConfiguration();
+                    Configuration.ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.ProjectId;
+                    Configuration.UserCreationId = Program.WinFormConfigurationComponent.UserLogged.UserId;
+                    Configuration.UserLastModificationId = Program.WinFormConfigurationComponent.UserLogged.UserId;
+                    Configuration.Add();
+                }
+                #endregion
+
+                Program.WinFormConfigurationComponent.LoadConfiguration();
+
+                //Load
+                DataBase Database = new();
+                Program.WinFormConfigurationComponent.DataBaseChosen = Database;
+
+                //Load empty PropertyGridDatabase
+                DataBase DataBase = new()
+                {
+                    ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
+                };
+
+                Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
+                PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+
+                btnAddDatabase.Image = Resources.btnNew;
+                lblActionDatabase.Text = "Add";
+
+                volverAProyectosToolStripMenuItem.Visible = true;
+
+                lblMessageDockedBottom.Text = "Project loaded";
+                lblTitle.Text = $@"Project: {Program.WinFormConfigurationComponent.ProjectChosen.Name}";
+                lblSubtitle.Text = $@"Database: | Table: | Field: ";
             }
-            #endregion
-
-            Program.WinFormConfigurationComponent.LoadConfiguration();
-
-            //Load
-            DataBase Database = new();
-            Program.WinFormConfigurationComponent.DataBaseChosen = Database;
-
-            //Load empty PropertyGridDatabase
-            DataBase DataBase = new()
+            catch (Exception ex)
             {
-                ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
-            };
-
-            Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
-            PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
-
-            btnAddDatabase.Image = Resources.btnNew;
-            lblActionDatabase.Text = "Add";
-
-            volverAProyectosToolStripMenuItem.Visible = true;
-
-            lblMessageDockedBottom.Text = "Project loaded";
-            lblTitle.Text = $@"Project: {Program.WinFormConfigurationComponent.ProjectChosen.Name}";
-            lblSubtitle.Text = $@"Database: | Table: | Field: ";
+                lblMessageDockedBottom.Text = ex.Message;
+            }
         }
 
         private void LoadPanelGenerator()
@@ -502,20 +488,6 @@ namespace FiyiStackApp
                     #endregion
 
                     _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.Add();
-
-                    #region Access
-                    UserProject UserProject = new();
-                    UserProject.UserId = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    UserProject.AccessTypeId = 1;
-                    UserProject.ProjectId = _ProjectId;
-                    #endregion
-
-                    UserProject.Active = true;
-                    UserProject.DateTimeCreation = DateTime.Now;
-                    UserProject.DateTimeLastModification = UserProject.DateTimeCreation;
-                    UserProject.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    UserProject.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    UserProject.Add();
                 }
                 else //Edit project
                 {
@@ -533,90 +505,6 @@ namespace FiyiStackApp
 
                     Program.WinFormConfigurationComponent.ProjectChosen.Update();
                     #endregion
-
-                    #region Access
-                    UserProject UserProject = new(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
-                    #endregion
-
-                    #region Delete a UserId that is present in the table but is not present in the listview
-                    if (UserProject.UsersIdThatHasBeenInvited != null && UserProject.UsersIdThatHasBeenInvited != "")
-                    {
-                        //Se pasa el valor de UserProject/UsersIdThatHasBeenInvited a un string temporal para no afectar su valor original
-                        //en las proximas lineas
-                        string tmpUsersIdThatHasBeenInvited = UserProject.UsersIdThatHasBeenInvited;
-                        //Se saca el ; del final para no generar error en las siguientes lineas
-                        tmpUsersIdThatHasBeenInvited = tmpUsersIdThatHasBeenInvited.TrimEnd(';');
-                        string[] strUsersIdThatHasBeenInvited = tmpUsersIdThatHasBeenInvited.Split(';');
-                        bool flagofdeletion1 = true;
-                        foreach (string strUserIdThatHasBeenInvited in strUsersIdThatHasBeenInvited)
-                        {
-                            if (flagofdeletion1)
-                            {
-                                //Ways to delete in a tag column
-                                if (UserProject.UsersIdThatHasBeenInvited == $"{strUserIdThatHasBeenInvited};")
-                                {
-                                    UserProject.UsersIdThatHasBeenInvited = "";
-                                }
-                                else
-                                {
-                                    if (UserProject.UsersIdThatHasBeenInvited.EndsWith($"{strUserIdThatHasBeenInvited};"))
-                                    {
-                                        UserProject.UsersIdThatHasBeenInvited = UserProject.UsersIdThatHasBeenInvited.Replace($"{strUserIdThatHasBeenInvited};", ";");
-                                    }
-                                    else
-                                    {
-                                        if (!UserProject.UsersIdThatHasBeenInvited.EndsWith($"{strUserIdThatHasBeenInvited};"))
-                                        {
-                                            UserProject.UsersIdThatHasBeenInvited = UserProject.UsersIdThatHasBeenInvited.Replace($"{strUserIdThatHasBeenInvited};", "");
-                                        }
-                                    }
-                                }
-                            }
-                            else { flagofdeletion1 = true; } //To reset the flag for the next Items[i]
-                        }
-                    }
-
-                    if (UserProject.UsersIdThatAcceptedInvitation != null && UserProject.UsersIdThatAcceptedInvitation != "")
-                    {
-                        string tmpUsersIdThatAcceptedInvitation = UserProject.UsersIdThatAcceptedInvitation;
-                        tmpUsersIdThatAcceptedInvitation = tmpUsersIdThatAcceptedInvitation.TrimEnd(';');
-                        string[] strUsersIdThatAcceptedInvitation = tmpUsersIdThatAcceptedInvitation.Split(';');
-                        bool flagofdeletion2 = true;
-                        foreach (string strUserIdThatAcceptedInvitation in strUsersIdThatAcceptedInvitation)
-                        {
-                            if (flagofdeletion2)
-                            {
-                                //Ways to delete in a tag column
-                                if (UserProject.UsersIdThatAcceptedInvitation == $"{strUserIdThatAcceptedInvitation};")
-                                {
-                                    UserProject.UsersIdThatAcceptedInvitation = "";
-                                }
-                                else
-                                {
-                                    if (UserProject.UsersIdThatAcceptedInvitation.EndsWith($"{strUserIdThatAcceptedInvitation};"))
-                                    {
-                                        UserProject.UsersIdThatAcceptedInvitation = UserProject.UsersIdThatAcceptedInvitation.Replace($"{strUserIdThatAcceptedInvitation};", ";");
-                                    }
-                                    else
-                                    {
-                                        if (!UserProject.UsersIdThatAcceptedInvitation.EndsWith($"{strUserIdThatAcceptedInvitation};"))
-                                        {
-                                            UserProject.UsersIdThatAcceptedInvitation = UserProject.UsersIdThatAcceptedInvitation.Replace($"{strUserIdThatAcceptedInvitation};", "");
-                                        }
-                                    }
-                                }
-                            }
-                            else { flagofdeletion2 = true; } //To reset the flag for the next Items[i]
-                        }
-                    }
-                    #endregion
-
-                    UserProject.Active = true;
-                    //UserProject.DateTimeCreation = DateTime.Now; NO MODIFICATION
-                    UserProject.DateTimeLastModification = UserProject.DateTimeCreation;
-                    //UserProject.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId; NO MODIFICATION
-                    UserProject.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    UserProject.UpdateByUserProjectId();
                 }
 
                 Program.WinFormConfigurationComponent.ProjectChosen = new Project(_ProjectId);

@@ -13,8 +13,7 @@ namespace FiyiStackApp
         //For all forms
         public User UserLogged = new();
         public Configuration Configuration = new();
-        public List<Project> lstYourFiyiStackProjects = [];
-        public List<Project> lstNotYourFiyiStackProjects = [];
+        public List<Project> lstProject = [];
         public Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
 
         //For LoginForm
@@ -59,7 +58,6 @@ namespace FiyiStackApp
 
         //For GeneratorForm
         public Project ProjectChosen = new();
-        public UserProject UserProjectChosen = new();
 
         public List<DataBase> lstDataBaseInFiyiStack = [];
         public DataBase DataBaseChosen = new();
