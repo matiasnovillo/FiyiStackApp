@@ -197,16 +197,22 @@ namespace FiyiStackApp
 
         private void LoadProjects()
         {
-            ListViewProjects.Items.Clear();
-
-            List<Project> lstProject = new Project()
-                .GetAllByUserId(Program.WinFormConfigurationComponent.UserLogged.UserId);
-
-            foreach (Project project in lstProject)
+            try
             {
-                Program.WinFormConfigurationComponent.lstProject.Add(project);
-                ListViewProjects.Items.Add(project.Name);
+                ListViewProjects.Items.Clear();
+
+                List<Project> lstProject = new Project()
+                    .GetAllByUserId(Program.WinFormConfigurationComponent.UserLogged.UserId);
+
+                foreach (Project project in lstProject)
+                {
+                    Program.WinFormConfigurationComponent.lstProject.Add(project);
+                    ListViewItem item = new(project.Name);
+                    item.Tag = project.ProjectId;
+                    ListViewProjects.Items.Add(item);
+                }
             }
+            catch (Exception) { throw; }
         }
 
         private void NewProject()
@@ -309,29 +315,54 @@ namespace FiyiStackApp
         {
             try
             {
-                //Validations
-                Project Project = (Project)PropertyGridProject.SelectedObject;
+                Cursor = Cursors.WaitCursor;
 
-                bool flagDuplicated = false;
-                foreach (ListViewItem project in ListViewProjects.Items)
+                int _ProjectId = 0;
+                if (Program.WinFormConfigurationComponent.ProjectChosen.ProjectId == 0) //New project
                 {
-                    if (project.Text == Project.Name)
-                    {
-                        flagDuplicated = true;
-                    }
+                    lblMessageDockedBottom.Text = "Creating new project";
+
+                    //Validations
+                    Project Project = new Project().GetOneByName(((Project)PropertyGridProject.SelectedObject).Name);
+                    if (Project.ProjectId != 0) { throw new Exception("The project already exists"); }
+
+                    #region Basic
+                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
+                    Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
+                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now;
+                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation;
+                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId;
+                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
+                    #endregion
+
+                    _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.Add();
+                }
+                else //Edit project
+                {
+                    lblMessageDockedBottom.Text = "Editing project";
+
+                    _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.ProjectId;
+
+                    #region Basic
+                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
+                    Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
+                    //Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now; NO MODIFICATION
+                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = DateTime.Now;
+                    //Program.WinFormConfigurationComponent.ProjectChosen.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId; NO MODIFICATION
+                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
+
+                    Program.WinFormConfigurationComponent.ProjectChosen.Update();
+                    #endregion
                 }
 
-                if (flagDuplicated)
-                {
-                    throw new Exception("Ya existe un proyecto guardado con ese nombre");
-                }
+                Program.WinFormConfigurationComponent.ProjectChosen = new Project(_ProjectId);
+                Cursor = Cursors.Default;
 
-                LoadPanelGenerator();
                 HideAllPanelsExcept(PanelGenerator);
                 LoadDataBases();
 
                 #region Load auditing fields in a list 
-                Models.Core.Field ActiveField = new Models.Core.Field()
+                Field ActiveField = new()
                 {
                     FieldId = 0,
                     TableId = 0,
@@ -348,7 +379,7 @@ namespace FiyiStackApp
                     UserIdCreation = 1,
                     UserIdLastModification = 1
                 };
-                Models.Core.Field DateTimeCreationField = new Models.Core.Field()
+                Field DateTimeCreationField = new()
                 {
                     FieldId = 0,
                     TableId = 0,
@@ -365,7 +396,7 @@ namespace FiyiStackApp
                     UserIdCreation = 1,
                     UserIdLastModification = 1
                 };
-                Models.Core.Field DateTimeLastModificationField = new Models.Core.Field()
+                Field DateTimeLastModificationField = new()
                 {
                     FieldId = 0,
                     TableId = 0,
@@ -382,11 +413,11 @@ namespace FiyiStackApp
                     UserIdCreation = 1,
                     UserIdLastModification = 1
                 };
-                Models.Core.Field UserCreationIdField = new Models.Core.Field()
+                Field UserCreationIdField = new()
                 {
                     FieldId = 0,
                     TableId = 0,
-                    DataTypeId = 13, //Foreign Key (Id)
+                    DataTypeId = 23, //Foreign Key (Id)
                     Name = "UserCreationId",
                     Nullable = true,
                     HistoryUser = "For auditing purposes",
@@ -399,11 +430,11 @@ namespace FiyiStackApp
                     UserIdCreation = 1,
                     UserIdLastModification = 1
                 };
-                Models.Core.Field UserLastModificationIdField = new Models.Core.Field()
+                Field UserLastModificationIdField = new()
                 {
                     FieldId = 0,
                     TableId = 0,
-                    DataTypeId = 13, //Foreign Key (Id)
+                    DataTypeId = 23, //Foreign Key (Id)
                     Name = "UserLastModificationId",
                     Nullable = true,
                     HistoryUser = "For auditing purposes",
@@ -466,54 +497,6 @@ namespace FiyiStackApp
                 lblMessageDockedBottom.Text = ex.Message;
             }
         }
-
-        private void LoadPanelGenerator()
-        {
-            try
-            {
-                Cursor = Cursors.WaitCursor;
-
-                int _ProjectId = 0;
-                if (Program.WinFormConfigurationComponent.ProjectChosen.ProjectId == 0) //New project
-                {
-                    lblMessageDockedBottom.Text = "Creating new project";
-
-                    #region Basic
-                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
-                    Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
-                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now;
-                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation;
-                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
-                    #endregion
-
-                    _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.Add();
-                }
-                else //Edit project
-                {
-                    lblMessageDockedBottom.Text = "Editing project";
-
-                    _ProjectId = Program.WinFormConfigurationComponent.ProjectChosen.ProjectId;
-
-                    #region Basic
-                    Program.WinFormConfigurationComponent.ProjectChosen = (Project)PropertyGridProject.SelectedObject;
-                    Program.WinFormConfigurationComponent.ProjectChosen.Active = true;
-                    //Program.WinFormConfigurationComponent.ProjectChosen.DateTimeCreation = DateTime.Now; NO MODIFICATION
-                    Program.WinFormConfigurationComponent.ProjectChosen.DateTimeLastModification = DateTime.Now;
-                    //Program.WinFormConfigurationComponent.ProjectChosen.UserIdCreation = Program.WinFormConfigurationComponent.UserLogged.UserId; NO MODIFICATION
-                    Program.WinFormConfigurationComponent.ProjectChosen.UserIdLastModification = Program.WinFormConfigurationComponent.UserLogged.UserId;
-
-                    Program.WinFormConfigurationComponent.ProjectChosen.Update();
-                    #endregion
-                }
-
-                Program.WinFormConfigurationComponent.ProjectChosen = new Project(_ProjectId);
-                Cursor = Cursors.Default;
-            }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
-        }
-
-        
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
@@ -915,14 +898,14 @@ namespace FiyiStackApp
                 lblMessageDockedBottom.Text = "Loading";
                 Cursor = Cursors.WaitCursor;
 
-                Models.Core.DataBase DataBase = new Models.Core.DataBase();
+                DataBase DataBase = new();
                 Program.WinFormConfigurationComponent.lstDataBaseInFiyiStack = DataBase.GetAllByProjectIdToModel(Program.WinFormConfigurationComponent.ProjectChosen.ProjectId);
 
                 //Fill listview
                 ListViewDatabase.Clear();
-                foreach (Models.Core.DataBase database in Program.WinFormConfigurationComponent.lstDataBaseInFiyiStack)
+                foreach (DataBase database in Program.WinFormConfigurationComponent.lstDataBaseInFiyiStack)
                 {
-                    ListViewItem lvi = new ListViewItem(database.Name);
+                    ListViewItem lvi = new(database.Name);
                     lvi.Tag = database.DataBaseId;
                     lvi.ImageIndex = 0; //OK 
                     ListViewDatabase.Items.Add(lvi);
@@ -937,9 +920,10 @@ namespace FiyiStackApp
 
         private void picAddDataBase_Click(object sender, EventArgs e)
         {
-            Models.Core.DataBase DataBase = new Models.Core.DataBase();
-
-            DataBase.ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True";
+            DataBase DataBase = new()
+            {
+                ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
+            };
 
             Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
             PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;

@@ -299,7 +299,7 @@ namespace FiyiStackApp
             this.opcionesToolStripMenuItem});
             this.MenuStripDockedTop.Location = new System.Drawing.Point(0, 0);
             this.MenuStripDockedTop.Name = "MenuStripDockedTop";
-            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 30);
+            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 28);
             this.MenuStripDockedTop.TabIndex = 16;
             this.MenuStripDockedTop.Text = "menuStrip1";
             // 
@@ -310,7 +310,7 @@ namespace FiyiStackApp
             this.volverAProyectosToolStripMenuItem});
             this.opcionesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Window;
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.opcionesToolStripMenuItem.Text = "Options";
             // 
             // cambiarDatosDeUsuarioToolStripMenuItem
@@ -331,21 +331,22 @@ namespace FiyiStackApp
             // PanelDockedLeft
             // 
             this.PanelDockedLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 30);
+            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 28);
             this.PanelDockedLeft.Name = "PanelDockedLeft";
-            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 779);
+            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 781);
             this.PanelDockedLeft.TabIndex = 17;
             // 
             // PanelDockedCenter
             // 
+            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.PanelGenerator);
             this.PanelDockedCenter.Controls.Add(this.lblSubtitle);
             this.PanelDockedCenter.Controls.Add(this.lblTitle);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 30);
+            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
             this.PanelDockedCenter.Name = "PanelDockedCenter";
-            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 779);
+            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 781);
             this.PanelDockedCenter.TabIndex = 19;
             // 
             // PanelGenerator
@@ -1596,10 +1597,10 @@ namespace FiyiStackApp
             // 
             this.btnShowConfigurationForm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnShowConfigurationForm.Image = ((System.Drawing.Image)(resources.GetObject("btnShowConfigurationForm.Image")));
-            this.btnShowConfigurationForm.Location = new System.Drawing.Point(0, 448);
+            this.btnShowConfigurationForm.Location = new System.Drawing.Point(0, 457);
             this.btnShowConfigurationForm.Margin = new System.Windows.Forms.Padding(4);
             this.btnShowConfigurationForm.Name = "btnShowConfigurationForm";
-            this.btnShowConfigurationForm.Size = new System.Drawing.Size(169, 56);
+            this.btnShowConfigurationForm.Size = new System.Drawing.Size(129, 47);
             this.btnShowConfigurationForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnShowConfigurationForm.TabIndex = 91;
             this.btnShowConfigurationForm.TabStop = false;
@@ -1709,7 +1710,7 @@ namespace FiyiStackApp
             this.PanelProject.Controls.Add(this.PropertyGridProject);
             this.PanelProject.Controls.Add(this.btnNewOrEdit);
             this.PanelProject.Controls.Add(this.btnNewProject);
-            this.PanelProject.Location = new System.Drawing.Point(120, 88);
+            this.PanelProject.Location = new System.Drawing.Point(15, 88);
             this.PanelProject.Name = "PanelProject";
             this.PanelProject.Size = new System.Drawing.Size(1195, 624);
             this.PanelProject.TabIndex = 20;
@@ -1940,7 +1941,6 @@ namespace FiyiStackApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1367, 832);
-            this.Controls.Add(this.PanelProject);
             this.Controls.Add(this.PanelDockedCenter);
             this.Controls.Add(this.PanelDockedLeft);
             this.Controls.Add(this.lblMessageDockedBottom);

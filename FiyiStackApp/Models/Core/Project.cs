@@ -90,6 +90,47 @@ namespace FiyiStackApp.Models.Core
         #endregion
 
         #region Queries
+        public Project GetOneByName(string Name)
+        {
+            try
+            {
+                Project Project = new();
+                List<Project> lstProject = [];
+                DynamicParameters dp = new();
+                dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionStrings.fiyistac_FiyiStackAppProduction))
+                {
+                    lstProject = (List<Project>)sqlConnection.Query<Project>("[dbo].[Project.GetOneByName]", dp, commandType: CommandType.StoredProcedure);
+                }
+
+                if (lstProject.Count > 1)
+                {
+                    throw new Exception("The stored procedure [dbo].[Project.GetOneByName] returned more than one register/row");
+                }
+
+                foreach (var field in lstProject)
+                {
+                    Project.ProjectId = field.ProjectId;
+                    Project.Name = field.Name;
+                    Project.GeneralHistoryUser = field.GeneralHistoryUser;
+                    Project.PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer;
+                    Project.PathNET6CleanArchitecture = field.PathNET6CleanArchitecture;
+                    Project.PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB;
+                    Project.PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI;
+                    Project.PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst;
+                    Project.Active = field.Active;
+                    Project.UserIdCreation = field.UserIdCreation;
+                    Project.UserIdLastModification = field.UserIdLastModification;
+                    Project.DateTimeCreation = field.DateTimeCreation;
+                    Project.DateTimeLastModification = field.DateTimeLastModification;
+                }
+
+                return Project;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
         public List<Project> GetAllByUserId(int UserId)
         {
             try
