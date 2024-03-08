@@ -1039,118 +1039,68 @@ namespace FiyiStackApp
                 if (Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId == 0) { throw new Exception("Select a database"); }
                 if (Program.WinFormConfigurationComponent.TableChosen.TableId == 0) { throw new Exception("If you want to see the fields of the selected table, you have to import it first"); }
 
-                Models.Core.Field Field = new Models.Core.Field();
+                Field Field = new Field();
                 Program.WinFormConfigurationComponent.lstFieldInFiyiStack = Field.GetAllByTableIdToModel(Program.WinFormConfigurationComponent.TableChosen.TableId);
-
-                //Look for fields created outside FiyiStack
-                List<Models.Core.Field> lstFieldsCreatedOutsideFiyiStack = LoadFieldsCreatedOutsideFiyiStack();
-                if (lstFieldsCreatedOutsideFiyiStack != null)
-                {
-                    bool existfield = false;
-                    foreach (Models.Core.Field fieldcreatedoutsidefiyistack in lstFieldsCreatedOutsideFiyiStack)
-                    {
-                        foreach (Models.Core.Field field in Program.WinFormConfigurationComponent.lstFieldInFiyiStack)
-                        {
-                            if (field.Name == fieldcreatedoutsidefiyistack.Name)
-                            { existfield = true; }
-                        }
-                        if (!existfield)
-                        {
-                            Program.WinFormConfigurationComponent.lstFieldInFiyiStack.Add(fieldcreatedoutsidefiyistack);
-                        }
-                        existfield = false;
-                    }
-                }
 
                 //Fill listview
                 ListViewField.Clear();
-                foreach (Models.Core.Field field in Program.WinFormConfigurationComponent.lstFieldInFiyiStack)
+                foreach (Field field in Program.WinFormConfigurationComponent.lstFieldInFiyiStack)
                 {
-                    ListViewItem lvi = new ListViewItem($"{field.Name}");
-                    lvi.Tag = field.FieldId;
-
-
-                    //Analyze if the Field exist in the DB hosting/Database only if the user provide a ConnectionString
-
-                    FiyiStack.Library.MicrosoftSQLServer.Field MSSQLServerField = new FiyiStack.Library.MicrosoftSQLServer.Field();
-                    if (MSSQLServerField.DoesFieldExist(
-                        Program.WinFormConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
-                        Program.WinFormConfigurationComponent.TableChosen.Area,
-                        Program.WinFormConfigurationComponent.TableChosen.Name,
-                        Program.WinFormConfigurationComponent.TableChosen.Scheme,
-                        field.Name))
+                    ListViewItem lvi = new($"{field.Name}")
                     {
-                        if (field.FieldId != 0)
-                        {
-                            //lvi.ImageIndex = 0; OK 
+                        Tag = field.FieldId,
+                    };
 
-                            //The next lines are to improve the UX of DataTypes
-                            switch (field.DataTypeId)
-                            {
-                                case 3: //Integer
-                                    lvi.ImageIndex = 4;
-                                    break;
-                                case 4: //Boolean
-                                    lvi.ImageIndex = 5;
-                                    break;
-                                case 5: //Text: Basic
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 6: //Decimal
-                                    lvi.ImageIndex = 7;
-                                    break;
-                                case 8: //Primary Key (Id)
-                                    lvi.ImageIndex = 8;
-                                    break;
-                                case 10: //DateTime
-                                    lvi.ImageIndex = 9;
-                                    break;
-                                case 11: //Time
-                                    lvi.ImageIndex = 10;
-                                    break;
-                                case 13: //Foreign Key (Id): Options
-                                    lvi.ImageIndex = 11;
-                                    break;
-                                case 14: //Text: HexColour
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 15: //Text: TextArea
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 16: //Text: TextEditor
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 17: //Text: Password
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 18: //Text: PhoneNumber
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 19: //Text: URL
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 20: //Text: Email
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 21: //Text: File
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 22: //Text: Tag
-                                    lvi.ImageIndex = 6;
-                                    break;
-                                case 23: //Foreign Key (Id): DropDown
-                                    lvi.ImageIndex = 11;
-                                    break;
-                                default:
-                                    throw new Exception($"{field.Name} have a Data Type not recognized");
-                            }
-                        }
-                        else
+                    if (field.FieldId != 0)
+                    {
+                        //lvi.ImageIndex = 0; OK 
+
+                        //The next lines are to improve the UX of DataTypes
+                        lvi.ImageIndex = field.DataTypeId switch
                         {
-                            lvi.ImageIndex = 3; //Need to import to FiyiStack
-                        }
+                            //Integer
+                            3 => 4,
+                            //Boolean
+                            4 => 5,
+                            //Text: Basic
+                            5 => 6,
+                            //Decimal
+                            6 => 7,
+                            //Primary Key (Id)
+                            8 => 8,
+                            //DateTime
+                            10 => 9,
+                            //Time
+                            11 => 10,
+                            //Foreign Key (Id): Options
+                            13 => 11,
+                            //Text: HexColour
+                            14 => 6,
+                            //Text: TextArea
+                            15 => 6,
+                            //Text: TextEditor
+                            16 => 6,
+                            //Text: Password
+                            17 => 6,
+                            //Text: PhoneNumber
+                            18 => 6,
+                            //Text: URL
+                            19 => 6,
+                            //Text: Email
+                            20 => 6,
+                            //Text: File
+                            21 => 6,
+                            //Text: Tag
+                            22 => 6,
+                            //Foreign Key (Id): DropDown
+                            23 => 11,
+                            _ => throw new Exception($"{field.Name} have a Data Type not recognized"),
+                        };
                     }
-                    else { lvi.ImageIndex = 1; } //Need to upload/create Field inside DB hosting/DataBase
+                    else
+                    {
+                        lvi.ImageIndex = 3; //Need to import to FiyiStack
+                    }
 
                     ListViewField.Items.Add(lvi);
                 }
@@ -1164,32 +1114,6 @@ namespace FiyiStackApp
                 Cursor = Cursors.Default;
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; ListViewField.Items.Clear(); Cursor = Cursors.Default; }
-        }
-
-        private List<Field> LoadFieldsCreatedOutsideFiyiStack()
-        {
-            try
-            {
-                if (Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId == 0) { throw new Exception("Select a database"); }
-                if (Program.WinFormConfigurationComponent.TableChosen.TableId == 0) { throw new Exception("Select a table"); }
-
-                //Fill a List<CommonFunctions.MSSQLServer.Field>
-                FiyiStack.Library.MicrosoftSQLServer.Field MSSQLServerField = new FiyiStack.Library.MicrosoftSQLServer.Field();
-                List<FiyiStack.Library.MicrosoftSQLServer.Field> lstFieldCreatedOutsideFiyiStack = new List<FiyiStack.Library.MicrosoftSQLServer.Field>();
-                lstFieldCreatedOutsideFiyiStack = MSSQLServerField.GetAllFieldsByTableNameBySchemeNameToModel(Program.WinFormConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
-                    Program.WinFormConfigurationComponent.TableChosen.Name, Program.WinFormConfigurationComponent.TableChosen.Scheme);
-
-                //Move the above list to List<Models.Core.Field>
-                List<Field> lstField = [];
-                foreach (FiyiStack.Library.MicrosoftSQLServer.Field fieldcreatedoutsidefiyistack in lstFieldCreatedOutsideFiyiStack)
-                {
-                    Field Field = new();
-                    Field.Name = fieldcreatedoutsidefiyistack.Name;
-                    lstField.Add(Field);
-                }
-                return lstField;
-            }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; ListViewField.Items.Clear(); return null; }
         }
 
         private void btnAddTable_Click(object sender, EventArgs e)

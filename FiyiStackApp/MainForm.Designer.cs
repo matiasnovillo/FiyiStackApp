@@ -423,7 +423,7 @@ namespace FiyiStackApp
             this.PanelField.Controls.Add(this.labelFieldHistoryUser);
             this.PanelField.Controls.Add(this.labelDataType);
             this.PanelField.Controls.Add(this.cmbDataType);
-            this.PanelField.Location = new System.Drawing.Point(975, 409);
+            this.PanelField.Location = new System.Drawing.Point(986, 502);
             this.PanelField.Margin = new System.Windows.Forms.Padding(4);
             this.PanelField.Name = "PanelField";
             this.PanelField.Size = new System.Drawing.Size(929, 592);
@@ -1275,7 +1275,7 @@ namespace FiyiStackApp
             this.PanelTable.Controls.Add(this.ListViewTable);
             this.PanelTable.Controls.Add(this.btnAddTable);
             this.PanelTable.Controls.Add(this.btnDeleteTables);
-            this.PanelTable.Location = new System.Drawing.Point(1113, 288);
+            this.PanelTable.Location = new System.Drawing.Point(257, 17);
             this.PanelTable.Margin = new System.Windows.Forms.Padding(4);
             this.PanelTable.Name = "PanelTable";
             this.PanelTable.Size = new System.Drawing.Size(969, 589);
@@ -1361,7 +1361,6 @@ namespace FiyiStackApp
             this.ListViewTable.ShowGroups = false;
             this.ListViewTable.ShowItemToolTips = true;
             this.ListViewTable.Size = new System.Drawing.Size(423, 519);
-            this.ListViewTable.SmallImageList = this.ImageList;
             this.ListViewTable.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ListViewTable.TabIndex = 68;
             this.ListViewTable.TileSize = new System.Drawing.Size(50, 50);
@@ -1414,7 +1413,7 @@ namespace FiyiStackApp
             this.PanelDatabase.Controls.Add(this.btnDeleteDataBases);
             this.PanelDatabase.Controls.Add(this.lblActionDatabase);
             this.PanelDatabase.Controls.Add(this.btnAddDatabase);
-            this.PanelDatabase.Location = new System.Drawing.Point(271, 74);
+            this.PanelDatabase.Location = new System.Drawing.Point(921, 558);
             this.PanelDatabase.Margin = new System.Windows.Forms.Padding(4);
             this.PanelDatabase.Name = "PanelDatabase";
             this.PanelDatabase.Size = new System.Drawing.Size(938, 589);
