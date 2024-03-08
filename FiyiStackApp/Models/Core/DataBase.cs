@@ -16,9 +16,6 @@ namespace FiyiStackApp.Models.Core
         [CategoryAttribute("Settings"), DescriptionAttribute("Name of the database")]
         public string Name { get; set; }
 
-        [CategoryAttribute("Settings"), DescriptionAttribute("Generate in Microsoft SQL Server")]
-        public bool IsMSSQLServer { get; set; }
-
         [CategoryAttribute("Settings"), DescriptionAttribute("Connection string for MS SQL Server database")]
         public string ConnectionStringForMSSQLServer { get; set; }
 
@@ -64,7 +61,6 @@ namespace FiyiStackApp.Models.Core
                     this.DataBaseId = field.DataBaseId;
                     this.ProjectId = field.ProjectId;
                     this.Name = field.Name;
-                    this.IsMSSQLServer = field.IsMSSQLServer;
                     this.ConnectionStringForMSSQLServer = field.ConnectionStringForMSSQLServer;
                     this.Active = field.Active;
                     this.DateTimeCreation = field.DateTimeCreation;
@@ -101,7 +97,6 @@ namespace FiyiStackApp.Models.Core
                     this.DataBaseId = field.DataBaseId;
                     this.ProjectId = field.ProjectId;
                     this.Name = field.Name;
-                    this.IsMSSQLServer = field.IsMSSQLServer;
                     this.ConnectionStringForMSSQLServer = field.ConnectionStringForMSSQLServer;
                     this.Active = field.Active;
                     this.DateTimeCreation = field.DateTimeCreation;
@@ -158,7 +153,6 @@ namespace FiyiStackApp.Models.Core
                     DataBase.DataBaseId = field.DataBaseId;
                     DataBase.ProjectId = field.ProjectId;
                     DataBase.Name = field.Name;
-                    DataBase.IsMSSQLServer = field.IsMSSQLServer;
                     DataBase.ConnectionStringForMSSQLServer = field.ConnectionStringForMSSQLServer;
                     DataBase.Active = field.Active;
                     DataBase.DateTimeCreation = field.DateTimeCreation;
@@ -188,7 +182,6 @@ namespace FiyiStackApp.Models.Core
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("ProjectId", ProjectId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
-                dp.Add("IsMSSQLServer", IsMSSQLServer, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("ConnectionStringForMSSQLServer", ConnectionStringForMSSQLServer, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
@@ -233,7 +226,6 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("DataBaseId", DataBaseId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("ProjectId", ProjectId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
-                dp.Add("IsMSSQLServer", IsMSSQLServer, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("ConnectionStringForMSSQLServer", ConnectionStringForMSSQLServer, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
@@ -303,7 +295,6 @@ namespace FiyiStackApp.Models.Core
             return $"DataBaseId: {DataBaseId}, " +
                 $"ProjectId: {ProjectId}, " +
                 $"Name: {Name}, " +
-                $"IsMSSQLServer: {IsMSSQLServer}, " +
                 $"ConnectionStringForMSSQLServer: {ConnectionStringForMSSQLServer}, " +
                 $"Active: {Active}, " +
                 $"DateTimeCreation: {DateTimeCreation}, " +

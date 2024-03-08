@@ -42,13 +42,8 @@ namespace FiyiStackApp.Generation
 {GeneratorConfigurationComponent.lstStoredProcedureToGenerate.Count} stored procedures to work with
 ";
 
-                if (DataBaseChosen.IsMSSQLServer)
-                {
-                    LogText += $"Entering MS SQL Server language {Environment.NewLine}";
-                    LogText += MSSQLServer.Start(GeneratorConfigurationComponent);
-                }
-                else { LogText += $"Generation in MS SQL Server language omitted by user{Environment.NewLine}"; }
-
+                LogText += $"Entering MS SQL Server language{Environment.NewLine}";
+                LogText += MSSQLServer.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering C# language{Environment.NewLine}";
                 LogText += CSharp.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering TypeScript language{Environment.NewLine}";

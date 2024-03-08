@@ -719,38 +719,16 @@ namespace FiyiStackApp
 
                 //Fill listview
                 ListViewTable.Clear();
-                foreach (Models.Core.Table table in Program.WinFormConfigurationComponent.lstTableInFiyiStack)
+                foreach (Table table in Program.WinFormConfigurationComponent.lstTableInFiyiStack)
                 {
-                    ListViewItem lvi = new ListViewItem($"[{table.Scheme}].[{table.Area}.{table.Name}]");
+                    ListViewItem lvi = new($"[{table.Scheme}].[{table.Area}.{table.Name}]");
                     lvi.Tag = table.TableId;
-
-                    //Analyze if the Table exist in the DB hosting/Database only if the user provide a ConnectionString
-                    if (Program.WinFormConfigurationComponent.DataBaseChosen.IsMSSQLServer)
-                    {
-                        FiyiStack.Library.MicrosoftSQLServer.Table MSSQLServerTable = new FiyiStack.Library.MicrosoftSQLServer.Table();
-                        if (MSSQLServerTable.DoesTableExist(Program.WinFormConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer, table.Area, table.Name, table.Scheme))
-                        {
-                            if (table.TableId != 0)
-                            {
-                                lvi.ImageIndex = 0; //OK 
-                            }
-                            else
-                            {
-                                lvi.ImageIndex = 3; //Need to import to FiyiStack
-                            }
-                        }
-                        else { lvi.ImageIndex = 1; } //Need to upload/create Table inside DB hosting/DataBase
-                    }
-                    else
-                    {
-                        lvi.ImageIndex = 2; //NotSee. The user do not provide a ConnectionString to analyze
-                    }
 
                     ListViewTable.Items.Add(lvi);
                 }
 
                 //Fill PropertyGridTable
-                Table = new Models.Core.Table();
+                Table = new Table();
                 Program.WinFormConfigurationComponent.TableChosen = Table;
                 PropertyGridTable.SelectedObject = Program.WinFormConfigurationComponent.TableChosen;
 
@@ -808,7 +786,7 @@ namespace FiyiStackApp
 
         private void btnCopyDBProduction_Click(object sender, EventArgs e)
         {
-            Models.Core.DataBase DataBase = new Models.Core.DataBase();
+            DataBase DataBase = new();
             DataBase.ConnectionStringForMSSQLServer = "Password=[PUT_A_PASSWORD];Persist Security Info=True;User ID=[PUT_A_USER_ID];Initial Catalog=[PUT_A_DATABASE_NAME];Data Source=[PUT_A_SOURCE_(SERVER)];TrustServerCertificate=True";
             DataBase.DateTimeLastModification = DateTime.Now;
             DataBase.DateTimeCreation = DateTime.Now;
@@ -1001,6 +979,9 @@ namespace FiyiStackApp
         private void AddTableButton_Click(object sender, EventArgs e)
         {
             Table Table = new();
+            Table.Scheme = "dbo";
+            Table.Version = "1";
+
             Program.WinFormConfigurationComponent.TableChosen = Table;
             PropertyGridTable.SelectedObject = Program.WinFormConfigurationComponent.TableChosen;
 
@@ -1185,38 +1166,28 @@ namespace FiyiStackApp
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; ListViewField.Items.Clear(); Cursor = Cursors.Default; }
         }
 
-        private List<Models.Core.Field> LoadFieldsCreatedOutsideFiyiStack()
+        private List<Field> LoadFieldsCreatedOutsideFiyiStack()
         {
             try
             {
                 if (Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId == 0) { throw new Exception("Select a database"); }
                 if (Program.WinFormConfigurationComponent.TableChosen.TableId == 0) { throw new Exception("Select a table"); }
 
+                //Fill a List<CommonFunctions.MSSQLServer.Field>
+                FiyiStack.Library.MicrosoftSQLServer.Field MSSQLServerField = new FiyiStack.Library.MicrosoftSQLServer.Field();
+                List<FiyiStack.Library.MicrosoftSQLServer.Field> lstFieldCreatedOutsideFiyiStack = new List<FiyiStack.Library.MicrosoftSQLServer.Field>();
+                lstFieldCreatedOutsideFiyiStack = MSSQLServerField.GetAllFieldsByTableNameBySchemeNameToModel(Program.WinFormConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
+                    Program.WinFormConfigurationComponent.TableChosen.Name, Program.WinFormConfigurationComponent.TableChosen.Scheme);
 
-                if (Program.WinFormConfigurationComponent.DataBaseChosen.IsMSSQLServer)
+                //Move the above list to List<Models.Core.Field>
+                List<Field> lstField = [];
+                foreach (FiyiStack.Library.MicrosoftSQLServer.Field fieldcreatedoutsidefiyistack in lstFieldCreatedOutsideFiyiStack)
                 {
-                    //Fill a List<CommonFunctions.MSSQLServer.Field>
-                    FiyiStack.Library.MicrosoftSQLServer.Field MSSQLServerField = new FiyiStack.Library.MicrosoftSQLServer.Field();
-                    List<FiyiStack.Library.MicrosoftSQLServer.Field> lstFieldCreatedOutsideFiyiStack = new List<FiyiStack.Library.MicrosoftSQLServer.Field>();
-                    lstFieldCreatedOutsideFiyiStack = MSSQLServerField.GetAllFieldsByTableNameBySchemeNameToModel(Program.WinFormConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
-                        Program.WinFormConfigurationComponent.TableChosen.Name, Program.WinFormConfigurationComponent.TableChosen.Scheme);
-
-
-
-                    //Move the above list to List<Models.Core.Field>
-                    List<Models.Core.Field> lstField = new List<Models.Core.Field>();
-                    foreach (FiyiStack.Library.MicrosoftSQLServer.Field fieldcreatedoutsidefiyistack in lstFieldCreatedOutsideFiyiStack)
-                    {
-                        Models.Core.Field Field = new Models.Core.Field();
-                        Field.Name = fieldcreatedoutsidefiyistack.Name;
-                        lstField.Add(Field);
-                    }
-                    return lstField;
+                    Field Field = new();
+                    Field.Name = fieldcreatedoutsidefiyistack.Name;
+                    lstField.Add(Field);
                 }
-                else
-                {
-                    return null;
-                }
+                return lstField;
             }
             catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; ListViewField.Items.Clear(); return null; }
         }

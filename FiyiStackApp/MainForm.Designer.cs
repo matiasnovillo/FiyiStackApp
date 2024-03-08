@@ -269,7 +269,7 @@ namespace FiyiStackApp
             this.lblMessageDockedBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblMessageDockedBottom.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessageDockedBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.lblMessageDockedBottom.Location = new System.Drawing.Point(0, 809);
+            this.lblMessageDockedBottom.Location = new System.Drawing.Point(0, 1032);
             this.lblMessageDockedBottom.Name = "lblMessageDockedBottom";
             this.lblMessageDockedBottom.Size = new System.Drawing.Size(116, 23);
             this.lblMessageDockedBottom.TabIndex = 13;
@@ -333,20 +333,20 @@ namespace FiyiStackApp
             this.PanelDockedLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelDockedLeft.Location = new System.Drawing.Point(0, 28);
             this.PanelDockedLeft.Name = "PanelDockedLeft";
-            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 781);
+            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 1004);
             this.PanelDockedLeft.TabIndex = 17;
             // 
             // PanelDockedCenter
             // 
-            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.PanelGenerator);
+            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.lblSubtitle);
             this.PanelDockedCenter.Controls.Add(this.lblTitle);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
             this.PanelDockedCenter.Name = "PanelDockedCenter";
-            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 781);
+            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 1004);
             this.PanelDockedCenter.TabIndex = 19;
             // 
             // PanelGenerator
@@ -356,7 +356,7 @@ namespace FiyiStackApp
             this.PanelGenerator.Controls.Add(this.PanelTable);
             this.PanelGenerator.Controls.Add(this.PanelDatabase);
             this.PanelGenerator.Controls.Add(this.PanelMain);
-            this.PanelGenerator.Location = new System.Drawing.Point(6, 105);
+            this.PanelGenerator.Location = new System.Drawing.Point(41, 362);
             this.PanelGenerator.Name = "PanelGenerator";
             this.PanelGenerator.Size = new System.Drawing.Size(1195, 624);
             this.PanelGenerator.TabIndex = 21;
@@ -423,7 +423,7 @@ namespace FiyiStackApp
             this.PanelField.Controls.Add(this.labelFieldHistoryUser);
             this.PanelField.Controls.Add(this.labelDataType);
             this.PanelField.Controls.Add(this.cmbDataType);
-            this.PanelField.Location = new System.Drawing.Point(960, 406);
+            this.PanelField.Location = new System.Drawing.Point(975, 409);
             this.PanelField.Margin = new System.Windows.Forms.Padding(4);
             this.PanelField.Name = "PanelField";
             this.PanelField.Size = new System.Drawing.Size(929, 592);
@@ -1275,7 +1275,7 @@ namespace FiyiStackApp
             this.PanelTable.Controls.Add(this.ListViewTable);
             this.PanelTable.Controls.Add(this.btnAddTable);
             this.PanelTable.Controls.Add(this.btnDeleteTables);
-            this.PanelTable.Location = new System.Drawing.Point(818, 511);
+            this.PanelTable.Location = new System.Drawing.Point(1113, 288);
             this.PanelTable.Margin = new System.Windows.Forms.Padding(4);
             this.PanelTable.Name = "PanelTable";
             this.PanelTable.Size = new System.Drawing.Size(969, 589);
@@ -1414,7 +1414,7 @@ namespace FiyiStackApp
             this.PanelDatabase.Controls.Add(this.btnDeleteDataBases);
             this.PanelDatabase.Controls.Add(this.lblActionDatabase);
             this.PanelDatabase.Controls.Add(this.btnAddDatabase);
-            this.PanelDatabase.Location = new System.Drawing.Point(889, 465);
+            this.PanelDatabase.Location = new System.Drawing.Point(271, 74);
             this.PanelDatabase.Margin = new System.Windows.Forms.Padding(4);
             this.PanelDatabase.Name = "PanelDatabase";
             this.PanelDatabase.Size = new System.Drawing.Size(938, 589);
@@ -1710,7 +1710,7 @@ namespace FiyiStackApp
             this.PanelProject.Controls.Add(this.PropertyGridProject);
             this.PanelProject.Controls.Add(this.btnNewOrEdit);
             this.PanelProject.Controls.Add(this.btnNewProject);
-            this.PanelProject.Location = new System.Drawing.Point(15, 88);
+            this.PanelProject.Location = new System.Drawing.Point(968, 811);
             this.PanelProject.Name = "PanelProject";
             this.PanelProject.Size = new System.Drawing.Size(1195, 624);
             this.PanelProject.TabIndex = 20;
@@ -1859,7 +1859,7 @@ namespace FiyiStackApp
             this.PanelLogin.Controls.Add(this.btnSeePassword);
             this.PanelLogin.Controls.Add(this.picErrorForFantasyNameOrEmail);
             this.PanelLogin.Controls.Add(this.btnLogin);
-            this.PanelLogin.Location = new System.Drawing.Point(1051, 745);
+            this.PanelLogin.Location = new System.Drawing.Point(833, 891);
             this.PanelLogin.Name = "PanelLogin";
             this.PanelLogin.Size = new System.Drawing.Size(1195, 624);
             this.PanelLogin.TabIndex = 17;
@@ -1940,7 +1940,7 @@ namespace FiyiStackApp
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(57)))));
-            this.ClientSize = new System.Drawing.Size(1367, 832);
+            this.ClientSize = new System.Drawing.Size(1367, 1055);
             this.Controls.Add(this.PanelDockedCenter);
             this.Controls.Add(this.PanelDockedLeft);
             this.Controls.Add(this.lblMessageDockedBottom);
