@@ -526,79 +526,72 @@ namespace FiyiStackApp
                 {
                     if (ListViewTable.Items[i].Checked)
                     {
-                        if (ListViewTable.Items[i].ImageIndex == 3) { throw new Exception("It is not allowed to generate external tables. First, import them."); }
-                        if (ListViewTable.Items[i].ImageIndex == 2) { throw new Exception("It is not allowed to generate using blinded tables. First, give a ConnectionString"); }
-                        if (ListViewTable.Items[i].ImageIndex == 0 ||
-                            ListViewTable.Items[i].ImageIndex == 1 ||
-                            ListViewTable.Items[i].ImageIndex == 13) //OK or Need to upload or Virtual model
+                        Table TableChecked = new(Convert.ToInt32(ListViewTable.Items[i].Tag));
+                        if (TableChecked.TableId == 0 ||
+                            TableChecked.Name.Trim() == "" ||
+                            TableChecked.Name == null ||
+                            TableChecked.Scheme.Trim() == "" ||
+                            TableChecked.Scheme == null ||
+                            TableChecked.Area.Trim() == "" ||
+                            TableChecked.Area == null)
+                        { throw new Exception("It is not allowed to generate tables without neccessary data"); }
+                        else
                         {
-                            Table TableChecked = new(Convert.ToInt32(ListViewTable.Items[i].Tag));
-                            if (TableChecked.TableId == 0 ||
-                                TableChecked.Name.Trim() == "" ||
-                                TableChecked.Name == null ||
-                                TableChecked.Scheme.Trim() == "" ||
-                                TableChecked.Scheme == null ||
-                                TableChecked.Area.Trim() == "" ||
-                                TableChecked.Area == null)
-                            { throw new Exception("It is not allowed to generate tables without neccessary data"); }
-                            else
+                            //Fill a list of tables, fields and stored procedures to generate
+                            Program.WinFormConfigurationComponent.lstTableToGenerate.Add(TableChecked);
+                            foreach (Field field in new Field().GetAllByTableIdToModel(TableChecked.TableId))
                             {
-                                //Fill a list of tables, fields and stored procedures to generate
-                                Program.WinFormConfigurationComponent.lstTableToGenerate.Add(TableChecked);
-                                foreach (Field field in new Field().GetAllByTableIdToModel(TableChecked.TableId))
+                                Program.WinFormConfigurationComponent.lstFieldToGenerate.Add(field);
+                            }
+
+                            int actionId = 0;
+                            foreach (string action in lstStoredProcedureAction)
+                            {
+                                StoredProcedure storedprocedure = new()
                                 {
-                                    Program.WinFormConfigurationComponent.lstFieldToGenerate.Add(field);
+                                    TableArea = TableChecked.Area,
+                                    TableName = TableChecked.Name,
+                                    SchemeName = TableChecked.Scheme
+                                };
+                                switch (actionId)
+                                {
+                                    case 0: //Insert
+                                        storedprocedure.Action = action;
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 1: //UpdateBy
+                                        storedprocedure.Action = $"{action}{TableChecked.Name}Id";
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 2: //DeleteBy
+                                        storedprocedure.Action = $"{action}{TableChecked.Name}Id";
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 3: //Select1By
+                                        storedprocedure.Action = $"{action}{TableChecked.Name}Id";
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 4: //SelectAll
+                                        storedprocedure.Action = action;
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 5: //SelectAllPaged
+                                        storedprocedure.Action = action;
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 6: //Count
+                                        storedprocedure.Action = action;
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    case 7: //DeleteAll
+                                        storedprocedure.Action = action;
+                                        Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
+                                        break;
+                                    default:
+                                        throw new Exception("An unexpected value entered inside validation and preparation step");
                                 }
 
-                                int actionId = 0;
-                                foreach (string action in lstStoredProcedureAction)
-                                {
-                                    StoredProcedure storedprocedure = new()
-                                    {
-                                        TableArea = TableChecked.Area,
-                                        TableName = TableChecked.Name,
-                                        SchemeName = TableChecked.Scheme
-                                    };
-                                    switch (actionId)
-                                    {
-                                        case 0: //Insert
-                                            storedprocedure.Action = action;
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 1: //UpdateBy
-                                            storedprocedure.Action = $"{action}{TableChecked.Name}Id";
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 2: //DeleteBy
-                                            storedprocedure.Action = $"{action}{TableChecked.Name}Id";
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 3: //Select1By
-                                            storedprocedure.Action = $"{action}{TableChecked.Name}Id";
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 4: //SelectAll
-                                            storedprocedure.Action = action;
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 5: //SelectAllPaged
-                                            storedprocedure.Action = action;
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 6: //Count
-                                            storedprocedure.Action = action;
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        case 7: //DeleteAll
-                                            storedprocedure.Action = action;
-                                            Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate.Add(storedprocedure);
-                                            break;
-                                        default:
-                                            throw new Exception("An unexpected value entered inside validation and preparation step");
-                                    }
-
-                                    actionId += 1;
-                                }
+                                actionId += 1;
                             }
                         }
                     }
@@ -613,6 +606,28 @@ namespace FiyiStackApp
                 }
 
                 Cursor = Cursors.WaitCursor;
+
+                //Need it to avoid Exceptions
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer = "";
+                }
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNET6CleanArchitecture = "";
+                }
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst = "";
+                }
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI = "";
+                }
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB = "";
+                }
 
                 if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
                 {
@@ -1239,7 +1254,7 @@ namespace FiyiStackApp
                 {
                     if (ListViewField.Items[i].Checked)
                     {
-                        Models.Core.Field Field = new Models.Core.Field();
+                        Field Field = new Field();
 
                         Field.DeleteByFieldId(Convert.ToInt32(ListViewField.Items[i].Tag));
 
