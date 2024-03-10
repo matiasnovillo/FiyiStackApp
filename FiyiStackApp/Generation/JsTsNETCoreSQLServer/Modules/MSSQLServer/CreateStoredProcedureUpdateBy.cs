@@ -14,7 +14,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
             {
                 string NonQuery = $@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
 (
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInUpdateBy_ForSQLServer}
+    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInUpdateBy_ForSQLServer}
     @RowsAffected INT OUTPUT
 )
 

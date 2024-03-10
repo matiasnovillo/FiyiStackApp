@@ -131,7 +131,7 @@ namespace FiyiStackApp.Models.Tools
         ///</summary>
         public fieldChainerJsTsNETCoreSQLServer(Table Table) 
         {
-            Field Field = new Field();
+            Field Field = new();
             List<Field> lstField = Field.GetAllByTableIdToModel(Table.TableId);
             NumberOfFields = lstField.Count;
 

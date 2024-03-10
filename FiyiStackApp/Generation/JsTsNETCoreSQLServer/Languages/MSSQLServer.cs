@@ -92,14 +92,16 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
 
             #region Stored procedure
             LogText += $"Getting inside stored procedure structure. {GeneratorConfigurationComponent.lstStoredProcedureToGenerate.Count} to work with {Environment.NewLine}";
-            Action<StoredProcedure> ActionForStoredProcedures = (StoredProcedureToGenerate) =>
+            Action<StoredProcedure, Models.Core.Table> ActionForStoredProcedures = (StoredProcedureToGenerate, table) =>
             {
                 try
                 {
                     string CompleteStoredProcedureName = $"[{StoredProcedureToGenerate.SchemeName}].[{StoredProcedureToGenerate.TableArea}.{StoredProcedureToGenerate.TableName}.{StoredProcedureToGenerate.Action}]";
                     LogText += $"Searching {CompleteStoredProcedureName} {Environment.NewLine}";
 
-                    StoredProcedure MSSQLServerStoredProcedure = new StoredProcedure();
+                    GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer(table);
+
+                    StoredProcedure MSSQLServerStoredProcedure = new();
 
                 //Search the stored procedure, if it is not found, create it
                 bool CreateStoredProcedure = true;
@@ -222,7 +224,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     StoredProcedureToGenerate.TableName,
                     StoredProcedureToGenerate.SchemeName);
 
-                ActionForStoredProcedures(StoredProcedureToGenerate);
+                ActionForStoredProcedures(StoredProcedureToGenerate, TableToGenerate);
             }
             #endregion
 
