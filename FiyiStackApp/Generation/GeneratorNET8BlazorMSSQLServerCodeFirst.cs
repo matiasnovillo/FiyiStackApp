@@ -1,6 +1,7 @@
 ﻿using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Core;
 using FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages;
+using FiyiStackApp.Generation.CommonGenerators.Languages;
 
 namespace FiyiStackApp.Generation
 {
@@ -41,6 +42,8 @@ namespace FiyiStackApp.Generation
 {GeneratorConfigurationComponent.lstFieldToGenerate.Count} fields to work with
 ";
 
+                LogText += $"Entering Microsoft SQL Server language{Environment.NewLine}";
+                LogText += MSSQLServer.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering C# language{Environment.NewLine}";
                 LogText += CSharp.Start(GeneratorConfigurationComponent);
 
