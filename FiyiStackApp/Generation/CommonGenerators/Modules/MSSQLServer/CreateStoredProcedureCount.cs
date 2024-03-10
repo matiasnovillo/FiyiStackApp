@@ -4,11 +4,11 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 {
     public static partial class MSSQLServer
     {
-        public static void CreateStoredProcedureDeleteAll(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
+        public static void CreateStoredProcedureCount(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
         {
             try
             {
@@ -22,13 +22,20 @@ AS
 /*
  * Execute this stored procedure with the next script as example
  *
-EXEC [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
+DECLARE	@Counter int
+
+EXEC	@Counter = [dbo].[{Table.Area}.{Table.Name}.Count]
+
+SELECT	'Counter' = @Counter
  *
  */
 
 --Last modification on: {DateTime.Now}
 
-DELETE FROM [{Table.Area}.{Table.Name}]";
+SELECT 
+	COUNT(*)
+FROM 
+	[{Table.Area}.{Table.Name}]";
 
                 NonQuery.Replace("\r", "").Replace("\n", "");;
 
@@ -43,7 +50,7 @@ DELETE FROM [{Table.Area}.{Table.Name}]";
                 { Directory.CreateDirectory(ScriptPath); }
 
                 WinFormConfigurationComponent.CreateFile(
-                $"{ScriptPath}{Table.Area}.{Table.Name}_DeleteAll.sql",
+                $"{ScriptPath}{Table.Area}.{Table.Name}_Count.sql",
                 NonQuery,
                 GeneratorConfigurationComponent.Configuration.DeleteFiles);
                 #endregion

@@ -2,7 +2,7 @@
 using Dapper;
 using Microsoft.Data.SqlClient;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 {
     public static partial class MSSQLServer
     {

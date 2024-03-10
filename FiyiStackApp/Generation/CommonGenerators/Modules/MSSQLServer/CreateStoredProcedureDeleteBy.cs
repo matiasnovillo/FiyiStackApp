@@ -1,20 +1,23 @@
 ﻿using FiyiStack.Library.NET;
 using FiyiStackApp.Models.Core;
 using Microsoft.Data.SqlClient;
-using System.Data;
 using Dapper;
+using System.Data;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 {
     public static partial class MSSQLServer
     {
-        public static void CreateStoredProcedureInsert(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
+        public static void CreateStoredProcedureDeleteBy(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
         {
             try
             {
-                string NonQuery = $@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}] 
-({GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInInsert_ForSQLServer}
-    @NewEnteredId INT OUTPUT
+                string NonQuery =   //The USE [Database] statement is not allowed in CREATE/ALTER Procedure statements
+$@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
+(
+    @{Table.Name}Id INT,
+    @RowsAffected INT OUTPUT
 )
 
 AS
@@ -24,34 +27,23 @@ AS
 /*
  * Execute this stored procedure with the next script as example
  *
-DECLARE	@NewEnteredId INT
+DECLARE	@RowsAffected INT
 EXEC [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersExample_ForSQLServer}
-@NewEnteredId = @NewEnteredId OUTPUT
-
-SELECT @NewEnteredId AS N'@NewEnteredId'
+    @{Table.Name}Id = 1,
+    @RowsAffected = @RowsAffected OUTPUT
+SELECT @RowsAffected AS N'@RowsAffected'
  *
  */
 
 --Last modification on: {DateTime.Now}
 
-INSERT INTO [{Table.Area}.{Table.Name}]
-(
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForInsertInto_ForSQLServer}
-";
-                NonQuery = NonQuery.TrimEnd('\n', '\r', ',');
-                NonQuery += $@"
-)
-VALUES
-(
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForValues_ForSQLServer}
-";
-                NonQuery = NonQuery.TrimEnd('\n','\r',',');
-                NonQuery += $@"
-)
+DELETE FROM 
+    [{Table.Area}.{Table.Name}]
+WHERE 
+    1 = 1
+    AND [{Table.Area}.{Table.Name}].[{Table.Name}Id] = @{Table.Name}Id
 
-SELECT @NewEnteredId = @@IDENTITY";
-
+SELECT @RowsAffected = @@ROWCOUNT"; 
 
                 NonQuery.Replace("\r", "").Replace("\n", "");
 
@@ -66,7 +58,7 @@ SELECT @NewEnteredId = @@IDENTITY";
                 { Directory.CreateDirectory(ScriptPath); }
 
                 WinFormConfigurationComponent.CreateFile(
-                $"{ScriptPath}{Table.Area}.{Table.Name}_Insert.sql",
+                $"{ScriptPath}{Table.Area}.{Table.Name}_DeleteBy.sql",
                 NonQuery,
                 GeneratorConfigurationComponent.Configuration.DeleteFiles);
                 #endregion

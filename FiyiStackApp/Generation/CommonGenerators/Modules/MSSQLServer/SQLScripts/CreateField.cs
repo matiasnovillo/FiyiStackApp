@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FiyiStackApp.Models.Core;
 using FiyiStackApp.Models.Tools;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer.SQLScripts
 {
     public static partial class SQLScripts
     {

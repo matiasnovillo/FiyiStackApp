@@ -2,17 +2,17 @@
 using Dapper;
 using Microsoft.Data.SqlClient;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 {
     public static partial class MSSQLServer
     {
-        public static void DeleteTable(string ConnectionString, string DataBaseName, string SchemeName, string TableName)
+        public static void DeleteStoredProcedure(string ConnectionString, string DataBaseName, string SchemeName, string TableArea, string TableName, string Action)
         {
             try
             {
                 string NonQuery =
                     $"USE [{DataBaseName}] " +
-                    $"DROP TABLE [{SchemeName}].[{TableName}]";
+                    $"DROP PROCEDURE [{SchemeName}].[{TableArea}.{TableName}.{Action}]";
 
                 NonQuery.Replace("\r", "").Replace("\n", "");
 

@@ -1,9 +1,9 @@
 ﻿using FiyiStackApp.Models.Core;
-using FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules;
 using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Tools;
+using FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
+namespace FiyiStackApp.Generation.CommonGenerators.Languages
 {
     public static class MSSQLServer
     {
@@ -27,7 +27,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     {
                         LogText += $"[{TableToGenerate.Scheme}].[{TableToGenerate.Area}.{TableToGenerate.Name}] not found. Creating it {Environment.NewLine}";
 
-                        Modules.MSSQLServer.CreateTable(GeneratorConfigurationComponent,
+                        Modules.MSSQLServer.MSSQLServer.CreateTable(GeneratorConfigurationComponent,
                             GeneratorConfigurationComponent.DataBaseChosen.Name,
                             TableToGenerate.Area,
                             TableToGenerate.Name,
@@ -61,12 +61,12 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
 
                     Models.Core.Table Table = new Models.Core.Table(FieldToGenerate.TableId);
 
-                //Search the field, if it is not found, create it
-                if (!MSSQLServerField.DoesFieldExist(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer, Table.Area, Table.Name, Table.Scheme, FieldToGenerate.Name))
+                    //Search the field, if it is not found, create it
+                    if (!MSSQLServerField.DoesFieldExist(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer, Table.Area, Table.Name, Table.Scheme, FieldToGenerate.Name))
                     {
                         LogText += $"{FieldToGenerate.Name} not found. Creating it {Environment.NewLine}";
 
-                        Modules.MSSQLServer.CreateField(GeneratorConfigurationComponent,
+                        Modules.MSSQLServer.MSSQLServer.CreateField(GeneratorConfigurationComponent,
                             GeneratorConfigurationComponent.DataBaseChosen.Name,
                             Table.Area,
                             Table.Name,
@@ -103,8 +103,8 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
 
                     StoredProcedure MSSQLServerStoredProcedure = new();
 
-                //Search the stored procedure, if it is not found, create it
-                bool CreateStoredProcedure = true;
+                    //Search the stored procedure, if it is not found, create it
+                    bool CreateStoredProcedure = true;
                     if (!MSSQLServerStoredProcedure.ExistStoredProcedure(
                         GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
                         GeneratorConfigurationComponent.DataBaseChosen.Name,
@@ -116,11 +116,11 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                     { LogText += $"{CompleteStoredProcedureName} not found. Creating it {Environment.NewLine}"; CreateStoredProcedure = true; }
                     else
                     {
-                    //Delete the stored procedure if the user allow
-                    if (GeneratorConfigurationComponent.Configuration.DeleteStoredProcedure)
+                        //Delete the stored procedure if the user allow
+                        if (GeneratorConfigurationComponent.Configuration.DeleteStoredProcedure)
                         {
                             LogText += $"{CompleteStoredProcedureName} found. Deleting and creating it {Environment.NewLine}";
-                            Modules.MSSQLServer.DeleteStoredProcedure(
+                            Modules.MSSQLServer.MSSQLServer.DeleteStoredProcedure(
                                 GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer,
                                 GeneratorConfigurationComponent.DataBaseChosen.Name,
                                 StoredProcedureToGenerate.SchemeName,
@@ -148,7 +148,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //Insert
                         if (StoredProcedureToGenerate.Action.StartsWith("Insert"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureInsert(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureInsert(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -156,7 +156,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //UpdateBy
                         if (StoredProcedureToGenerate.Action.StartsWith("UpdateBy"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureUpdateBy(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureUpdateBy(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -164,7 +164,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //Count
                         if (StoredProcedureToGenerate.Action.StartsWith("Count"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureCount(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureCount(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -172,7 +172,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //DeleteAll
                         if (StoredProcedureToGenerate.Action.StartsWith("DeleteAll"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureDeleteAll(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureDeleteAll(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -180,7 +180,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //DeleteBy
                         if (StoredProcedureToGenerate.Action.StartsWith("DeleteBy"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureDeleteBy(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureDeleteBy(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -188,7 +188,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //Select1By
                         if (StoredProcedureToGenerate.Action.StartsWith("Select1By"))
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureSelect1By(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureSelect1By(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -196,7 +196,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //SelectAll
                         if (StoredProcedureToGenerate.Action == "SelectAll")
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureSelectAll(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureSelectAll(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -204,7 +204,7 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
                         //SelectAllPaged
                         if (StoredProcedureToGenerate.Action == "SelectAllPaged")
                         {
-                            Modules.MSSQLServer.CreateStoredProcedureSelectAllPaged(
+                            Modules.MSSQLServer.MSSQLServer.CreateStoredProcedureSelectAllPaged(
                             GeneratorConfigurationComponent,
                             StoredProcedureToGenerate.Action,
                             Table);
@@ -231,9 +231,9 @@ namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages
             #region SQL Scripts in project folder
             foreach (Models.Core.Table TableToGenerate in GeneratorConfigurationComponent.lstTableToGenerate)
             {
-                SQLScripts.CreateField(GeneratorConfigurationComponent, TableToGenerate);
+                Modules.MSSQLServer.SQLScripts.SQLScripts.CreateField(GeneratorConfigurationComponent, TableToGenerate);
             }
-            
+
             #endregion
 
             return LogText;

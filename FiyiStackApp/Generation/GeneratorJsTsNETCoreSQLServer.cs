@@ -1,6 +1,7 @@
 ﻿using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Core;
 using FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages;
+using FiyiStackApp.Generation.CommonGenerators.Languages;
 
 namespace FiyiStackApp.Generation
 {

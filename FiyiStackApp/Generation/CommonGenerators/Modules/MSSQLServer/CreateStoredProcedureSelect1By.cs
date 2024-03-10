@@ -1,21 +1,21 @@
 ﻿using FiyiStack.Library.NET;
 using FiyiStackApp.Models.Core;
 using Microsoft.Data.SqlClient;
-using Dapper;
 using System.Data;
+using Dapper;
 
-namespace FiyiStackApp.Generation.JsTsNETCoreSQLServer.Modules
+namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 {
     public static partial class MSSQLServer
     {
-        public static void CreateStoredProcedureUpdateBy(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
+        public static void CreateStoredProcedureSelect1By(GeneratorConfigurationComponent GeneratorConfigurationComponent, string Action, Table Table)
         {
             try
             {
-                string NonQuery = $@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
+                string NonQuery =   //The USE [Database] statement is not allowed in CREATE/ALTER Procedure statements
+$@"CREATE PROCEDURE [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
 (
-    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForParametersInUpdateBy_ForSQLServer}
-    @RowsAffected INT OUTPUT
+    @{Table.Name}Id INT
 )
 
 AS
@@ -25,27 +25,31 @@ AS
 /*
  * Execute this stored procedure with the next script as example
  *
-DECLARE	@RowsAffected int
-EXEC [{Table.Scheme}].[{Table.Area}.{Table.Name}.{Action}]
-    @{Table.Name}Id = 1,
-    @RowsAffected = @RowsAffected OUTPUT
-SELECT @RowsAffected AS N'@RowsAffected'
+EXEC [{Table.Scheme}].[{Table.Name}.{Action}]
+    @{Table.Name}Id = 1
  *
  */
 
 --Last modification on: {DateTime.Now}
 
-UPDATE [{Table.Area}.{Table.Name}] SET
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForUpdateInUpdateBy_ForSQLServer}";
+SET DATEFORMAT DMY
+
+SELECT
+{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.SQLServerFieldsForSelect_ForSQLServer}";
 
                 NonQuery = NonQuery.TrimEnd('\n', '\r', ',');
-                NonQuery += $@"
+
+                NonQuery += 
+$@"
+FROM 
+    [{Table.Area}.{Table.Name}]
+    LEFT OUTER JOIN [CMSCore.User] AS [CMSCore.User.UserCreationId] ON [{Table.Area}.{Table.Name}].[UserCreationId] = [CMSCore.User.UserCreationId].[UserId]
+	LEFT OUTER JOIN [CMSCore.User] AS [CMSCore.User.UserLastModificationId] ON [{Table.Area}.{Table.Name}].[UserLastModificationId] = [CMSCore.User.UserLastModificationId].[UserId]
 WHERE 
-    1 = 1 
-    AND [{Table.Area}.{Table.Name}].[{Table.Name}Id] = @{Table.Name}Id 
-
-SELECT @RowsAffected = @@ROWCOUNT";
-
+    1 = 1
+    AND [{Table.Area}.{Table.Name}].[{Table.Name}Id] = @{Table.Name}Id
+ORDER BY 
+    [{Table.Area}.{Table.Name}].[{Table.Name}Id]";
 
                 NonQuery.Replace("\r", "").Replace("\n", "");
 
@@ -60,7 +64,7 @@ SELECT @RowsAffected = @@ROWCOUNT";
                 { Directory.CreateDirectory(ScriptPath); }
 
                 WinFormConfigurationComponent.CreateFile(
-                $"{ScriptPath}{Table.Area}.{Table.Name}_UpdateBy.sql",
+                $"{ScriptPath}{Table.Area}.{Table.Name}_Select1By.sql",
                 NonQuery,
                 GeneratorConfigurationComponent.Configuration.DeleteFiles);
                 #endregion
