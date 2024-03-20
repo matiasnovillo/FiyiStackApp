@@ -72,12 +72,12 @@ namespace FiyiStackApp.Models.Core
                 {
                     this.ProjectId = field.ProjectId;
                     Name = field.Name;
-                    GeneralHistoryUser = field.GeneralHistoryUser;
-                    PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer;
-                    PathNET6CleanArchitecture = field.PathNET6CleanArchitecture;
-                    PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB;
-                    PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI;
-                    PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst;
+                    GeneralHistoryUser = field.GeneralHistoryUser ?? "";
+                    PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer ?? "";
+                    PathNET6CleanArchitecture = field.PathNET6CleanArchitecture ?? "";
+                    PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB ?? "";
+                    PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI ?? "";
+                    PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst ?? "";
                     Active = field.Active;
                     UserIdCreation = field.UserIdCreation;
                     UserIdLastModification = field.UserIdLastModification;

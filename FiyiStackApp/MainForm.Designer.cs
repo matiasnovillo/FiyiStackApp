@@ -339,9 +339,9 @@ namespace FiyiStackApp
             // PanelDockedCenter
             // 
             this.PanelDockedCenter.Controls.Add(this.PanelGenerator);
-            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.lblSubtitle);
             this.PanelDockedCenter.Controls.Add(this.lblTitle);
+            this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
@@ -351,10 +351,10 @@ namespace FiyiStackApp
             // 
             // PanelGenerator
             // 
+            this.PanelGenerator.Controls.Add(this.PanelDatabase);
             this.PanelGenerator.Controls.Add(this.PanelSummary);
             this.PanelGenerator.Controls.Add(this.PanelField);
             this.PanelGenerator.Controls.Add(this.PanelTable);
-            this.PanelGenerator.Controls.Add(this.PanelDatabase);
             this.PanelGenerator.Controls.Add(this.PanelMain);
             this.PanelGenerator.Location = new System.Drawing.Point(41, 362);
             this.PanelGenerator.Name = "PanelGenerator";
@@ -1413,7 +1413,7 @@ namespace FiyiStackApp
             this.PanelDatabase.Controls.Add(this.btnDeleteDataBases);
             this.PanelDatabase.Controls.Add(this.lblActionDatabase);
             this.PanelDatabase.Controls.Add(this.btnAddDatabase);
-            this.PanelDatabase.Location = new System.Drawing.Point(921, 558);
+            this.PanelDatabase.Location = new System.Drawing.Point(0, 0);
             this.PanelDatabase.Margin = new System.Windows.Forms.Padding(4);
             this.PanelDatabase.Name = "PanelDatabase";
             this.PanelDatabase.Size = new System.Drawing.Size(938, 589);
@@ -1709,7 +1709,7 @@ namespace FiyiStackApp
             this.PanelProject.Controls.Add(this.PropertyGridProject);
             this.PanelProject.Controls.Add(this.btnNewOrEdit);
             this.PanelProject.Controls.Add(this.btnNewProject);
-            this.PanelProject.Location = new System.Drawing.Point(968, 811);
+            this.PanelProject.Location = new System.Drawing.Point(914, 613);
             this.PanelProject.Name = "PanelProject";
             this.PanelProject.Size = new System.Drawing.Size(1195, 624);
             this.PanelProject.TabIndex = 20;
@@ -1858,7 +1858,7 @@ namespace FiyiStackApp
             this.PanelLogin.Controls.Add(this.btnSeePassword);
             this.PanelLogin.Controls.Add(this.picErrorForFantasyNameOrEmail);
             this.PanelLogin.Controls.Add(this.btnLogin);
-            this.PanelLogin.Location = new System.Drawing.Point(833, 891);
+            this.PanelLogin.Location = new System.Drawing.Point(868, 992);
             this.PanelLogin.Name = "PanelLogin";
             this.PanelLogin.Size = new System.Drawing.Size(1195, 624);
             this.PanelLogin.TabIndex = 17;

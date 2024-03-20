@@ -802,9 +802,14 @@ namespace FiyiStackApp
         private void btnCopyDBProduction_Click(object sender, EventArgs e)
         {
             DataBase DataBase = new();
+            DataBase.DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId;
+            DataBase.ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId;
+            DataBase.Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active;
+            DataBase.UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation;
+            DataBase.DateTimeCreation = Program.WinFormConfigurationComponent.DataBaseChosen.DateTimeCreation;
+            DataBase.UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification;
             DataBase.ConnectionStringForMSSQLServer = "Password=[PUT_A_PASSWORD];Persist Security Info=True;User ID=[PUT_A_USER_ID];Initial Catalog=[PUT_A_DATABASE_NAME];Data Source=[PUT_A_SOURCE_(SERVER)];TrustServerCertificate=True";
             DataBase.DateTimeLastModification = DateTime.Now;
-            DataBase.DateTimeCreation = DateTime.Now;
 
             Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
 
