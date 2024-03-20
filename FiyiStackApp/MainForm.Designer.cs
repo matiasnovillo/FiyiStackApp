@@ -44,6 +44,20 @@ namespace FiyiStackApp
             this.PanelDockedLeft = new System.Windows.Forms.Panel();
             this.PanelDockedCenter = new System.Windows.Forms.Panel();
             this.PanelGenerator = new System.Windows.Forms.Panel();
+            this.PanelDatabase = new System.Windows.Forms.Panel();
+            this.btnCopyDBProduction = new System.Windows.Forms.PictureBox();
+            this.btnCopyDBLocalhost = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.PropertyGridDatabase = new System.Windows.Forms.PropertyGrid();
+            this.btnRefreshDataBases = new System.Windows.Forms.PictureBox();
+            this.picAddDataBase = new System.Windows.Forms.PictureBox();
+            this.ListViewDatabase = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ImageList = new System.Windows.Forms.ImageList(this.components);
+            this.btnDeleteDataBases = new System.Windows.Forms.PictureBox();
+            this.lblActionDatabase = new System.Windows.Forms.Label();
+            this.btnAddDatabase = new System.Windows.Forms.PictureBox();
             this.PanelSummary = new System.Windows.Forms.Panel();
             this.TextBoxLogger = new System.Windows.Forms.TextBox();
             this.btnHidePanelSummary = new System.Windows.Forms.PictureBox();
@@ -97,7 +111,6 @@ namespace FiyiStackApp
             this.btnDeleteField = new System.Windows.Forms.PictureBox();
             this.ListViewField = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ImageList = new System.Windows.Forms.ImageList(this.components);
             this.labelFieldName = new System.Windows.Forms.Label();
             this.txtFieldName = new System.Windows.Forms.TextBox();
             this.btnAddField = new System.Windows.Forms.PictureBox();
@@ -115,19 +128,6 @@ namespace FiyiStackApp
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAddTable = new System.Windows.Forms.PictureBox();
             this.btnDeleteTables = new System.Windows.Forms.PictureBox();
-            this.PanelDatabase = new System.Windows.Forms.Panel();
-            this.btnCopyDBProduction = new System.Windows.Forms.PictureBox();
-            this.btnCopyDBLocalhost = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.PropertyGridDatabase = new System.Windows.Forms.PropertyGrid();
-            this.btnRefreshDataBases = new System.Windows.Forms.PictureBox();
-            this.picAddDataBase = new System.Windows.Forms.PictureBox();
-            this.ListViewDatabase = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnDeleteDataBases = new System.Windows.Forms.PictureBox();
-            this.lblActionDatabase = new System.Windows.Forms.Label();
-            this.btnAddDatabase = new System.Windows.Forms.PictureBox();
             this.PanelMain = new System.Windows.Forms.Panel();
             this.btnShowConfigurationForm = new System.Windows.Forms.PictureBox();
             this.labelDataBase = new System.Windows.Forms.Label();
@@ -137,6 +137,8 @@ namespace FiyiStackApp
             this.btnGenerate = new System.Windows.Forms.PictureBox();
             this.picStep2Tables = new System.Windows.Forms.PictureBox();
             this.picStep1Databases = new System.Windows.Forms.PictureBox();
+            this.lblSubtitle = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.PanelProject = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchYourProjectByName = new System.Windows.Forms.TextBox();
@@ -146,8 +148,6 @@ namespace FiyiStackApp
             this.PropertyGridProject = new System.Windows.Forms.PropertyGrid();
             this.btnNewOrEdit = new System.Windows.Forms.PictureBox();
             this.btnNewProject = new System.Windows.Forms.PictureBox();
-            this.lblSubtitle = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.PanelLogin = new System.Windows.Forms.Panel();
             this.picImageLogin = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
@@ -158,6 +158,13 @@ namespace FiyiStackApp
             this.MenuStripDockedTop.SuspendLayout();
             this.PanelDockedCenter.SuspendLayout();
             this.PanelGenerator.SuspendLayout();
+            this.PanelDatabase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBProduction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBLocalhost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRefreshDataBases)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddDataBase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteDataBases)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAddDatabase)).BeginInit();
             this.PanelSummary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).BeginInit();
             this.PanelField.SuspendLayout();
@@ -186,13 +193,6 @@ namespace FiyiStackApp
             ((System.ComponentModel.ISupportInitialize)(this.btnSelectAllTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAddTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteTables)).BeginInit();
-            this.PanelDatabase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBProduction)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBLocalhost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnRefreshDataBases)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAddDataBase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteDataBases)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAddDatabase)).BeginInit();
             this.PanelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnShowConfigurationForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStep3Properties)).BeginInit();
@@ -360,6 +360,200 @@ namespace FiyiStackApp
             this.PanelGenerator.Name = "PanelGenerator";
             this.PanelGenerator.Size = new System.Drawing.Size(1195, 624);
             this.PanelGenerator.TabIndex = 21;
+            // 
+            // PanelDatabase
+            // 
+            this.PanelDatabase.Controls.Add(this.btnCopyDBProduction);
+            this.PanelDatabase.Controls.Add(this.btnCopyDBLocalhost);
+            this.PanelDatabase.Controls.Add(this.label14);
+            this.PanelDatabase.Controls.Add(this.label13);
+            this.PanelDatabase.Controls.Add(this.PropertyGridDatabase);
+            this.PanelDatabase.Controls.Add(this.btnRefreshDataBases);
+            this.PanelDatabase.Controls.Add(this.picAddDataBase);
+            this.PanelDatabase.Controls.Add(this.ListViewDatabase);
+            this.PanelDatabase.Controls.Add(this.btnDeleteDataBases);
+            this.PanelDatabase.Controls.Add(this.lblActionDatabase);
+            this.PanelDatabase.Controls.Add(this.btnAddDatabase);
+            this.PanelDatabase.Location = new System.Drawing.Point(0, 0);
+            this.PanelDatabase.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelDatabase.Name = "PanelDatabase";
+            this.PanelDatabase.Size = new System.Drawing.Size(938, 589);
+            this.PanelDatabase.TabIndex = 104;
+            // 
+            // btnCopyDBProduction
+            // 
+            this.btnCopyDBProduction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCopyDBProduction.Image = ((System.Drawing.Image)(resources.GetObject("btnCopyDBProduction.Image")));
+            this.btnCopyDBProduction.Location = new System.Drawing.Point(707, 510);
+            this.btnCopyDBProduction.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCopyDBProduction.Name = "btnCopyDBProduction";
+            this.btnCopyDBProduction.Size = new System.Drawing.Size(33, 31);
+            this.btnCopyDBProduction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCopyDBProduction.TabIndex = 196;
+            this.btnCopyDBProduction.TabStop = false;
+            this.btnCopyDBProduction.Click += new System.EventHandler(this.btnCopyDBProduction_Click);
+            // 
+            // btnCopyDBLocalhost
+            // 
+            this.btnCopyDBLocalhost.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCopyDBLocalhost.Image = ((System.Drawing.Image)(resources.GetObject("btnCopyDBLocalhost.Image")));
+            this.btnCopyDBLocalhost.Location = new System.Drawing.Point(527, 510);
+            this.btnCopyDBLocalhost.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCopyDBLocalhost.Name = "btnCopyDBLocalhost";
+            this.btnCopyDBLocalhost.Size = new System.Drawing.Size(33, 31);
+            this.btnCopyDBLocalhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCopyDBLocalhost.TabIndex = 195;
+            this.btnCopyDBLocalhost.TabStop = false;
+            this.btnCopyDBLocalhost.Click += new System.EventHandler(this.btnCopyDBLocalhost_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
+            this.label14.Location = new System.Drawing.Point(600, 518);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(99, 23);
+            this.label14.TabIndex = 194;
+            this.label14.Text = "Production";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
+            this.label13.Location = new System.Drawing.Point(431, 518);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 23);
+            this.label13.TabIndex = 193;
+            this.label13.Text = "Localhost";
+            // 
+            // PropertyGridDatabase
+            // 
+            this.PropertyGridDatabase.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PropertyGridDatabase.Location = new System.Drawing.Point(436, 30);
+            this.PropertyGridDatabase.Name = "PropertyGridDatabase";
+            this.PropertyGridDatabase.Size = new System.Drawing.Size(490, 471);
+            this.PropertyGridDatabase.TabIndex = 192;
+            // 
+            // btnRefreshDataBases
+            // 
+            this.btnRefreshDataBases.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshDataBases.Image = global::FiyiStackApp.Properties.Resources.Refresh;
+            this.btnRefreshDataBases.Location = new System.Drawing.Point(86, 551);
+            this.btnRefreshDataBases.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefreshDataBases.Name = "btnRefreshDataBases";
+            this.btnRefreshDataBases.Size = new System.Drawing.Size(33, 31);
+            this.btnRefreshDataBases.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnRefreshDataBases.TabIndex = 191;
+            this.btnRefreshDataBases.TabStop = false;
+            this.btnRefreshDataBases.Click += new System.EventHandler(this.btnRefreshDataBases_Click);
+            // 
+            // picAddDataBase
+            // 
+            this.picAddDataBase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picAddDataBase.Image = global::FiyiStackApp.Properties.Resources.Add;
+            this.picAddDataBase.Location = new System.Drawing.Point(45, 552);
+            this.picAddDataBase.Margin = new System.Windows.Forms.Padding(4);
+            this.picAddDataBase.Name = "picAddDataBase";
+            this.picAddDataBase.Size = new System.Drawing.Size(33, 31);
+            this.picAddDataBase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAddDataBase.TabIndex = 190;
+            this.picAddDataBase.TabStop = false;
+            this.picAddDataBase.Click += new System.EventHandler(this.picAddDataBase_Click);
+            // 
+            // ListViewDatabase
+            // 
+            this.ListViewDatabase.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.ListViewDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
+            this.ListViewDatabase.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewDatabase.CheckBoxes = true;
+            this.ListViewDatabase.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.ListViewDatabase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ListViewDatabase.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
+            this.ListViewDatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
+            this.ListViewDatabase.FullRowSelect = true;
+            this.ListViewDatabase.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.ListViewDatabase.HideSelection = false;
+            this.ListViewDatabase.Location = new System.Drawing.Point(0, 0);
+            this.ListViewDatabase.Margin = new System.Windows.Forms.Padding(4);
+            this.ListViewDatabase.MultiSelect = false;
+            this.ListViewDatabase.Name = "ListViewDatabase";
+            this.ListViewDatabase.ShowGroups = false;
+            this.ListViewDatabase.ShowItemToolTips = true;
+            this.ListViewDatabase.Size = new System.Drawing.Size(423, 543);
+            this.ListViewDatabase.SmallImageList = this.ImageList;
+            this.ListViewDatabase.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.ListViewDatabase.TabIndex = 63;
+            this.ListViewDatabase.TileSize = new System.Drawing.Size(50, 50);
+            this.ListViewDatabase.UseCompatibleStateImageBehavior = false;
+            this.ListViewDatabase.View = System.Windows.Forms.View.List;
+            this.ListViewDatabase.ItemActivate += new System.EventHandler(this.ListViewDatabase_ItemActivate);
+            this.ListViewDatabase.BackColorChanged += new System.EventHandler(this.ListViewDatabase_BackColorChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 200;
+            // 
+            // ImageList
+            // 
+            this.ImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ImageList.ImageStream")));
+            this.ImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.ImageList.Images.SetKeyName(0, "OKNegative.png");
+            this.ImageList.Images.SetKeyName(1, "Upload1.png");
+            this.ImageList.Images.SetKeyName(2, "NotSee1.png");
+            this.ImageList.Images.SetKeyName(3, "DownloadNegative1.png");
+            this.ImageList.Images.SetKeyName(4, "DataTypeInteger1.png");
+            this.ImageList.Images.SetKeyName(5, "DataTypeBoolean1.png");
+            this.ImageList.Images.SetKeyName(6, "DataTypeText1.png");
+            this.ImageList.Images.SetKeyName(7, "DataTypeDecimal1.png");
+            this.ImageList.Images.SetKeyName(8, "DataTypePK1.png");
+            this.ImageList.Images.SetKeyName(9, "DataTypeDateTime1.png");
+            this.ImageList.Images.SetKeyName(10, "DataTypeTime1.png");
+            this.ImageList.Images.SetKeyName(11, "DataTypeFK1.png");
+            this.ImageList.Images.SetKeyName(12, "DataTypeHexColour1.png");
+            // 
+            // btnDeleteDataBases
+            // 
+            this.btnDeleteDataBases.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteDataBases.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteDataBases.Image")));
+            this.btnDeleteDataBases.Location = new System.Drawing.Point(4, 551);
+            this.btnDeleteDataBases.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteDataBases.Name = "btnDeleteDataBases";
+            this.btnDeleteDataBases.Size = new System.Drawing.Size(33, 31);
+            this.btnDeleteDataBases.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnDeleteDataBases.TabIndex = 66;
+            this.btnDeleteDataBases.TabStop = false;
+            this.btnDeleteDataBases.Click += new System.EventHandler(this.btnDeleteDataBases_Click);
+            // 
+            // lblActionDatabase
+            // 
+            this.lblActionDatabase.AutoSize = true;
+            this.lblActionDatabase.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
+            this.lblActionDatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
+            this.lblActionDatabase.Location = new System.Drawing.Point(431, 0);
+            this.lblActionDatabase.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblActionDatabase.Name = "lblActionDatabase";
+            this.lblActionDatabase.Size = new System.Drawing.Size(52, 27);
+            this.lblActionDatabase.TabIndex = 85;
+            this.lblActionDatabase.Text = "Add";
+            // 
+            // btnAddDatabase
+            // 
+            this.btnAddDatabase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddDatabase.Image = ((System.Drawing.Image)(resources.GetObject("btnAddDatabase.Image")));
+            this.btnAddDatabase.Location = new System.Drawing.Point(809, 544);
+            this.btnAddDatabase.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddDatabase.Name = "btnAddDatabase";
+            this.btnAddDatabase.Size = new System.Drawing.Size(117, 38);
+            this.btnAddDatabase.TabIndex = 92;
+            this.btnAddDatabase.TabStop = false;
+            this.btnAddDatabase.Click += new System.EventHandler(this.btnAddDatabase_Click);
+            this.btnAddDatabase.Paint += new System.Windows.Forms.PaintEventHandler(this.btnAddDatabase_Paint);
             // 
             // PanelSummary
             // 
@@ -1155,24 +1349,6 @@ namespace FiyiStackApp
             this.columnHeader3.Text = "Name";
             this.columnHeader3.Width = 200;
             // 
-            // ImageList
-            // 
-            this.ImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ImageList.ImageStream")));
-            this.ImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.ImageList.Images.SetKeyName(0, "OKNegative.png");
-            this.ImageList.Images.SetKeyName(1, "Upload1.png");
-            this.ImageList.Images.SetKeyName(2, "NotSee1.png");
-            this.ImageList.Images.SetKeyName(3, "DownloadNegative1.png");
-            this.ImageList.Images.SetKeyName(4, "DataTypeInteger1.png");
-            this.ImageList.Images.SetKeyName(5, "DataTypeBoolean1.png");
-            this.ImageList.Images.SetKeyName(6, "DataTypeText1.png");
-            this.ImageList.Images.SetKeyName(7, "DataTypeDecimal1.png");
-            this.ImageList.Images.SetKeyName(8, "DataTypePK1.png");
-            this.ImageList.Images.SetKeyName(9, "DataTypeDateTime1.png");
-            this.ImageList.Images.SetKeyName(10, "DataTypeTime1.png");
-            this.ImageList.Images.SetKeyName(11, "DataTypeFK1.png");
-            this.ImageList.Images.SetKeyName(12, "DataTypeHexColour1.png");
-            // 
             // labelFieldName
             // 
             this.labelFieldName.AutoSize = true;
@@ -1400,182 +1576,6 @@ namespace FiyiStackApp
             this.btnDeleteTables.TabStop = false;
             this.btnDeleteTables.Click += new System.EventHandler(this.btnDeleteTables_Click);
             // 
-            // PanelDatabase
-            // 
-            this.PanelDatabase.Controls.Add(this.btnCopyDBProduction);
-            this.PanelDatabase.Controls.Add(this.btnCopyDBLocalhost);
-            this.PanelDatabase.Controls.Add(this.label14);
-            this.PanelDatabase.Controls.Add(this.label13);
-            this.PanelDatabase.Controls.Add(this.PropertyGridDatabase);
-            this.PanelDatabase.Controls.Add(this.btnRefreshDataBases);
-            this.PanelDatabase.Controls.Add(this.picAddDataBase);
-            this.PanelDatabase.Controls.Add(this.ListViewDatabase);
-            this.PanelDatabase.Controls.Add(this.btnDeleteDataBases);
-            this.PanelDatabase.Controls.Add(this.lblActionDatabase);
-            this.PanelDatabase.Controls.Add(this.btnAddDatabase);
-            this.PanelDatabase.Location = new System.Drawing.Point(0, 0);
-            this.PanelDatabase.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelDatabase.Name = "PanelDatabase";
-            this.PanelDatabase.Size = new System.Drawing.Size(938, 589);
-            this.PanelDatabase.TabIndex = 104;
-            // 
-            // btnCopyDBProduction
-            // 
-            this.btnCopyDBProduction.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCopyDBProduction.Image = ((System.Drawing.Image)(resources.GetObject("btnCopyDBProduction.Image")));
-            this.btnCopyDBProduction.Location = new System.Drawing.Point(707, 510);
-            this.btnCopyDBProduction.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCopyDBProduction.Name = "btnCopyDBProduction";
-            this.btnCopyDBProduction.Size = new System.Drawing.Size(33, 31);
-            this.btnCopyDBProduction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnCopyDBProduction.TabIndex = 196;
-            this.btnCopyDBProduction.TabStop = false;
-            this.btnCopyDBProduction.Click += new System.EventHandler(this.btnCopyDBProduction_Click);
-            // 
-            // btnCopyDBLocalhost
-            // 
-            this.btnCopyDBLocalhost.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCopyDBLocalhost.Image = ((System.Drawing.Image)(resources.GetObject("btnCopyDBLocalhost.Image")));
-            this.btnCopyDBLocalhost.Location = new System.Drawing.Point(527, 510);
-            this.btnCopyDBLocalhost.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCopyDBLocalhost.Name = "btnCopyDBLocalhost";
-            this.btnCopyDBLocalhost.Size = new System.Drawing.Size(33, 31);
-            this.btnCopyDBLocalhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnCopyDBLocalhost.TabIndex = 195;
-            this.btnCopyDBLocalhost.TabStop = false;
-            this.btnCopyDBLocalhost.Click += new System.EventHandler(this.btnCopyDBLocalhost_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.label14.Location = new System.Drawing.Point(600, 518);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(99, 23);
-            this.label14.TabIndex = 194;
-            this.label14.Text = "Production";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.label13.Location = new System.Drawing.Point(431, 518);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(88, 23);
-            this.label13.TabIndex = 193;
-            this.label13.Text = "Localhost";
-            // 
-            // PropertyGridDatabase
-            // 
-            this.PropertyGridDatabase.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PropertyGridDatabase.Location = new System.Drawing.Point(436, 30);
-            this.PropertyGridDatabase.Name = "PropertyGridDatabase";
-            this.PropertyGridDatabase.Size = new System.Drawing.Size(490, 471);
-            this.PropertyGridDatabase.TabIndex = 192;
-            // 
-            // btnRefreshDataBases
-            // 
-            this.btnRefreshDataBases.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshDataBases.Image = global::FiyiStackApp.Properties.Resources.Refresh;
-            this.btnRefreshDataBases.Location = new System.Drawing.Point(86, 551);
-            this.btnRefreshDataBases.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRefreshDataBases.Name = "btnRefreshDataBases";
-            this.btnRefreshDataBases.Size = new System.Drawing.Size(33, 31);
-            this.btnRefreshDataBases.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnRefreshDataBases.TabIndex = 191;
-            this.btnRefreshDataBases.TabStop = false;
-            this.btnRefreshDataBases.Click += new System.EventHandler(this.btnRefreshDataBases_Click);
-            // 
-            // picAddDataBase
-            // 
-            this.picAddDataBase.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picAddDataBase.Image = global::FiyiStackApp.Properties.Resources.Add;
-            this.picAddDataBase.Location = new System.Drawing.Point(45, 552);
-            this.picAddDataBase.Margin = new System.Windows.Forms.Padding(4);
-            this.picAddDataBase.Name = "picAddDataBase";
-            this.picAddDataBase.Size = new System.Drawing.Size(33, 31);
-            this.picAddDataBase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAddDataBase.TabIndex = 190;
-            this.picAddDataBase.TabStop = false;
-            this.picAddDataBase.Click += new System.EventHandler(this.picAddDataBase_Click);
-            // 
-            // ListViewDatabase
-            // 
-            this.ListViewDatabase.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.ListViewDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.ListViewDatabase.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListViewDatabase.CheckBoxes = true;
-            this.ListViewDatabase.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.ListViewDatabase.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ListViewDatabase.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
-            this.ListViewDatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.ListViewDatabase.FullRowSelect = true;
-            this.ListViewDatabase.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.ListViewDatabase.HideSelection = false;
-            this.ListViewDatabase.Location = new System.Drawing.Point(0, 0);
-            this.ListViewDatabase.Margin = new System.Windows.Forms.Padding(4);
-            this.ListViewDatabase.MultiSelect = false;
-            this.ListViewDatabase.Name = "ListViewDatabase";
-            this.ListViewDatabase.ShowGroups = false;
-            this.ListViewDatabase.ShowItemToolTips = true;
-            this.ListViewDatabase.Size = new System.Drawing.Size(423, 543);
-            this.ListViewDatabase.SmallImageList = this.ImageList;
-            this.ListViewDatabase.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.ListViewDatabase.TabIndex = 63;
-            this.ListViewDatabase.TileSize = new System.Drawing.Size(50, 50);
-            this.ListViewDatabase.UseCompatibleStateImageBehavior = false;
-            this.ListViewDatabase.View = System.Windows.Forms.View.List;
-            this.ListViewDatabase.ItemActivate += new System.EventHandler(this.ListViewDatabase_ItemActivate);
-            this.ListViewDatabase.BackColorChanged += new System.EventHandler(this.ListViewDatabase_BackColorChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 200;
-            // 
-            // btnDeleteDataBases
-            // 
-            this.btnDeleteDataBases.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteDataBases.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteDataBases.Image")));
-            this.btnDeleteDataBases.Location = new System.Drawing.Point(4, 551);
-            this.btnDeleteDataBases.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteDataBases.Name = "btnDeleteDataBases";
-            this.btnDeleteDataBases.Size = new System.Drawing.Size(33, 31);
-            this.btnDeleteDataBases.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnDeleteDataBases.TabIndex = 66;
-            this.btnDeleteDataBases.TabStop = false;
-            this.btnDeleteDataBases.Click += new System.EventHandler(this.btnDeleteDataBases_Click);
-            // 
-            // lblActionDatabase
-            // 
-            this.lblActionDatabase.AutoSize = true;
-            this.lblActionDatabase.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
-            this.lblActionDatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(221)))));
-            this.lblActionDatabase.Location = new System.Drawing.Point(431, 0);
-            this.lblActionDatabase.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblActionDatabase.Name = "lblActionDatabase";
-            this.lblActionDatabase.Size = new System.Drawing.Size(52, 27);
-            this.lblActionDatabase.TabIndex = 85;
-            this.lblActionDatabase.Text = "Add";
-            // 
-            // btnAddDatabase
-            // 
-            this.btnAddDatabase.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDatabase.Image = ((System.Drawing.Image)(resources.GetObject("btnAddDatabase.Image")));
-            this.btnAddDatabase.Location = new System.Drawing.Point(809, 544);
-            this.btnAddDatabase.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddDatabase.Name = "btnAddDatabase";
-            this.btnAddDatabase.Size = new System.Drawing.Size(117, 38);
-            this.btnAddDatabase.TabIndex = 92;
-            this.btnAddDatabase.TabStop = false;
-            this.btnAddDatabase.Click += new System.EventHandler(this.btnAddDatabase_Click);
-            this.btnAddDatabase.Paint += new System.Windows.Forms.PaintEventHandler(this.btnAddDatabase_Paint);
-            // 
             // PanelMain
             // 
             this.PanelMain.Controls.Add(this.btnShowConfigurationForm);
@@ -1700,6 +1700,28 @@ namespace FiyiStackApp
             this.picStep1Databases.TabIndex = 97;
             this.picStep1Databases.TabStop = false;
             // 
+            // lblSubtitle
+            // 
+            this.lblSubtitle.AutoSize = true;
+            this.lblSubtitle.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
+            this.lblSubtitle.Location = new System.Drawing.Point(36, 69);
+            this.lblSubtitle.Name = "lblSubtitle";
+            this.lblSubtitle.Size = new System.Drawing.Size(98, 27);
+            this.lblSubtitle.TabIndex = 19;
+            this.lblSubtitle.Text = "lblSubtitle";
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
+            this.lblTitle.Location = new System.Drawing.Point(32, 17);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(151, 50);
+            this.lblTitle.TabIndex = 18;
+            this.lblTitle.Text = "lblTitle";
+            // 
             // PanelProject
             // 
             this.PanelProject.Controls.Add(this.label1);
@@ -1823,28 +1845,6 @@ namespace FiyiStackApp
             this.btnNewProject.TabStop = false;
             this.btnNewProject.Click += new System.EventHandler(this.btnNewProject_Click);
             // 
-            // lblSubtitle
-            // 
-            this.lblSubtitle.AutoSize = true;
-            this.lblSubtitle.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(36, 69);
-            this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(98, 27);
-            this.lblSubtitle.TabIndex = 19;
-            this.lblSubtitle.Text = "lblSubtitle";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.lblTitle.Location = new System.Drawing.Point(32, 17);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(151, 50);
-            this.lblTitle.TabIndex = 18;
-            this.lblTitle.Text = "lblTitle";
-            // 
             // PanelLogin
             // 
             this.PanelLogin.Controls.Add(this.picImageLogin);
@@ -1959,6 +1959,14 @@ namespace FiyiStackApp
             this.PanelDockedCenter.ResumeLayout(false);
             this.PanelDockedCenter.PerformLayout();
             this.PanelGenerator.ResumeLayout(false);
+            this.PanelDatabase.ResumeLayout(false);
+            this.PanelDatabase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBProduction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBLocalhost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRefreshDataBases)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAddDataBase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteDataBases)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAddDatabase)).EndInit();
             this.PanelSummary.ResumeLayout(false);
             this.PanelSummary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHidePanelSummary)).EndInit();
@@ -1997,14 +2005,6 @@ namespace FiyiStackApp
             ((System.ComponentModel.ISupportInitialize)(this.btnSelectAllTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAddTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteTables)).EndInit();
-            this.PanelDatabase.ResumeLayout(false);
-            this.PanelDatabase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBProduction)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopyDBLocalhost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnRefreshDataBases)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAddDataBase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteDataBases)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAddDatabase)).EndInit();
             this.PanelMain.ResumeLayout(false);
             this.PanelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnShowConfigurationForm)).EndInit();

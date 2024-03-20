@@ -789,7 +789,13 @@ namespace FiyiStackApp
         {
             Models.Core.DataBase DataBase = new Models.Core.DataBase
             {
-                ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework",
+                DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId,
+                ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId,
+                Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active,
+                UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation,
+                UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification,
+                Name = Program.WinFormConfigurationComponent.DataBaseChosen.Name,
+                ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework;TrustServerCertificate=True",
                 DateTimeLastModification = DateTime.Now,
                 DateTimeCreation = DateTime.Now
             };
