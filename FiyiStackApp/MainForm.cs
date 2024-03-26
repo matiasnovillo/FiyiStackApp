@@ -17,88 +17,106 @@ namespace FiyiStackApp
 
         public MainForm()
         {
-            InitializeComponent();
-            //Basic
-            Loading = true;
-            Cursor = Cursors.WaitCursor;
-            lblMessageDockedBottom.Text = "";
-
-            #region Manage radius of WinForms components
-            Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
-
-            
-
-            //Set border radius to various components
-            txtFantasyNameOrEmail.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtPassword.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtSearchYourProjectByName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            ListViewProjects.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            ListViewDatabase.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            ListViewTable.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            ListViewField.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            TextBoxLogger.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-
-            txtFieldName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtFieldHistoryUser.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtTextRegex.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtDateTimeMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtDateTimeMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtTimeSpanMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtTimeSpanMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtHexColourMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtHexColourMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            txtForeignTableName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-
-            cmbDataType.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
-            #endregion
-
-            if (Program.WinFormConfigurationComponent.RememberMe)//Remembered user
+            try
             {
-                txtFantasyNameOrEmail.Text = Program.WinFormConfigurationComponent.FantasyNameOrEmailFromLocalDB;
-                chbRememberMe.Checked = true;
-                txtFantasyNameOrEmail.TabIndex = 1;
-                txtPassword.TabIndex = 0;
+                InitializeComponent();
+                //Basic
+                Loading = true;
+                Cursor = Cursors.WaitCursor;
+                lblMessageDockedBottom.Text = "";
 
+                #region Manage radius of WinForms components
+                Color BlackColorPlus1 = (Color)new ColorConverter().ConvertFromString("#20262D");
+
+
+
+                //Set border radius to various components
+                txtFantasyNameOrEmail.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtPassword.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtSearchYourProjectByName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                ListViewProjects.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                ListViewDatabase.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                ListViewTable.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                ListViewField.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                TextBoxLogger.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+
+                txtFieldName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtFieldHistoryUser.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtTextRegex.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtDateTimeMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtDateTimeMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtTimeSpanMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtTimeSpanMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtHexColourMax.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtHexColourMin.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtForeignTableName.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+
+                cmbDataType.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                #endregion
+
+                if (Program.WinFormConfigurationComponent.RememberMe)//Remembered user
+                {
+                    txtFantasyNameOrEmail.Text = Program.WinFormConfigurationComponent.FantasyNameOrEmailFromLocalDB;
+                    chbRememberMe.Checked = true;
+                    txtFantasyNameOrEmail.TabIndex = 1;
+                    txtPassword.TabIndex = 0;
+
+                }
+                else//Not remembered user
+                {
+                    txtFantasyNameOrEmail.Text = "";
+                    chbRememberMe.Checked = false;
+                    txtFantasyNameOrEmail.TabIndex = 0;
+                    txtPassword.TabIndex = 1;
+                }
+                Loading = false;
+
+                //Load ComboBox for DataType
+                Program.WinFormConfigurationComponent.DataType = new DataType();
+                cmbDataType.ValueMember = "Value";
+                cmbDataType.DisplayMember = "Text";
+                cmbDataType.DataSource = new DataType().GetList("");
+
+                //Basico
+                PanelLogin.Location = new Point(6, 106);
+                PanelProject.Location = new Point(6, 106);
+                PanelGenerator.Location = new Point(6, 106);
+
+                PanelDatabase.Location = new Point(242, 17);
+                PanelTable.Location = new Point(242, 17);
+                PanelField.Location = new Point(242, 17);
+                PanelSummary.Location = new Point(242, 17);
+
+                picStep1Databases.Visible = true;
+                picStep2Tables.Visible = false;
+                picStep3Properties.Visible = false;
+
+                lblTitle.Text = "Welcome to FiyiStack. The great low-code generator";
+                lblSubtitle.Text = "More than 5.000 lines of code per table. And keeps increasing";
+                cambiarDatosDeUsuarioToolStripMenuItem.Visible = false;
+                volverAProyectosToolStripMenuItem.Visible = false;
+
+                HideAllPanelsExcept(PanelLogin);
+                HideAllGeneratorPanelsExcept(PanelDatabase);
+
+                lblMessageDockedBottom.Text = "Ready";
+                Cursor = Cursors.Default;
             }
-            else//Not remembered user
+            catch (Exception ex)
             {
-                txtFantasyNameOrEmail.Text = "";
-                chbRememberMe.Checked = false;
-                txtFantasyNameOrEmail.TabIndex = 0;
-                txtPassword.TabIndex = 1;
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
             }
-            Loading = false;
-
-            //Load ComboBox for DataType
-            Program.WinFormConfigurationComponent.DataType = new DataType();
-            cmbDataType.ValueMember = "Value";
-            cmbDataType.DisplayMember = "Text";
-            cmbDataType.DataSource = new DataType().GetList("");
-
-            //Basico
-            PanelLogin.Location = new Point(6, 106);
-            PanelProject.Location = new Point(6, 106);
-            PanelGenerator.Location = new Point(6, 106);
-
-            PanelDatabase.Location = new Point(242, 17);
-            PanelTable.Location = new Point(242, 17);
-            PanelField.Location = new Point(242, 17);
-            PanelSummary.Location = new Point(242, 17);
-
-            picStep1Databases.Visible = true;
-            picStep2Tables.Visible = false;
-            picStep3Properties.Visible = false;
-
-            lblTitle.Text = "Welcome to FiyiStack. The great low-code generator";
-            lblSubtitle.Text = "More than 5.000 lines of code per table. And keeps increasing";
-            cambiarDatosDeUsuarioToolStripMenuItem.Visible = false;
-            volverAProyectosToolStripMenuItem.Visible = false;
-
-            HideAllPanelsExcept(PanelLogin);
-            HideAllGeneratorPanelsExcept(PanelDatabase);
-            
-            lblMessageDockedBottom.Text = "Ready";
-            Cursor = Cursors.Default;
         }
 
         private void HideAllPanelsExcept(Panel PanelToShow)
@@ -178,21 +196,52 @@ namespace FiyiStackApp
             {
                 lblMessageDockedBottom.Text = ex.Message;
                 Cursor = Cursors.Default; 
-                Console.WriteLine(ex.Message); 
+                Console.WriteLine(ex.Message);
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
             }
         }
 
         private void ShowingPanelProject()
         {
-            //Basico (inicio)
-            lblMessageDockedBottom.Text = "Loading";
-            Cursor = Cursors.WaitCursor;
+            try
+            {
+                //Basico (inicio)
+                lblMessageDockedBottom.Text = "Loading";
+                Cursor = Cursors.WaitCursor;
 
-            PropertyGridProject.SelectedObject = new Project();
+                PropertyGridProject.SelectedObject = new Project();
 
-            lblTitle.Text = "Load or edit a project";
-            lblSubtitle.Text = "";
-            cambiarDatosDeUsuarioToolStripMenuItem.Visible = true;
+                lblTitle.Text = "Load or edit a project";
+                lblSubtitle.Text = "";
+                cambiarDatosDeUsuarioToolStripMenuItem.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void LoadProjects()
@@ -212,23 +261,55 @@ namespace FiyiStackApp
                     ListViewProjects.Items.Add(item);
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) 
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void NewProject()
         {
-            lblMessageDockedBottom.Text = "Loading";
-            Cursor = Cursors.WaitCursor;
+            try
+            {
+                lblMessageDockedBottom.Text = "Loading";
+                Cursor = Cursors.WaitCursor;
 
-            //Basic
-            btnNewOrEdit.Image = Resources.btnNew;
-            PropertyGridProject.SelectedObject = new Project();
+                //Basic
+                btnNewOrEdit.Image = Resources.btnNew;
+                PropertyGridProject.SelectedObject = new Project();
 
-            //Create a "zero" Project
-            Program.WinFormConfigurationComponent.ProjectChosen = new Project();
+                //Create a "zero" Project
+                Program.WinFormConfigurationComponent.ProjectChosen = new Project();
 
-            lblMessageDockedBottom.Text = "Ready";
-            Cursor = Cursors.Default;
+                lblMessageDockedBottom.Text = "Ready";
+                Cursor = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void txtSearchYourProjectByName_KeyDown(object sender, KeyEventArgs e)
@@ -278,31 +359,62 @@ namespace FiyiStackApp
             catch (Exception ex)
             {
                 lblMessageDockedBottom.Text = ex.Message;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
             }
         }
 
         private void ListViewYourProjects_ItemActivate(object sender, EventArgs e)
         {
-            lblMessageDockedBottom.Text = "Loading";
-            Cursor = Cursors.WaitCursor;
-            btnNewOrEdit.Image = Resources.btnEdit;
-
-            Project ProjectChosen = new Project();
-            foreach (ListViewItem project in ListViewProjects.Items)
+            try
             {
-                if (project.Selected)
+                lblMessageDockedBottom.Text = "Loading";
+                Cursor = Cursors.WaitCursor;
+                btnNewOrEdit.Image = Resources.btnEdit;
+
+                Project ProjectChosen = new Project();
+                foreach (ListViewItem project in ListViewProjects.Items)
                 {
-                    ProjectChosen = Program.WinFormConfigurationComponent.lstProject.Find(projectSaved =>
-                            projectSaved.ProjectId == Convert.ToInt32(project.Tag));
+                    if (project.Selected)
+                    {
+                        ProjectChosen = Program.WinFormConfigurationComponent.lstProject.Find(projectSaved =>
+                                projectSaved.ProjectId == Convert.ToInt32(project.Tag));
 
-                    //Load Basic panel of selected project
-                    Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
-                    PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
+                        //Load Basic panel of selected project
+                        Program.WinFormConfigurationComponent.ProjectChosen = new Project(ProjectChosen.ProjectId);
+                        PropertyGridProject.SelectedObject = Program.WinFormConfigurationComponent.ProjectChosen;
+                    }
                 }
-            }
 
-            lblMessageDockedBottom.Text = "Ready";
-            Cursor = Cursors.Default;
+                lblMessageDockedBottom.Text = "Ready";
+                Cursor = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void cambiarDatosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -495,6 +607,19 @@ namespace FiyiStackApp
             catch (Exception ex)
             {
                 lblMessageDockedBottom.Text = ex.Message;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
             }
         }
 
@@ -717,7 +842,24 @@ namespace FiyiStackApp
                 TextBoxLogger.Text += "Ready. Generation done";
                 Cursor = Cursors.Default;
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void LoadTables()
@@ -752,7 +894,25 @@ namespace FiyiStackApp
                 Cursor = Cursors.Default;
             }
             catch (Exception ex)
-            { lblMessageDockedBottom.Text = ex.Message; ListViewTable.Items.Clear(); ListViewField.Items.Clear(); Cursor = Cursors.Default; }
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                ListViewTable.Items.Clear(); 
+                ListViewField.Items.Clear(); 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnShowConfigurationForm_Click(object sender, EventArgs e)
@@ -787,39 +947,75 @@ namespace FiyiStackApp
 
         private void btnCopyDBLocalhost_Click(object sender, EventArgs e)
         {
-            Models.Core.DataBase DataBase = new Models.Core.DataBase
+            try
             {
-                DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId,
-                ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId,
-                Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active,
-                UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation,
-                UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification,
-                Name = Program.WinFormConfigurationComponent.DataBaseChosen.Name,
-                ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework;TrustServerCertificate=True",
-                DateTimeLastModification = DateTime.Now,
-                DateTimeCreation = DateTime.Now
-            };
+                DataBase DataBase = new()
+                {
+                    DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId,
+                    ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId,
+                    Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active,
+                    UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation,
+                    UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification,
+                    Name = Program.WinFormConfigurationComponent.DataBaseChosen.Name,
+                    ConnectionStringForMSSQLServer = "data source =.;initial catalog=[PUT_A_DATABASE_NAME];Integrated Security = SSPI;MultipleActiveResultSets=True;Pooling=false;persist security info=True;App=EntityFramework;TrustServerCertificate=True",
+                    DateTimeLastModification = DateTime.Now,
+                    DateTimeCreation = DateTime.Now
+                };
 
-            Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
+                Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
 
-            PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+                PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnCopyDBProduction_Click(object sender, EventArgs e)
         {
-            DataBase DataBase = new();
-            DataBase.DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId;
-            DataBase.ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId;
-            DataBase.Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active;
-            DataBase.UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation;
-            DataBase.DateTimeCreation = Program.WinFormConfigurationComponent.DataBaseChosen.DateTimeCreation;
-            DataBase.UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification;
-            DataBase.ConnectionStringForMSSQLServer = "Password=[PUT_A_PASSWORD];Persist Security Info=True;User ID=[PUT_A_USER_ID];Initial Catalog=[PUT_A_DATABASE_NAME];Data Source=[PUT_A_SOURCE_(SERVER)];TrustServerCertificate=True";
-            DataBase.DateTimeLastModification = DateTime.Now;
+            try
+            {
+                DataBase DataBase = new();
+                DataBase.DataBaseId = Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId;
+                DataBase.ProjectId = Program.WinFormConfigurationComponent.DataBaseChosen.ProjectId;
+                DataBase.Active = Program.WinFormConfigurationComponent.DataBaseChosen.Active;
+                DataBase.UserIdCreation = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdCreation;
+                DataBase.DateTimeCreation = Program.WinFormConfigurationComponent.DataBaseChosen.DateTimeCreation;
+                DataBase.UserIdLastModification = Program.WinFormConfigurationComponent.DataBaseChosen.UserIdLastModification;
+                DataBase.ConnectionStringForMSSQLServer = "Password=[PUT_A_PASSWORD];Persist Security Info=True;User ID=[PUT_A_USER_ID];Initial Catalog=[PUT_A_DATABASE_NAME];Data Source=[PUT_A_SOURCE_(SERVER)];TrustServerCertificate=True";
+                DataBase.DateTimeLastModification = DateTime.Now;
 
-            Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
+                Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
 
-            PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+                PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnAddDatabase_Click(object sender, EventArgs e)
@@ -851,7 +1047,24 @@ namespace FiyiStackApp
 
                 LoadDataBases();
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void volverAProyectosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -892,7 +1105,24 @@ namespace FiyiStackApp
                     }
                 }
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void LoadDataBases()
@@ -919,21 +1149,56 @@ namespace FiyiStackApp
                 btnAddDatabase.Image = Resources.btnNew;
                 Cursor = Cursors.Default;
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void picAddDataBase_Click(object sender, EventArgs e)
         {
-            DataBase DataBase = new()
+            try
             {
-                ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
-            };
+                DataBase DataBase = new()
+                {
+                    ConnectionStringForMSSQLServer = "data source =.; initial catalog = [PUT_A_DATABASE_NAME]; Integrated Security = SSPI; MultipleActiveResultSets=True;Pooling=false;Persist Security Info=True;App=EntityFramework;TrustServerCertificate=True"
+                };
 
-            Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
-            PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
+                Program.WinFormConfigurationComponent.DataBaseChosen = DataBase;
+                PropertyGridDatabase.SelectedObject = Program.WinFormConfigurationComponent.DataBaseChosen;
 
-            btnAddDatabase.Image = Resources.btnNew;
-            lblActionDatabase.Text = "Add";
+                btnAddDatabase.Image = Resources.btnNew;
+                lblActionDatabase.Text = "Add";
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnRefreshDataBases_Click(object sender, EventArgs e)
@@ -963,7 +1228,24 @@ namespace FiyiStackApp
 
                 lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} ({Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId}) | Table: | Field: ";
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnDeleteTables_Click(object sender, EventArgs e)
@@ -991,7 +1273,24 @@ namespace FiyiStackApp
                     }
                 }
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnSelectAllTable_Click(object sender, EventArgs e)
@@ -1004,22 +1303,40 @@ namespace FiyiStackApp
 
         private void AddTableButton_Click(object sender, EventArgs e)
         {
-            Table Table = new();
-            Table.Scheme = "dbo";
-            Table.Version = "1";
-
-            Program.WinFormConfigurationComponent.TableChosen = Table;
-            PropertyGridTable.SelectedObject = Program.WinFormConfigurationComponent.TableChosen;
-
-            btnAddTable.Image = Resources.btnNew;
-            lblActionTable.Text = "Add";
-
-            //Uncheck all fields in ListViewTable
-            foreach (ListViewItem item in ListViewTable.Items)
+            try
             {
-                item.Checked = false;
-                item.Focused = false;
-                item.Selected = false;
+                Table Table = new();
+                Table.Scheme = "dbo";
+                Table.Version = "1";
+
+                Program.WinFormConfigurationComponent.TableChosen = Table;
+                PropertyGridTable.SelectedObject = Program.WinFormConfigurationComponent.TableChosen;
+
+                btnAddTable.Image = Resources.btnNew;
+                lblActionTable.Text = "Add";
+
+                //Uncheck all fields in ListViewTable
+                foreach (ListViewItem item in ListViewTable.Items)
+                {
+                    item.Checked = false;
+                    item.Focused = false;
+                    item.Selected = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
             }
         }
 
@@ -1052,7 +1369,24 @@ namespace FiyiStackApp
 
                 lblSubtitle.Text = $@"Database: {Program.WinFormConfigurationComponent.DataBaseChosen.Name} ({Program.WinFormConfigurationComponent.DataBaseChosen.DataBaseId}) | Table: {Program.WinFormConfigurationComponent.TableChosen.Name} ({Program.WinFormConfigurationComponent.TableChosen.TableId}) | Field: ";
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void LoadFields()
@@ -1139,7 +1473,25 @@ namespace FiyiStackApp
                 cmbDataType.SelectedIndex = 0;
                 Cursor = Cursors.Default;
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; ListViewField.Items.Clear(); Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                ListViewField.Items.Clear(); 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnAddTable_Click(object sender, EventArgs e)
@@ -1193,7 +1545,7 @@ namespace FiyiStackApp
                     int TableAddedId = Program.WinFormConfigurationComponent.TableChosen.Add();
 
                     //Adding Primary Key (Id) always
-                    Models.Core.Field Field = new Models.Core.Field()
+                    Field Field = new()
                     {
                         FieldId = 0,
                         TableId = TableAddedId,
@@ -1215,13 +1567,12 @@ namespace FiyiStackApp
                     //Adding auditing fields if the user want
                     if (Program.WinFormConfigurationComponent.Configuration.AddAuditingFieldsToNewTable)
                     {
-                        foreach (Models.Core.Field field in Program.WinFormConfigurationComponent.lstAuditingFields)
+                        foreach (Field field in Program.WinFormConfigurationComponent.lstAuditingFields)
                         {
                             field.TableId = TableAddedId;
                             field.Add();
                         }
                     }
-
 
                     Cursor = Cursors.Default;
                 }
@@ -1240,7 +1591,24 @@ namespace FiyiStackApp
                 lblActionTable.Text = "Add";
                 lblMessageDockedBottom.Text = $"Ready. [{Program.WinFormConfigurationComponent.TableChosen.Scheme}].[{Program.WinFormConfigurationComponent.TableChosen.Area}.{Program.WinFormConfigurationComponent.TableChosen.Name}] added/updated correctly";
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message;
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnDeleteField_Click(object sender, EventArgs e)
@@ -1273,7 +1641,24 @@ namespace FiyiStackApp
                     }
                 }
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message;
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnSelectAllField_Click(object sender, EventArgs e)
@@ -1423,7 +1808,24 @@ namespace FiyiStackApp
                         throw new Exception("The Data Type selector entered in error");
                 }
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void ListViewField_ItemActivate(object sender, EventArgs e)
@@ -1542,7 +1944,24 @@ namespace FiyiStackApp
 
                 lblMessageDockedBottom.Text = Program.WinFormConfigurationComponent.FieldChosen.Name + " loaded";
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnAddField_Click(object sender, EventArgs e)
@@ -1750,7 +2169,24 @@ namespace FiyiStackApp
                 }
                 LoadFields();
             }
-            catch (Exception ex) { lblMessageDockedBottom.Text = ex.Message; Cursor = Cursors.Default; }
+            catch (Exception ex) 
+            { 
+                lblMessageDockedBottom.Text = ex.Message; 
+                Cursor = Cursors.Default;
+
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnHidePanelSummary_Click(object sender, EventArgs e)

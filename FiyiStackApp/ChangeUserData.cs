@@ -15,9 +15,27 @@ namespace FiyiStackApp
     {
         public ChangeUserData()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            txtNewPassword.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+                txtNewPassword.BackColor = Program.WinFormConfigurationComponent.BlackColorPlus1;
+            }
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message, 
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
 
         private void btnEditPassword_Paint(object sender, PaintEventArgs e)
@@ -27,15 +45,33 @@ namespace FiyiStackApp
 
         private void btnEditUserData_Click(object sender, EventArgs e)
         {
-            if (txtNewPassword.Text.Trim() != "" || txtNewUserName.Text.Trim() != "" || txtNewEmail.Text.Trim() != "")
+            try
             {
-                User LoggedUser = Program.WinFormConfigurationComponent.UserLogged;
-                LoggedUser.ChangeUserDataByUserId(LoggedUser.UserId, 
-                    FiyiStack.Library.NET.Security.EncodeString(txtNewPassword.Text),
-                    txtNewUserName.Text,
-                    txtNewEmail.Text);
+                if (txtNewPassword.Text.Trim() != "" || txtNewUserName.Text.Trim() != "" || txtNewEmail.Text.Trim() != "")
+                {
+                    User LoggedUser = Program.WinFormConfigurationComponent.UserLogged;
+                    LoggedUser.ChangeUserDataByUserId(LoggedUser.UserId,
+                        FiyiStack.Library.NET.Security.EncodeString(txtNewPassword.Text),
+                        txtNewUserName.Text,
+                        txtNewEmail.Text);
+                }
+                this.Close();
             }
-            this.Close();
+            catch (Exception ex)
+            {
+                Failure failure = new()
+                {
+                    Active = true,
+                    UserCreationId = 1,
+                    UserLastModificationId = 1,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Source = ex.Source,
+                };
+                failure.Add();
+            }
         }
     }
 }

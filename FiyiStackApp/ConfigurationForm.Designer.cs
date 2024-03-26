@@ -376,7 +376,6 @@ namespace FiyiStackApp
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FiyiStack - Configuration";
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ConfigurationForm_MouseMove);
             this.PanelDatabaseConfiguration.ResumeLayout(false);
             this.PanelDatabaseConfiguration.PerformLayout();
             this.StatusStrip.ResumeLayout(false);
