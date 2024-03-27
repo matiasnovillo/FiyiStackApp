@@ -151,13 +151,13 @@ $@"//{field.Name}
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
 {{
     <td>
-        <span class=""badge rounded-pill bg-success"">ON</span>
+        <span class=""badge rounded-pill bg-success"">Sí</span>
     </td>
 }}
 else
 {{
     <td>
-        <span class=""badge rounded-pill bg-danger"">OFF</span>
+        <span class=""badge rounded-pill bg-danger"">No</span>
     </td>
 }}
                                         ";
@@ -167,7 +167,7 @@ else
     <p>
         <b>{field.Name}: </b>
         <span class=""badge rounded-pill bg-success"">
-            ON
+            Sí
         </span>
     </p>
 }}
@@ -176,13 +176,15 @@ else
     <p>
         <b>{field.Name}: </b>
         <span class=""badge rounded-pill bg-danger"">
-            OFF
+            No
         </span>
     </p>
 }}
                                         ";
 
-                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
+                        if (field.Name != "Active")
+                        {
+                            PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
                     <div class=""form-check form-switch"">
                         <input class=""form-check-input""
                                type=""checkbox""
@@ -195,10 +197,6 @@ else
                         </label>
                     </div>
                     ";
-
-                        if (field.Name != "Active")
-                        {
-                            
                         }
                         break;
                     case 5: //Text: Basic

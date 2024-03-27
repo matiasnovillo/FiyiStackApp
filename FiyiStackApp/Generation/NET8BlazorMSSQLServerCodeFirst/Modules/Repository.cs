@@ -84,19 +84,29 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 int Total{Table.Name} = _context.{Table.Name}.Count();
 
-                var paginated{Table.Name} = _context.{Table.Name}
+                var query = from {Table.Name.ToLower()} in _context.{Table.Name}
+                            join userCreation in _context.User on {Table.Name.ToLower()}.UserCreationId equals userCreation.UserId
+                            join userLastModification in _context.User on {Table.Name.ToLower()}.UserLastModificationId equals userLastModification.UserId
+                            select new {{ {Table.Name} = {Table.Name.ToLower()}, UserCreation = userCreation, UserLastModification = userLastModification }};
+
+                // Extraemos los resultados en listas separadas
+                List<{Table.Name}> lst{Table.Name} = query.Select(result => result.{Table.Name})
                         .Where(x => strictSearch ?
                             words.All(word => x.{Table.Name}Id.ToString().Contains(word)) :
                             words.Any(word => x.{Table.Name}Id.ToString().Contains(word)))
-                        .OrderBy(p => p.{Table.Name}Id)
+                        .OrderByDescending(p => p.DateTimeLastModification)
                         .Skip((pageIndex - 1) * pageSize)
                         .Take(pageSize)
                         .ToList();
+                List<User> lstUserCreation = query.Select(result => result.UserCreation).ToList();
+                List<User> lstUserLastModification = query.Select(result => result.UserLastModification).ToList();
 
-                return new paginated{Table.Name}DTO
+                return new paginatedRoleDTO
                 {{
-                    lst{Table.Name} = paginated{Table.Name},
-                    TotalItems = Total{Table.Name},
+                    lst{Table.Name} = lst{Table.Name},
+                    lstUserCreation = lstUserCreation,
+                    lstUserLastModification = lstUserLastModification,
+                    TotalItems = TotalRole,
                     PageIndex = pageIndex,
                     PageSize = pageSize
                 }};

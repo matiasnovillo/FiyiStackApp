@@ -18,7 +18,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 @using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
 
-<PageTitle>Query {Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+<PageTitle>Buscar {Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
 
 <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
 
@@ -32,15 +32,15 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         <div class=""card card-body mx-3 mx-md-4 mt-n6"">
             <div class=""card-header mb-0 pb-0 bg-white"">
                 <h1 class=""mb-3"">
-                    Query {Table.Name.ToLower()}
+                    Buscar {Table.Name.ToLower()}
                 </h1>
                 <NavLink class=""btn btn-outline-info"" href=""Dashboard"">
                     <span class=""fas fa-chevron-left"" aria-hidden=""true""></span>
-                    &nbsp;Go back
+                    &nbsp;Volver
                 </NavLink>
                 <NavLink class=""btn btn-success text-white"" href=""{Table.Area}/{Table.Name}Page/0"">
                     <span class=""fas fa-plus"" aria-hidden=""true""></span>
-                    &nbsp;Create {Table.Name.ToLower()}
+                    &nbsp;Crear {Table.Name.ToLower()}
                 </NavLink>
             </div>
             <div class=""card-body px-0"">
@@ -50,11 +50,11 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                         <!--Searchbox-->
                         <input type=""search"" @oninput=""SearchText""
                                class=""form-control""
-                               placeholder=""Search {Table.Name.ToLower()} by {Table.Name}Id..."" />
+                               placeholder=""Buscar {Table.Name.ToLower()} por {Table.Name}Id..."" />
                         <br />
                         <!--Strict or lax search-->
                         <div>
-                            <h6><b>Strict or lax search</b></h6>
+                            <h6><b>Búsqueda estricta o laxa</b></h6>
                             <div class=""form-check form-switch"">
                                 <input class=""form-check-input""
                                        type=""checkbox""
@@ -63,24 +63,24 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                                        id=""strict-search"" />
                                 <label class=""form-check-label""
                                        for=""strict-search"">
-                                    Strict search
+                                    Búsqueda estricta
                                 </label>
                             </div>
                         </div>
                         <br />
-                        <h6><b>View type</b></h6>
+                        <h6><b>Tipo de vista</b></h6>
                         <div class=""btn-group mb-3"" role=""group"" aria-label=""btngroup"">
                             <button type=""button"" 
                                 class=""btn bg-gradient-primary""
                                 onclick=@(() => ChangeView(""table""))>
                                 <i class=""fas fa-table""></i>
-                                Table
+                                Tabla
                             </button>
                             <button type=""button"" 
                                 class=""btn bg-gradient-primary""
                                 onclick=@(() => ChangeView(""list""))>
                                 <i class=""fas fa-th-list""></i>
-                                Cards
+                                Cartas
                             </button>
                         </div>
                     </div>
@@ -92,19 +92,19 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                                         @onclick=""ConvertToExcel""
                                         class=""btn btn-outline-info ml-4 mb-4"">
                                     <i class=""fas fa-file""></i>
-                                    Export to Excel
+                                    Exportar a Excel
                                 </button>
                                 <button type=""button""
                                         @onclick=""ConvertToCSV""
                                         class=""btn btn-outline-warning mb-4 mx-3"">
                                     <i class=""fas fa-file""></i>
-                                    Export to CSV
+                                    Exportar a CSV
                                 </button>
                                 <button type=""button""
                                         @onclick=""ConvertToPDF""
                                         class=""btn btn-outline-success mb-4"">
                                     <i class=""fas fa-file""></i>
-                                    Export to PDF
+                                    Exportar a PDF
                                 </button>
                             </div>
                         </div>
@@ -143,27 +143,29 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                     </div>
                 </div>
                 <!--Table-->
-                <h6><b>Number of registers: @TotalRows</b></h6>
+                <h6><b>Nº de registros: @TotalRows</b></h6>
                 @if (ChosenView == ""table"")
                 {{
                     <table class=""table table-striped table-hover table-bordered table-responsive mt-4"">
                         <thead>
                             <tr>
                                 {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_TH_ForBlazorPageQuery}
-                                <th>Actions</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (paginated{Table.Name}DTO != null)
                             {{
-                                @foreach ({Table.Name}? {Table.Name.ToLower()} in paginated{Table.Name}DTO.lst{Table.Name})
+                                @for (int i = 0; i < paginated{Table.Name}DTO.lst{Table.Name}.Count(); i++)
                                 {{
+                                    int deleteButton = @paginated{Table.Name}DTO.lst{Table.Name}[i]!.{Table.Name}Id;
+
                                     <tr>
                                         {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_TD_ForBlazorPageQuery}
                                         <td>
                                             <div class=""nav-item"">
                                                 <button class=""btn btn-sm btn-outline-danger""
-                                                        onclick=@(() => Delete({Table.Name.ToLower()}!.{Table.Name}Id))>
+                                                        onclick=@(() => Delete(deleteButton))>
                                                     <span class=""fas fa-trash"" aria-hidden=""true""></span>
                                                 </button>
                                             </div>
@@ -184,8 +186,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 {{
                     @if (paginated{Table.Name}DTO != null)      
                     {{
-                        @foreach ({Table.Name}? {Table.Name.ToLower()} in paginated{Table.Name}DTO.lst{Table.Name})
+                        @for (int i = 0; i < paginated{Table.Name}DTO.lst{Table.Name}.Count(); i++)
                         {{
+                            int deleteButton = @paginated{Table.Name}DTO.lst{Table.Name}[i]!.{Table.Name}Id;
+
                             <div class=""card shadow-lg mt-2"">
                                 <div class=""card-body"">
                                         {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_Card_ForBlazorPageQuery}
@@ -197,7 +201,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                                         </div>
                                         <div class=""col-2"">
                                             <button class=""btn btn-lg btn-outline-danger""
-                                                    onclick=@(() => Delete({Table.Name.ToLower()}!.{Table.Name}Id))>
+                                                    onclick=@(() => Delete(deleteButton))>
                                                 <span class=""fas fa-trash"" aria-hidden=""true""></span>
                                             </button>
                                             <a class=""btn btn-lg btn-outline-info""

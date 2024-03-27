@@ -20,14 +20,14 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 @if ({Table.Name}Id == 0)
 {{
-    <PageTitle>Add {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+    <PageTitle>Agregar {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
 }}
 else
 {{
-    <PageTitle>Edit {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
+    <PageTitle>Editar {Table.Name.ToLower()} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
 }}
 
-<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
+<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstFoldersAndPages=""lstFoldersAndPages""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
 
 <div class=""main-content position-relative max-height-vh-100 h-100"">
     <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard>
@@ -41,16 +41,16 @@ else
                 <h1 class=""mb-3"">
                     @if({Table.Name}Id == 0)
                     {{
-                        <span>Add {Table.Name.ToLower()}</span>
+                        <span>Agregar {Table.Name.ToLower()}</span>
                     }}
                     else
                     {{
-                        <span>Edit {Table.Name.ToLower()}</span>
+                        <span>Editar {Table.Name.ToLower()}</span>
                     }}
                 </h1>
                 <NavLink class=""btn btn-outline-info"" href=""{Table.Area}/{Table.Name}Page"">
                     <span class=""fas fa-chevron-left""></span>
-                    &nbsp;Go back
+                    &nbsp;Volver
                 </NavLink>
             </div>
             <div class=""card-body px-0"">
@@ -64,19 +64,19 @@ else
                         <i class=""fas fa-pen""></i>
                         @if ({Table.Name}Id == 0)
                         {{
-                            <span>Add</span>
+                            <span>Agregar</span>
                         }}
                         else
                         {{
-                            <span>Edit</span>
+                            <span>Editar</span>
                         }}
                     </button>
                     <NavLink class=""btn btn-outline-info"" href=""{Table.Area}/{Table.Name}Page"">
                         <span class=""fas fa-chevron-left""></span>
-                        &nbsp;Go back
+                        &nbsp;Volver
                     </NavLink>
                 </form>
-                @((MarkupString)MessageForForm)
+                @((MarkupString)Message)
             </div>
         </div>
     </div>
@@ -86,14 +86,14 @@ else
 
 @code {{
     #region Properties
-    public List<Menu> lstMenuResult {{ get; set; }} = [];
+    public List<folderForDashboard> lstFoldersAndPages = [];
 
     public List<Role> lstRole {{ get; set; }} = [];
 
     [Parameter]
     public int {Table.Name}Id {{ get; set; }}
 
-    public string MessageForForm {{ get; set; }} = """";
+    public string Message {{ get; set; }} = """";
 
     [SupplyParameterFromForm]
     public {Table.Name} {Table.Name} {{ get; set; }} = new();
@@ -110,7 +110,7 @@ else
             //Look for saved user in shared component, simulates a session
             User = StateContainer.User == null ? new() : StateContainer.User;
 
-            lstMenuResult = [];
+            lstFoldersAndPages = [];
             {Table.Name} = new();
 
             if (User != null)
@@ -126,8 +126,8 @@ else
                     List<Menu> lstMenu = menuRepository
                                         .GetAll();
 
-                    lstMenuResult = rolemenuRepository
-                                        .GetAllByRoleId(User.RoleId, lstMenu);
+                    lstFoldersAndPages = rolemenuRepository
+                                            .GetAllPagesAndFoldersForDashboardByRoleId(User.RoleId);
 
                     lstRole = roleRepository.GetAll();
 
@@ -177,7 +177,7 @@ else
 
             failureRepository.Add(failure);
 
-            MessageForForm = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
                                 Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
                             </div>"";
         }}
@@ -228,7 +228,7 @@ else
 
             failureRepository.Add(failure);
 
-            MessageForForm = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
                                 Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
                             </div>"";
         }}
