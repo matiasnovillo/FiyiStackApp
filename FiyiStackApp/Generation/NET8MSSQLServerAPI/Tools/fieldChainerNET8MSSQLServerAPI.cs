@@ -485,13 +485,13 @@ $@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", {(field.
 
                             CSharpFieldsForNonQuerySP2_ForCSharpModel += "String";
 
-                            SQLServerFieldsForCreateFields_ForSQLServer += "VARCHAR(6) ";
+                            SQLServerFieldsForCreateFields_ForSQLServer += "VARCHAR(7) ";
 
                             SQLServerFieldsForParametersExample_ForSQLServer += $@"    @{field.Name} = AABBCC,";
 
-                            SQLServerFieldsForParametersInInsert_ForSQLServer += $@"    @{field.Name} VARCHAR(6),";
+                            SQLServerFieldsForParametersInInsert_ForSQLServer += $@"    @{field.Name} VARCHAR(7),";
 
-                            SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} VARCHAR(6),";
+                            SQLServerFieldsForParametersInUpdateBy_ForSQLServer += $@"    @{field.Name} VARCHAR(7),";
 
                             Fields_ForJSONScript += $@"    ""{field.Name}"" : ""212529"",{Environment.NewLine}";
 

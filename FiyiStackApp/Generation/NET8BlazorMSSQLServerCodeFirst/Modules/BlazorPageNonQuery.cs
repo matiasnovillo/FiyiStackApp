@@ -190,8 +190,9 @@ else
             if ({Table.Name}Id == 0)
             {{
                 //Create new {Table.Name}
-                {Table.Name}.{Table.Name}Id = 0;
-
+                {Table.Name}.Active = true;
+                {Table.Name}.UserCreationId = User.UserId;
+                {Table.Name}.UserLastModificationId = User.UserId;
                 {Table.Name}.DateTimeCreation = DateTime.Now;
                 {Table.Name}.DateTimeLastModification = DateTime.Now;
 
@@ -202,6 +203,7 @@ else
             {{
                 //Update data
                 {Table.Name}.DateTimeLastModification = DateTime.Now;
+                {Table.Name}.UserLastModificationId = User.UserId;
 
                 {Table.Name.ToLower()}Repository
                             .Update({Table.Name});

@@ -10,7 +10,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             try
             {
                 string Content =
-                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.FiyiStore.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 

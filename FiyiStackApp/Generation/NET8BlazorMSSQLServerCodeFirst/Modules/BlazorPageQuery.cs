@@ -20,7 +20,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 <PageTitle>Buscar {Table.Name} - {GeneratorConfigurationComponent.ProjectChosen.Name}</PageTitle>
 
-<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstMenuResult=""lstMenuResult""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
+<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard lstFoldersAndPages=""lstFoldersAndPages""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarVerticalDashboard>
 
 <div class=""main-content position-relative max-height-vh-100 h-100"">
     <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarHorizontalDashboard>
@@ -171,7 +171,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                                             </div>
                                             <div class=""nav-item mt-2"">
                                                 <a class=""btn btn-sm btn-outline-info""
-                                                   href=""{Table.Area}/{Table.Name}Page/@{Table.Name.ToLower()}?.{Table.Name}Id"">
+                                                   href=""{Table.Area}/{Table.Name}Page/@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id"">
                                                     <span class=""fas fa-pen"" aria-hidden=""true""></span>
                                                 </a>
                                             </div>
@@ -205,7 +205,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                                                 <span class=""fas fa-trash"" aria-hidden=""true""></span>
                                             </button>
                                             <a class=""btn btn-lg btn-outline-info""
-                                                href=""{Table.Area}/{Table.Name}Page/@{Table.Name.ToLower()}?.{Table.Name}Id"">
+                                                href=""{Table.Area}/{Table.Name}Page/@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id"">
                                                 <span class=""fas fa-pen"" aria-hidden=""true""></span>
                                             </a>
                                         </div>
@@ -255,7 +255,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 @code {{
     #region Properties
-    public List<Menu> lstMenuResult {{ get; set; }} = [];
+    public List<folderForDashboard> lstFoldersAndPages {{ get; set; }} = [];
 
     public int TotalRows {{ get; set; }} = 0;
 
@@ -289,7 +289,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             //Look for saved user in shared component, simulates a session
             User = StateContainer.User == null ? new() : StateContainer.User;
 
-            lstMenuResult = [];
+            lstFoldersAndPages = [];
 
             paginated{Table.Name}DTO = new();
             paginated{Table.Name}DTO.lst{Table.Name} = [];
@@ -307,8 +307,8 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                     List<Menu> lstMenu = menuRepository
                                             .GetAll();
 
-                    lstMenuResult = rolemenuRepository
-                                        .GetAllByRoleId(User.RoleId, lstMenu);
+                    lstFoldersAndPages = rolemenuRepository
+                                            .GetAllPagesAndFoldersForDashboardByRoleId(User.RoleId);
 
                     paginated{Table.Name}DTO = {Table.Name.ToLower()}Repository
                                                 .GetAllBy{Table.Name}IdPaginated(

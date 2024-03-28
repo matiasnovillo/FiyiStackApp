@@ -69,7 +69,7 @@ namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
                         NonQuery += $@"USE [{DataBaseName}]
                     SET ANSI_NULLS ON
                     SET QUOTED_IDENTIFIER ON
-                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] VARCHAR(6) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
+                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] VARCHAR(7) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
                         break;
                     case 15: //Text: TextArea
                         NonQuery += $@"USE [{DataBaseName}]

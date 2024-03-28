@@ -31,7 +31,6 @@ namespace FiyiStackApp.Models.Core
                 int MaxId;
 
                 DynamicParameters dp = new();
-                dp.Add("FailureId", FailureId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("Message", Message, DbType.String, ParameterDirection.Input);
                 dp.Add("StackTrace", StackTrace, DbType.String, ParameterDirection.Input);
                 dp.Add("Source", Source, DbType.String, ParameterDirection.Input);

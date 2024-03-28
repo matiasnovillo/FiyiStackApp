@@ -12,8 +12,9 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.BasicCore;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.BasicCore.Entities.Configuration;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Interfaces;
 using System.Data;
@@ -24,9 +25,9 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 {{
     public class {Table.Name}Repository : I{Table.Name}Repository
     {{
-        protected readonly EFCoreContext _context;
+        protected readonly {GeneratorConfigurationComponent.ProjectChosen.Name}Context _context;
 
-        public {Table.Name}Repository(EFCoreContext context)
+        public {Table.Name}Repository({GeneratorConfigurationComponent.ProjectChosen.Name}Context context)
         {{
             _context = context;
         }}
@@ -101,12 +102,12 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 List<User> lstUserCreation = query.Select(result => result.UserCreation).ToList();
                 List<User> lstUserLastModification = query.Select(result => result.UserLastModification).ToList();
 
-                return new paginatedRoleDTO
+                return new paginated{Table.Name}DTO
                 {{
                     lst{Table.Name} = lst{Table.Name},
                     lstUserCreation = lstUserCreation,
                     lstUserLastModification = lstUserLastModification,
-                    TotalItems = TotalRole,
+                    TotalItems = Total{Table.Name},
                     PageIndex = pageIndex,
                     PageSize = pageSize
                 }};

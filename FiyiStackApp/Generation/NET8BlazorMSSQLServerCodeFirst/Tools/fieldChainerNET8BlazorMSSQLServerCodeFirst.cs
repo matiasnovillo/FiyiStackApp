@@ -107,10 +107,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
@@ -148,38 +148,38 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
-{{
-    <td>
-        <span class=""badge rounded-pill bg-success"">Sí</span>
-    </td>
-}}
-else
-{{
-    <td>
-        <span class=""badge rounded-pill bg-danger"">No</span>
-    </td>
-}}
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
+                                        {{
+                                            <td>
+                                                <span class=""badge rounded-pill bg-success"">Sí</span>
+                                            </td>
+                                        }}
+                                        else
+                                        {{
+                                            <td>
+                                                <span class=""badge rounded-pill bg-danger"">No</span>
+                                            </td>
+                                        }}
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@{Table.Name.ToLower()}!.{field.Name})
-{{
-    <p>
-        <b>{field.Name}: </b>
-        <span class=""badge rounded-pill bg-success"">
-            Sí
-        </span>
-    </p>
-}}
-else
-{{
-    <p>
-        <b>{field.Name}: </b>
-        <span class=""badge rounded-pill bg-danger"">
-            No
-        </span>
-    </p>
-}}
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
+                                        {{
+                                            <p>
+                                                <b>{field.Name}: </b>
+                                                <span class=""badge rounded-pill bg-success"">
+                                                    Sí
+                                                </span>
+                                            </p>
+                                        }}
+                                        else
+                                        {{
+                                            <p>
+                                                <b>{field.Name}: </b>
+                                                <span class=""badge rounded-pill bg-danger"">
+                                                    No
+                                                </span>
+                                            </p>
+                                        }}
                                         ";
 
                         if (field.Name != "Active")
@@ -214,10 +214,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -250,10 +250,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -281,10 +281,10 @@ $@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
         public int {field.Name} {{ get; set; }}
 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{Table.Name}Id</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{Table.Name}Id: </b>@{Table.Name.ToLower()}?.{Table.Name}Id</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{Table.Name}Id: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id</p>
                                         ";
 
                         break;
@@ -295,10 +295,10 @@ $@"[Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.Nullable 
         public DateTime {field.Name} {{ get; set; }}
 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesForEntityConfiguration +=
@@ -341,10 +341,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -387,18 +387,18 @@ $@"//{field.Name}
                 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>
-    <span style=""color:@{Table.Name.ToLower()}?.{field.Name};"">
-        <b class=""fas fa-palette""></b>
-        @{Table.Name.ToLower()}?.{field.Name}
-    </span>
-</td>
+                                            <span style=""color:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}"">
+                                                <b class=""fas fa-palette""></b>
+                                                @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                            </span>
+                                        </td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p style=""color:@{Table.Name.ToLower()}?.{field.Name};"">
-    <b>{field.Name}: </b>
-    <b class=""fas fa-palette""></b>
-    @{Table.Name.ToLower()}?.{field.Name}
-</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p style=""color:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name};"">
+                                            <b>{field.Name}: </b>
+                                            <b class=""fas fa-palette""></b>
+                                            @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                        </p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -430,10 +430,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</div>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</div>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -467,10 +467,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</div>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</div>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"
@@ -485,7 +485,7 @@ $@"//{field.Name}
                         <button id=""button-quill-conversion-{field.Name.ToLower()}""
                         type=""button""
                         class=""btn btn-outline-primary my-2"">
-                            Convert to HTML
+                            Convertir a HTML
                         </button>
                         <input type=""text""
                                id=""quill-result-{field.Name.ToLower()}""
@@ -558,10 +558,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -595,20 +595,20 @@ $@"//{field.Name}
                 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>
-    <a class=""nav-link text-info""
-       href=""tel:@{Table.Name.ToLower()}?.{field.Name}"">
-        <b class=""fas fa-phone""></b>
-        @{Table.Name.ToLower()}?.{field.Name}
-    </a>
-</td>
+                                            <a class=""nav-link text-info""
+                                               href=""tel:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}"">
+                                                <b class=""fas fa-phone""></b>
+                                                @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                            </a>
+                                        </td>
                                         ";
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<a class=""nav-link text-info px-0""
-    href=""tel:@{Table.Name.ToLower()}?.{field.Name}"">
-    <b>{field.Name}: </b>
-    <b class=""fas fa-phone""></b>
-    @{Table.Name.ToLower()}?.{field.Name}
-</a>
+                                            href=""tel:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}"">
+                                            <b>{field.Name}: </b>
+                                            <b class=""fas fa-phone""></b>
+                                            @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                        </a>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -642,22 +642,22 @@ $@"//{field.Name}
                 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>
-    <a class=""nav-link text-info""
-       href=""@{Table.Name.ToLower()}?.{field.Name}""
-       target=""_blank"">
-        <b class=""fas fa-link""></b>
-        @{Table.Name.ToLower()}?.{field.Name}
-    </a>
-</td>
+                                            <a class=""nav-link text-info""
+                                               href=""@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}""
+                                               target=""_blank"">
+                                                <b class=""fas fa-link""></b>
+                                                @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                            </a>
+                                        </td>
                                         ";
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<a class=""nav-link text-info px-0""
-    href=""@{Table.Name.ToLower()}?.{field.Name}""
-    target=""_blank"">
-    <b>{field.Name}: </b>
-    <b class=""fas fa-link""></b>
-    @{Table.Name.ToLower()}?.{field.Name}
-</a>
+                                            href=""@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}""
+                                            target=""_blank"">
+                                            <b>{field.Name}: </b>
+                                            <b class=""fas fa-link""></b>
+                                            @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                        </a>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -691,20 +691,20 @@ $@"//{field.Name}
                 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>
-    <a class=""nav-link text-info""
-       href=""mailto:@{Table.Name.ToLower()}?.{field.Name}"">
-        <b class=""fas fa-envelope""></b>
-        @{Table.Name.ToLower()}?.{field.Name}
-    </a>
-</td>
+                                            <a class=""nav-link text-info""
+                                               href=""mailto:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}"">
+                                                <b class=""fas fa-envelope""></b>
+                                                @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                            </a>
+                                        </td>
                                         ";
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<a class=""nav-link text-info px-0""
-    href=""mailto:@{Table.Name.ToLower()}?.{field.Name}"">
-    <b>{field.Name}: </b>
-    <b class=""fas fa-envelope""></b>
-    @{Table.Name.ToLower()}?.{field.Name}
-</a>
+                                            href=""mailto:@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}"">
+                                            <b>{field.Name}: </b>
+                                            <b class=""fas fa-envelope""></b>
+                                            @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                        </a>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -738,22 +738,22 @@ $@"//{field.Name}
                 ";
 
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>
-    <a class=""nav-link text-info""
-       href=""@{Table.Name.ToLower()}?.{field.Name}""
-       download>
-        <b class=""fas fa-download""></b>
-        @{Table.Name.ToLower()}?.{field.Name}
-    </a>
-</td>
+                                            <a class=""nav-link text-info""
+                                               href=""@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}""
+                                               download>
+                                                <b class=""fas fa-download""></b>
+                                                @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                            </a>
+                                        </td>
                                         ";
 
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<a class=""nav-link text-info px-0""
-    href=""@{Table.Name.ToLower()}?.{field.Name}""
-    download>
-    <b>{field.Name}: </b>
-    <b class=""fas fa-download""></b>
-    @{Table.Name.ToLower()}?.{field.Name}
-</a>
+                                            href=""@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}""
+                                            download>
+                                            <b>{field.Name}: </b>
+                                            <b class=""fas fa-download""></b>
+                                            @paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}
+                                        </a>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -832,8 +832,9 @@ $@"//{field.Name}
         }}
         catch (Exception ex)
         {{
-            MessageForForm = $@""There was a mistake. Try again.
-                             Error message: {{ex.Message}}"";
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                            Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                         </div>"";
 
             ProgressPercentFor{field.Name} = 100;
             ProgressBarColourFor{field.Name} = ""bg-danger"";
@@ -863,10 +864,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -900,10 +901,10 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@{Table.Name.ToLower()}?.{field.Name}</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@{Table.Name.ToLower()}?.{field.Name}</td>
+                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
                                         ";
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
