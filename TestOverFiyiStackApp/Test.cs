@@ -24,6 +24,7 @@ namespace UnitTestOverFiyiStackApp
             fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer = new fieldChainerJsTsNETCoreSQLServer();
             modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer = new modelChainerJsTsNETCoreSQLServer();
             fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst = new fieldChainerNET8BlazorMSSQLServerCodeFirst();
+            fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst = new fieldChainerNET8RazorMSSQLServerCodeFirst();
 
             //Tables inside FiyiStack database = 0
             List<Table> lstTableInFiyiStack = new List<Table>();
@@ -294,6 +295,7 @@ namespace UnitTestOverFiyiStackApp
                 fieldChainerJsTsNETCoreSQLServer,
                 modelChainerJsTsNETCoreSQLServer,
                 fieldChainerNET8BlazorMSSQLServerCodeFirst,
+                fieldChainerNET8RazorMSSQLServerCodeFirst,
                 ProjectChosen,
                 DataBaseChosen,
                 lstTableInFiyiStack,

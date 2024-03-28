@@ -55,7 +55,7 @@ namespace FiyiStackApp
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                     ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI;
                 }
-                else
+                else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("DTOs"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities"));
@@ -67,6 +67,11 @@ namespace FiyiStackApp
                     ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[4].Checked = Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
+                }
+                else
+                {
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Fullstack Application"));
+                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst;
                 }
 
                 //Front-end
@@ -88,10 +93,14 @@ namespace FiyiStackApp
                 else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8MSSQLServerAPI.Trim() != "")
                 {
                 }
-                else
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Blazor pages"));
                     ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
+                }
+                else
+                {
+
                 }
 
                 //Hide elements except
@@ -155,13 +164,17 @@ namespace FiyiStackApp
                     {
                         Configuration.WantNET8MSSQLServerAPI = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
-                    else
+                    else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                     {
                         Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[0].Checked;
                         Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[1].Checked;
                         Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[2].Checked;
                         Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[3].Checked;
                         Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[4].Checked;
+                    }
+                    else
+                    {
+                        Configuration.WantNET8RazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
 
 
@@ -185,9 +198,13 @@ namespace FiyiStackApp
                     {
                         
                     }
-                    else
+                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                     {
                         Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = ListViewFrontEndFilesGenerators.Items[0].Checked;
+                    }
+                    else
+                    {
+
                     }
 
 

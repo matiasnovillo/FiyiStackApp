@@ -1,10 +1,12 @@
 ﻿using FiyiStack.Library.MicrosoftSQLServer;
 using FiyiStackApp.Models.Core;
-using FiyiStackApp.Generation.NET6CleanArchitecture.Languages;
+using FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages;
+using FiyiStackApp.Generation.CommonGenerators.Languages;
+using FiyiStackApp.Models.Tools;
 
 namespace FiyiStackApp.Generation
 {
-    public static class GeneratorNET6CleanArchitecture
+    public static class GeneratorNET8RazorMSSQLServerCodeFirst
     {
         public static string Start(Configuration Configuration,
             Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
@@ -41,12 +43,19 @@ namespace FiyiStackApp.Generation
                 string LogText = $@"Starting...
 {GeneratorConfigurationComponent.lstTableToGenerate.Count} tables to work with
 {GeneratorConfigurationComponent.lstFieldToGenerate.Count} fields to work with
-{GeneratorConfigurationComponent.lstStoredProcedureToGenerate.Count} stored procedures to work with
 ";
 
-
+                LogText += $"Entering MS SQL Server language{Environment.NewLine}";
+                LogText += MSSQLServer.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering C# language{Environment.NewLine}";
                 LogText += CSharp.Start(GeneratorConfigurationComponent);
+                LogText += $"Entering other files{Environment.NewLine}";
+                LogText += OtherFiles.Start(GeneratorConfigurationComponent);
+                //TODO Descomentar esto cuando termine los de arriba
+                //LogText += $"Entering TypeScript language{Environment.NewLine}";
+                //LogText += TypeScript.Start(GeneratorConfigurationComponent);
+                //LogText += $"Entering JavaScript language{Environment.NewLine}";
+                //LogText += JavaScript.Start(GeneratorConfigurationComponent);
 
                 return LogText;
             }

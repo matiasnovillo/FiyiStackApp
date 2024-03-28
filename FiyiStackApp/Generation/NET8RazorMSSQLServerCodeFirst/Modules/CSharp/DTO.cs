@@ -1,7 +1,7 @@
 ﻿using FiyiStack.Library.NET;
 using FiyiStackApp.Models.Core;
 
-namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
+namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
 {
     public static partial class CSharp
     {

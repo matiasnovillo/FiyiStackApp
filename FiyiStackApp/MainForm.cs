@@ -753,6 +753,10 @@ namespace FiyiStackApp
                 {
                     Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB = "";
                 }
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst))
+                {
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst = "";
+                }
 
                 if (Program.WinFormConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer.Trim() != "")
                 {
@@ -763,6 +767,7 @@ namespace FiyiStackApp
                                     new fieldChainerJsTsNETCoreSQLServer(),
                                     new modelChainerJsTsNETCoreSQLServer(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -779,6 +784,7 @@ namespace FiyiStackApp
                                     new fieldChainerJsTsNETCoreSQLServer(),
                                     new modelChainerJsTsNETCoreSQLServer(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -795,6 +801,7 @@ namespace FiyiStackApp
                                     new fieldChainerJsTsNETCoreSQLServer(),
                                     new modelChainerJsTsNETCoreSQLServer(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -811,6 +818,24 @@ namespace FiyiStackApp
                                     new fieldChainerJsTsNETCoreSQLServer(),
                                     new modelChainerJsTsNETCoreSQLServer(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
+                                    Program.WinFormConfigurationComponent.ProjectChosen,
+                                    Program.WinFormConfigurationComponent.DataBaseChosen,
+                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
+                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
+                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
+                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                }
+                else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                {
+                    TextBoxLogger.Text += GeneratorNET8BlazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
+                                    new fieldChainerNET8MSSQLServerAPI(),
+                                    new modelChainerNET8MSSQLServerAPI(),
+                                    new fieldChainerNodeJsExpressMongoDB(),
+                                    new fieldChainerJsTsNETCoreSQLServer(),
+                                    new modelChainerJsTsNETCoreSQLServer(),
+                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -820,13 +845,14 @@ namespace FiyiStackApp
                 }
                 else
                 {
-                    TextBoxLogger.Text += GeneratorNET8BlazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
+                    TextBoxLogger.Text += GeneratorNET8RazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
                                     new fieldChainerNET8MSSQLServerAPI(),
                                     new modelChainerNET8MSSQLServerAPI(),
                                     new fieldChainerNodeJsExpressMongoDB(),
                                     new fieldChainerJsTsNETCoreSQLServer(),
                                     new modelChainerJsTsNETCoreSQLServer(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
+                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,

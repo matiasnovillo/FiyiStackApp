@@ -2,6 +2,7 @@
 using FiyiStackApp.Models.Core;
 using FiyiStackApp.Generation.JsTsNETCoreSQLServer.Languages;
 using FiyiStackApp.Generation.CommonGenerators.Languages;
+using FiyiStackApp.Models.Tools;
 
 namespace FiyiStackApp.Generation
 {
@@ -14,6 +15,7 @@ namespace FiyiStackApp.Generation
             Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
             Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
+            Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
             List<Models.Core.Table> lstTableInFiyiStack,
@@ -28,6 +30,7 @@ namespace FiyiStackApp.Generation
             fieldChainerJsTsNETCoreSQLServer,
             modelChainerJsTsNETCoreSQLServer,
             fieldChainerNET8BlazorMSSQLServerCodeFirst,
+            fieldChainerNET8RazorMSSQLServerCodeFirst,
             ProjectChosen,
             DataBaseChosen,
             lstTableInFiyiStack,

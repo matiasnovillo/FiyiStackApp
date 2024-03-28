@@ -169,6 +169,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst = Configuration.WantNET8RazorMSSQLServerCodeFirst;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
                 Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;
