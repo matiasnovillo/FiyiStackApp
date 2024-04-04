@@ -99,28 +99,54 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                     else { LogText += $"Generation of C# DTO for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion
 
-                    #region C# Interfaces
+                    #region C# Interface for Repository
                     if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
                     {
-                        string CSharpInterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
-                        if (Directory.Exists(CSharpInterfacePath))
+                        string CSharpInterfaceForRepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
+                        if (Directory.Exists(CSharpInterfaceForRepositoryPath))
                         {
-                            LogText += $"Folder: {CSharpInterfacePath} exist {Environment.NewLine}";
+                            LogText += $"Folder: {CSharpInterfaceForRepositoryPath} exist {Environment.NewLine}";
                         }
                         else
                         {
-                            LogText += $"Folder: {CSharpInterfacePath} does not exist. Creating folder {Environment.NewLine}";
-                            Directory.CreateDirectory(CSharpInterfacePath);
+                            LogText += $"Folder: {CSharpInterfaceForRepositoryPath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(CSharpInterfaceForRepositoryPath);
                         }
 
-                        Content = Modules.CSharp.Interface(GeneratorConfigurationComponent, Table);
+                        Content = Modules.CSharp.InterfaceForRepository(GeneratorConfigurationComponent, Table);
 
                         WinFormConfigurationComponent.CreateFile(
-                        $"{CSharpInterfacePath}I{Table.Name}Repository.cs",
+                        $"{CSharpInterfaceForRepositoryPath}I{Table.Name}Repository.cs",
                         Content,
                         GeneratorConfigurationComponent.Configuration.DeleteFiles);
 
                         LogText += $"C# Interface I{Table.Name}Repository.cs created {Environment.NewLine}";
+                    }
+                    else { LogText += $"Generation of C# interface for {Table.Name} cancelled by user {Environment.NewLine}"; }
+                    #endregion
+
+                    #region C# Interface for Service
+                    if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
+                    {
+                        string CSharpInterfaceForServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
+                        if (Directory.Exists(CSharpInterfaceForServicePath))
+                        {
+                            LogText += $"Folder: {CSharpInterfaceForServicePath} exist {Environment.NewLine}";
+                        }
+                        else
+                        {
+                            LogText += $"Folder: {CSharpInterfaceForServicePath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(CSharpInterfaceForServicePath);
+                        }
+
+                        Content = Modules.CSharp.InterfaceForService(GeneratorConfigurationComponent, Table);
+
+                        WinFormConfigurationComponent.CreateFile(
+                        $"{CSharpInterfaceForServicePath}I{Table.Name}Service.cs",
+                        Content,
+                        GeneratorConfigurationComponent.Configuration.DeleteFiles);
+
+                        LogText += $"C# Interface I{Table.Name}Service.cs created {Environment.NewLine}";
                     }
                     else { LogText += $"Generation of C# interface for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion
@@ -174,6 +200,31 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                         LogText += $"C# Repository {Table.Name}Repository.cs created {Environment.NewLine}";
                     }
                     else { LogText += $"Generation of C# repository for {Table.Name} cancelled by user {Environment.NewLine}"; }
+                    #endregion
+
+                    #region C# Services
+                    if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
+                    {
+                        string CSharpServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Services\\";
+                        if (Directory.Exists(CSharpServicePath))
+                        {
+                            LogText += $"Folder: {CSharpServicePath} exist {Environment.NewLine}";
+                        }
+                        else
+                        {
+                            LogText += $"Folder: {CSharpServicePath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(CSharpServicePath);
+                        }
+
+                        Content = Modules.CSharp.Service(GeneratorConfigurationComponent, Table);
+
+                        WinFormConfigurationComponent.CreateFile(
+                        $"{CSharpServicePath}{Table.Name}Service.cs",
+                        Content, GeneratorConfigurationComponent.Configuration.DeleteFiles);
+
+                        LogText += $"C# Service {Table.Name}Service.cs created {Environment.NewLine}";
+                    }
+                    else { LogText += $"Generation of C# service for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion
 
                     #region C# .NET 8 Controller

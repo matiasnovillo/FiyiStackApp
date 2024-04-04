@@ -5,14 +5,15 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
 {
     public static partial class CSharp
     {
-        public static string Interface(GeneratorConfigurationComponent GeneratorConfigurationComponent, Table Table)
+        public static string InterfaceForRepository(GeneratorConfigurationComponent GeneratorConfigurationComponent, Table Table)
         {
             try
             {
                 string Content =
-                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+                $@"using System.Data;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
-using System.Data;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Library;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 
@@ -36,15 +37,17 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         #endregion
 
         #region Non-Queries
-        bool Add({Table.Name} {Table.Name.ToLower()});
+        int Add({Table.Name} {Table.Name.ToLower()});
 
-        bool Update({Table.Name} {Table.Name.ToLower()});
+        int Update({Table.Name} {Table.Name.ToLower()});
 
-        bool DeleteBy{Table.Name}Id(int {Table.Name.ToLower()});
-        #endregion
+        int DeleteBy{Table.Name}Id(int {Table.Name.ToLower()});
 
-        #region Other methods
-        DataTable GetAllInDataTable();
+        void DeleteManyOrAll(Ajax Ajax, string DeleteType);
+
+        int CopyBy{Table.Name}Id(int {Table.Name}Id);
+
+        int CopyManyOrAll(Ajax Ajax, string CopyType);
         #endregion
     }}
 }}

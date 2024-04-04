@@ -10,7 +10,8 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
             try
             {
                 string Content =
-                $@"using Microsoft.EntityFrameworkCore.Metadata.Builders;
+                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}

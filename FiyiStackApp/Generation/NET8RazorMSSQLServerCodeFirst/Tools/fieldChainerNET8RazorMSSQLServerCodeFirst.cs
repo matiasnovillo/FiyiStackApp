@@ -270,7 +270,7 @@ $@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", {(field.Nullab
                             Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                            Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                            Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                             Fields_ForController_InInsertAsync_Ajax += $@"int {field.Name} = Convert.ToInt32(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""]);
@@ -356,7 +356,7 @@ $@"        public bool {field.Name} {{ get; set; }}
                             Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                            Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                            Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                             Fields_ForController_InInsertAsync_Ajax += $@"bool {field.Name} = Convert.ToBoolean(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""]);
@@ -435,7 +435,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -515,7 +515,7 @@ $@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", {(field.Nu
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"decimal {field.Name} = Convert.ToDecimal(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""].ToString().Replace(""."","",""));
@@ -639,7 +639,7 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.N
                             Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                            Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                            Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                             Fields_ForController_InInsertAsync_Ajax += $@"DateTime {field.Name} = Convert.ToDateTime(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""]);
@@ -720,7 +720,7 @@ $@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", {(field.N
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"TimeSpan {field.Name} = TimeSpan.Parse(HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""]);
@@ -803,7 +803,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
                             Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                            Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                            Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                             Fields_ForController_InInsertAsync_Ajax += $@"int {field.Name} = 0; 
@@ -901,7 +901,7 @@ $@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", {(field.
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -978,7 +978,7 @@ $@"        public string {field.Name} {{ get; set; }}
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1052,7 +1052,7 @@ $@"        public string {field.Name} {{ get; set; }}
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1150,7 +1150,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = """";
@@ -1242,7 +1242,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1327,7 +1327,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1410,7 +1410,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1492,7 +1492,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];;
@@ -1621,7 +1621,7 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
                         Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                        Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                        Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                         Fields_ForController_InInsertAsync_Ajax += $@"string {field.Name} = HttpContext.Request.Form[""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{field.Name.ToLower()}-input""];
@@ -1705,7 +1705,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
                             Fields_ForController_InInsertAsync += $@"{field.Name} = {field.Name},
                         ";
 
-                            Fields_ForController_InUpdateAsync += $@"{Table.Name}Model.{field.Name} = {field.Name};
+                            Fields_ForController_InUpdateAsync += $@"{Table.Name}.{field.Name} = {field.Name};
                     ";
 
                             Fields_ForController_InInsertAsync_Ajax += $@"int {field.Name} = 0; 
@@ -2061,7 +2061,7 @@ $@"//{field.Name}
                     case 11: //Time
 
                         PropertiesForEntity +=
-$@"        public TimeOnly {field.Name} {{ get; set; }}
+$@"        public TimeSpan {field.Name} {{ get; set; }}
 ";
 
                         PropertiesForEntityConfiguration +=

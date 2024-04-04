@@ -17,6 +17,7 @@ using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.BasicCore;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Interfaces;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Library;
 using System.Data;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
@@ -117,59 +118,123 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         #endregion
 
         #region Non-Queries
-        public bool Add({Table.Name} {Table.Name.ToLower()})
+        public int Add({Table.Name} {Table.Name.ToLower()})
         {{
             try
             {{
                 _context.{Table.Name}.Add({Table.Name.ToLower()});
-                return _context.SaveChanges() > 0;
+                _context.SaveChanges();
+                
+                return {Table.Name.ToLower()}.{Table.Name}Id;   
             }}
             catch (Exception) {{ throw; }}
         }}
 
-        public bool Update({Table.Name} {Table.Name.ToLower()})
+        public int Update({Table.Name} {Table.Name.ToLower()})
         {{
             try
             {{
                 _context.{Table.Name}.Update({Table.Name.ToLower()});
-                return _context.SaveChanges() > 0;
+                return _context.SaveChanges();
             }}
             catch (Exception) {{ throw; }}
         }}
 
-        public bool DeleteBy{Table.Name}Id(int {Table.Name.ToLower()}Id)
+        public int DeleteBy{Table.Name}Id(int {Table.Name.ToLower()}Id)
         {{
             try
             {{
-                AsQueryable()
+                int RowsDeleted = AsQueryable()
                         .Where(x => x.{Table.Name}Id == {Table.Name.ToLower()}Id)
                         .ExecuteDelete();
 
-                return _context.SaveChanges() > 0;
+                _context.SaveChanges();
+
+                return RowsDeleted;
             }}
             catch (Exception) {{ throw; }}
         }}
-        #endregion
 
-        #region Other methods
-        public DataTable GetAllInDataTable()
+        public void DeleteManyOrAll(Ajax ajax, string deleteType)
         {{
             try
             {{
-                List<{Table.Name}> lst{Table.Name} = _context.{Table.Name}.ToList();
-
-                DataTable DataTable = new();
-                DataTable.Columns.Add(""{Table.Name}Id"", typeof(string));
-                {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable1}
-
-                foreach ({Table.Name} {Table.Name.ToLower()} in lst{Table.Name})
+                if (deleteType == ""All"")
                 {{
-                    DataTable.Rows.Add(
-                        {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable}
-                        );
+                    var RegistersToDelete = _context.{Table.Name}.ToList();
+
+                    _context.{Table.Name}.RemoveRange(RegistersToDelete);
+
+                    _context.SaveChanges();
+                }}
+                else
+                {{
+                    string[] RowsChecked = ajax.AjaxForString.Split(',');
+
+                    for (int i = 0; i < RowsChecked.Length; i++)
+                    {{
+                        _context.{Table.Name}
+                                    .Where(x => x.{Table.Name}Id == Convert.ToInt32(RowsChecked[i]))
+                                    .ExecuteDelete();
+
+                        _context.SaveChanges();
+                    }}
+                }}
+            }}
+            catch (Exception) {{ throw; }}
+        }}
+
+        public int CopyBy{Table.Name}Id(int {Table.Name.ToLower()}Id)
+        {{
+            try
+            {{
+                {Table.Name} {Table.Name} = _context.{Table.Name}
+                                .Where(x => x.{Table.Name}Id == {Table.Name.ToLower()}Id)
+                                .FirstOrDefault();
+
+                {Table.Name}.{Table.Name}Id = 0;
+
+                _context.{Table.Name}.Add({Table.Name});
+                return _context.SaveChanges();
+            }}
+            catch (Exception) {{ throw; }}
+        }}
+
+        public int CopyManyOrAll(Ajax ajax, string copyType)
+        {{
+            try
+            {{
+                int NumberOfRegistersEntered = 0;
+
+                if (copyType == ""All"")
+                {{
+                    List<{Table.Name}> lst{Table.Name} = [];
+                    lst{Table.Name} = _context.{Table.Name}.ToList();
+
+                    for (int i = 0; i < lst{Table.Name}.Count; i++)
+                    {{
+                        {Table.Name} {Table.Name} = lst{Table.Name}[i];
+                        {Table.Name}.{Table.Name}Id = 0;
+                        _context.{Table.Name}.Add({Table.Name});
+                        NumberOfRegistersEntered += _context.SaveChanges();
+                    }}
+                }}
+                else
+                {{
+                    string[] RowsChecked = ajax.AjaxForString.Split(',');
+
+                    for (int i = 0; i < RowsChecked.Length; i++)
+                    {{
+                        {Table.Name} {Table.Name} = _context.{Table.Name}
+                                                    .Where(x => x.{Table.Name}Id == Convert.ToInt32(RowsChecked[i]))
+                                                    .FirstOrDefault();
+                        {Table.Name}.{Table.Name}Id = 0;
+                        _context.{Table.Name}.Add({Table.Name});
+                        NumberOfRegistersEntered += _context.SaveChanges();
+                    }}
                 }}
 
-                return DataTable;
+                return NumberOfRegistersEntered;
             }}
             catch (Exception) {{ throw; }}
         }}
