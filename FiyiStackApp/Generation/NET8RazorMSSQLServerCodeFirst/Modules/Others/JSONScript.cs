@@ -8,7 +8,7 @@
             {
                 string Content =
                     $@"{{
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForJSONScript.TrimEnd('\t','\n', '\r', ',')}
+{GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForJSONScript.TrimEnd('\t','\n', '\r', ',')}
 }}";
 
                 return Content;

@@ -34,32 +34,7 @@ namespace FiyiStackApp.Models.Core
 
         public int TemplateId { get; set; }
 
-        public bool WantCSharpModelsWithSPs { get; set; }
-
-        public bool WantCSharpDTOs { get; set; }
-
-        public bool WantCSharpFilters { get; set; }
-
-        public bool WantCSharpInterfaces { get; set; }
-
-        public bool WantCSharpServices { get; set; }
-
-        public bool WantCSharpRazorPages { get; set; }
-
-        public bool WantCSharpWebAPIs { get; set; }
-
-        public bool WantTypeScriptModels { get; set; }
-
-        public bool WantTypeScriptDTOs { get; set; }
-
-        public bool WantjQueryDOMManipulator { get; set; }
-
-        //For NET6CleanArchitecture
-        public bool WantBackendAPI { get; set; }
-
         public bool WantBackendAPINodeJsExpressMongoDB { get; set; }
-
-        public bool WantNET8MSSQLServerAPI { get; set; }
 
         public bool WantDTONET8BlazorMSSQLServerCodeFirst { get; set; }
 
@@ -103,19 +78,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("DeleteStoredProcedure", DeleteStoredProcedure, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DeleteFiles", DeleteFiles, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("TemplateId", TemplateId, DbType.Int32, ParameterDirection.Input);
-                dp.Add("WantCSharpModelsWithSPs", WantCSharpModelsWithSPs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpDTOs", WantCSharpDTOs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpFilters", WantCSharpFilters, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpInterfaces", WantCSharpInterfaces, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpServices", WantCSharpServices, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpRazorPages", WantCSharpRazorPages, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpWebAPIs", WantCSharpWebAPIs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantTypeScriptModels", WantTypeScriptModels, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
@@ -158,19 +121,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("DeleteStoredProcedure", DeleteStoredProcedure, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DeleteFiles", DeleteFiles, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("TemplateId", TemplateId, DbType.Int32, ParameterDirection.Input);
-                dp.Add("WantCSharpModelsWithSPs", WantCSharpModelsWithSPs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpDTOs", WantCSharpDTOs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpFilters", WantCSharpFilters, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpInterfaces", WantCSharpInterfaces, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpServices", WantCSharpServices, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpRazorPages", WantCSharpRazorPages, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantCSharpWebAPIs", WantCSharpWebAPIs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantTypeScriptModels", WantTypeScriptModels, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantTypeScriptDTOs", WantTypeScriptDTOs, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantjQueryDOMManipulator", WantjQueryDOMManipulator, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantBackendAPI", WantBackendAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNET8MSSQLServerAPI", WantNET8MSSQLServerAPI, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
@@ -229,19 +180,7 @@ namespace FiyiStackApp.Models.Core
                     Configuration.DeleteStoredProcedure = configuration.DeleteStoredProcedure;
                     Configuration.DeleteFiles = configuration.DeleteFiles;
                     Configuration.TemplateId = configuration.TemplateId;
-                    Configuration.WantCSharpModelsWithSPs = configuration.WantCSharpModelsWithSPs;
-                    Configuration.WantCSharpDTOs = configuration.WantCSharpDTOs;
-                    Configuration.WantCSharpFilters = configuration.WantCSharpFilters;
-                    Configuration.WantCSharpInterfaces = configuration.WantCSharpInterfaces;
-                    Configuration.WantCSharpServices = configuration.WantCSharpServices;
-                    Configuration.WantCSharpRazorPages = configuration.WantCSharpRazorPages;
-                    Configuration.WantCSharpWebAPIs = configuration.WantCSharpWebAPIs;
-                    Configuration.WantTypeScriptModels = configuration.WantTypeScriptModels;
-                    Configuration.WantTypeScriptDTOs = configuration.WantTypeScriptDTOs;
-                    Configuration.WantjQueryDOMManipulator = configuration.WantjQueryDOMManipulator;
-                    Configuration.WantBackendAPI = configuration.WantBackendAPI;
                     Configuration.WantBackendAPINodeJsExpressMongoDB = configuration.WantBackendAPINodeJsExpressMongoDB;
-                    Configuration.WantNET8MSSQLServerAPI = configuration.WantNET8MSSQLServerAPI;
                     Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
@@ -271,26 +210,14 @@ namespace FiyiStackApp.Models.Core
                 $"DeleteStoredProcedure: {DeleteStoredProcedure}, " +
                 $"DeleteFiles: {DeleteFiles}, " +
                 $"TemplateId: {TemplateId}, " +
-                $"WantCSharpModelsWithSPs: {WantCSharpModelsWithSPs}, " +
-                $"WantCSharpDTOs: {WantCSharpDTOs}, " +
-                $"WantCSharpFilters: {WantCSharpFilters}, " +
-                $"WantCSharpInterfaces: {WantCSharpInterfaces}, " +
-                $"WantCSharpServices: {WantCSharpServices}, " +
-                $"WantCSharpRazorPages: {WantCSharpRazorPages}, " +
-                $"WantCSharpWebAPIs: {WantCSharpWebAPIs}, " +
-                $"WantTypeScriptModels: {WantTypeScriptModels}, " +
-                $"WantTypeScriptDTOs: {WantTypeScriptDTOs}, " +
-                $"WantjQueryDOMManipulator: {WantjQueryDOMManipulator}, " +
                 $"WantBackendAPINodeJsExpressMongoDB: {WantBackendAPINodeJsExpressMongoDB}, " +
-                $"WantNET8MSSQLServerAPI: {WantNET8MSSQLServerAPI}, " +
                 $"WantDTONET8BlazorMSSQLServerCodeFirst: {WantDTONET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantEntityNET8BlazorMSSQLServerCodeFirst: {WantEntityNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst: {WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantInterfaceNET8BlazorMSSQLServerCodeFirst: {WantInterfaceNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantRepositoryNET8BlazorMSSQLServerCodeFirst: {WantRepositoryNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantBlazorPageNET8BlazorMSSQLServerCodeFirst: {WantBlazorPageNET8BlazorMSSQLServerCodeFirst}, " +
-                $"WantNET8RazorMSSQLServerCodeFirst: {WantNET8RazorMSSQLServerCodeFirst}, " +
-                $"WantBackendAPI:WantBackendAPI {WantBackendAPI}";
+                $"WantNET8RazorMSSQLServerCodeFirst: {WantNET8RazorMSSQLServerCodeFirst}";
         }
     }
 }

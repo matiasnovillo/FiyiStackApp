@@ -25,22 +25,8 @@ ON[PRIMARY]";
 
                 NonQuery.Replace("\r", "").Replace("\n", "");
 
-                using (SqlConnection sqlConnection = new SqlConnection(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer))
-                {
-                    var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
-                }
-
-                #region Create script in project folder
-                string ScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\SQLScripts\\";
-                if (!Directory.Exists(ScriptPath))
-                { Directory.CreateDirectory(ScriptPath); }
-
-                WinFormConfigurationComponent.CreateFile(
-                $"{ScriptPath}{TableArea}.{TableName}_CreateTable.sql",
-                NonQuery,
-                GeneratorConfigurationComponent.Configuration.DeleteFiles); 
-                #endregion
-
+                using SqlConnection sqlConnection = new(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer);
+                var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
             }
             catch (Exception ex) { throw ex; }
         }

@@ -17,10 +17,10 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                     LogText += $"Working with {Table.Name} {Environment.NewLine}";
                     string Content = "";
 
-                    #region TypeScript model
-                    if (GeneratorConfigurationComponent.Configuration.WantTypeScriptModels)
+                    #region TypeScript entity
+                    if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
                     {
-                        string TypeScriptModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\TsModels\\";
+                        string TypeScriptModelPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\TsEntities\\";
                         if (Directory.Exists(TypeScriptModelPath))
                         {
                             LogText += $"Folder: {TypeScriptModelPath} exist {Environment.NewLine}";
@@ -31,37 +31,37 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                             Directory.CreateDirectory(TypeScriptModelPath);
                         }
 
-                        Content = Modules.TypeScript.Model(GeneratorConfigurationComponent, Table);
+                        Content = Modules.TypeScript.Entity(GeneratorConfigurationComponent, Table);
                         
                         WinFormConfigurationComponent.CreateFile(
-                            $"{TypeScriptModelPath}{Table.Name}_TsModel.ts", 
+                            $"{TypeScriptModelPath}{Table.Name}_TsEntity.ts", 
                             Content, 
                             GeneratorConfigurationComponent.Configuration.DeleteFiles);
 
-                        LogText += $"TypeScript model {Table.Name}.ts created {Environment.NewLine}";
+                        LogText += $"TypeScript entity {Table.Name}_TsEntity.ts created {Environment.NewLine}";
                     }
-                    else { LogText += $"Generation of TypeScript model for {Table.Name} cancelled by user {Environment.NewLine}"; }
+                    else { LogText += $"Generation of TypeScript entity for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion
 
-                    #region jQuery in TypeScript
-                    if (GeneratorConfigurationComponent.Configuration.WantjQueryDOMManipulator)
+                    #region jQuery in TypeScript (Query)
+                    if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
                     {
-                        string jQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\jQuery\\";
-                        if (Directory.Exists(jQueryPath))
+                        string QueryjQueryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\jQuery\\";
+                        if (Directory.Exists(QueryjQueryPath))
                         {
-                            LogText += $"Folder: {jQueryPath} exist {Environment.NewLine}";
+                            LogText += $"Folder: {QueryjQueryPath} exist {Environment.NewLine}";
                         }
                         else
                         {
-                            LogText += $"Folder: {jQueryPath} does not exist. Creating folder {Environment.NewLine}";
-                            Directory.CreateDirectory(jQueryPath);
+                            LogText += $"Folder: {QueryjQueryPath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(QueryjQueryPath);
                         }
 
                         Content = Modules.TypeScript.jQueryQuery(GeneratorConfigurationComponent, Table);
 
                         WinFormConfigurationComponent.CreateFile(
-                            $"{jQueryPath}{Table.Name}Query_jQuery.ts",
-                            Content, 
+                            $"{QueryjQueryPath}{Table.Name}Query_jQuery.ts",
+                            Content,
                             GeneratorConfigurationComponent.Configuration.DeleteFiles);
 
                         LogText += $"jQuery in TypeScript {Table.Name}Query_jQuery.ts created {Environment.NewLine}";
@@ -70,9 +70,9 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                     #endregion
 
                     #region TypeScript DTO
-                    if (GeneratorConfigurationComponent.Configuration.WantTypeScriptDTOs)
+                    if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
                     {
-                        string TypeScriptDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathJsTsNETCoreSQLServer}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\DTOs\\";
+                        string TypeScriptDTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\wwwroot\\ts\\{Table.Area}\\{Table.Name}\\DTOs\\";
                         if (Directory.Exists(TypeScriptDTOPath))
                         {
                             LogText += $"Folder: {TypeScriptDTOPath} exist {Environment.NewLine}";
@@ -86,11 +86,11 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                         Content = Modules.TypeScript.DTO(GeneratorConfigurationComponent, Table);
 
                         WinFormConfigurationComponent.CreateFile(
-                            $"{TypeScriptDTOPath}{Table.Name.ToLower()}SelectAllPaged.ts",
+                            $"{TypeScriptDTOPath}paginated{Table.Name}DTO.ts",
                             Content,
                             GeneratorConfigurationComponent.Configuration.DeleteFiles);
 
-                        LogText += $"TypeScript DTO {Table.Name.ToLower()}SelectAllPaged.ts created {Environment.NewLine}";
+                        LogText += $"TypeScript DTO paginated{Table.Name}DTO.ts created {Environment.NewLine}";
                     }
                     else { LogText += $"Generation of TypeScript DTO for {Table.Name} cancelled by user {Environment.NewLine}"; }
                     #endregion

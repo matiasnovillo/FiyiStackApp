@@ -79,7 +79,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 <br>
 <table cellpadding=""""0"""" cellspacing=""""0"""" border=""""0"""" width=""""100%"""" style=""""width: 100% !important; min-width: 100%; max-width: 100%;"""">
     <tr>
-        {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForIronPDF_Converter}
+        {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForIronPDF_Converter}
     </tr>
     {{RowsAsHTML}}
 </table>
@@ -104,9 +104,10 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 //We define another DataTable dt{Table.Name}Copy to avoid issue related to DateTime conversion
                 DataTable dt{Table.Name}Copy = new();
+                dt{Table.Name}Copy.TableName = ""{Table.Name}"";
 
                 #region Define columns for dt{Table.Name}Copy
-                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForExcel_Converter_DefineDataColumns.TrimEnd('\t')}
+                {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForExcel_Converter_DefineDataColumns.TrimEnd('\t')}
                 #endregion
 
                 #region Create another DataTable to copy
@@ -149,7 +150,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                     DataTable dt{Table.Name}Copy = new();
 
                     #region Define columns for dt{Table.Name}Copy
-                    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Fields_ForExcel_Converter_DefineDataColumns}
+                    {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForExcel_Converter_DefineDataColumns}
                     #endregion
 
                     ds{Table.Name}.Tables.Add(dt{Table.Name}Copy);

@@ -19,10 +19,8 @@ ALTER TABLE [{SchemeName}].[{TableArea}.{TableName}] DROP COLUMN {FieldName}";
 
                 NonQuery.Replace("\r", "").Replace("\n", "");
 
-                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-                {
-                    var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
-                }
+                using SqlConnection sqlConnection = new(ConnectionString);
+                var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
             }
             catch (Exception ex) { throw ex; }
         }

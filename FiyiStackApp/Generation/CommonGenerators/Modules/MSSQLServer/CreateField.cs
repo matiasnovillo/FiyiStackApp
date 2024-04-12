@@ -131,10 +131,8 @@ namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
 
                 if (Field.Name != TableName + "Id")
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer))
-                    {
-                        var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
-                    } 
+                    using SqlConnection sqlConnection = new(GeneratorConfigurationComponent.DataBaseChosen.ConnectionStringForMSSQLServer);
+                    var dataReader = sqlConnection.ExecuteReader(NonQuery, commandType: CommandType.Text);
                 }
 
                 return NonQuery;

@@ -19,19 +19,20 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
                 List<Field> lstField = Field.GetAllByTableIdToModel(Table.TableId);
 
                 string Content =
-                        $@"import {{ {Table.Name}Model }} from ""../TsModels/{Table.Name}_TsModel"";
+                        $@"import {{ UserEntity }} from ""../../../CMSCore/User_TsEntity"";
+import {{ {Table.Name}Entity }} from ""../TsEntities/{Table.Name}_TsEntity"";
 
 { Security.WaterMark(Security.EWaterMarkFor.TypeScriptAndJavaScript, Constant.FiyiStackGUID.ToString())}
 
-export class {Table.Name.ToLower()}SelectAllPaged {{
-    QueryString?: string;
-    ActualPageNumber?: number;
-    RowsPerPage?: number;
-    SorterColumn?: string;
-    SortToggler?: boolean;
-    TotalRows?: number;
-    TotalPages?: number;
-    lst{Table.Name}Model?: {Table.Name}Model[] | undefined;
+export class paginated{Table.Name}DTO {{
+    lst{Table.Name}?: {Table.Name}Entity[] | undefined;
+    lstUserCreation?: UserEntity[] | undefined;
+    lstUserLastModification?: UserEntity[] | undefined;
+    TextToSearch?: string;
+    IsStrictSearch?: boolean;
+    PageIndex?: number;
+    PageSize?: number;
+    TotalItems?: number;
 }}";
 
                 return Content;

@@ -7,11 +7,7 @@ namespace FiyiStackApp.Generation
     public static class GeneratorNodeJsExpressMongoDB
     {
         public static string Start(Configuration Configuration,
-            Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
-            Models.Tools.modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI,
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
-            Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
-            Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst,
             Models.Core.Project ProjectChosen,
@@ -22,11 +18,7 @@ namespace FiyiStackApp.Generation
             List<StoredProcedure> lstStoredProcedureToGenerate)
         {
             GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
-            fieldChainerNET8MSSQLServerAPI,
-            modelChainerNET8MSSQLServerAPI,
             fieldChainerNodeJsExpressMongoDB,
-            fieldChainerJsTsNETCoreSQLServer,
-            modelChainerJsTsNETCoreSQLServer,
             fieldChainerNET8BlazorMSSQLServerCodeFirst,
             fieldChainerNET8RazorMSSQLServerCodeFirst,
             ProjectChosen,

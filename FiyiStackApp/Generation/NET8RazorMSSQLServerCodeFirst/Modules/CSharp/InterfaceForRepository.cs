@@ -43,7 +43,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
         int DeleteBy{Table.Name}Id(int {Table.Name.ToLower()});
 
-        void DeleteManyOrAll(Ajax Ajax, string DeleteType);
+        string DeleteManyOrAll(Ajax Ajax, string DeleteType);
 
         int CopyBy{Table.Name}Id(int {Table.Name}Id);
 

@@ -9,11 +9,7 @@ namespace FiyiStackApp.Generation
     public static class GeneratorNET8RazorMSSQLServerCodeFirst
     {
         public static string Start(Configuration Configuration,
-            Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
-            Models.Tools.modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI,
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
-            Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
-            Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst,
             Models.Core.Project ProjectChosen,
@@ -24,11 +20,7 @@ namespace FiyiStackApp.Generation
             List<StoredProcedure> lstStoredProcedureToGenerate)
         {
             GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
-            fieldChainerNET8MSSQLServerAPI,
-            modelChainerNET8MSSQLServerAPI,
             fieldChainerNodeJsExpressMongoDB,
-            fieldChainerJsTsNETCoreSQLServer,
-            modelChainerJsTsNETCoreSQLServer,
             fieldChainerNET8BlazorMSSQLServerCodeFirst,
             fieldChainerNET8RazorMSSQLServerCodeFirst,
             ProjectChosen,
@@ -49,13 +41,10 @@ namespace FiyiStackApp.Generation
                 LogText += MSSQLServer.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering C# language{Environment.NewLine}";
                 LogText += CSharp.Start(GeneratorConfigurationComponent);
+                LogText += $"Entering TypeScript language{Environment.NewLine}";
+                LogText += TypeScript.Start(GeneratorConfigurationComponent);
                 LogText += $"Entering other files{Environment.NewLine}";
                 LogText += OtherFiles.Start(GeneratorConfigurationComponent);
-                //TODO Descomentar esto cuando termine los de arriba
-                //LogText += $"Entering TypeScript language{Environment.NewLine}";
-                //LogText += TypeScript.Start(GeneratorConfigurationComponent);
-                //LogText += $"Entering JavaScript language{Environment.NewLine}";
-                //LogText += JavaScript.Start(GeneratorConfigurationComponent);
 
                 return LogText;
             }

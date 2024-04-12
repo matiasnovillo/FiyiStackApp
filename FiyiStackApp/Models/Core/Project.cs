@@ -17,17 +17,8 @@ namespace FiyiStackApp.Models.Core
         [CategoryAttribute("Settings"), DescriptionAttribute("History user")]
         public string GeneralHistoryUser { get; set; }
 
-        [CategoryAttribute("Settings"), DescriptionAttribute("Path to JsTsNETCoreSQLServer")]
-        public string PathJsTsNETCoreSQLServer { get; set; }
-
-        [CategoryAttribute("Settings"), DescriptionAttribute("Path to NET6CleanArchitecture")]
-        public string PathNET6CleanArchitecture { get; set; }
-
         [CategoryAttribute("Settings"), DescriptionAttribute("Path to NodeJsExpressMongoDB")]
         public string PathNodeJsExpressMongoDB { get; set; }
-
-        [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8MSSQLServerAPI")]
-        public string PathNET8MSSQLServerAPI { get; set; }
 
         [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8BlazorMSSQLServerCodeFirst")]
         public string PathNET8BlazorMSSQLServerCodeFirst { get; set; }
@@ -76,10 +67,7 @@ namespace FiyiStackApp.Models.Core
                     this.ProjectId = field.ProjectId;
                     Name = field.Name;
                     GeneralHistoryUser = field.GeneralHistoryUser ?? "";
-                    PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer ?? "";
-                    PathNET6CleanArchitecture = field.PathNET6CleanArchitecture ?? "";
                     PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB ?? "";
-                    PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI ?? "";
                     PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst ?? "";
                     PathNET8RazorMSSQLServerCodeFirst = field.PathNET8RazorMSSQLServerCodeFirst ?? "";
                     Active = field.Active;
@@ -118,10 +106,7 @@ namespace FiyiStackApp.Models.Core
                     Project.ProjectId = field.ProjectId;
                     Project.Name = field.Name;
                     Project.GeneralHistoryUser = field.GeneralHistoryUser;
-                    Project.PathJsTsNETCoreSQLServer = field.PathJsTsNETCoreSQLServer;
-                    Project.PathNET6CleanArchitecture = field.PathNET6CleanArchitecture;
                     Project.PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB;
-                    Project.PathNET8MSSQLServerAPI = field.PathNET8MSSQLServerAPI;
                     Project.PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst;
                     Project.PathNET8RazorMSSQLServerCodeFirst = field.PathNET8RazorMSSQLServerCodeFirst;
                     Project.Active = field.Active;
@@ -170,10 +155,7 @@ namespace FiyiStackApp.Models.Core
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
                 dp.Add("GeneralHistoryUser", GeneralHistoryUser, DbType.String, ParameterDirection.Input);
-                dp.Add("PathJsTsNETCoreSQLServer", PathJsTsNETCoreSQLServer, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET8MSSQLServerAPI", PathNET8MSSQLServerAPI, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8RazorMSSQLServerCodeFirst", PathNET8RazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
@@ -219,10 +201,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("ProjectId", ProjectId, DbType.Int32, ParameterDirection.Input);
                 dp.Add("Name", Name, DbType.String, ParameterDirection.Input);
                 dp.Add("GeneralHistoryUser", GeneralHistoryUser, DbType.String, ParameterDirection.Input);
-                dp.Add("PathJsTsNETCoreSQLServer", PathJsTsNETCoreSQLServer, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET6CleanArchitecture", PathNET6CleanArchitecture, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET8MSSQLServerAPI", PathNET8MSSQLServerAPI, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8RazorMSSQLServerCodeFirst", PathNET8RazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
@@ -297,10 +276,7 @@ namespace FiyiStackApp.Models.Core
             return $"ProjectId: {ProjectId}, " +
                 $"Name: {Name}, " +
                 $"GeneralHistoryUser: {GeneralHistoryUser}, " +
-                $"PathJsTsNETCoreSQLServer: {PathJsTsNETCoreSQLServer}, " +
-                $"PathNET6CleanArchitecture: {PathNET6CleanArchitecture}, " +
                 $"PathNodeJsExpressMongoDB: {PathNodeJsExpressMongoDB}, " +
-                $"PathNET8MSSQLServerAPI: {PathNET8MSSQLServerAPI}, " +
                 $"PathNET8RazorMSSQLServerCodeFirst: {PathNET8RazorMSSQLServerCodeFirst}, " +
                 $"Active: {Active}, " +
                 $"UserIdCreation: {UserIdCreation}, " +

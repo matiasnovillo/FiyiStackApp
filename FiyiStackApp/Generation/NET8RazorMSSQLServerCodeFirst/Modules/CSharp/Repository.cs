@@ -155,17 +155,35 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             catch (Exception) {{ throw; }}
         }}
 
-        public void DeleteManyOrAll(Ajax ajax, string deleteType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name=""ajax""></param>
+        /// <param name=""deleteType""></param>
+        /// <returns>Return the rows deleted</returns>
+        public string DeleteManyOrAll(Ajax ajax, string deleteType)
         {{
             try
             {{
                 if (deleteType == ""All"")
                 {{
                     var RegistersToDelete = _context.{Table.Name}.ToList();
+                    
+                    List<{Table.Name}> lst{Table.Name} = _context.{Table.Name}.ToList();
+                    string RowsDeleted = """";
+
+                    for (int i = 0; i < lst{Table.Name}.Count; i++)
+                    {{
+                        RowsDeleted += $@""{{lst{Table.Name}[i].{Table.Name}Id}},""; 
+                    }}
+
+                    RowsDeleted = RowsDeleted.TrimEnd(',');
 
                     _context.{Table.Name}.RemoveRange(RegistersToDelete);
 
                     _context.SaveChanges();
+
+                    return RowsDeleted;
                 }}
                 else
                 {{
@@ -179,11 +197,20 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                         _context.SaveChanges();
                     }}
+
+                    ajax.AjaxForString = ajax.AjaxForString.TrimEnd(',');
+
+                    return ajax.AjaxForString;
                 }}
             }}
             catch (Exception) {{ throw; }}
         }}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name=""{Table.Name.ToLower()}Id""></param>
+        /// <returns>The last entered ID after the copy transaction</returns>        
         public int CopyBy{Table.Name}Id(int {Table.Name.ToLower()}Id)
         {{
             try
@@ -195,11 +222,21 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 {Table.Name}.{Table.Name}Id = 0;
 
                 _context.{Table.Name}.Add({Table.Name});
-                return _context.SaveChanges();
+                _context.SaveChanges();
+
+                return _context.{Table.Name}
+                                .OrderByDescending(x => x.{Table.Name}Id)
+                                .FirstOrDefault().{Table.Name}Id;
             }}
             catch (Exception) {{ throw; }}
         }}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name=""ajax""></param>
+        /// <param name=""copyType""></param>
+        /// <returns>The number of rows copied</returns>
         public int CopyManyOrAll(Ajax ajax, string copyType)
         {{
             try

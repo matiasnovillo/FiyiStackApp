@@ -115,19 +115,7 @@ namespace FiyiStackApp
 
                 TemplateId = 1,
 
-                WantCSharpModelsWithSPs = true,
-                WantCSharpDTOs = true,
-                WantCSharpFilters = true,
-                WantCSharpInterfaces = true,
-                WantCSharpServices = true,
-                WantCSharpRazorPages = true,
-                WantCSharpWebAPIs = true,
-                WantTypeScriptModels = true,
-                WantjQueryDOMManipulator = true,
-                WantTypeScriptDTOs = true,
-                WantBackendAPI = true,
                 WantBackendAPINodeJsExpressMongoDB = true,
-                WantNET8MSSQLServerAPI = true,
                 WantDTONET8BlazorMSSQLServerCodeFirst = true,
                 WantEntityNET8BlazorMSSQLServerCodeFirst = true,
                 WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = true,
@@ -154,16 +142,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.TemplateId = Configuration.TemplateId;
 
                 //C#
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpModelsWithSPs = Configuration.WantCSharpModelsWithSPs;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpDTOs = Configuration.WantCSharpDTOs;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpFilters = Configuration.WantCSharpFilters;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpInterfaces = Configuration.WantCSharpInterfaces;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpServices = Configuration.WantCSharpServices;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpRazorPages = Configuration.WantCSharpRazorPages;
-                Program.WinFormConfigurationComponent.Configuration.WantCSharpWebAPIs = Configuration.WantCSharpWebAPIs;
-                Program.WinFormConfigurationComponent.Configuration.WantBackendAPI = Configuration.WantBackendAPI;
                 Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB = Configuration.WantBackendAPINodeJsExpressMongoDB;
-                Program.WinFormConfigurationComponent.Configuration.WantNET8MSSQLServerAPI = Configuration.WantNET8MSSQLServerAPI;
                 Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
@@ -171,9 +150,6 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst = Configuration.WantNET8RazorMSSQLServerCodeFirst;
                 //Front-end
-                Program.WinFormConfigurationComponent.Configuration.WantTypeScriptModels = Configuration.WantTypeScriptModels;
-                Program.WinFormConfigurationComponent.Configuration.WantjQueryDOMManipulator = Configuration.WantjQueryDOMManipulator;
-                Program.WinFormConfigurationComponent.Configuration.WantTypeScriptDTOs = Configuration.WantTypeScriptDTOs;
                 Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
             }
             catch (Exception ex) { throw ex; }

@@ -250,7 +250,8 @@ $@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", {(field.Nullab
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: number";
+                        TsFields_ForTsModel += $@"{field.Name}?: number;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong><i class=""fas fa-divide"">
@@ -337,7 +338,8 @@ $@"        public bool {field.Name} {{ get; set; }}
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : true,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: boolean";
+                        TsFields_ForTsModel += $@"{field.Name}?: boolean;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -418,7 +420,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong><i class=""fas fa-font"">
@@ -498,7 +501,8 @@ $@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", {(field.Nu
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : 3.14,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: number";
+                        TsFields_ForTsModel += $@"{field.Name}?: number;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -580,7 +584,8 @@ $@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: number";
+                        TsFields_ForTsModel += $@"{field.Name}?: number;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left text-light"">
         <i class=""fas fa-key""></i> ${{row.{field.Name}}}
@@ -620,7 +625,8 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.N
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""1753-01-01T00:00:00.001Z"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -703,7 +709,8 @@ $@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", {(field.N
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""00:00:00.001"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string";
+                        TsFields_ForTsModel += $@"{field.Name}?: string;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -784,7 +791,8 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: number";
+                        TsFields_ForTsModel += $@"{field.Name}?: number;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -883,7 +891,8 @@ $@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", {(field.
                         else
                         { throw new Exception($"{field.Name} has not 'Colour' in the name"); }
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"" >
         <strong style=""color:#${{row.{field.Name}}}"">
@@ -961,7 +970,8 @@ $@"        public string {field.Name} {{ get; set; }}
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -1037,7 +1047,8 @@ $@"        public string {field.Name} {{ get; set; }}
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <i class=""fas fa-font""></i> ${{row.{field.Name}}}
@@ -1133,7 +1144,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -1221,7 +1233,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <a href=""tel:${{row.{field.Name}}}"">
@@ -1306,7 +1319,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <a href=""${{row.{field.Name}}}"" target=""_blank"">
@@ -1389,7 +1403,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <a href=""mailto:${{row.{field.Name}}}"">
@@ -1473,7 +1488,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <a href=""${{row.{field.Name}}}"">
@@ -1604,7 +1620,8 @@ $@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nul
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : ""Put{field.Name}"",{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined";
+                        TsFields_ForTsModel += $@"{field.Name}?: string | string[] | number | undefined;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>
@@ -1686,7 +1703,8 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
 
                         FieldForHTTPFile += $@"    ""{field.Name}"" : 1,{Environment.NewLine}";
 
-                        TsFields_ForTsModel += $@"{field.Name}?: number";
+                        TsFields_ForTsModel += $@"{field.Name}?: number;
+    ";
 
                         Fields_ForjQuery_TableFill_SecondtPart += $@"<td class=""text-left"">
         <strong>

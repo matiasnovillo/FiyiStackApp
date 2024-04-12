@@ -6,11 +6,7 @@ namespace FiyiStackApp.Generation
     public partial class GeneratorConfigurationComponent : Component
     {
         public Configuration Configuration { get; set; }
-        public Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI { get; set; }
-        public Models.Tools.modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI { get; set; }
         public Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB { get; set; }
-        public Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer { get; set; }
-        public Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer { get; set; }
         public Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst { get; set; }
         public Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst { get; set; }
 
@@ -23,11 +19,7 @@ namespace FiyiStackApp.Generation
 
         #region Constructors
         public GeneratorConfigurationComponent(Configuration Configuration,
-            Models.Tools.fieldChainerNET8MSSQLServerAPI fieldChainerNET8MSSQLServerAPI,
-            Models.Tools.modelChainerNET8MSSQLServerAPI modelChainerNET8MSSQLServerAPI,
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
-            Models.Tools.fieldChainerJsTsNETCoreSQLServer fieldChainerJsTsNETCoreSQLServer,
-            Models.Tools.modelChainerJsTsNETCoreSQLServer modelChainerJsTsNETCoreSQLServer,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst,
             Project ProjectChosen,
@@ -39,11 +31,8 @@ namespace FiyiStackApp.Generation
         {
 
             //Initialization
-            this.fieldChainerNET8MSSQLServerAPI = new Models.Tools.fieldChainerNET8MSSQLServerAPI();
-            this.modelChainerNET8MSSQLServerAPI = new Models.Tools.modelChainerNET8MSSQLServerAPI();
             this.fieldChainerNodeJsExpressMongoDB = new Models.Tools.fieldChainerNodeJsExpressMongoDB();
-            this.fieldChainerJsTsNETCoreSQLServer = new Models.Tools.fieldChainerJsTsNETCoreSQLServer();
-            this.modelChainerJsTsNETCoreSQLServer = new Models.Tools.modelChainerJsTsNETCoreSQLServer();
+            this.fieldChainerNET8BlazorMSSQLServerCodeFirst = new Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst();
             this.fieldChainerNET8RazorMSSQLServerCodeFirst = new Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst();
             this.ProjectChosen = new Project();
             this.DataBaseChosen = new DataBase();
@@ -54,11 +43,8 @@ namespace FiyiStackApp.Generation
 
             //Copy objects from parameters
             this.Configuration = Configuration;
-            this.fieldChainerNET8MSSQLServerAPI = fieldChainerNET8MSSQLServerAPI;
-            this.modelChainerNET8MSSQLServerAPI = modelChainerNET8MSSQLServerAPI;
             this.fieldChainerNodeJsExpressMongoDB = fieldChainerNodeJsExpressMongoDB;
-            this.fieldChainerJsTsNETCoreSQLServer = fieldChainerJsTsNETCoreSQLServer;
-            this.modelChainerJsTsNETCoreSQLServer = modelChainerJsTsNETCoreSQLServer;
+            this.fieldChainerNET8BlazorMSSQLServerCodeFirst = fieldChainerNET8BlazorMSSQLServerCodeFirst;
             this.fieldChainerNET8RazorMSSQLServerCodeFirst = fieldChainerNET8RazorMSSQLServerCodeFirst;
             this.ProjectChosen = ProjectChosen;
             this.DataBaseChosen = DataBaseChosen;

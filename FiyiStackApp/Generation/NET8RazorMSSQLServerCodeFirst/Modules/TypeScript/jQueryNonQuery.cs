@@ -3,7 +3,7 @@ using FiyiStackApp.Models.Core;
 
 namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
 {
-    public static partial class JavaScript
+    public static partial class TypeScript
     {
         public static string jQueryNonQuery(GeneratorConfigurationComponent GeneratorConfigurationComponent, Table Table)
         {
@@ -19,14 +19,14 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
 var formData = new FormData();
 
 //Used for Quill Editor
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextEditor_ForjQueryNonQuery_Quill}
+{GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.FieldTextEditor_ForjQueryNonQuery_Quill}
 
 //Used for file input
-{GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextFile_ForjQueryNonQuery}
+{GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.FieldTextFile_ForjQueryNonQuery}
 
 //LOAD EVENT
 $(document).ready(function () {{
-    {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.FieldTextEditor_ForjQueryNonQuery_LoadEvent}
+    {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.FieldTextEditor_ForjQueryNonQuery_LoadEvent}
     
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName(""needs-validation"");
@@ -42,7 +42,7 @@ $(document).ready(function () {{
                 //{Table.Name}Id
                 formData.append(""{Table.Area.ToLower()}-{Table.Name.ToLower()}-{Table.Name.ToLower()}id-input"", $(""#{Table.Area.ToLower()}-{Table.Name.ToLower()}-{Table.Name.ToLower()}id-input"").val());
 
-                {GeneratorConfigurationComponent.fieldChainerJsTsNETCoreSQLServer.Field_ForjQueryNonQuery_FormData}
+                {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Field_ForjQueryNonQuery_FormData}
 
                 //Setup request
                 var xmlHttpRequest = new XMLHttpRequest();
