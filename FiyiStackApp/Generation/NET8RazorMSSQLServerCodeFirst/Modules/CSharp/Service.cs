@@ -117,7 +117,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                 DataTable.Columns.Add(""{Table.Name}Id"", typeof(string));
                 {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable1}
 
-                foreach (Client client in lstClient)
+                foreach ({Table.Name} {Table.Name.ToLower()} in lst{Table.Name})
                         {{
                             DataTable.Rows.Add(
                                 {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable}
@@ -205,7 +205,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                     {Table.Name} {Table.Name} = _context.{Table.Name}
                                             .Where(x => x.{Table.Name}Id == Convert.ToInt32(RowChecked))
                                             .FirstOrDefault();      
-                    lst{Table.Name}.Add(Client);
+                    lst{Table.Name}.Add({Table.Name});
                 }}
             }}
 
