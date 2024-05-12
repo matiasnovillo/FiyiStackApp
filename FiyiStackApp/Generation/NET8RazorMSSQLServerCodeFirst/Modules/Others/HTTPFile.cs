@@ -12,28 +12,28 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"@api = http://localhost:PutHerePortNumber/api
 
-### Select1By{Table.Name}Id
-{{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/Select1By{Table.Name}IdToJSON/1
+### GetBy{Table.Name}Id
+GET {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/GetBy{Table.Name}Id/1
 
-### SelectAll
-{{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/SelectAllToJSON
+### GetAll
+GET {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/GetAll
 
-### SelectAllPaged
-POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/SelectAllPagedToJSON
+### GetAllPaginated
+POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/GetAllPaginated
 Content-Type: application/json
 
 {{
-    ""QueryString"" : """",
-    ""ActualPageNumber"" : 1,
-    ""RowsPerPage"": 10,
-    ""SorterColumn"": ""{Table.Name}Id"",
-    ""SortToggler"": false,
-    ""TotalRows"": 0,
-    ""TotalPages"": 0
+    ""lst{Table.Name}"" : [],
+    ""lstUserCreation"" : [],
+    ""lstUserLastModification"" : [],
+    ""TextToSearch"": "",
+    ""IsStrictSearch"": false,
+    ""PageIndex"" : 1,
+    ""PageSize"": 10
 }}
 
 ### InsertOrUpdate
-POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/InsertOrUpdate
+POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/AddOrUpdate
 Content-Type: application/json
 
 {{
@@ -56,6 +56,14 @@ POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/CopyBy{Table.Name}Id/
 
 ### CopyManyOrAll
 POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/CopyManyOrAll/All
+Content-Type: application/json
+
+{{
+    ""AjaxForString"": """"
+}}
+
+### Export
+POST {{{{api}}}}/{Table.Area}/{Table.Name}/{Table.Version}/Export/Excel/All
 Content-Type: application/json
 
 {{

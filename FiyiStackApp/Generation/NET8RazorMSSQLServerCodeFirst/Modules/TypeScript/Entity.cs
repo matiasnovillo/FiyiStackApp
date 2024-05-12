@@ -102,27 +102,9 @@ export class {Table.Name}Entity {{
         return Rx.from(ajax.post(URL, Body, Header));
     }}
 
-    //Exportations
-    static ExportAsPDF(ExportationType: string, Body: Ajax) {{
-        let URL = ""/api/{Table.Area}/{Table.Name}/{Table.Version}/ExportAsPDF/"" + ExportationType;
-        let Header: any = {{
-            ""Accept"": ""application/json"",
-            ""Content-Type"": ""application/json; charset=utf-8""
-        }};
-        return Rx.from(ajax.post(URL, Body, Header));
-    }}
-
-    static ExportAsExcel(ExportationType: string, Body: Ajax) {{
-        let URL = ""/api/{Table.Area}/{Table.Name}/{Table.Version}/ExportAsExcel/"" + ExportationType;
-        let Header: any = {{
-            ""Accept"": ""application/json"",
-            ""Content-Type"": ""application/json; charset=utf-8""
-        }};
-        return Rx.from(ajax.post(URL, Body, Header));
-    }}
-
-    static ExportAsCSV(ExportationType: string, Body: Ajax) {{
-        let URL = ""/api/{Table.Area}/{Table.Name}/{Table.Version}/ExportAsCSV/"" + ExportationType;
+    //Export
+    static Export(ExportationFile: string, ExportationType: string, Body: Ajax) {{
+        let URL = `/api/{Table.Area}/{Table.Name}/{Table.Version}/Export/${{ExportationFile}}/${{ExportationType}}`;
         let Header: any = {{
             ""Accept"": ""application/json"",
             ""Content-Type"": ""application/json; charset=utf-8""

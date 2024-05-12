@@ -22,7 +22,7 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                     #region JSON Script
                     if (GeneratorConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst)
                     {
-                        string JSONScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\JSONScripts\\";
+                        string JSONScriptPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\JSON\\";
                         if (Directory.Exists(JSONScriptPath))
                         {
                             LogText += $"Folder: {JSONScriptPath} exist {Environment.NewLine}";
@@ -43,7 +43,7 @@ namespace FiyiStackApp.Generation.NET8RazorMSSQLServerCodeFirst.Languages
                     #endregion
 
                     #region HTTP file
-                    string HTTPFilePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\HTTPFiles\\";
+                    string HTTPFilePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\HTTP\\";
                     if (Directory.Exists(HTTPFilePath))
                     {
                         LogText += $"Folder: {HTTPFilePath} exist {Environment.NewLine}";

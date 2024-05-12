@@ -57,16 +57,14 @@ class {Table.Name}Query {{
                         response_{Table.Name.ToLower()}Query?.lst{Table.Name}?.forEach(row => {{
 
                             ListContent += `
-<div class=""row"">
-    <div class=""col-12"">
-        <div class=""card bg-gradient-dark h-100"">
-            <div class=""card-header bg-transparent text-sm-start text-center pt-4 pb-3 px-4"">
-                <h6 class=""mb-1 text-white"">ID: ${{row.{Table.Name}Id}}</h6>
-            </div>
-            <hr class=""horizontal light my-0"">
-            <div class=""card-body"">
-                {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForjQuery_ListFill}
-            </div>
+<div class=""col-12 col-md-6 col-lg-4 mt-4"">
+    <div class=""card bg-gradient-dark h-100"">
+        <div class=""card-header bg-transparent text-sm-start text-center pt-4 pb-3 px-4"">
+            <h6 class=""mb-1 text-white"">ID: ${{row.{Table.Name}Id}}</h6>
+        </div>
+        <hr class=""horizontal light my-0"">
+        <div class=""card-body"">
+            {GeneratorConfigurationComponent.fieldChainerNET8RazorMSSQLServerCodeFirst.Fields_ForjQuery_ListFill}
         </div>
     </div>
 </div>`;
