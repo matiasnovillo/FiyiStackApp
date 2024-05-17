@@ -49,6 +49,8 @@ namespace FiyiStackApp.Models.Core
         public  bool WantBlazorPageNET8BlazorMSSQLServerCodeFirst { get; set; }
 
         public  bool WantNET8RazorMSSQLServerCodeFirst { get; set; }
+
+        public bool WantNETFrameworkWinForm { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -86,6 +88,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8RazorMSSQLServerCodeFirst", WantNET8RazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantNETFrameworkWinForm", WantNETFrameworkWinForm, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -129,6 +132,7 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantNET8RazorMSSQLServerCodeFirst", WantNET8RazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantNETFrameworkWinForm", WantNETFrameworkWinForm, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -188,6 +192,7 @@ namespace FiyiStackApp.Models.Core
                     Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantNET8RazorMSSQLServerCodeFirst = configuration.WantNET8RazorMSSQLServerCodeFirst;
+                    Configuration.WantNETFrameworkWinForm = configuration.WantNETFrameworkWinForm;
                 }
 
                 return Configuration;
@@ -217,6 +222,7 @@ namespace FiyiStackApp.Models.Core
                 $"WantInterfaceNET8BlazorMSSQLServerCodeFirst: {WantInterfaceNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantRepositoryNET8BlazorMSSQLServerCodeFirst: {WantRepositoryNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantBlazorPageNET8BlazorMSSQLServerCodeFirst: {WantBlazorPageNET8BlazorMSSQLServerCodeFirst}, " +
+                $"WantNETFrameworkWinForm: {WantNETFrameworkWinForm}, " +
                 $"WantNET8RazorMSSQLServerCodeFirst: {WantNET8RazorMSSQLServerCodeFirst}";
         }
     }

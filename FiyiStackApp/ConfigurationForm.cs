@@ -28,7 +28,7 @@ namespace FiyiStackApp
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
                     ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB;
                 }
-                else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("DTOs"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities"));
@@ -41,25 +41,42 @@ namespace FiyiStackApp
                     ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[4].Checked = Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
                 }
-                else
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm.Trim() != "")
                 {
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Fullstack Application"));
                     ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst;
+                }
+                else
+                {
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities"));
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities Configuration"));
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Interfaces"));
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Repositories"));
+                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
+                    ListViewBackEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
+                    ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
+                    ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                 }
 
                 //Front-end
                 if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
                 {
-                    
+
                 }
                 else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Blazor pages"));
                     ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
                 }
-                else
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst.Trim() != "")
                 {
-
+                    ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Razor pages"));
+                    ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst;
+                }
+                else 
+                {
+                    ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Windows forms"));
+                    ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm;
                 }
 
                 //Hide elements except
