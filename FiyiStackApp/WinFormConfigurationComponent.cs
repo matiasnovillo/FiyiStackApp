@@ -148,7 +148,7 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
-                Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst = Configuration.WantNET8RazorMSSQLServerCodeFirst;
+                Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm = Configuration.WantNETFrameworkWinForm;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
             }

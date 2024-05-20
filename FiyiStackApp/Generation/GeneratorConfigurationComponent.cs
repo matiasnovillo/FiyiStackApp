@@ -8,7 +8,6 @@ namespace FiyiStackApp.Generation
         public Configuration Configuration { get; set; }
         public Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB { get; set; }
         public Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst { get; set; }
-        public Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst { get; set; }
 
         public Project ProjectChosen { get; set; }
         public DataBase DataBaseChosen { get; set; }
@@ -21,7 +20,6 @@ namespace FiyiStackApp.Generation
         public GeneratorConfigurationComponent(Configuration Configuration,
             Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
-            Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst fieldChainerNET8RazorMSSQLServerCodeFirst,
             Project ProjectChosen,
             DataBase DataBaseChosen,
             List<Table> lstTableInFiyiStack,
@@ -33,7 +31,6 @@ namespace FiyiStackApp.Generation
             //Initialization
             this.fieldChainerNodeJsExpressMongoDB = new Models.Tools.fieldChainerNodeJsExpressMongoDB();
             this.fieldChainerNET8BlazorMSSQLServerCodeFirst = new Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst();
-            this.fieldChainerNET8RazorMSSQLServerCodeFirst = new Models.Tools.fieldChainerNET8RazorMSSQLServerCodeFirst();
             this.ProjectChosen = new Project();
             this.DataBaseChosen = new DataBase();
             this.lstTableInFiyiStack = [];
@@ -45,7 +42,6 @@ namespace FiyiStackApp.Generation
             this.Configuration = Configuration;
             this.fieldChainerNodeJsExpressMongoDB = fieldChainerNodeJsExpressMongoDB;
             this.fieldChainerNET8BlazorMSSQLServerCodeFirst = fieldChainerNET8BlazorMSSQLServerCodeFirst;
-            this.fieldChainerNET8RazorMSSQLServerCodeFirst = fieldChainerNET8RazorMSSQLServerCodeFirst;
             this.ProjectChosen = ProjectChosen;
             this.DataBaseChosen = DataBaseChosen;
             this.lstTableInFiyiStack = lstTableInFiyiStack;

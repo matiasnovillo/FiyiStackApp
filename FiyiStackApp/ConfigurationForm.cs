@@ -44,7 +44,7 @@ namespace FiyiStackApp
                 else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm.Trim() != "")
                 {
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Fullstack Application"));
-                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst;
+                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm;
                 }
                 else
                 {
@@ -68,15 +68,14 @@ namespace FiyiStackApp
                     ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Blazor pages"));
                     ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
                 }
-                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst.Trim() != "")
-                {
-                    ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Razor pages"));
-                    ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNET8RazorMSSQLServerCodeFirst;
-                }
-                else 
+                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm.Trim() != "")
                 {
                     ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Windows forms"));
                     ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm;
+                }
+                else 
+                {
+                    
                 }
 
                 //Hide elements except
@@ -132,7 +131,7 @@ namespace FiyiStackApp
                     }
                     else
                     {
-                        Configuration.WantNET8RazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[0].Checked;
+                        Configuration.WantNETFrameworkWinForm = ListViewBackEndFilesGenerators.Items[0].Checked;
                     }
 
 

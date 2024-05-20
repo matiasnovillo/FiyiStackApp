@@ -741,9 +741,9 @@ namespace FiyiStackApp
                 {
                     Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB = "";
                 }
-                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst))
+                if (string.IsNullOrEmpty(Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm))
                 {
-                    Program.WinFormConfigurationComponent.ProjectChosen.PathNET8RazorMSSQLServerCodeFirst = "";
+                    Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm = "";
                 }
 
                 if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
@@ -751,7 +751,6 @@ namespace FiyiStackApp
                     TextBoxLogger.Text += GeneratorNodeJsExpressMongoDB.Start(Program.WinFormConfigurationComponent.Configuration,
                                     new fieldChainerNodeJsExpressMongoDB(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -764,7 +763,6 @@ namespace FiyiStackApp
                     TextBoxLogger.Text += GeneratorNET8BlazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
                                     new fieldChainerNodeJsExpressMongoDB(),
                                     new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
                                     Program.WinFormConfigurationComponent.ProjectChosen,
                                     Program.WinFormConfigurationComponent.DataBaseChosen,
                                     Program.WinFormConfigurationComponent.lstTableInFiyiStack,
@@ -774,16 +772,7 @@ namespace FiyiStackApp
                 }
                 else
                 {
-                    TextBoxLogger.Text += GeneratorNET8RazorMSSQLServerCodeFirst.Start(Program.WinFormConfigurationComponent.Configuration,
-                                    new fieldChainerNodeJsExpressMongoDB(),
-                                    new fieldChainerNET8BlazorMSSQLServerCodeFirst(),
-                                    new fieldChainerNET8RazorMSSQLServerCodeFirst(),
-                                    Program.WinFormConfigurationComponent.ProjectChosen,
-                                    Program.WinFormConfigurationComponent.DataBaseChosen,
-                                    Program.WinFormConfigurationComponent.lstTableInFiyiStack,
-                                    Program.WinFormConfigurationComponent.lstTableToGenerate,
-                                    Program.WinFormConfigurationComponent.lstFieldToGenerate,
-                                    Program.WinFormConfigurationComponent.lstStoredProcedureToGenerate);
+                    //Here it should be WinForm
                 }
 
                 //After generation done

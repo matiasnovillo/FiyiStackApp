@@ -23,9 +23,6 @@ namespace FiyiStackApp.Models.Core
         [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8BlazorMSSQLServerCodeFirst")]
         public string PathNET8BlazorMSSQLServerCodeFirst { get; set; }
 
-        [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNET8RazorMSSQLServerCodeFirst")]
-        public string PathNET8RazorMSSQLServerCodeFirst { get; set; }
-
         [CategoryAttribute("Settings"), DescriptionAttribute("Path to PathNETFrameworkWinForm")]
         public string PathNETFrameworkWinForm { get; set; }
 
@@ -73,7 +70,6 @@ namespace FiyiStackApp.Models.Core
                     PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB ?? "";
                     PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst ?? "";
                     PathNETFrameworkWinForm = field.PathNETFrameworkWinForm ?? "";
-                    PathNET8RazorMSSQLServerCodeFirst = field.PathNET8RazorMSSQLServerCodeFirst ?? "";
                     Active = field.Active;
                     UserIdCreation = field.UserIdCreation;
                     UserIdLastModification = field.UserIdLastModification;
@@ -113,7 +109,6 @@ namespace FiyiStackApp.Models.Core
                     Project.PathNodeJsExpressMongoDB = field.PathNodeJsExpressMongoDB;
                     Project.PathNET8BlazorMSSQLServerCodeFirst = field.PathNET8BlazorMSSQLServerCodeFirst;
                     Project.PathNETFrameworkWinForm = field.PathNETFrameworkWinForm;
-                    Project.PathNET8RazorMSSQLServerCodeFirst = field.PathNET8RazorMSSQLServerCodeFirst;
                     Project.Active = field.Active;
                     Project.UserIdCreation = field.UserIdCreation;
                     Project.UserIdLastModification = field.UserIdLastModification;
@@ -163,7 +158,6 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNETFrameworkWinForm", PathNETFrameworkWinForm, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET8RazorMSSQLServerCodeFirst", PathNET8RazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
@@ -210,7 +204,6 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("PathNodeJsExpressMongoDB", PathNodeJsExpressMongoDB, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNET8BlazorMSSQLServerCodeFirst", PathNET8BlazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("PathNETFrameworkWinForm", PathNETFrameworkWinForm, DbType.String, ParameterDirection.Input);
-                dp.Add("PathNET8RazorMSSQLServerCodeFirst", PathNET8RazorMSSQLServerCodeFirst, DbType.String, ParameterDirection.Input);
                 dp.Add("Active", Active, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DateTimeCreation", DateTimeCreation, DbType.DateTime, ParameterDirection.Input);
                 dp.Add("DateTimeLastModification", DateTimeLastModification, DbType.DateTime, ParameterDirection.Input);
@@ -284,7 +277,6 @@ namespace FiyiStackApp.Models.Core
                 $"Name: {Name}, " +
                 $"GeneralHistoryUser: {GeneralHistoryUser}, " +
                 $"PathNodeJsExpressMongoDB: {PathNodeJsExpressMongoDB}, " +
-                $"PathNET8RazorMSSQLServerCodeFirst: {PathNET8RazorMSSQLServerCodeFirst}, " +
                 $"Active: {Active}, " +
                 $"UserIdCreation: {UserIdCreation}, " +
                 $"UserIdLastModification: {UserIdLastModification}, " +
