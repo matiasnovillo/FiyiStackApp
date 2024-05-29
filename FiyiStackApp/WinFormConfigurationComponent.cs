@@ -115,13 +115,13 @@ namespace FiyiStackApp
 
                 TemplateId = 1,
 
-                WantBackendAPINodeJsExpressMongoDB = true,
                 WantDTONET8BlazorMSSQLServerCodeFirst = true,
                 WantEntityNET8BlazorMSSQLServerCodeFirst = true,
                 WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = true,
                 WantInterfaceNET8BlazorMSSQLServerCodeFirst = true,
                 WantRepositoryNET8BlazorMSSQLServerCodeFirst = true,
-                WantBlazorPageNET8BlazorMSSQLServerCodeFirst = true
+                WantBlazorPageNET8BlazorMSSQLServerCodeFirst = true,
+                WantServiceNET8BlazorMSSQLServerCodeFirst = true
             };
             return Configuration;
         }
@@ -142,13 +142,13 @@ namespace FiyiStackApp
                 Program.WinFormConfigurationComponent.Configuration.TemplateId = Configuration.TemplateId;
 
                 //C#
-                Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB = Configuration.WantBackendAPINodeJsExpressMongoDB;
+                //Back-end
                 Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                 Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
-                Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm = Configuration.WantNETFrameworkWinForm;
+                Program.WinFormConfigurationComponent.Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst = Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst;
                 //Front-end
                 Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
             }

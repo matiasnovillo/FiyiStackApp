@@ -8,7 +8,6 @@ namespace FiyiStackApp.Generation
     public static class GeneratorNET8BlazorMSSQLServerCodeFirst
     {
         public static string Start(Configuration Configuration,
-            Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Models.Core.Project ProjectChosen,
             Models.Core.DataBase DataBaseChosen,
@@ -18,7 +17,6 @@ namespace FiyiStackApp.Generation
             List<StoredProcedure> lstStoredProcedureToGenerate)
         {
             GeneratorConfigurationComponent GeneratorConfigurationComponent = new GeneratorConfigurationComponent(Configuration,
-            fieldChainerNodeJsExpressMongoDB,
             fieldChainerNET8BlazorMSSQLServerCodeFirst,
             ProjectChosen,
             DataBaseChosen,

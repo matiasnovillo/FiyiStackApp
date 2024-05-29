@@ -6,7 +6,6 @@ namespace FiyiStackApp.Generation
     public partial class GeneratorConfigurationComponent : Component
     {
         public Configuration Configuration { get; set; }
-        public Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB { get; set; }
         public Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst { get; set; }
 
         public Project ProjectChosen { get; set; }
@@ -18,7 +17,6 @@ namespace FiyiStackApp.Generation
 
         #region Constructors
         public GeneratorConfigurationComponent(Configuration Configuration,
-            Models.Tools.fieldChainerNodeJsExpressMongoDB fieldChainerNodeJsExpressMongoDB,
             Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst fieldChainerNET8BlazorMSSQLServerCodeFirst,
             Project ProjectChosen,
             DataBase DataBaseChosen,
@@ -29,7 +27,6 @@ namespace FiyiStackApp.Generation
         {
 
             //Initialization
-            this.fieldChainerNodeJsExpressMongoDB = new Models.Tools.fieldChainerNodeJsExpressMongoDB();
             this.fieldChainerNET8BlazorMSSQLServerCodeFirst = new Models.Tools.fieldChainerNET8BlazorMSSQLServerCodeFirst();
             this.ProjectChosen = new Project();
             this.DataBaseChosen = new DataBase();
@@ -40,7 +37,6 @@ namespace FiyiStackApp.Generation
 
             //Copy objects from parameters
             this.Configuration = Configuration;
-            this.fieldChainerNodeJsExpressMongoDB = fieldChainerNodeJsExpressMongoDB;
             this.fieldChainerNET8BlazorMSSQLServerCodeFirst = fieldChainerNET8BlazorMSSQLServerCodeFirst;
             this.ProjectChosen = ProjectChosen;
             this.DataBaseChosen = DataBaseChosen;

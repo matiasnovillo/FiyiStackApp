@@ -23,59 +23,27 @@ namespace FiyiStackApp
                 chbclonedConfigurationDeleteFiles.Checked = Program.WinFormConfigurationComponent.Configuration.DeleteFiles;
 
                 //Back-end
-                if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
-                {
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Backend API"));
-                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBackendAPINodeJsExpressMongoDB;
-                }
-                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("DTOs"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities Configuration"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Interfaces"));
                     ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Repositories"));
+                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Services"));
                     ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                     ListViewBackEndFilesGenerators.Items[4].Checked = Program.WinFormConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
-                }
-                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm.Trim() != "")
-                {
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Fullstack Application"));
-                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm;
-                }
-                else
-                {
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities"));
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Entities Configuration"));
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Interfaces"));
-                    ListViewBackEndFilesGenerators.Items.Add(new ListViewItem("Repositories"));
-                    ListViewBackEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
-                    ListViewBackEndFilesGenerators.Items[1].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
-                    ListViewBackEndFilesGenerators.Items[2].Checked = Program.WinFormConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
-                    ListViewBackEndFilesGenerators.Items[3].Checked = Program.WinFormConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
+                    ListViewBackEndFilesGenerators.Items[5].Checked = Program.WinFormConfigurationComponent.Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst;
                 }
 
                 //Front-end
-                if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
-                {
-
-                }
-                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                 {
                     ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Blazor pages"));
                     ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
-                }
-                else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNETFrameworkWinForm.Trim() != "")
-                {
-                    ListViewFrontEndFilesGenerators.Items.Add(new ListViewItem("Windows forms"));
-                    ListViewFrontEndFilesGenerators.Items[0].Checked = Program.WinFormConfigurationComponent.Configuration.WantNETFrameworkWinForm;
-                }
-                else 
-                {
-                    
                 }
 
                 //Hide elements except
@@ -117,11 +85,7 @@ namespace FiyiStackApp
                     Configuration.DeleteFiles = chbclonedConfigurationDeleteFiles.Checked;
 
                     //Back-end
-                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
-                    {
-                        Configuration.WantBackendAPINodeJsExpressMongoDB = ListViewBackEndFilesGenerators.Items[0].Checked;
-                    }
-                    else if(Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                     {
                         Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[0].Checked;
                         Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[1].Checked;
@@ -129,26 +93,12 @@ namespace FiyiStackApp
                         Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[3].Checked;
                         Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[4].Checked;
                     }
-                    else
-                    {
-                        Configuration.WantNETFrameworkWinForm = ListViewBackEndFilesGenerators.Items[0].Checked;
-                    }
-
-
 
                     //Front-end
-                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathNodeJsExpressMongoDB.Trim() != "")
-                    {
-                    }
-                    else if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
+                    if (Program.WinFormConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst.Trim() != "")
                     {
                         Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = ListViewFrontEndFilesGenerators.Items[0].Checked;
                     }
-                    else
-                    {
-
-                    }
-
 
                     if (Configuration.ConfigurationId != 0) //Edit
                     {

@@ -34,8 +34,6 @@ namespace FiyiStackApp.Models.Core
 
         public int TemplateId { get; set; }
 
-        public bool WantBackendAPINodeJsExpressMongoDB { get; set; }
-
         public bool WantDTONET8BlazorMSSQLServerCodeFirst { get; set; }
 
         public bool WantEntityNET8BlazorMSSQLServerCodeFirst { get; set; }
@@ -48,7 +46,7 @@ namespace FiyiStackApp.Models.Core
 
         public  bool WantBlazorPageNET8BlazorMSSQLServerCodeFirst { get; set; }
 
-        public  bool WantNETFrameworkWinForm { get; set; }
+        public bool WantServiceNET8BlazorMSSQLServerCodeFirst { get; set; }
         #endregion
 
         #region Constructors of Configuration
@@ -78,14 +76,13 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("DeleteStoredProcedure", DeleteStoredProcedure, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DeleteFiles", DeleteFiles, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("TemplateId", TemplateId, DbType.Int32, ParameterDirection.Input);
-                dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantInterfaceNET8BlazorMSSQLServerCodeFirst", WantInterfaceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNETFrameworkWinForm", WantNETFrameworkWinForm, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantServiceNET8BlazorMSSQLServerCodeFirst", WantServiceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -121,14 +118,13 @@ namespace FiyiStackApp.Models.Core
                 dp.Add("DeleteStoredProcedure", DeleteStoredProcedure, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("DeleteFiles", DeleteFiles, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("TemplateId", TemplateId, DbType.Int32, ParameterDirection.Input);
-                dp.Add("WantBackendAPINodeJsExpressMongoDB", WantBackendAPINodeJsExpressMongoDB, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantDTONET8BlazorMSSQLServerCodeFirst", WantDTONET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityNET8BlazorMSSQLServerCodeFirst", WantEntityNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst", WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantInterfaceNET8BlazorMSSQLServerCodeFirst", WantInterfaceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantRepositoryNET8BlazorMSSQLServerCodeFirst", WantRepositoryNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
                 dp.Add("WantBlazorPageNET8BlazorMSSQLServerCodeFirst", WantBlazorPageNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
-                dp.Add("WantNETFrameworkWinForm", WantNETFrameworkWinForm, DbType.Boolean, ParameterDirection.Input);
+                dp.Add("WantServiceNET8BlazorMSSQLServerCodeFirst", WantServiceNET8BlazorMSSQLServerCodeFirst, DbType.Boolean, ParameterDirection.Input);
 
                 DataTable DataTable = new DataTable();
                 DataTable = FiyiStack.Library.NET.Dapper.Connector.ExecuteStoredProcedureToDataTable(
@@ -180,14 +176,13 @@ namespace FiyiStackApp.Models.Core
                     Configuration.DeleteStoredProcedure = configuration.DeleteStoredProcedure;
                     Configuration.DeleteFiles = configuration.DeleteFiles;
                     Configuration.TemplateId = configuration.TemplateId;
-                    Configuration.WantBackendAPINodeJsExpressMongoDB = configuration.WantBackendAPINodeJsExpressMongoDB;
                     Configuration.WantDTONET8BlazorMSSQLServerCodeFirst = configuration.WantDTONET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst;
                     Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst = configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst;
-                    Configuration.WantNETFrameworkWinForm = configuration.WantNETFrameworkWinForm;
+                    Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst = configuration.WantServiceNET8BlazorMSSQLServerCodeFirst;
                 }
 
                 return Configuration;
@@ -210,14 +205,13 @@ namespace FiyiStackApp.Models.Core
                 $"DeleteStoredProcedure: {DeleteStoredProcedure}, " +
                 $"DeleteFiles: {DeleteFiles}, " +
                 $"TemplateId: {TemplateId}, " +
-                $"WantBackendAPINodeJsExpressMongoDB: {WantBackendAPINodeJsExpressMongoDB}, " +
                 $"WantDTONET8BlazorMSSQLServerCodeFirst: {WantDTONET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantEntityNET8BlazorMSSQLServerCodeFirst: {WantEntityNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst: {WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantInterfaceNET8BlazorMSSQLServerCodeFirst: {WantInterfaceNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantRepositoryNET8BlazorMSSQLServerCodeFirst: {WantRepositoryNET8BlazorMSSQLServerCodeFirst}, " +
                 $"WantBlazorPageNET8BlazorMSSQLServerCodeFirst: {WantBlazorPageNET8BlazorMSSQLServerCodeFirst}, " +
-                $"WantNETFrameworkWinForm: {WantNETFrameworkWinForm}";
+                $"WantServiceNET8BlazorMSSQLServerCodeFirst: {WantServiceNET8BlazorMSSQLServerCodeFirst}";
         }
     }
 }
