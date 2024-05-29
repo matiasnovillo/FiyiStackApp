@@ -299,7 +299,7 @@ namespace FiyiStackApp
             this.opcionesToolStripMenuItem});
             this.MenuStripDockedTop.Location = new System.Drawing.Point(0, 0);
             this.MenuStripDockedTop.Name = "MenuStripDockedTop";
-            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 28);
+            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 30);
             this.MenuStripDockedTop.TabIndex = 16;
             this.MenuStripDockedTop.Text = "menuStrip1";
             // 
@@ -331,9 +331,9 @@ namespace FiyiStackApp
             // PanelDockedLeft
             // 
             this.PanelDockedLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 28);
+            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 30);
             this.PanelDockedLeft.Name = "PanelDockedLeft";
-            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 1004);
+            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 1002);
             this.PanelDockedLeft.TabIndex = 17;
             // 
             // PanelDockedCenter
@@ -344,9 +344,9 @@ namespace FiyiStackApp
             this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
+            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 30);
             this.PanelDockedCenter.Name = "PanelDockedCenter";
-            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 1004);
+            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 1002);
             this.PanelDockedCenter.TabIndex = 19;
             // 
             // PanelGenerator
@@ -754,15 +754,15 @@ namespace FiyiStackApp
             this.txtDecimalMax.Location = new System.Drawing.Point(25, 133);
             this.txtDecimalMax.Margin = new System.Windows.Forms.Padding(4);
             this.txtDecimalMax.Maximum = new decimal(new int[] {
-            -1593835521,
-            466537709,
-            54210,
-            393216});
+            -1,
+            -1,
+            -1,
+            0});
             this.txtDecimalMax.Minimum = new decimal(new int[] {
-            -1593835521,
-            466537709,
-            54210,
-            -2147090432});
+            -1,
+            -1,
+            -1,
+            -2147483648});
             this.txtDecimalMax.Name = "txtDecimalMax";
             this.txtDecimalMax.Size = new System.Drawing.Size(228, 29);
             this.txtDecimalMax.TabIndex = 99;
@@ -795,15 +795,15 @@ namespace FiyiStackApp
             this.txtDecimalMin.Location = new System.Drawing.Point(25, 38);
             this.txtDecimalMin.Margin = new System.Windows.Forms.Padding(4);
             this.txtDecimalMin.Maximum = new decimal(new int[] {
-            -1593835521,
-            466537709,
-            54210,
-            393216});
+            -1,
+            -1,
+            -1,
+            0});
             this.txtDecimalMin.Minimum = new decimal(new int[] {
-            -1593835521,
-            466537709,
-            54210,
-            -2147090432});
+            -1,
+            -1,
+            -1,
+            -2147483648});
             this.txtDecimalMin.Name = "txtDecimalMin";
             this.txtDecimalMin.Size = new System.Drawing.Size(228, 29);
             this.txtDecimalMin.TabIndex = 96;
@@ -1249,11 +1249,6 @@ namespace FiyiStackApp
             0,
             0,
             0});
-            this.txtTextMin.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.txtTextMin.Name = "txtTextMin";
             this.txtTextMin.Size = new System.Drawing.Size(228, 29);
             this.txtTextMin.TabIndex = 96;
@@ -1340,7 +1335,7 @@ namespace FiyiStackApp
             this.ListViewField.TabIndex = 86;
             this.ListViewField.TileSize = new System.Drawing.Size(50, 50);
             this.ListViewField.UseCompatibleStateImageBehavior = false;
-            this.ListViewField.View = System.Windows.Forms.View.SmallIcon;
+            this.ListViewField.View = System.Windows.Forms.View.List;
             this.ListViewField.ItemActivate += new System.EventHandler(this.ListViewField_ItemActivate);
             this.ListViewField.BackColorChanged += new System.EventHandler(this.ListViewField_BackColorChanged);
             // 
@@ -1541,7 +1536,7 @@ namespace FiyiStackApp
             this.ListViewTable.TabIndex = 68;
             this.ListViewTable.TileSize = new System.Drawing.Size(50, 50);
             this.ListViewTable.UseCompatibleStateImageBehavior = false;
-            this.ListViewTable.View = System.Windows.Forms.View.SmallIcon;
+            this.ListViewTable.View = System.Windows.Forms.View.List;
             this.ListViewTable.ItemActivate += new System.EventHandler(this.ListViewTable_ItemActivate);
             this.ListViewTable.BackColorChanged += new System.EventHandler(this.ListViewTable_BackColorChanged);
             // 
@@ -1787,7 +1782,7 @@ namespace FiyiStackApp
             this.ListViewProjects.TabIndex = 24;
             this.ListViewProjects.TileSize = new System.Drawing.Size(50, 50);
             this.ListViewProjects.UseCompatibleStateImageBehavior = false;
-            this.ListViewProjects.View = System.Windows.Forms.View.SmallIcon;
+            this.ListViewProjects.View = System.Windows.Forms.View.List;
             this.ListViewProjects.ItemActivate += new System.EventHandler(this.ListViewYourProjects_ItemActivate);
             this.ListViewProjects.BackColorChanged += new System.EventHandler(this.ListViewYourProjects_BackColorChanged);
             // 

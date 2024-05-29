@@ -1662,28 +1662,25 @@ namespace FiyiStackApp
                 PanelBoolean.Visible = false;
 
                 //Set to default all Data Type components
-                txtTextMin.Value = 1;
+                txtTextMin.Value = 0;
                 txtTextMax.Value = 8000;
                 txtTextRegex.Text = "";
                 txtForeignTableName.Text = "";
 
-                txtIntMax.Value = 1000;
+                txtIntMax.Value = int.MaxValue;
                 txtIntMin.Value = 0;
 
                 DatePickerMax.Value = new DateTime(9998, 12, 30, 23, 59, 59, 999);
                 DatePickerMin.Value = new DateTime(1753, 1, 1, 0, 0, 0, 0);
                 TimePickerMax.Value = new DateTime(9998, 12, 30, 23, 59, 59, 999);
-                TimePickerMin.Value = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-                txtDateTimeMax.Text = DatePickerMax.Value.ToString("yyyy-MM-ddTHH:mm");
-                txtDateTimeMin.Text = DatePickerMin.Value.ToString("yyyy-MM-ddTHH:mm");
-
-                //txtTimeSpanMax.Text = FiyiStack.Library.MicrosoftSQLServer.Constant.TimeMAXValue.ToString();
-                //txtTimeSpanMin.Text = FiyiStack.Library.MicrosoftSQLServer.Constant.TimeMINValue.ToString();
+                TimePickerMin.Value = new DateTime(1753, 1, 1, 12, 0, 0, 0);
+                txtDateTimeMax.Text = $@"{DatePickerMax.Value.ToString("yyyy-MM-ddT")}{TimePickerMax.Value.ToString("HH:mm")}";
+                txtDateTimeMin.Text = $@"{DatePickerMin.Value.ToString("yyyy-MM-ddT")}{TimePickerMin.Value.ToString("HH:mm")}";
 
                 txtHexColourMax.Text = "FFFFFF";
                 txtHexColourMin.Text = "000000";
 
-                txtDecimalMax.Value = 1000;
+                txtDecimalMax.Value = decimal.MaxValue;
                 txtDecimalMin.Value = 0;
 
                 switch (Convert.ToInt32(cmbDataType.SelectedValue))
