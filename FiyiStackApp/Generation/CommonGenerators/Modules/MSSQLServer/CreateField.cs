@@ -43,7 +43,7 @@ namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
                         NonQuery += $@"USE [{DataBaseName}]
                     SET ANSI_NULLS ON
                     SET QUOTED_IDENTIFIER ON
-                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] NUMERIC(24,6) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
+                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] NUMERIC(18,2) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
                         break;
                     case 8: //Primary Key (Id)
                         break;
