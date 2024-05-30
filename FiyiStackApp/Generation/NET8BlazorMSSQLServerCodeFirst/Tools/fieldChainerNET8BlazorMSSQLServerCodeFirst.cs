@@ -38,6 +38,10 @@ namespace FiyiStackApp.Models.Tools
 
         public int iForImportInService { get; set; } = 7; //Start in 7 because it adds the auditory fields that are 5 + Id
 
+        public string ErrorMessage_InNonQueryBlazor { get; set; } = "";
+
+        public string Handlers_InNonQueryBlazor { get; set; } = "";
+
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
         }
@@ -54,6 +58,9 @@ namespace FiyiStackApp.Models.Tools
 
             foreach (Field field in lstField)
             {
+                ErrorMessage_InNonQueryBlazor += $@"public string ErrorMessage{field.Name} {{ get; set; }} = """";
+    ";
+
                 PropertiesForEntity += field.HistoryUser == "" ? "" : $@"        ///<summary>
         /// {field.HistoryUser}
         ///</summary>
@@ -99,7 +106,7 @@ namespace FiyiStackApp.Models.Tools
                     case 3: //Integer
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue})]
+$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", ""{field.Name}"", true, {field.MinValue}, {field.MaxValue})]
         public int {field.Name} {{ get; set; }}
 ";
 
@@ -113,20 +120,43 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = Convert.ToInt32(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""number""
-                               step=""1""
-                               min=""{field.MinValue}"" 
-                               max=""{field.MaxValue}"" 
-                               id=""{field.Name.ToLower()}""
-                               class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                        step=""1"" 
+                        id=""{field.Name.ToLower()}""
+                        class=""form-control""
+                        value=""@{Table.Name}!.{field.Name}""
+                        @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
@@ -151,7 +181,8 @@ $@"//{field.Name}
                     case 4: //Boolean
 
                         PropertiesForEntity +=
-$@"        public bool {field.Name} {{ get; set; }}
+$@"        [Library.ModelAttributeValidator.Required(""{field.Name}"", ""{field.Name}"")]   
+        public bool {field.Name} {{ get; set; }}
 ";
 
                         PropertiesForEntityConfiguration +=
@@ -164,15 +195,37 @@ $@"//{field.Name}
 
                         if (field.Name != "Active")
                         {
+                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = Convert.ToBoolean(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
                     <div class=""form-check form-switch"">
                         <input class=""form-check-input""
-                               type=""checkbox""
-                               name=""strict-search""
-                               @bind=""{Table.Name}!.{field.Name}""
-                               id=""{field.Name.ToLower()}"" />
+                        type=""checkbox""
+                        value=""@{Table.Name}!.{field.Name}""
+                        @onchange=""Handle{field.Name}Change""
+                        id=""{field.Name.ToLower()}"" />
                         <label class=""form-check-label""
-                               for=""{field.Name.ToLower()}"">
+                        for=""{field.Name.ToLower()}"">
                             {field.Name}
                         </label>
                     </div>
@@ -225,6 +278,27 @@ $@"//{field.Name}
                         break;
                     case 5: //Text: Basic
 
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
 
@@ -255,21 +329,46 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if(ErrorMessage{field.Name} != """")
+                            {{
+                            @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""text""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
                         break;
                     case 6: //Decimal
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = Convert.ToDecimal(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -282,7 +381,7 @@ $@"//{field.Name}
                         iForImportInService += 1;
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue.Replace(',', '.')}D, {field.MaxValue.Replace(',', '.')}D)]
+$@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", ""{field.Name}"", true, {field.MinValue.Replace(',', '.')}D, {field.MaxValue.Replace(',', '.')}D)]
         public decimal {field.Name} {{ get; set; }}
 ";
 
@@ -301,19 +400,20 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""number""
-                               step=""0.1""
-                               id=""{field.Name.ToLower()}""
-                               min=""{field.MinValue}"" 
-                               max=""{field.MaxValue}"" 
-                               class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                        step=""0.1""
+                        id=""{field.Name.ToLower()}"" 
+                        class=""form-control""
+                        value=""@{Table.Name}!.{field.Name}""
+                        @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
@@ -338,7 +438,7 @@ $@"
                     case 10: //DateTime
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", true, ""{field.MinValue}"", ""{field.MaxValue}"")]
         public DateTime {field.Name} {{ get; set; }}
 ";
 
@@ -352,17 +452,42 @@ $@"//{field.Name}
 
                         if (field.Name != "DateTimeCreation" && field.Name != "DateTimeLastModification")
                         {
+                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = Convert.ToDateTime(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                                class=""input-group input-group-static"">
-                                {field.Name}
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
+                            {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
-                        <input type=""datetime-local""
-                               id=""{field.Name.ToLower()}""
-                               class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}""/>
+                        <input type=""datetime""
+                        id=""{field.Name.ToLower()}""
+                        class=""form-control""
+                        value=""@{Table.Name}!.{field.Name}""
+                        @onchange=""Handle{field.Name}Change""/>
                     </div>
                     ";
 
@@ -383,7 +508,29 @@ $@"//{field.Name}
                                         ";
                         }
                         break;
-                    case 11: //Time
+                    case 11: //TimeSpan
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = TimeSpan.Parse(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        //Re-render the page to show ScannedText
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -396,7 +543,7 @@ $@"//{field.Name}
                         iForImportInService += 1;
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+$@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", ""{field.Name}"", true, ""{field.MinValue}"", ""{field.MaxValue}"")]
         public TimeSpan {field.Name} {{ get; set; }}
 ";
 
@@ -415,16 +562,19 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""time""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
@@ -434,6 +584,27 @@ $@"//{field.Name}
                         throw new Exception("The Foreign Key (Id) Options property is not allowed in this generator");
 
                     case 14: //Text: HexColour
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -474,21 +645,45 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""color""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
                         break;
                     case 15: //Text: TextArea
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -520,22 +715,46 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <textarea rows=""10""
-                            class=""form-control""
-                            @bind=""{Table.Name}!.{field.Name}""
-                            {(field.Nullable == true ? "" : "required")}
-                            id=""{field.Name.ToLower()}"">
+                        class=""form-control""
+                        value=""@{Table.Name}!.{field.Name}""
+                        @onchange=""Handle{field.Name}Change""
+                        id=""{field.Name.ToLower()}"">
                         </textarea>
                     </div>
                     ";
 
                         break;
                     case 16: //Text: TextEditor 
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -566,12 +785,14 @@ $@"//{field.Name}
                         PropertiesInHTML_Card_ForBlazorPageQuery += $@"<div><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</div>
                                         ";
 
-                        PropertiesInHTML_BlazorNonQueryPage += $@"
-                    <!--{field.Name}-->
+                        PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
                     <div class=""mb-3"">
-                        <label for=""quill-editor-{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                        <label for=""quill-editor-{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <div id=""quill-editor-{field.Name.ToLower()}"">
                         </div>
@@ -583,8 +804,8 @@ $@"//{field.Name}
                         <input type=""text""
                                id=""quill-result-{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     <link rel=""stylesheet"" href=""assets/vendor/quill/dist/quill.snow.css"">
                     <script type=""text/javascript"">
@@ -638,6 +859,27 @@ $@"//{field.Name}
                         break;
                     case 17: //Text: Password
 
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
 
@@ -668,21 +910,45 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""password""
                                id=""{field.Name.ToLower()}""
-                               {(field.Nullable == true ? "" : "required")}
                                class=""form-control""
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change""/>
                     </div>
                     ";
 
                         break;
                     case 18: //Text: PhoneNumber
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -725,21 +991,45 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""tel""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
                         break;
                     case 19: //Text: URL
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -784,21 +1074,45 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""url""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
                         break;
                     case 20: //Text: Email
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -841,21 +1155,45 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""email""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}"" />
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change"" />
                     </div>
                     ";
 
                         break;
                     case 21: //Text: File
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -900,15 +1238,18 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <InputFile type=""file""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
+                               
                                OnChange=""@Upload{field.Name}"" />
                         @{{
                             var ProgressCssFor{field.Name} = ""progress"" + (DisplayProgressFor{field.Name} ? """" : ""d-none"");
@@ -969,6 +1310,8 @@ $@"//{field.Name}
 
             {Table.Name}!.{field.Name} = Result;
 
+            Check(""[{field.Name}]"");
+
             ProgressPercentFor{field.Name} = 100;
             ProgressBarColourFor{field.Name} = ""bg-success"";
             DisplayProgressFor{field.Name} = false;
@@ -993,6 +1336,27 @@ $@"//{field.Name}
 
                         break;
                     case 22: //Text: Tag
+
+                        Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = e.Value?.ToString();
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
 
                         PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
@@ -1024,16 +1388,19 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <input type=""text""
                                id=""{field.Name.ToLower()}""
                                class=""form-control""
-                               {(field.Nullable == true ? "" : "required")}
-                               @bind=""{Table.Name}!.{field.Name}""
+                               value=""@{Table.Name}!.{field.Name}""
+                               @onchange=""Handle{field.Name}Change""
                                data-toggle=""tags"" />
                     </div>
                     ";
@@ -1056,15 +1423,42 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+    {{
+        {Table.Name}.{field.Name} = Convert.ToInt32(e.Value?.ToString());
+        ValidationResult ValidationResult = Check(""[{field.Name}]"");
+
+        if (ValidationResult == null)
+        {{
+            ErrorMessage{field.Name} = $@"""";
+        }}
+        else
+        {{
+            ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
+    <i class=""""fas fa-circle-xmark""""></i>
+    {{ValidationResult.ErrorMessage}}
+</span>"";
+        }}
+
+        //Re-render the page to show ScannedText
+        await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+    }}
+    ";
+
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-3"">
-                        <label for=""{field.Name.ToLower()}""
-                               class=""input-group input-group-static"">
+                    <div class=""input-group input-group-static mb-3"">
+                        <label for=""{field.Name.ToLower()}"">
                             {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
                         </label>
                         <select id=""{field.Name.ToLower()}""
                             class=""form-control""
-                            @bind={Table.Name}.{field.Name}>
+                            value=""@{Table.Name}!.{field.Name}""
+                            @onchange=""Handle{field.Name}Change"">
+                            <option value=""0"">Seleccionar</option>
                         </select>
                     </div>
                     ";

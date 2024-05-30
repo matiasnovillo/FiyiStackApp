@@ -21,10 +21,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 <PageTitle>Buscar {Table.Name} - {Table.Area}</PageTitle>
 
-<{Table.Area}.Components.Layout.SideNav lstFoldersAndPages=""lstFoldersAndPages""></{Table.Area}.Components.Layout.SideNav>
+<{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.SideNav lstFoldersAndPages=""lstFoldersAndPages""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.SideNav>
 
 <div class=""main-content position-relative max-height-vh-100 h-100"">
-    <{Table.Area}.Components.Layout.NavBarDashboard Pagina=""{Table.Name}""></{Table.Area}.Components.Layout.NavBarDashboard>
+    <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarDashboard Pagina=""{Table.Name}""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarDashboard>
     <div class=""container-fluid px-2 px-md-4"">
         <div class=""page-header min-height-300 border-radius-xl mt-4""
         style=""background-image: url('img/BasicCore/Landscape.jpg');"">
@@ -633,8 +633,8 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }})
     </script>
 
-    <{Table.Area}.Components.Layout.FixedPlugin></{Table.Area}.Components.Layout.FixedPlugin>
-    <{Table.Area}.Components.Layout.FooterDashboard></{Table.Area}.Components.Layout.FooterDashboard>
+    <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FixedPlugin></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FixedPlugin>
+    <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FooterDashboard></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.FooterDashboard>
 
 </div>
 
