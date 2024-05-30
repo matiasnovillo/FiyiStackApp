@@ -67,9 +67,6 @@ namespace FiyiStackApp.Models.Tools
         <div style=""""height: 40px; line-height: 40px; font-size: 38px;"""">&nbsp;</div>
     </td>";
 
-                PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
-                                ";
-
                 Properties_ForExcel_Converter_DefineDataColumns += $@"DataColumn dtColumn{field.Name}Fordt{Table.Name}Copy = new()
             {{
                 DataType = typeof(string),
@@ -114,12 +111,6 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
-                                        ";
-
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
-                                        ";
-
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -145,6 +136,15 @@ $@"//{field.Name}
 
                             Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
+
+                            PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
+                            PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
+                                        ";
+
+                            PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
+                                        ";
                         }
 
                         break;
@@ -161,40 +161,6 @@ $@"//{field.Name}
                     .IsRequired(true);
 
                 ";
-
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
-                                        {{
-                                            <td>
-                                                <span class=""badge rounded-pill bg-success"">Sí</span>
-                                            </td>
-                                        }}
-                                        else
-                                        {{
-                                            <td>
-                                                <span class=""badge rounded-pill bg-danger"">No</span>
-                                            </td>
-                                        }}
-                                        ";
-
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
-                                        {{
-                                            <p>
-                                                <b>{field.Name}: </b>
-                                                <span class=""badge rounded-pill bg-success"">
-                                                    Sí
-                                                </span>
-                                            </p>
-                                        }}
-                                        else
-                                        {{
-                                            <p>
-                                                <b>{field.Name}: </b>
-                                                <span class=""badge rounded-pill bg-danger"">
-                                                    No
-                                                </span>
-                                            </p>
-                                        }}
-                                        ";
 
                         if (field.Name != "Active")
                         {
@@ -218,9 +184,49 @@ $@"//{field.Name}
 
                             Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
+
+                            PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
+                            PropertiesInHTML_TD_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
+                                        {{
+                                            <td>
+                                                <span class=""badge rounded-pill bg-success"">Sí</span>
+                                            </td>
+                                        }}
+                                        else
+                                        {{
+                                            <td>
+                                                <span class=""badge rounded-pill bg-danger"">No</span>
+                                            </td>
+                                        }}
+                                        ";
+
+                            PropertiesInHTML_Card_ForBlazorPageQuery += $@"@if (@paginated{Table.Name}DTO.lst{Table.Name}[i]!.{field.Name})
+                                        {{
+                                            <p>
+                                                <b>{field.Name}: </b>
+                                                <span class=""badge rounded-pill bg-success"">
+                                                    Sí
+                                                </span>
+                                            </p>
+                                        }}
+                                        else
+                                        {{
+                                            <p>
+                                                <b>{field.Name}: </b>
+                                                <span class=""badge rounded-pill bg-danger"">
+                                                    No
+                                                </span>
+                                            </p>
+                                        }}
+                                        ";
                         }
                         break;
                     case 5: //Text: Basic
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -264,6 +270,9 @@ $@"//{field.Name}
 
                         break;
                     case 6: //Decimal
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -311,6 +320,9 @@ $@"//{field.Name}
                         break;
                     case 8: //Primary Key (Id)
 
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>ID</th>
+                                ";
+
                         PropertiesForEntity +=
 $@"
         public int {field.Name} {{ get; set; }}
@@ -319,7 +331,7 @@ $@"
                         PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id</td>
                                         ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{Table.Name}Id: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id</p>
+                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>ID: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id</p>
                                         ";
 
                         break;
@@ -329,12 +341,6 @@ $@"
 $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
         public DateTime {field.Name} {{ get; set; }}
 ";
-
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
-                                        ";
-
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
-                                        ";
 
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
@@ -366,9 +372,21 @@ $@"//{field.Name}
 
                             Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
+
+                            PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
+                            PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
+                                        ";
+
+                            PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
+                                        ";
                         }
                         break;
                     case 11: //Time
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -416,6 +434,9 @@ $@"//{field.Name}
                         throw new Exception("The Foreign Key (Id) Options property is not allowed in this generator");
 
                     case 14: //Text: HexColour
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -469,6 +490,9 @@ $@"//{field.Name}
                         break;
                     case 15: //Text: TextArea
 
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
 
@@ -512,6 +536,9 @@ $@"//{field.Name}
 
                         break;
                     case 16: //Text: TextEditor 
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -611,6 +638,9 @@ $@"//{field.Name}
                         break;
                     case 17: //Text: Password
 
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
 
@@ -653,6 +683,9 @@ $@"//{field.Name}
 
                         break;
                     case 18: //Text: PhoneNumber
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -707,6 +740,9 @@ $@"//{field.Name}
 
                         break;
                     case 19: //Text: URL
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -764,6 +800,9 @@ $@"//{field.Name}
                         break;
                     case 20: //Text: Email
 
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
 
@@ -817,6 +856,9 @@ $@"//{field.Name}
 
                         break;
                     case 21: //Text: File
+
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
 
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
@@ -952,6 +994,9 @@ $@"//{field.Name}
                         break;
                     case 22: //Text: Tag
 
+                        PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
                         Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
 
@@ -1009,12 +1054,6 @@ $@"//{field.Name}
 
                 ";
 
-                        PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
-                                        ";
-
-                        PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
-                                        ";
-
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
@@ -1036,6 +1075,15 @@ $@"//{field.Name}
 
                             Properties_ForImport2 += $@"{field.Name} = {field.Name},
                         ";
+
+                            PropertiesInHTML_TD_ForBlazorPageQuery += $@"<td>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</td>
+                                        ";
+
+                            PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
+                                ";
+
+                            PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
+                                        ";
                         }
                         break;
                     default:
