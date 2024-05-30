@@ -1645,6 +1645,9 @@ namespace FiyiStackApp
                 txtIntMax.Value = int.MaxValue;
                 txtIntMin.Value = 0;
 
+                txtTimeSpanMin.Text = "00:00";
+                txtTimeSpanMax.Text = "23:59";
+
                 DatePickerMax.Value = new DateTime(9998, 12, 30, 23, 59, 59, 999);
                 DatePickerMin.Value = new DateTime(1753, 1, 1, 0, 0, 0, 0);
                 TimePickerMax.Value = new DateTime(9998, 12, 30, 23, 59, 59, 999);

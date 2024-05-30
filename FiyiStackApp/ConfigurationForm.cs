@@ -92,6 +92,7 @@ namespace FiyiStackApp
                         Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[2].Checked;
                         Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[3].Checked;
                         Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[4].Checked;
+                        Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst = ListViewBackEndFilesGenerators.Items[5].Checked;
                     }
 
                     //Front-end

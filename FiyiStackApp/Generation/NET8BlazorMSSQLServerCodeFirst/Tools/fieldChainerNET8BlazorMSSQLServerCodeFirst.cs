@@ -33,6 +33,11 @@ namespace FiyiStackApp.Models.Tools
 
         public string UploadFileMethod_BlazorNonQueryPage { get; set; } = "";
 
+        public string Properties_ForImport1 { get; set; } = "";
+        public string Properties_ForImport2 { get; set; } = "";
+
+        public int iForImportInService { get; set; } = 7; //Start in 7 because it adds the auditory fields that are 5 + Id
+
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
         }
@@ -41,7 +46,7 @@ namespace FiyiStackApp.Models.Tools
         /// Object used to reduce duplicated code in /Generator/DataToGenerate folder <br/>
         /// This object contains all the fields chained to engage in every part of looped code
         ///</summary>
-        public fieldChainerNET8BlazorMSSQLServerCodeFirst(Table Table) 
+        public fieldChainerNET8BlazorMSSQLServerCodeFirst(Table Table)
         {
             Field Field = new();
             List<Field> lstField = Field.GetAllByTableIdToModel(Table.TableId);
@@ -65,9 +70,11 @@ namespace FiyiStackApp.Models.Tools
                 PropertiesInHTML_TH_ForBlazorPageQuery += $@"<th>{field.Name}</th>
                                 ";
 
-                Properties_ForExcel_Converter_DefineDataColumns += $@"DataColumn dtColumn{field.Name}Fordt{Table.Name}Copy = new DataColumn();
-            dtColumn{field.Name}Fordt{Table.Name}Copy.DataType = typeof(string);
-            dtColumn{field.Name}Fordt{Table.Name}Copy.ColumnName = ""{field.Name}"";
+                Properties_ForExcel_Converter_DefineDataColumns += $@"DataColumn dtColumn{field.Name}Fordt{Table.Name}Copy = new()
+            {{
+                DataType = typeof(string),
+                ColumnName = ""{field.Name}""
+            }};
             dt{Table.Name}Copy.Columns.Add(dtColumn{field.Name}Fordt{Table.Name}Copy);
 
             ";
@@ -95,7 +102,7 @@ namespace FiyiStackApp.Models.Tools
                     case 3: //Integer
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue})]
+$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue})]
         public int {field.Name} {{ get; set; }}
 ";
 
@@ -131,6 +138,13 @@ $@"//{field.Name}
                                @bind=""{Table.Name}!.{field.Name}"" />
                     </div>
                     ";
+
+                            Properties_ForImport1 += $@"int {field.Name} = Convert.ToInt32(row.Cell({iForImportInService}).GetString());
+                    ";
+                            iForImportInService += 1;
+
+                            Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
                         }
 
                         break;
@@ -197,12 +211,26 @@ $@"//{field.Name}
                         </label>
                     </div>
                     ";
+
+                            Properties_ForImport1 += $@"bool {field.Name} = Convert.ToBoolean(row.Cell({iForImportInService}).GetString());
+                    ";
+                            iForImportInService += 1;
+
+                            Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
                         }
                         break;
                     case 5: //Text: Basic
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -237,8 +265,15 @@ $@"//{field.Name}
                         break;
                     case 6: //Decimal
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"decimal {field.Name} = Convert.ToDecimal(row.Cell({iForImportInService}).GetString());
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue.Replace(',', '.')}D, {field.MaxValue.Replace(',', '.')}D)]
+$@"        [Library.ModelAttributeValidator.Decimal(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue.Replace(',', '.')}D, {field.MaxValue.Replace(',', '.')}D)]
         public decimal {field.Name} {{ get; set; }}
 ";
 
@@ -277,7 +312,7 @@ $@"//{field.Name}
                     case 8: //Primary Key (Id)
 
                         PropertiesForEntity +=
-$@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
+$@"
         public int {field.Name} {{ get; set; }}
 ";
 
@@ -291,7 +326,7 @@ $@"[Library.ModelAttributeValidator.Key(""{field.Name}"")]
                     case 10: //DateTime
 
                         PropertiesForEntity +=
-$@"[Library.ModelAttributeValidator.DateTime(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
         public DateTime {field.Name} {{ get; set; }}
 ";
 
@@ -324,13 +359,27 @@ $@"//{field.Name}
                                @bind=""{Table.Name}!.{field.Name}""/>
                     </div>
                     ";
+
+                            Properties_ForImport1 += $@"DateTime {field.Name} = Convert.ToDateTime(row.Cell({iForImportInService}).GetString());
+                    ";
+                            iForImportInService += 1;
+
+                            Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
                         }
                         break;
                     case 11: //Time
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"TimeSpan {field.Name} = TimeSpan.Parse(row.Cell({iForImportInService}).GetString());
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"
-    public TimeOnly {field.Name} {{ get; set; }}
+$@"        [Library.ModelAttributeValidator.TimeSpan(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+        public TimeSpan {field.Name} {{ get; set; }}
 ";
 
                         PropertiesForEntityConfiguration +=
@@ -366,15 +415,17 @@ $@"//{field.Name}
 
                         throw new Exception("The Foreign Key (Id) Options property is not allowed in this generator");
 
-                        if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
-                        {
-                            
-                        }
-                        break;
                     case 14: //Text: HexColour
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
+$@"        [Library.ModelAttributeValidator.HexColour(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, ""{field.MinValue}"", ""{field.MaxValue}"")]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -418,8 +469,16 @@ $@"//{field.Name}
                         break;
                     case 15: //Text: TextArea
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        public string? {field.Name} {{ get; set; }}
+$@"        { (field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.Required(""{field.Name}"", ""{field.Name}"")]") }
+        public string? {field.Name} {{ get; set; }}
 ";
 
                         PropertiesForEntityConfiguration +=
@@ -454,8 +513,15 @@ $@"//{field.Name}
                         break;
                     case 16: //Text: TextEditor 
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        {(field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.Required(""{field.Name}"", ""{field.Name}"")]")}
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -545,8 +611,15 @@ $@"//{field.Name}
                         break;
                     case 17: //Text: Password
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -581,8 +654,15 @@ $@"//{field.Name}
                         break;
                     case 18: //Text: PhoneNumber
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -628,8 +708,15 @@ $@"//{field.Name}
                         break;
                     case 19: //Text: URL
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -677,8 +764,15 @@ $@"//{field.Name}
                         break;
                     case 20: //Text: Email
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -724,8 +818,15 @@ $@"//{field.Name}
                         break;
                     case 21: //Text: File
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -851,8 +952,15 @@ $@"//{field.Name}
                         break;
                     case 22: //Text: Tag
 
+                        Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
+
+                        Properties_ForImport1 += $@"string {field.Name} = row.Cell({iForImportInService}).GetString();
+                    ";
+                        iForImportInService += 1;
+
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
+$@"        [Library.ModelAttributeValidator.String(""{field.Name}"", ""{field.Name}"", {(field.Nullable == true ? "false" : "true")}, {field.MinValue}, {field.MaxValue}, {(field.Regex == "" ? @"""""" : $@"""{field.Regex}""")})]
         public string? {field.Name} {{ get; set; }}
 ";
 
@@ -889,7 +997,7 @@ $@"//{field.Name}
                     case 23: //Foreign Key (Id): DropDown
 
                         PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Key(""{field.Name}"")]
+$@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}"")]
         public int {field.Name} {{ get; set; }}
 ";
 
@@ -921,6 +1029,13 @@ $@"//{field.Name}
                         </select>
                     </div>
                     ";
+
+                            Properties_ForImport1 += $@"int {field.Name} = Convert.ToInt32(row.Cell({iForImportInService}).GetString());
+                    ";
+                            iForImportInService += 1;
+
+                            Properties_ForImport2 += $@"{field.Name} = {field.Name},
+                        ";
                         }
                         break;
                     default:

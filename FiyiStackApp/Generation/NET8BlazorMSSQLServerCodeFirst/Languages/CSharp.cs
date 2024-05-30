@@ -67,7 +67,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     }
                     #endregion
 
-                    #region C# Interface
+                    #region C# Interface for repository
                     if (GeneratorConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst)
                     {
                         string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
@@ -81,10 +81,33 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                             Directory.CreateDirectory(InterfacePath);
                         }
 
-                        Content = Modules.CSharp.Interface(GeneratorConfigurationComponent, Table);
+                        Content = Modules.CSharp.InterfaceRepository(GeneratorConfigurationComponent, Table);
 
                         WinFormConfigurationComponent.CreateFile(
                         $"{InterfacePath}I{Table.Name}Repository.cs",
+                        Content,
+                        GeneratorConfigurationComponent.Configuration.DeleteFiles);
+                    }
+                    #endregion
+
+                    #region C# Interface for service
+                    if (GeneratorConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst)
+                    {
+                        string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
+                        if (Directory.Exists(InterfacePath))
+                        {
+                            LogText += $"Folder: {InterfacePath} exist {Environment.NewLine}";
+                        }
+                        else
+                        {
+                            LogText += $"Folder: {InterfacePath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(InterfacePath);
+                        }
+
+                        Content = Modules.CSharp.InterfaceService(GeneratorConfigurationComponent, Table);
+
+                        WinFormConfigurationComponent.CreateFile(
+                        $"{InterfacePath}I{Table.Name}Service.cs",
                         Content,
                         GeneratorConfigurationComponent.Configuration.DeleteFiles);
                     }
@@ -113,10 +136,33 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     }
                     #endregion
 
+                    #region C# Service
+                    if (GeneratorConfigurationComponent.Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst)
+                    {
+                        string ServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Services\\";
+                        if (Directory.Exists(ServicePath))
+                        {
+                            LogText += $"Folder: {ServicePath} exist {Environment.NewLine}";
+                        }
+                        else
+                        {
+                            LogText += $"Folder: {ServicePath} does not exist. Creating folder {Environment.NewLine}";
+                            Directory.CreateDirectory(ServicePath);
+                        }
+
+                        Content = Modules.CSharp.Service(GeneratorConfigurationComponent, Table);
+
+                        WinFormConfigurationComponent.CreateFile(
+                        $"{ServicePath}{Table.Name}Service.cs",
+                        Content,
+                        GeneratorConfigurationComponent.Configuration.DeleteFiles);
+                    }
+                    #endregion
+
                     #region C# EntityConfiguration
                     if (GeneratorConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Entities\\EntitiesConfiguration\\";
+                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\EntitiesConfiguration\\";
                         if (Directory.Exists(RepositoryPath))
                         {
                             LogText += $"Folder: {RepositoryPath} exist {Environment.NewLine}";

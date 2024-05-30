@@ -5,7 +5,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 {
     public static partial class CSharp
     {
-        public static string Interface(GeneratorConfigurationComponent GeneratorConfigurationComponent, Table Table)
+        public static string InterfaceRepository(GeneratorConfigurationComponent GeneratorConfigurationComponent, Table Table)
         {
             try
             {
@@ -29,6 +29,8 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
         List<{Table.Name}?> GetAll();
 
+        List<{Table.Name}?> GetAllBy{Table.Name}Id(List<int> lst{Table.Name}Checked);
+
         paginated{Table.Name}DTO GetAllBy{Table.Name}IdPaginated(string textToSearch,
             bool strictSearch,
             int pageIndex,
@@ -43,7 +45,9 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         bool DeleteBy{Table.Name}Id(int {Table.Name.ToLower()});
         #endregion
 
-        #region Other methods
+        #region Methods for DataTable
+        DataTable GetAllBy{Table.Name}IdInDataTable(List<int> lst{Table.Name}Checked);
+
         DataTable GetAllInDataTable();
         #endregion
     }}

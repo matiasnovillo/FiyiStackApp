@@ -11,12 +11,12 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             {
                 string Content =
                 $@"using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.BasicCore;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Interfaces;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.DatabaseContexts;
+using System.Text.RegularExpressions;
 using System.Data;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
@@ -66,6 +66,27 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             try
             {{
                 return _context.{Table.Name}.ToList();
+            }}
+            catch (Exception) {{ throw; }}
+        }}
+
+        public List<{Table.Name}?> GetAllBy{Table.Name}Id(List<int> lst{Table.Name}Checked)
+        {{
+            try
+            {{
+                List<{Table.Name}?> lst{Table.Name} = [];
+
+                foreach (int {Table.Name}Id in lst{Table.Name}Checked)
+                {{
+                    {Table.Name} {Table.Name.ToLower()} = _context.{Table.Name}.Where(x => x.{Table.Name}Id == {Table.Name}Id).FirstOrDefault();
+
+                    if ({Table.Name.ToLower()} != null)
+                    {{
+                        lst{Table.Name}.Add({Table.Name.ToLower()});
+                    }}
+                }}
+
+                return lst{Table.Name};
             }}
             catch (Exception) {{ throw; }}
         }}
@@ -151,7 +172,32 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         }}
         #endregion
 
-        #region Other methods
+        #region Methods for DataTable
+        public DataTable GetAllBy{Table.Name}IdInDataTable(List<int> lst{Table.Name}Checked)
+        {{
+            try
+            {{
+                DataTable DataTable = new();
+                DataTable.Columns.Add(""{Table.Name}Id"", typeof(string));
+                {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable1}
+
+                foreach (int {Table.Name}Id in lst{Table.Name}Checked)
+                {{
+                    {Table.Name} {Table.Name.ToLower()} = _context.{Table.Name}.Where(x => x.{Table.Name}Id == {Table.Name}Id).FirstOrDefault();
+
+                    if ({Table.Name.ToLower()} != null)
+                    {{
+                        DataTable.Rows.Add(
+                        {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesForRepository_DataTable}
+                        );
+                    }}
+                }}                
+
+                return DataTable;
+            }}
+            catch (Exception) {{ throw; }}
+        }}
+
         public DataTable GetAllInDataTable()
         {{
             try

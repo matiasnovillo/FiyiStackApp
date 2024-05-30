@@ -12,10 +12,11 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 
-namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities.EntitiesConfiguration
+namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.EntitiesConfiguration
 {{
     public class {Table.Name}Configuration : IEntityTypeConfiguration<{Table.Name}>
     {{
