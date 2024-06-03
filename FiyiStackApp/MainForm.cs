@@ -1637,7 +1637,7 @@ namespace FiyiStackApp
                 PanelBoolean.Visible = false;
 
                 //Set to default all Data Type components
-                txtTextMin.Value = 0;
+                txtTextMin.Value = 1;
                 txtTextMax.Value = 8000;
                 txtTextRegex.Text = "";
                 txtForeignTableName.Text = "";

@@ -299,7 +299,7 @@ namespace FiyiStackApp
             this.opcionesToolStripMenuItem});
             this.MenuStripDockedTop.Location = new System.Drawing.Point(0, 0);
             this.MenuStripDockedTop.Name = "MenuStripDockedTop";
-            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 30);
+            this.MenuStripDockedTop.Size = new System.Drawing.Size(1367, 28);
             this.MenuStripDockedTop.TabIndex = 16;
             this.MenuStripDockedTop.Text = "menuStrip1";
             // 
@@ -331,9 +331,9 @@ namespace FiyiStackApp
             // PanelDockedLeft
             // 
             this.PanelDockedLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 30);
+            this.PanelDockedLeft.Location = new System.Drawing.Point(0, 28);
             this.PanelDockedLeft.Name = "PanelDockedLeft";
-            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 1002);
+            this.PanelDockedLeft.Size = new System.Drawing.Size(154, 1004);
             this.PanelDockedLeft.TabIndex = 17;
             // 
             // PanelDockedCenter
@@ -344,9 +344,9 @@ namespace FiyiStackApp
             this.PanelDockedCenter.Controls.Add(this.PanelProject);
             this.PanelDockedCenter.Controls.Add(this.PanelLogin);
             this.PanelDockedCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 30);
+            this.PanelDockedCenter.Location = new System.Drawing.Point(154, 28);
             this.PanelDockedCenter.Name = "PanelDockedCenter";
-            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 1002);
+            this.PanelDockedCenter.Size = new System.Drawing.Size(1213, 1004);
             this.PanelDockedCenter.TabIndex = 19;
             // 
             // PanelGenerator
