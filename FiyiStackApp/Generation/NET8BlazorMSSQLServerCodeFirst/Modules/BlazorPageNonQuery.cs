@@ -127,8 +127,12 @@ else
                 if (User.UserId != 0)
                 {{
                     //Logged user
-                    if (User.RoleId != 1) //Only Root can access
+                    List<Menu> lstMenuWithPermission = rolemenuRepository
+                                    .GetAllByRoleIdAndPathForPermission(User.RoleId, ""/{Table.Area}/{Table.Name}Page"");
+
+                    if (lstMenuWithPermission.Count == 0)
                     {{
+                        //Redirect to...
                         NavigationManager.NavigateTo(""403"");
                     }}
 
@@ -258,8 +262,12 @@ else
         }}
     }}
 
-    #region Handlers
-    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Handlers_InNonQueryBlazor}
+    #region Uploaders
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.UploadFileMethod_BlazorNonQueryPage}
+    #endregion    
+
+    #region Searchers
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Searchers_BlazorNonQueryPage}
     #endregion
 
     /// <summary>
@@ -338,7 +346,9 @@ else
         }}
     }}
 
-    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.UploadFileMethod_BlazorNonQueryPage}
+    #region Handlers
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Handlers_InNonQueryBlazor}
+    #endregion
 }}
 
 ";

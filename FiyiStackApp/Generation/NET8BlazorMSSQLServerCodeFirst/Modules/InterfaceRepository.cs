@@ -31,6 +31,8 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
         List<{Table.Name}?> GetAllBy{Table.Name}Id(List<int> lst{Table.Name}Checked);
 
+        List<{Table.Name}> GetAllBy{Table.Name}IdForModal(string textToSearch);
+
         paginated{Table.Name}DTO GetAllBy{Table.Name}IdPaginated(string textToSearch,
             bool strictSearch,
             int pageIndex,

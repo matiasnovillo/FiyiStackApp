@@ -697,8 +697,12 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 if (User.UserId != 0)
                 {{
                     //Logged user
-                    if (User.RoleId != 1) //Only Root can access
+                    List<Menu> lstMenuWithPermission = rolemenuRepository
+                                    .GetAllByRoleIdAndPathForPermission(User.RoleId, ""/{Table.Area}/{Table.Name}Page"");
+
+                    if (lstMenuWithPermission.Count == 0)
                     {{
+                        //Redirect to...
                         NavigationManager.NavigateTo(""403"");
                     }}
 

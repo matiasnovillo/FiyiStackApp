@@ -70,6 +70,24 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             catch (Exception) {{ throw; }}
         }}
 
+        public List<{Table.Name}> GetAllBy{Table.Name}IdForModal(string textToSearch)
+        {{
+            try
+            {{
+                var query = from {Table.Name.ToLower()} in _context.{Table.Name}
+                            select new {{ {Table.Name} = {Table.Name.ToLower()}}};
+
+                // Extraemos los resultados en listas separadas
+                List<{Table.Name}> lst{Table.Name} = query.Select(result => result.{Table.Name})
+                        .Where(x => x.{Table.Name}Id.ToString().Contains(textToSearch))
+                        .OrderByDescending(p => p.DateTimeLastModification)
+                        .ToList();
+
+                return lst{Table.Name};
+            }}
+            catch (Exception) {{ throw; }}
+        }}
+
         public List<{Table.Name}?> GetAllBy{Table.Name}Id(List<int> lst{Table.Name}Checked)
         {{
             try

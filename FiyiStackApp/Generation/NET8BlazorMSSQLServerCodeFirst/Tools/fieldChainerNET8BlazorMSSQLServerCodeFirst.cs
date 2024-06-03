@@ -42,6 +42,8 @@ namespace FiyiStackApp.Models.Tools
 
         public string Handlers_InNonQueryBlazor { get; set; } = "";
 
+        public string Searchers_BlazorNonQueryPage { get; set; } = "";
+
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
         }
@@ -105,11 +107,6 @@ namespace FiyiStackApp.Models.Tools
                         throw new Exception("You must choose a Data Type");
                     case 3: //Integer
 
-                        PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", ""{field.Name}"", true, {field.MinValue}, {field.MaxValue})]
-        public int {field.Name} {{ get; set; }}
-";
-
                         PropertiesForEntityConfiguration += 
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
@@ -120,6 +117,10 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            PropertiesForEntity +=
+$@"        public int {field.Name} {{ get; set; }}
+";
+
                             Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
     {{
         {Table.Name}.{field.Name} = Convert.ToInt32(e.Value?.ToString());
@@ -127,7 +128,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -176,14 +179,16 @@ $@"//{field.Name}
                             PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
                         }
+                        else
+                        {
+                            PropertiesForEntity +=
+$@"        [Library.ModelAttributeValidator.Int(""{field.Name}"", ""{field.Name}"", true, {field.MinValue}, {field.MaxValue})]
+        public int {field.Name} {{ get; set; }}
+";
+                        }
 
                         break;
                     case 4: //Boolean
-
-                        PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Required(""{field.Name}"", ""{field.Name}"")]   
-        public bool {field.Name} {{ get; set; }}
-";
 
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
@@ -195,6 +200,12 @@ $@"//{field.Name}
 
                         if (field.Name != "Active")
                         {
+
+                            PropertiesForEntity +=
+$@"        {(field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.Required(""{field.Name}"", ""{field.Name}"")]")}  
+        public bool {field.Name} {{ get; set; }}
+";
+
                             Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
     {{
         {Table.Name}.{field.Name} = Convert.ToBoolean(e.Value?.ToString());
@@ -202,7 +213,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -275,6 +288,13 @@ $@"//{field.Name}
                                         }}
                                         ";
                         }
+                        else
+                        {
+                            PropertiesForEntity +=
+$@"        public bool {field.Name} {{ get; set; }}
+";
+                        }
+
                         break;
                     case 5: //Text: Basic
 
@@ -285,7 +305,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -355,7 +377,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -437,11 +461,6 @@ $@"
                         break;
                     case 10: //DateTime
 
-                        PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", true, ""{field.MinValue}"", ""{field.MaxValue}"")]
-        public DateTime {field.Name} {{ get; set; }}
-";
-
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
@@ -452,6 +471,11 @@ $@"//{field.Name}
 
                         if (field.Name != "DateTimeCreation" && field.Name != "DateTimeLastModification")
                         {
+                            PropertiesForEntity +=
+$@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.Name}"", true, ""{field.MinValue}"", ""{field.MaxValue}"")]
+        public DateTime {field.Name} {{ get; set; }}
+";
+
                             Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
     {{
         {Table.Name}.{field.Name} = Convert.ToDateTime(e.Value?.ToString());
@@ -459,7 +483,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -507,6 +533,12 @@ $@"//{field.Name}
                             PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
                         }
+                        else
+                        {
+                            PropertiesForEntity +=
+$@"        public DateTime {field.Name} {{ get; set; }}
+";
+                        }
                         break;
                     case 11: //TimeSpan
 
@@ -517,7 +549,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -592,7 +626,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -671,7 +707,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -742,7 +780,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -866,7 +906,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -936,7 +978,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1017,7 +1061,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1100,7 +1146,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1181,7 +1229,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1344,7 +1394,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1408,11 +1460,6 @@ $@"//{field.Name}
                         break;
                     case 23: //Foreign Key (Id): DropDown
 
-                        PropertiesForEntity +=
-$@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}"")]
-        public int {field.Name} {{ get; set; }}
-";
-
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
@@ -1423,6 +1470,52 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            PropertiesForEntity +=
+$@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}"")]
+        public int {field.Name} {{ get; set; }}
+";
+
+                            Searchers_BlazorNonQueryPage += $@"private async Task SearchText{field.Name}(ChangeEventArgs args)
+    {{
+        try
+        {{
+            //Basic configuration
+            Message = """";
+
+            string TextToSearch = args.Value.ToString();
+
+            //lst{field.Name} = {field.Name}Repository.GetAllBy{field.Name}ForModal(TextToSearch);
+        }}
+        catch (Exception ex)
+        {{
+            Failure failure = new()
+                {{
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = User.UserId == 0 ? 1 : User.UserId,
+                    UserLastModificationId = User.UserId == 0 ? 1 : User.UserId,
+                    EmergencyLevel = 1,
+                    Comment = """",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                }};
+
+            failureRepository.Add(failure);
+
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                            </div>"";
+        }}
+        finally
+        {{
+            //Re-render the page
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }}
+    }}
+    ";
+
                             Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
     {{
         {Table.Name}.{field.Name} = Convert.ToInt32(e.Value?.ToString());
@@ -1430,7 +1523,9 @@ $@"//{field.Name}
 
         if (ValidationResult == null)
         {{
-            ErrorMessage{field.Name} = $@"""";
+            ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
+                <i class=""""fas fa-circle-check""""></i>
+            </span>"";
         }}
         else
         {{
@@ -1446,20 +1541,84 @@ $@"//{field.Name}
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
-                        <label for=""{field.Name.ToLower()}"">
-                            {field.Name}
-                            @if (ErrorMessage{field.Name} != """")
-                            {{
-                                @((MarkupString)ErrorMessage{field.Name})
-                            }}
-                        </label>
-                        <select id=""{field.Name.ToLower()}""
-                            class=""form-control""
-                            value=""@{Table.Name}!.{field.Name}""
-                            @onchange=""Handle{field.Name}Change"">
-                            <option value=""0"">Seleccionar</option>
-                        </select>
+                    <label>
+                        {field.Name}
+                        @if (ErrorMessage{field.Name} != """")
+                        {{
+                            @((MarkupString)ErrorMessage{field.Name})
+                        }}
+                    </label>
+                    <br/>
+                    <input type=""hidden""
+                           id=""{field.Name.ToLower()}""
+                           value=""@Client!.{field.Name}""/>
+                    <br/>
+                    <button type=""button"" 
+                    class=""btn btn-dark"" 
+                    data-bs-toggle=""modal"" 
+                    data-bs-target=""#{field.Name.ToLower()}modal"">
+                        Seleccionar
+                    </button>
+                    <!-- Modal -->
+                    <div class=""modal fade"" 
+                        id=""{field.Name.ToLower()}modal"" 
+                        tabindex=""-1"" 
+                        aria-labelledby=""{field.Name.ToLower()}modallabel"" 
+                        aria-hidden=""true"">
+                        <div class=""modal-dialog"">
+                            <div class=""modal-content"">
+                                <div class=""modal-header"">
+                                    <h5 class=""modal-title"" id=""{field.Name.ToLower()}modallabel"">
+                                        {field.Name}
+                                    </h5>
+                                </div>
+                                <div class=""modal-body"">
+                                    <div class=""input-group input-group-dynamic"">
+                                        <span class=""input-group-text"">
+                                            <i class=""fas fa-search"" aria-hidden=""true""></i>
+                                        </span>
+                                        <input class=""form-control""
+                                               @oninput=""SearchText{field.Name}""
+                                               type=""search"">
+                                    </div>
+                                    <br />
+                                    <div class=""table-responsive"">
+                                        <table class=""table table-striped table-hover table-bordered mt-4"">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>ID</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @* @foreach (class var in lst)
+                                                {{
+                                                    <tr>
+                                                        <td>
+                                                            <input type=""radio"" 
+                                                            id=""@var.{field.Name}"" 
+                                                            name=""{field.Name.ToLower()}""
+                                                            value=""@var.{field.Name}""
+                                                            @onclick=""@(() => Handle{field.Name}(var.{field.Name}))"">
+                                                        </td>
+                                                        <td>
+                                                            @var.{field.Name}
+                                                        </td>
+                                                    </tr>
+                                                }} *@
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class=""modal-footer justify-content-end"">
+                                    <button type=""button"" 
+                                    class=""btn btn-dark mb-0"" 
+                                    data-bs-dismiss=""modal"">
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     ";
 
@@ -1479,6 +1638,13 @@ $@"//{field.Name}
                             PropertiesInHTML_Card_ForBlazorPageQuery += $@"<p><b>{field.Name}: </b>@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{field.Name}</p>
                                         ";
                         }
+                        else
+                        {
+                            PropertiesForEntity +=
+$@"        public int {field.Name} {{ get; set; }}
+";
+                        }
+
                         break;
                     default:
                         throw new Exception("ERROR localizing Data Type: The Data Type identificator is not correct");
