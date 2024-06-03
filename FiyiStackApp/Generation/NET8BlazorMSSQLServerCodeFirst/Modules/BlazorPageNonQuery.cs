@@ -213,6 +213,9 @@ else
                 {{
                     {Table.Name.ToLower()}Repository
                         .Add({Table.Name});
+
+                    //Redirect to users page
+                    NavigationManager.NavigateTo(""{Table.Area}/{Table.Name}Page"");
                 }}
 
 
@@ -227,11 +230,11 @@ else
                 {{
                     {Table.Name.ToLower()}Repository
                             .Update({Table.Name});
+
+                    //Redirect to users page
+                    NavigationManager.NavigateTo(""{Table.Area}/{Table.Name}Page"");
                 }}
             }}
-
-            //Redirect to users page
-            NavigationManager.NavigateTo(""{Table.Area}/{Table.Name}Page"");
         }}
         catch (Exception ex)
         {{
