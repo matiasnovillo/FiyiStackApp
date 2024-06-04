@@ -1516,9 +1516,9 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
     }}
     ";
 
-                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(ChangeEventArgs e)
+                            Handlers_InNonQueryBlazor += $@"private async Task Handle{field.Name}Change(int {field.Name.ToLower()})
     {{
-        {Table.Name}.{field.Name} = Convert.ToInt32(e.Value?.ToString());
+        {Table.Name}.{field.Name} = {field.Name.ToLower()};
         ValidationResult ValidationResult = Check(""[{field.Name}]"");
 
         if (ValidationResult == null)
@@ -1551,7 +1551,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
                     <br/>
                     <input type=""hidden""
                            id=""{field.Name.ToLower()}""
-                           value=""@Client!.{field.Name}""/>
+                           value=""@{Table.Name}!.{field.Name}""/>
                     <br/>
                     <button type=""button"" 
                     class=""btn btn-dark"" 
@@ -1599,7 +1599,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
                                                             id=""@var.{field.Name}"" 
                                                             name=""{field.Name.ToLower()}""
                                                             value=""@var.{field.Name}""
-                                                            @onclick=""@(() => Handle{field.Name}(var.{field.Name}))"">
+                                                            @onclick=""@(() => Handle{field.Name}Change(var.{field.Name}))"">
                                                         </td>
                                                         <td>
                                                             @var.{field.Name}
