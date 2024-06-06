@@ -12,10 +12,10 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"@page ""/{Table.Area}/{Table.Name}Page""
 
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Services;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Repositories;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Services;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.DTOs;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
 @inject {Table.Name}Service {Table.Name.ToLower()}Service;
 
@@ -27,7 +27,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
     <{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarDashboard Pagina=""{Table.Name}""></{GeneratorConfigurationComponent.ProjectChosen.Name}.Components.Layout.NavBarDashboard>
     <div class=""container-fluid px-2 px-md-4"">
         <div class=""page-header min-height-300 border-radius-xl mt-4""
-        style=""background-image: url('img/BasicCore/Landscape.jpg');"">
+        style=""background-image: url('img/System/Landscape.jpg');"">
             <span class=""mask bg-gradient-dark opacity-6""></span>
         </div>
         <div class=""card mx-3 mx-md-4 mt-n6"">

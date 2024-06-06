@@ -16,7 +16,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     if (Table.Area == "" || Table.Name == "") { throw new Exception("C# generation cancelled. A table does not have an area or name declared"); }
 
                     //Here we prepare the fieldChainerNET8MSSQLServerAPI object for every table to generate
-                    GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst = new(Table);
+                    GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst = new(Table, GeneratorConfigurationComponent.ProjectChosen);
 
                     LogText += $"Working with {Table.Name} {Environment.NewLine}";
                     string Content = "";
@@ -24,7 +24,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# DTO
                     if (GeneratorConfigurationComponent.Configuration.WantDTONET8BlazorMSSQLServerCodeFirst)
                     {
-                        string DTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\DTOs\\";
+                        string DTOPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\DTOs\\";
                         if (Directory.Exists(DTOPath))
                         {
                             LogText += $"Folder: {DTOPath} exist {Environment.NewLine}";
@@ -47,7 +47,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Entity
                     if (GeneratorConfigurationComponent.Configuration.WantEntityNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string EntityPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Entities\\";
+                        string EntityPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\Entities\\";
                         if (Directory.Exists(EntityPath))
                         {
                             LogText += $"Folder: {EntityPath} exist {Environment.NewLine}";
@@ -70,7 +70,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Interface for repository
                     if (GeneratorConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
+                        string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\Interfaces\\";
                         if (Directory.Exists(InterfacePath))
                         {
                             LogText += $"Folder: {InterfacePath} exist {Environment.NewLine}";
@@ -93,7 +93,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Interface for service
                     if (GeneratorConfigurationComponent.Configuration.WantInterfaceNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Interfaces\\";
+                        string InterfacePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\Interfaces\\";
                         if (Directory.Exists(InterfacePath))
                         {
                             LogText += $"Folder: {InterfacePath} exist {Environment.NewLine}";
@@ -116,7 +116,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Repository
                     if (GeneratorConfigurationComponent.Configuration.WantRepositoryNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Repositories\\";
+                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\Repositories\\";
                         if (Directory.Exists(RepositoryPath))
                         {
                             LogText += $"Folder: {RepositoryPath} exist {Environment.NewLine}";
@@ -139,7 +139,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Service
                     if (GeneratorConfigurationComponent.Configuration.WantServiceNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string ServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\Services\\";
+                        string ServicePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\Services\\";
                         if (Directory.Exists(ServicePath))
                         {
                             LogText += $"Folder: {ServicePath} exist {Environment.NewLine}";
@@ -162,7 +162,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# EntityConfiguration
                     if (GeneratorConfigurationComponent.Configuration.WantEntityConfigurationNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\EntitiesConfiguration\\";
+                        string RepositoryPath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Areas\\{Table.Area}\\{Table.Name}Back\\EntitiesConfiguration\\";
                         if (Directory.Exists(RepositoryPath))
                         {
                             LogText += $"Folder: {RepositoryPath} exist {Environment.NewLine}";
@@ -185,7 +185,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Blazor Pages (Query)
                     if (GeneratorConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}\\";
+                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}Pages\\";
                         if (Directory.Exists(BlazorPagePath))
                         {
                             LogText += $"Folder: {BlazorPagePath} exist {Environment.NewLine}";
@@ -208,7 +208,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Languages
                     #region C# Blazor Pages (Non-Query)
                     if (GeneratorConfigurationComponent.Configuration.WantBlazorPageNET8BlazorMSSQLServerCodeFirst)
                     {
-                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}\\";
+                        string BlazorPagePath = $"{GeneratorConfigurationComponent.ProjectChosen.PathNET8BlazorMSSQLServerCodeFirst}\\Components\\Pages\\{Table.Area}Pages\\{Table.Name}Pages\\";
                         if (Directory.Exists(BlazorPagePath))
                         {
                             LogText += $"Folder: {BlazorPagePath} exist {Environment.NewLine}";

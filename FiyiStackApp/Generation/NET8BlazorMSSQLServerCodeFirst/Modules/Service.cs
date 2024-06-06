@@ -15,12 +15,12 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 $@"using ClosedXML.Excel;
 using IronPdf;
 using CsvHelper;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Interfaces;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Interfaces;
 using System.Data;
 using System.Globalization;
 
-namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Services
+namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Services
 {{
     public class {Table.Name}Service : I{Table.Name}Service
     {{

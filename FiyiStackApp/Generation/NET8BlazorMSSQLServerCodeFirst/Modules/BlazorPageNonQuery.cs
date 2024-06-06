@@ -11,11 +11,13 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                 string Content =
                 $@"@page ""/{Table.Area}/{Table.Name}Page/{{{Table.Name}Id:int}}""
 
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
-@using System.ComponentModel.DataAnnotations;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Repositories;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
+@using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.DTOs;
 @inject {Table.Name}Repository {Table.Name.ToLower()}Repository;
+
+<!--FOREIGN CALLS (TABLES)-->
+{GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Injections_BlazorNonQueryPage}
 
 @if ({Table.Name}Id == 0)
 {{
@@ -109,7 +111,11 @@ else
     //Error messages for inputs
     {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ErrorMessage_InNonQueryBlazor}
 
+    //Progress bars for uploaders
     {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ProgressBarForFile_BlazorNonQueryPage}
+    
+    //FOREIGN LISTS (TABLES)
+    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ForeignListsDeclaration_BlazorNonQueryPage}
     #endregion
 
     protected override void OnInitialized()
@@ -143,6 +149,9 @@ else
                                             .GetAllPagesAndFoldersForDashboardByRoleId(User.RoleId);
 
                     lstRole = roleRepository.GetAll();
+
+                    //FOREIGN LISTS (TABLES)
+                    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ForeignListsGet_BlazorNonQueryPage}
 
                     if ({Table.Name}Id == 0)
                     {{
@@ -269,7 +278,7 @@ else
     {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.UploadFileMethod_BlazorNonQueryPage}
     #endregion    
 
-    #region Searchers
+    #region SEARCHERS FOR FOREIGN TABLES
     {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.Searchers_BlazorNonQueryPage}
     #endregion
 

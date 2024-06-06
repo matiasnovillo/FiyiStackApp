@@ -1321,7 +1321,7 @@ namespace FiyiStackApp
                 ListViewField.Clear();
                 foreach (Field field in Program.WinFormConfigurationComponent.lstFieldInFiyiStack)
                 {
-                    ListViewItem lvi = new($"{field.Name}")
+                    ListViewItem lvi = new($"{field.Name} {(field.Nullable == true ? "(Nullable)" : "")}")
                     {
                         Tag = field.FieldId,
                     };
@@ -1642,8 +1642,8 @@ namespace FiyiStackApp
                 txtTextRegex.Text = "";
                 txtForeignTableName.Text = "";
 
-                txtIntMax.Value = int.MaxValue;
-                txtIntMin.Value = 0;
+                txtIntMax.Value = 9228162514264337593543950335m;
+                txtIntMin.Value = 0m;
 
                 txtTimeSpanMin.Text = "00:00";
                 txtTimeSpanMax.Text = "23:59";

@@ -1,4 +1,5 @@
-﻿using FiyiStackApp.Models.Core;
+﻿using FiyiStackApp.Generation;
+using FiyiStackApp.Models.Core;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace FiyiStackApp.Models.Tools
@@ -43,6 +44,9 @@ namespace FiyiStackApp.Models.Tools
         public string Handlers_InNonQueryBlazor { get; set; } = "";
 
         public string Searchers_BlazorNonQueryPage { get; set; } = "";
+        public string Injections_BlazorNonQueryPage { get; set; } = "";
+        public string ForeignListsDeclaration_BlazorNonQueryPage { get; set; } = "";
+        public string ForeignListsGet_BlazorNonQueryPage { get; set; } = "";
 
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
@@ -52,7 +56,7 @@ namespace FiyiStackApp.Models.Tools
         /// Object used to reduce duplicated code in /Generator/DataToGenerate folder <br/>
         /// This object contains all the fields chained to engage in every part of looped code
         ///</summary>
-        public fieldChainerNET8BlazorMSSQLServerCodeFirst(Table Table)
+        public fieldChainerNET8BlazorMSSQLServerCodeFirst(Table Table, Project Project)
         {
             Field Field = new();
             List<Field> lstField = Field.GetAllByTableIdToModel(Table.TableId);
@@ -135,9 +139,9 @@ $@"        public int {field.Name} {{ get; set; }}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         
@@ -146,7 +150,7 @@ $@"        public int {field.Name} {{ get; set; }}
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -157,7 +161,7 @@ $@"        public int {field.Name} {{ get; set; }}
                         <input type=""number""
                         step=""1"" 
                         id=""{field.Name.ToLower()}""
-                        class=""form-control""
+                        class=""form-control pt-0""
                         value=""@{Table.Name}!.{field.Name}""
                         @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -220,9 +224,9 @@ $@"        {(field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.R
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         
@@ -231,7 +235,7 @@ $@"        {(field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.R
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""form-check form-switch"">
+                    <div class=""form-check form-switch mb-5 pb-2"">
                         <input class=""form-check-input""
                         type=""checkbox""
                         value=""@{Table.Name}!.{field.Name}""
@@ -312,9 +316,9 @@ $@"        public bool {field.Name} {{ get; set; }}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -351,7 +355,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if(ErrorMessage{field.Name} != """")
@@ -361,7 +365,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""text""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -384,9 +388,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         
@@ -424,7 +428,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -435,7 +439,7 @@ $@"//{field.Name}
                         <input type=""number""
                         step=""0.1""
                         id=""{field.Name.ToLower()}"" 
-                        class=""form-control""
+                        class=""form-control pt-0""
                         value=""@{Table.Name}!.{field.Name}""
                         @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -490,9 +494,9 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         
@@ -501,7 +505,7 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -511,7 +515,7 @@ $@"        [Library.ModelAttributeValidator.DateTime(""{field.Name}"", ""{field.
                         </label>
                         <input type=""datetime""
                         id=""{field.Name.ToLower()}""
-                        class=""form-control""
+                        class=""form-control pt-0""
                         value=""@{Table.Name}!.{field.Name}""
                         @onchange=""Handle{field.Name}Change""/>
                     </div>
@@ -556,9 +560,9 @@ $@"        public DateTime {field.Name} {{ get; set; }}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         //Re-render the page to show ScannedText
@@ -596,7 +600,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -606,7 +610,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""time""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -633,9 +637,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -681,7 +685,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -691,7 +695,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""color""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -714,9 +718,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -753,7 +757,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -762,7 +766,7 @@ $@"//{field.Name}
                             }}
                         </label>
                         <textarea rows=""10""
-                        class=""form-control""
+                        class=""form-control pt-0""
                         value=""@{Table.Name}!.{field.Name}""
                         @onchange=""Handle{field.Name}Change""
                         id=""{field.Name.ToLower()}"">
@@ -787,9 +791,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -843,7 +847,7 @@ $@"//{field.Name}
                         </button>
                         <input type=""text""
                                id=""quill-result-{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -913,9 +917,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -952,7 +956,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -962,7 +966,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""password""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change""/>
                     </div>
@@ -985,9 +989,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -1035,7 +1039,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1045,7 +1049,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""tel""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -1068,9 +1072,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -1120,7 +1124,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1130,7 +1134,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""url""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -1153,9 +1157,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -1203,7 +1207,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1213,7 +1217,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""email""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change"" />
                     </div>
@@ -1236,9 +1240,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -1288,7 +1292,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1298,7 +1302,7 @@ $@"//{field.Name}
                         </label>
                         <InputFile type=""file""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                
                                OnChange=""@Upload{field.Name}"" />
                         @{{
@@ -1401,9 +1405,9 @@ $@"//{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -1440,7 +1444,7 @@ $@"//{field.Name}
                                         ";
 
                         PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""input-group input-group-static mb-3"">
+                    <div class=""input-group input-group-static mb-5 pb-2"">
                         <label for=""{field.Name.ToLower()}"">
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1450,7 +1454,7 @@ $@"//{field.Name}
                         </label>
                         <input type=""text""
                                id=""{field.Name.ToLower()}""
-                               class=""form-control""
+                               class=""form-control pt-0""
                                value=""@{Table.Name}!.{field.Name}""
                                @onchange=""Handle{field.Name}Change""
                                data-toggle=""tags"" />
@@ -1470,6 +1474,17 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            ForeignListsGet_BlazorNonQueryPage += $@"lst{field.ForeignTableName} = {field.ForeignTableName.ToLower()}Repository.GetAllBy{field.Name}ForModal("""");
+                    ";
+
+                            ForeignListsDeclaration_BlazorNonQueryPage += $@"public List<{field.ForeignTableName}> lst{field.ForeignTableName} {{ get; set; }} = [];
+    ";
+
+                            Injections_BlazorNonQueryPage += $@"@using {Project.Name}.Areas.{Table.Area}.{field.ForeignTableName}Back.Entities;
+@using XXProjectNameXX.Areas.{Table.Area}.{field.ForeignTableName}Back.Repositories;
+@inject {field.ForeignTableName}Repository {field.ForeignTableName.ToLower()}Repository;
+";
+
                             PropertiesForEntity +=
 $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}"")]
         public int {field.Name} {{ get; set; }}
@@ -1484,7 +1499,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
 
             string TextToSearch = args.Value.ToString();
 
-            //lst{field.Name} = {field.Name}Repository.GetAllBy{field.Name}ForModal(TextToSearch);
+            lst{field.ForeignTableName} = {field.ForeignTableName.ToLower()}Repository.GetAllBy{field.Name}ForModal(TextToSearch);
         }}
         catch (Exception ex)
         {{
@@ -1530,9 +1545,9 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
         else
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-danger"""">
-    <i class=""""fas fa-circle-xmark""""></i>
-    {{ValidationResult.ErrorMessage}}
-</span>"";
+                <i class=""""fas fa-circle-xmark""""></i>
+                {{ValidationResult.ErrorMessage}}
+            </span>"";
         }}
 
         //Re-render the page to show ScannedText
@@ -1541,81 +1556,82 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <label>
-                        {field.Name}
-                        @if (ErrorMessage{field.Name} != """")
-                        {{
-                            @((MarkupString)ErrorMessage{field.Name})
-                        }}
-                    </label>
-                    <br/>
-                    <input type=""hidden""
-                           id=""{field.Name.ToLower()}""
-                           value=""@{Table.Name}!.{field.Name}""/>
-                    <br/>
-                    <button type=""button"" 
-                    class=""btn btn-dark"" 
-                    data-bs-toggle=""modal"" 
-                    data-bs-target=""#{field.Name.ToLower()}modal"">
-                        Seleccionar
-                    </button>
-                    <!-- Modal -->
-                    <div class=""modal fade"" 
-                        id=""{field.Name.ToLower()}modal"" 
-                        tabindex=""-1"" 
-                        aria-labelledby=""{field.Name.ToLower()}modallabel"" 
-                        aria-hidden=""true"">
-                        <div class=""modal-dialog"">
-                            <div class=""modal-content"">
-                                <div class=""modal-header"">
-                                    <h5 class=""modal-title"" id=""{field.Name.ToLower()}modallabel"">
-                                        {field.Name}
-                                    </h5>
-                                </div>
-                                <div class=""modal-body"">
-                                    <div class=""input-group input-group-dynamic"">
-                                        <span class=""input-group-text"">
-                                            <i class=""fas fa-search"" aria-hidden=""true""></i>
-                                        </span>
-                                        <input class=""form-control""
-                                               @oninput=""SearchText{field.Name}""
-                                               type=""search"">
+                    <div class=""mb-5 pb-2"">
+                        <label>
+                            {field.Name}
+                            @if (ErrorMessage{field.Name} != """")
+                            {{
+                                @((MarkupString)ErrorMessage{field.Name})
+                            }}
+                        </label>
+                        <input type=""hidden""
+                               id=""{field.Name.ToLower()}""
+                               value=""@{Table.Name}!.{field.Name}""/>
+                        <br/>
+                        <button type=""button"" 
+                        class=""btn btn-dark"" 
+                        data-bs-toggle=""modal"" 
+                        data-bs-target=""#{field.Name.ToLower()}modal"">
+                            Seleccionar
+                        </button>
+                        <!-- Modal -->
+                        <div class=""modal fade"" 
+                            id=""{field.Name.ToLower()}modal"" 
+                            tabindex=""-1"" 
+                            aria-labelledby=""{field.Name.ToLower()}modallabel"" 
+                            aria-hidden=""true"">
+                            <div class=""modal-dialog"">
+                                <div class=""modal-content"">
+                                    <div class=""modal-header"">
+                                        <h5 class=""modal-title"" id=""{field.Name.ToLower()}modallabel"">
+                                            {field.ForeignTableName}
+                                        </h5>
                                     </div>
-                                    <br />
-                                    <div class=""table-responsive"">
-                                        <table class=""table table-striped table-hover table-bordered mt-4"">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>ID</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @* @foreach (class var in lst)
-                                                {{
+                                    <div class=""modal-body"">
+                                        <div class=""input-group input-group-dynamic"">
+                                            <span class=""input-group-text"">
+                                                <i class=""fas fa-search"" aria-hidden=""true""></i>
+                                            </span>
+                                            <input class=""form-control pt-0""
+                                                   @oninput=""SearchText{field.Name}""
+                                                   type=""search"">
+                                        </div>
+                                        <br />
+                                        <div class=""table-responsive"">
+                                            <table class=""table table-striped table-hover table-bordered mt-4"">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <input type=""radio"" 
-                                                            id=""@var.{field.Name}"" 
-                                                            name=""{field.Name.ToLower()}""
-                                                            value=""@var.{field.Name}""
-                                                            @onclick=""@(() => Handle{field.Name}Change(var.{field.Name}))"">
-                                                        </td>
-                                                        <td>
-                                                            @var.{field.Name}
-                                                        </td>
+                                                        <th></th>
+                                                        <th>ID</th>
                                                     </tr>
-                                                }} *@
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ({field.ForeignTableName} {field.ForeignTableName.ToLower()} in lst{field.ForeignTableName})
+                                                    {{
+                                                        <tr>
+                                                            <td>
+                                                                <input type=""radio"" 
+                                                                id=""@{field.ForeignTableName.ToLower()}-{field.ForeignTableName.ToLower()}.{field.Name}"" 
+                                                                name=""{field.Name.ToLower()}""
+                                                                value=""@{field.ForeignTableName.ToLower()}.{field.Name}""
+                                                                @onclick=""@(() => Handle{field.Name}Change({field.ForeignTableName.ToLower()}.{field.Name}))"">
+                                                            </td>
+                                                            <td>
+                                                                @{field.ForeignTableName.ToLower()}.{field.Name}
+                                                            </td>
+                                                        </tr>
+                                                    }}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class=""modal-footer justify-content-end"">
-                                    <button type=""button"" 
-                                    class=""btn btn-dark mb-0"" 
-                                    data-bs-dismiss=""modal"">
-                                        Cerrar
-                                    </button>
+                                    <div class=""modal-footer justify-content-end"">
+                                        <button type=""button"" 
+                                        class=""btn btn-dark mb-0"" 
+                                        data-bs-dismiss=""modal"">
+                                            Cerrar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

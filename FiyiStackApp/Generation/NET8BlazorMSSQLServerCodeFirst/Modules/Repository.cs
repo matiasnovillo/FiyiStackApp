@@ -11,17 +11,17 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             {
                 string Content =
                 $@"using Microsoft.EntityFrameworkCore;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Interfaces;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMS.UserBack.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.DTOs;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Interfaces;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.DatabaseContexts;
 using System.Text.RegularExpressions;
 using System.Data;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 
-namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Repositories
+namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Repositories
 {{
     public class {Table.Name}Repository : I{Table.Name}Repository
     {{

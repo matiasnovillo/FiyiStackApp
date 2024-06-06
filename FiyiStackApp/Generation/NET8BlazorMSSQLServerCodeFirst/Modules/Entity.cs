@@ -14,7 +14,7 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 
-namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities
+namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities
 {{
     public class {Table.Name}
     {{

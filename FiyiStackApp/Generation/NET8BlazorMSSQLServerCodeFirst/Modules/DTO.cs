@@ -10,12 +10,12 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             try
             {
                 string Content =
-                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMSCore.Entities;
-using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.Entities;
+                $@"using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMS.UserBack.Entities;
+using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
 
 {Security.WaterMark(Security.EWaterMarkFor.CSharp, Constant.FiyiStackGUID.ToString())}
 
-namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.DTOs
+namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.DTOs
 {{
     public class paginated{Table.Name}DTO
     {{
