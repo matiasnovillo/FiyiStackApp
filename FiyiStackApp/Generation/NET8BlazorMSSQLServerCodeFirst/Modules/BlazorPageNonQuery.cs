@@ -39,22 +39,20 @@ else
         </div>
         <div class=""card card-body mx-3 mx-md-4 mt-n6"">
             <div class=""card-header mb-0 pb-0"">
-                <div class=""d-flex justify-content-between"">
-                    <h3 class=""mb-3"">
-                        @if ({Table.Name}Id == 0)
-                        {{
-                            <span>Agregar {Table.Name.ToLower()}</span>
-                        }}
-                        else
-                        {{
-                            <span>Editar {Table.Name.ToLower()}</span>
-                        }}
-                    </h3>
-                    <NavLink class=""btn btn-outline-dark"" href=""{Table.Area}/{Table.Name}Page"">
-                        <span class=""fas fa-chevron-left""></span>
-                        &nbsp;Volver
-                    </NavLink>
-                </div>
+                <h3 class=""mb-3"">
+                    @if ({Table.Name}Id == 0)
+                    {{
+                        <span>Agregar {Table.Name.ToLower()}</span>
+                    }}
+                    else
+                    {{
+                        <span>Editar {Table.Name.ToLower()}</span>
+                    }}
+                </h3>
+                <NavLink class=""btn btn-outline-dark"" href=""{Table.Area}/{Table.Name}Page"">
+                    <span class=""fas fa-chevron-left""></span>
+                    &nbsp;Volver
+                </NavLink>
                 <hr />
             </div>
             <div class=""card-body px-0"">
