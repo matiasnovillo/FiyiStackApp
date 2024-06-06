@@ -1481,7 +1481,7 @@ $@"//{field.Name}
     ";
 
                             Injections_BlazorNonQueryPage += $@"@using {Project.Name}.Areas.{Table.Area}.{field.ForeignTableName}Back.Entities;
-@using XXProjectNameXX.Areas.{Table.Area}.{field.ForeignTableName}Back.Repositories;
+@using {Project.Name}.Areas.{Table.Area}.{field.ForeignTableName}Back.Repositories;
 @inject {field.ForeignTableName}Repository {field.ForeignTableName.ToLower()}Repository;
 ";
 
