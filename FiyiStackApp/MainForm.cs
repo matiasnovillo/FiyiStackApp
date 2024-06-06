@@ -1642,8 +1642,8 @@ namespace FiyiStackApp
                 txtTextRegex.Text = "";
                 txtForeignTableName.Text = "";
 
-                txtIntMax.Value = 9228162514264337593543950335m;
-                txtIntMin.Value = 0m;
+                txtIntMax.Value = 2147483647;
+                txtIntMin.Value = 0;
 
                 txtTimeSpanMin.Text = "00:00";
                 txtTimeSpanMax.Text = "23:59";
@@ -1658,7 +1658,7 @@ namespace FiyiStackApp
                 txtHexColourMax.Text = "FFFFFF";
                 txtHexColourMin.Text = "000000";
 
-                txtDecimalMax.Value = decimal.MaxValue;
+                txtDecimalMax.Value = 9228162514264337593543950335m;
                 txtDecimalMin.Value = 0;
 
                 switch (Convert.ToInt32(cmbDataType.SelectedValue))
@@ -1949,8 +1949,8 @@ namespace FiyiStackApp
                         break;
                     case 6: //Decimal
                         if (txtDecimalMin.Value > txtDecimalMax.Value) { throw new Exception("The minimum has to be at least equal to maximum"); }
-                        if (txtDecimalMin.Value > decimal.MaxValue || txtDecimalMin.Value < decimal.MinValue) { throw new Exception("The minimum entered is not supported"); }
-                        if (txtDecimalMax.Value > decimal.MaxValue || txtDecimalMax.Value < decimal.MinValue) { throw new Exception("The maximum entered is not supported"); }
+                        if (txtDecimalMin.Value > 9228162514264337593543950335m || txtDecimalMin.Value < -9228162514264337593543950335m) { throw new Exception("The minimum entered is not supported"); }
+                        if (txtDecimalMax.Value > 9228162514264337593543950335m || txtDecimalMax.Value < -9228162514264337593543950335m) { throw new Exception("The maximum entered is not supported"); }
 
                         Field.MinValue = txtDecimalMin.Value.ToString();
                         Field.MaxValue = txtDecimalMax.Value.ToString();
