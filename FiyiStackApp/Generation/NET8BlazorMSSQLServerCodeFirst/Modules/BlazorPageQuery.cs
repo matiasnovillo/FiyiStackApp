@@ -537,56 +537,60 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
                     <!--List-->
                     @if (paginated{Table.Name}DTO != null)      
                     {{
-                        @for (int i = 0; i < paginated{Table.Name}DTO.lst{Table.Name}.Count(); i++)
-                        {{
-                            int {Table.Name.ToLower()}Id = @paginated{Table.Name}DTO.lst{Table.Name}[i]!.{Table.Name}Id;
-
-                            <div class=""card shadow-lg mt-2"">
-                                <div class=""card-body"">
-                                    {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_Card_ForBlazorPageQuery}
-                                </div>
-                                <div class=""card-footer text-body-secondary"">
-                                    <div class=""d-flex justify-content-end"">
-                                        <style>
-                                            input.larger-checkbox {{
-                                                width: 60px;
-                                                height: 30px;
-                                            }}
-                                        </style>
-                                        <input class=""larger-checkbox""
-                                                   type=""checkbox""
-                                                   @onchange=""(() => CheckList({Table.Name.ToLower()}Id))"" />
-                                        <a class=""btn btn-outline-info mx-3""
-                                           href=""{Table.Area}/{Table.Name}Page/@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id"">
-                                            <span class=""fas fa-pen"" aria-hidden=""true""></span>
-                                        </a>
-                                        <button 
-                                            class=""btn btn-outline-danger toast-delete showtoast"">
-                                            <span class=""fas fa-trash"" aria-hidden=""true""></span>
-                                        </button>
-                                        <div class=""toast bg-gradient-dark fade p-2 mx-auto"" 
-                                        role=""alert"" 
-                                        aria-live=""assertive"" 
-                                        aria-atomic=""true"">
-                                            <div class=""toast-header border-0 bg-transparent"">
-                                                <i class=""fas fa-circle-xmark me-2 text-white""></i>
-                                                <span class=""me-auto font-weight-bold text-white"">Confirmar eliminación</span>
-                                                <i class=""fas fa-times text-md ms-3 cursor-pointer text-white closetoast"" data-bs-dismiss=""toast"" aria-label=""Close""></i>
-                                            </div>
-                                            <hr class=""horizontal light m-0"">
-                                            <div class=""toast-body text-white"">
-                                                ¿Esta seguro que desea borrar este registro con ID @{Table.Name.ToLower()}Id? Presione SI para borrar
-                                                <br/>
-                                                <button class=""btn btn-outline-danger btn-sm mt-2 closetoast""
-                                                        onclick=@(() => Delete({Table.Name.ToLower()}Id))>
-                                                    SI
+                        <div class=""row"">
+                            @for (int i = 0; i < paginated{Table.Name}DTO.lst{Table.Name}.Count(); i++)
+                            {{
+                                int {Table.Name.ToLower()}Id = @paginated{Table.Name}DTO.lst{Table.Name}[i]!.{Table.Name}Id;
+                                
+                                <div class=""col-12 col-md-4 mb-4"">
+                                    <div class=""card shadow-lg mt-2"">
+                                        <div class=""card-body"">
+                                            {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.PropertiesInHTML_Card_ForBlazorPageQuery}
+                                        </div>
+                                        <div class=""card-footer text-body-secondary"">
+                                            <div class=""d-flex justify-content-end"">
+                                                <style>
+                                                    input.larger-checkbox {{
+                                                        width: 60px;
+                                                        height: 30px;
+                                                    }}
+                                                </style>
+                                                <input class=""larger-checkbox""
+                                                           type=""checkbox""
+                                                           @onchange=""(() => CheckList({Table.Name.ToLower()}Id))"" />
+                                                <a class=""btn btn-outline-info mx-3""
+                                                   href=""{Table.Area}/{Table.Name}Page/@paginated{Table.Name}DTO.lst{Table.Name}[i]?.{Table.Name}Id"">
+                                                    <span class=""fas fa-pen"" aria-hidden=""true""></span>
+                                                </a>
+                                                <button 
+                                                    class=""btn btn-outline-danger toast-delete showtoast"">
+                                                    <span class=""fas fa-trash"" aria-hidden=""true""></span>
                                                 </button>
+                                                <div class=""toast bg-gradient-dark fade p-2 mx-auto"" 
+                                                role=""alert"" 
+                                                aria-live=""assertive"" 
+                                                aria-atomic=""true"">
+                                                    <div class=""toast-header border-0 bg-transparent"">
+                                                        <i class=""fas fa-circle-xmark me-2 text-white""></i>
+                                                        <span class=""me-auto font-weight-bold text-white"">Confirmar eliminación</span>
+                                                        <i class=""fas fa-times text-md ms-3 cursor-pointer text-white closetoast"" data-bs-dismiss=""toast"" aria-label=""Close""></i>
+                                                    </div>
+                                                    <hr class=""horizontal light m-0"">
+                                                    <div class=""toast-body text-white"">
+                                                        ¿Esta seguro que desea borrar este registro con ID @{Table.Name.ToLower()}Id? Presione SI para borrar
+                                                        <br/>
+                                                        <button class=""btn btn-outline-danger btn-sm mt-2 closetoast""
+                                                                onclick=@(() => Delete({Table.Name.ToLower()}Id))>
+                                                            SI
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }}
+                            }}
+                        </div>
                     }}
                 }}
                 <!--Pagination-->
