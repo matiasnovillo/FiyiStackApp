@@ -75,13 +75,13 @@ namespace FiyiStackApp.Generation.CommonGenerators.Modules.MSSQLServer
                         NonQuery += $@"USE [{DataBaseName}]
                     SET ANSI_NULLS ON
                     SET QUOTED_IDENTIFIER ON
-                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] TEXT {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
+                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] VARCHAR(MAX) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
                         break;
                     case 16: //Text: TextEditor
                         NonQuery += $@"USE [{DataBaseName}]
                     SET ANSI_NULLS ON
                     SET QUOTED_IDENTIFIER ON
-                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] TEXT {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
+                    ALTER TABLE [{TableScheme}].[{TableArea}.{TableName}] ADD [{Field.Name}] VARCHAR(MAX) {(Field.Nullable == true ? "NULL" : "NOT NULL")}";
                         break;
                     case 17: //Text: Password
                         NonQuery += $@"USE [{DataBaseName}]

@@ -47,6 +47,8 @@ namespace FiyiStackApp.Models.Tools
         public string Injections_BlazorNonQueryPage { get; set; } = "";
         public string ForeignListsDeclaration_BlazorNonQueryPage { get; set; } = "";
         public string ForeignListsGet_BlazorNonQueryPage { get; set; } = "";
+        public string EditPartFK_BlazorNonQueryPage { get; set; } = "";
+        public string ForeignLists_DTO { get; set; } = "";
 
         public fieldChainerNET8BlazorMSSQLServerCodeFirst() 
         { 
@@ -745,7 +747,7 @@ $@"        { (field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
-                    .HasColumnType(""text"")
+                    .HasColumnType(""varchar(MAX)"")
                     .IsRequired({(field.Nullable == true ? "false" : "true")});
 
                 ";
@@ -818,7 +820,7 @@ $@"        {(field.Nullable == true ? "" : $@"[Library.ModelAttributeValidator.R
                         PropertiesForEntityConfiguration +=
 $@"//{field.Name}
                 entity.Property(e => e.{field.Name})
-                    .HasColumnType(""text"")
+                    .HasColumnType(""varchar(MAX)"")
                     .IsRequired({(field.Nullable == true ? "false" : "true")});
 
                 ";
@@ -1346,6 +1348,11 @@ $@"//{field.Name}
                 ""{Table.Name}"",
                 e.File.Name);
 
+            if (!Directory.Exists(path))
+            {{
+                System.IO.Directory.CreateDirectory(path);
+            }}
+
             long MaxFileSize = 1024L * 1024L; //3MB max.
 
             await using FileStream FileStream = new(path, FileMode.Create);
@@ -1474,10 +1481,18 @@ $@"//{field.Name}
 
                         if (field.Name != "UserCreationId" && field.Name != "UserLastModificationId")
                         {
+                            ForeignLists_DTO += $@"public List<{field.ForeignTableName}?> lst{field.ForeignTableName} {{ get; set; }}
+        ";
+
                             ForeignListsGet_BlazorNonQueryPage += $@"lst{field.ForeignTableName} = {field.ForeignTableName.ToLower()}Repository.GetAllBy{field.Name}ForModal("""");
                     ";
 
+                            EditPartFK_BlazorNonQueryPage += $@"{field.ForeignTableName} {field.ForeignTableName} = {field.ForeignTableName.ToLower()}Repository.GetBy{field.Name}({Table.Name}.{field.Name});
+                        {field.ForeignTableName}XXX = {field.ForeignTableName}.XXX;
+                        ";
+
                             ForeignListsDeclaration_BlazorNonQueryPage += $@"public List<{field.ForeignTableName}> lst{field.ForeignTableName} {{ get; set; }} = [];
+    public string {field.ForeignTableName}XXX {{ get; set; }} = """";
     ";
 
                             Injections_BlazorNonQueryPage += $@"@using {Project.Name}.Areas.{Table.Area}.{field.ForeignTableName}Back.Entities;
@@ -1536,6 +1551,9 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
         {Table.Name}.{field.Name} = {field.Name.ToLower()};
         ValidationResult ValidationResult = Check(""[{field.Name}]"");
 
+        {field.ForeignTableName} {field.ForeignTableName} = {field.ForeignTableName.ToLower()}Repository.GetBy{field.Name}({Table.Name}.{field.Name});
+        {field.ForeignTableName}XXX = {field.ForeignTableName}.XXX;
+
         if (ValidationResult == null)
         {{
             ErrorMessage{field.Name} = $@""<span class=""""text-success"""">
@@ -1556,7 +1574,7 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
     ";
 
                             PropertiesInHTML_BlazorNonQueryPage += $@"<!--{field.Name}-->
-                    <div class=""mb-5 pb-2"">
+                    <div class=""input-group input-group-static"">
                         <label>
                             {field.Name}
                             @if (ErrorMessage{field.Name} != """")
@@ -1564,74 +1582,81 @@ $@"        [Library.ModelAttributeValidator.Key(""{field.Name}"", ""{field.Name}
                                 @((MarkupString)ErrorMessage{field.Name})
                             }}
                         </label>
+                        <input type=""text""
+                               readonly
+                               class=""form-control pt-0""
+                               @bind=""{field.ForeignTableName}XXX""/>
                         <input type=""hidden""
                                id=""{field.Name.ToLower()}""
                                value=""@{Table.Name}!.{field.Name}""/>
-                        <br/>
-                        <button type=""button"" 
-                        class=""btn btn-dark"" 
-                        data-bs-toggle=""modal"" 
-                        data-bs-target=""#{field.Name.ToLower()}modal"">
-                            Seleccionar
-                        </button>
-                        <!-- Modal -->
-                        <div class=""modal fade"" 
-                            id=""{field.Name.ToLower()}modal"" 
-                            tabindex=""-1"" 
-                            aria-labelledby=""{field.Name.ToLower()}modallabel"" 
-                            aria-hidden=""true"">
-                            <div class=""modal-dialog"">
-                                <div class=""modal-content"">
-                                    <div class=""modal-header"">
-                                        <h5 class=""modal-title"" id=""{field.Name.ToLower()}modallabel"">
-                                            {field.ForeignTableName}
-                                        </h5>
+                    </div>
+                    <button type=""button"" 
+                    class=""btn btn-dark mb-5 pb-2"" 
+                    data-bs-toggle=""modal"" 
+                    data-bs-target=""#{field.Name.ToLower()}modal"">
+                        Seleccionar
+                    </button>
+                    <!-- Modal -->
+                    <div class=""modal fade"" 
+                        id=""{field.Name.ToLower()}modal"" 
+                        tabindex=""-1"" 
+                        aria-labelledby=""{field.Name.ToLower()}modallabel"" 
+                        aria-hidden=""true"">
+                        <div class=""modal-dialog"">
+                            <div class=""modal-content"">
+                                <div class=""modal-header"">
+                                    <h5 class=""modal-title"" id=""{field.Name.ToLower()}modallabel"">
+                                        {field.ForeignTableName}
+                                    </h5>
+                                </div>
+                                <div class=""modal-body"">
+                                    <div class=""input-group input-group-dynamic"">
+                                        <span class=""input-group-text"">
+                                            <i class=""fas fa-search"" aria-hidden=""true""></i>
+                                        </span>
+                                        <input class=""form-control pt-0""
+                                                @oninput=""SearchText{field.Name}""
+                                                type=""search"">
                                     </div>
-                                    <div class=""modal-body"">
-                                        <div class=""input-group input-group-dynamic"">
-                                            <span class=""input-group-text"">
-                                                <i class=""fas fa-search"" aria-hidden=""true""></i>
-                                            </span>
-                                            <input class=""form-control pt-0""
-                                                   @oninput=""SearchText{field.Name}""
-                                                   type=""search"">
-                                        </div>
-                                        <br />
-                                        <div class=""table-responsive"">
-                                            <table class=""table table-striped table-hover table-bordered mt-4"">
-                                                <thead>
+                                    <br />
+                                    <div class=""table-responsive"">
+                                        <table class=""table table-striped table-hover table-bordered mt-4"">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>ID</th>
+                                                    <th>XXX</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ({field.ForeignTableName} {field.ForeignTableName.ToLower()} in lst{field.ForeignTableName})
+                                                {{
                                                     <tr>
-                                                        <th></th>
-                                                        <th>ID</th>
+                                                        <td>
+                                                            <input type=""radio"" 
+                                                            id=""@{field.ForeignTableName.ToLower()}-{field.ForeignTableName.ToLower()}.{field.Name}"" 
+                                                            name=""{field.Name.ToLower()}""
+                                                            value=""@{field.ForeignTableName.ToLower()}.{field.Name}""
+                                                            @onclick=""@(() => Handle{field.Name}Change({field.ForeignTableName.ToLower()}.{field.Name}))"">
+                                                        </td>
+                                                        <td>
+                                                            @{field.ForeignTableName.ToLower()}.{field.Name}
+                                                        </td>
+                                                        <td>
+                                                            @{field.ForeignTableName.ToLower()}.XXX
+                                                        </td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ({field.ForeignTableName} {field.ForeignTableName.ToLower()} in lst{field.ForeignTableName})
-                                                    {{
-                                                        <tr>
-                                                            <td>
-                                                                <input type=""radio"" 
-                                                                id=""@{field.ForeignTableName.ToLower()}-{field.ForeignTableName.ToLower()}.{field.Name}"" 
-                                                                name=""{field.Name.ToLower()}""
-                                                                value=""@{field.ForeignTableName.ToLower()}.{field.Name}""
-                                                                @onclick=""@(() => Handle{field.Name}Change({field.ForeignTableName.ToLower()}.{field.Name}))"">
-                                                            </td>
-                                                            <td>
-                                                                @{field.ForeignTableName.ToLower()}.{field.Name}
-                                                            </td>
-                                                        </tr>
-                                                    }}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                }}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class=""modal-footer justify-content-end"">
-                                        <button type=""button"" 
-                                        class=""btn btn-dark mb-0"" 
-                                        data-bs-dismiss=""modal"">
-                                            Cerrar
-                                        </button>
-                                    </div>
+                                </div>
+                                <div class=""modal-footer justify-content-end"">
+                                    <button type=""button"" 
+                                    class=""btn btn-dark mb-0"" 
+                                    data-bs-dismiss=""modal"">
+                                        Cerrar
+                                    </button>
                                 </div>
                             </div>
                         </div>

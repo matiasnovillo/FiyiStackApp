@@ -22,6 +22,10 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         public List<{Table.Name}?> lst{Table.Name} {{ get; set; }}
         public List<User?> lstUserCreation {{ get; set; }}
         public List<User?> lstUserLastModification {{ get; set; }}
+
+        //FOREIGN LISTS (TABLES)
+        {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.ForeignLists_DTO}
+
         public int TotalItems {{ get; set; }}
         public int PageIndex {{ get; set; }}
         public int PageSize {{ get; set; }}

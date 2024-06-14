@@ -124,22 +124,35 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 int Total{Table.Name} = _context.{Table.Name}.Count();
 
-                var query = from {Table.Name.ToLower()} in _context.{Table.Name}
-                            join userCreation in _context.User on {Table.Name.ToLower()}.UserCreationId equals userCreation.UserId
-                            join userLastModification in _context.User on {Table.Name.ToLower()}.UserLastModificationId equals userLastModification.UserId
-                            select new {{ {Table.Name} = {Table.Name.ToLower()}, UserCreation = userCreation, UserLastModification = userLastModification }};
-
-                // Extraemos los resultados en listas separadas
-                List<{Table.Name}> lst{Table.Name} = query.Select(result => result.{Table.Name})
+                List<{Table.Name}> lst{Table.Name} = _context.{Table.Name}
+                        .AsQueryable()
                         .Where(x => strictSearch ?
                             words.All(word => x.{Table.Name}Id.ToString().Contains(word)) :
                             words.Any(word => x.{Table.Name}Id.ToString().Contains(word)))
-                        .OrderByDescending(p => p.DateTimeLastModification)
+                        .OrderByDescending(x => x.DateTimeLastModification)
                         .Skip((pageIndex - 1) * pageSize)
                         .Take(pageSize)
                         .ToList();
-                List<User> lstUserCreation = query.Select(result => result.UserCreation).ToList();
-                List<User> lstUserLastModification = query.Select(result => result.UserLastModification).ToList();
+                List<User> lstUserCreation = [];
+                List<User> lstUserLastModification = [];
+
+                foreach ({Table.Name} {Table.Name.ToLower()} in lst{Table.Name})
+                {{
+
+                    User UserCreation = _context.User
+                        .AsQueryable()
+                        .Where(x => x.UserCreationId == {Table.Name.ToLower()}.UserCreationId)
+                        .FirstOrDefault();
+
+                    lstUserCreation.Add(UserCreation);
+
+                    User UserLastModification = _context.User
+                       .AsQueryable()
+                       .Where(x => x.UserLastModificationId == {Table.Name.ToLower()}.UserLastModificationId)
+                       .FirstOrDefault();
+
+                    lstUserLastModification.Add(UserLastModification);
+                }}
 
                 return new paginated{Table.Name}DTO
                 {{

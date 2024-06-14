@@ -162,6 +162,8 @@ else
 
                         {Table.Name} = {Table.Name.ToLower()}Repository
                                     .GetBy{Table.Name}Id({Table.Name}Id);
+
+                        {GeneratorConfigurationComponent.fieldChainerNET8BlazorMSSQLServerCodeFirst.EditPartFK_BlazorNonQueryPage}
                     }}                    
                 }}
                 else

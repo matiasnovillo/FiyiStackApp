@@ -766,6 +766,28 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
         }}
     }}
 
+    private async Task ResetData()
+    {{
+        try
+        {{
+            Message = $@"""";
+        }}
+        catch (Exception ex)
+        {{
+            Message = $@""<div class=""""alert alert-danger text-white font-weight-bold"""" role=""""alert"""">
+                            Hubo un error. Intente nuevamente. Mensaje del error: {{ex.Message}}
+                         </div>"";
+
+            ProgressPercentForImportingFile = 100;
+            ProgressBarColourForImportingFile = ""bg-danger"";
+        }}
+        finally
+        {{
+            //Re-render the page to show ScannedText
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }}
+    }}
+
     #region Events
     private async Task ImportExcel()
     {{
