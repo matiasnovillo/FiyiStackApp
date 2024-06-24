@@ -11,6 +11,8 @@ namespace FiyiStackApp.Generation.NET8BlazorMSSQLServerCodeFirst.Modules
             {
                 string Content =
                 $@"using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.CMS.UserBack.Entities;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.Entities;
 using {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area}.{Table.Name}Back.DTOs;
@@ -26,10 +28,19 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
     public class {Table.Name}Repository : I{Table.Name}Repository
     {{
         protected readonly {GeneratorConfigurationComponent.ProjectChosen.Name}Context _context;
+        private readonly IMemoryCache _memoryCache;
+        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
 
-        public {Table.Name}Repository({GeneratorConfigurationComponent.ProjectChosen.Name}Context context)
+        public {Table.Name}Repository({GeneratorConfigurationComponent.ProjectChosen.Name}Context context, IMemoryCache memoryCache)
         {{
             _context = context;
+            _memoryCache = memoryCache;
+
+            _memoryCacheEntryOptions = new MemoryCacheEntryOptions
+            {{
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+                SlidingExpiration = TimeSpan.FromMinutes(2)
+            }};
         }}
 
         public IQueryable<{Table.Name}> AsQueryable()
@@ -55,8 +66,19 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         {{
             try
             {{
-                return _context.{Table.Name}
-                            .FirstOrDefault(x => x.{Table.Name}Id == {Table.Name.ToLower()}Id);
+                //Look in cache first
+                if (!_memoryCache.TryGetValue($@""{Table.Area}.{Table.Name}.{Table.Name}Id={{{Table.Name.ToLower()}Id}}"", out {Table.Name}? {Table.Name.ToLower()}))
+                {{
+                    //If not exist in cache, look in DB
+                    {Table.Name.ToLower()} = _context.{Table.Name}
+                                .FirstOrDefault(x => x.{Table.Name}Id == {Table.Name.ToLower()}Id);
+                    
+                    if ({Table.Name.ToLower()} != null)
+                    {{
+                        _memoryCache.Set({Table.Name.ToLower()}Id, {Table.Name.ToLower()}, _memoryCacheEntryOptions);
+                    }}
+                }}
+                return {Table.Name.ToLower()};
             }}
             catch (Exception) {{ throw; }}
         }}
@@ -173,8 +195,18 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
         {{
             try
             {{
-                _context.{Table.Name}.Add({Table.Name.ToLower()});
-                return _context.SaveChanges() > 0;
+                EntityEntry<{Table.Name}> {Table.Name}ToAdd = _context.{Table.Name}.Add({Table.Name.ToLower()});
+
+                bool result = _context.SaveChanges() > 0;
+
+                if (result)
+                {{
+                    int Added{Table.Name}Id = {Table.Name}ToAdd.Entity.{Table.Name}Id;
+
+                    _memoryCache.Set($@""{Table.Area}.{Table.Name}.{Table.Name}Id={{Added{Table.Name}Id}}"", {Table.Name.ToLower()}, _memoryCacheEntryOptions);
+                }}
+
+                return result;
             }}
             catch (Exception) {{ throw; }}
         }}
@@ -184,7 +216,15 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             try
             {{
                 _context.{Table.Name}.Update({Table.Name.ToLower()});
-                return _context.SaveChanges() > 0;
+
+                bool result = _context.SaveChanges() > 0;
+
+                if (result)
+                {{
+                    _memoryCache.Set($@""{Table.Area}.{Table.Name}.{Table.Name}Id={{{Table.Name.ToLower()}.{Table.Name}Id}}"", {Table.Name.ToLower()}, _memoryCacheEntryOptions);
+                }}
+
+                return result;
             }}
             catch (Exception) {{ throw; }}
         }}
@@ -197,7 +237,14 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
                         .Where(x => x.{Table.Name}Id == {Table.Name.ToLower()}Id)
                         .ExecuteDelete();
 
-                return _context.SaveChanges() > 0;
+                bool result = _context.SaveChanges() > 0;
+
+                if (result)
+                {{
+                    _memoryCache.Remove($@""{Table.Area}.{Table.Name}.{Table.Name}Id={{{Table.Name.ToLower()}Id}}"");
+                }}
+
+                return result;
             }}
             catch (Exception) {{ throw; }}
         }}
