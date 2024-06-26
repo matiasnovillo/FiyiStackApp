@@ -97,7 +97,7 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
             try
             {{
                 var query = from {Table.Name.ToLower()} in _context.{Table.Name}
-                            select new {{ {Table.Name} = {Table.Name.ToLower()}}};
+                            select new {{ {Table.Name} = {Table.Name.ToLower()} }};
 
                 // Extraemos los resultados en listas separadas
                 List<{Table.Name}> lst{Table.Name} = query.Select(result => result.{Table.Name})
@@ -160,7 +160,6 @@ namespace {GeneratorConfigurationComponent.ProjectChosen.Name}.Areas.{Table.Area
 
                 foreach ({Table.Name} {Table.Name.ToLower()} in lst{Table.Name})
                 {{
-
                     User UserCreation = _context.User
                         .AsQueryable()
                         .Where(x => x.UserCreationId == {Table.Name.ToLower()}.UserCreationId)
